@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import Page from '../../components/Page';
 import HomeImage from '../../assets/img/home.png';
 import CashImage from '../../assets/img/crypto_tomb_cash.svg';
+import fork from '../../assets/img/fork.png'
 import Image from 'material-ui-image';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
@@ -139,32 +140,34 @@ const Home = () => {
         {/* Logo */}
         <Grid container item xs={12} sm={4} justify="center">
           {/* <Paper>xs=6 sm=3</Paper> */}
-          <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={CashImage} />
+          <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={fork} />
         </Grid>
         {/* Explanation text */}
         <Grid item xs={12} sm={8}>
           <Paper>
             <Box p={4}>
-              <h2>Welcome to Tomb Finance</h2>
-              <p>The first algorithmic stablecoin on Fantom Opera, pegged to the price of 1 FTM via seigniorage.</p>
+              <h2>Welcome to misko.finance</h2>
+              <p>The first algorithmic stablecoin on unknown chain, pegged to the price of 1 token via seigniorage.</p>
               <p>
-                Stake your TOMB-FTM LP in the Cemetery to earn TSHARE rewards.
-                Then stake your earned TSHARE in the Masonry to earn more TOMB!
+                Stake your MISKO-TOKEN LP in the Cemetery to earn MSHARE rewards. Then stake your earned MSHARE in the
+                Masonry to earn more MISKO!
               </p>
             </Box>
           </Paper>
-
-
-
         </Grid>
 
         <Grid container spacing={3}>
-    <Grid item  xs={12} sm={12} justify="center"  style={{ margin: '12px', display: 'flex' }}>
+          <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
             <Alert variant="filled" severity="warning">
               <b>
-      Please visit our <StyledLink target="_blank" href="https://docs.tomb.finance">documentation</StyledLink> before purchasing TOMB or TSHARE!</b>
+                Please visit our{' '}
+                <StyledLink target="_blank" href="https://docs.tomb.finance">
+                  documentation
+                </StyledLink>{' '}
+                before purchasing MISKO or MSHARE!
+              </b>
             </Alert>
-        </Grid>
+          </Grid>
         </Grid>
 
         {/* TVL */}
@@ -196,10 +199,10 @@ const Home = () => {
                 style={{ marginRight: '10px' }}
                 className={classes.button}
               >
-                Buy TOMB
+                Buy MISKO
               </Button>
               <Button variant="contained" target="_blank" href={buyTShareAddress} className={classes.button}>
-                Buy TSHARE
+                Buy MSHARE
               </Button>
             </CardContent>
           </Card>
@@ -209,7 +212,7 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>TOMB</h2>
+              <h2>MISKO</h2>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
@@ -248,7 +251,7 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>TSHARE</h2>
+              <h2>MSHARE</h2>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TSHARE');
@@ -285,7 +288,7 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>TBOND</h2>
+              <h2>MBOND</h2>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TBOND');
