@@ -146,10 +146,10 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Welcome to Polaris Finance</h2>
-              <p>The first algorithmic stablecoin on unknown chain, pegged to the price of 1 token via seigniorage.</p>
+              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 Aurora via seigniorage.</p>
               <p>
-                Stake your POLARIS-AURORA LP in the Cemetery to earn SPOLAR rewards. Then stake your earned SPOLAR in the
-                Masonry to earn more Polaris!
+                Stake your POLARIS-AURORA LP in the Down to earn SPOLAR rewards. Then stake your earned SPOLAR in the
+                Sunrise to earn more Polaris!
               </p>
             </Box>
           </Paper>
