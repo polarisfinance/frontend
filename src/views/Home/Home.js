@@ -3,6 +3,7 @@ import Page from '../../components/Page';
 import HomeImage from '../../assets/img/home.png';
 import CashImage from '../../assets/img/crypto_tomb_cash.svg';
 import fork from '../../assets/img/fork.png'
+import Logo from '../../logo.svg'
 import Image from 'material-ui-image';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
@@ -140,17 +141,17 @@ const Home = () => {
         {/* Logo */}
         <Grid container item xs={12} sm={4} justify="center">
           {/* <Paper>xs=6 sm=3</Paper> */}
-          <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={fork} />
+          <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={Logo} />
         </Grid>
         {/* Explanation text */}
         <Grid item xs={12} sm={8}>
           <Paper>
             <Box p={4}>
-              <h2>Welcome to misko.finance</h2>
+              <h2>Welcome to Polaris Finance</h2>
               <p>The first algorithmic stablecoin on unknown chain, pegged to the price of 1 token via seigniorage.</p>
               <p>
-                Stake your MISKO-TOKEN LP in the Cemetery to earn MSHARE rewards. Then stake your earned MSHARE in the
-                Masonry to earn more MISKO!
+                Stake your POLARIS-AURORA LP in the Cemetery to earn SPOLAR rewards. Then stake your earned SPOLAR in the
+                Masonry to earn more Polaris!
               </p>
             </Box>
           </Paper>
@@ -161,10 +162,10 @@ const Home = () => {
             <Alert variant="filled" severity="warning">
               <b>
                 Please visit our{' '}
-                <StyledLink target="_blank" href="https://docs.tomb.finance">
+                <StyledLink target="_blank" href="https://docs.polarisfinance.io">
                   documentation
                 </StyledLink>{' '}
-                before purchasing MISKO or MSHARE!
+                before purchasing POLAR or SPOLAR!
               </b>
             </Alert>
           </Grid>
@@ -199,10 +200,10 @@ const Home = () => {
                 style={{ marginRight: '10px' }}
                 className={classes.button}
               >
-                Buy MISKO
+                Buy POLAR
               </Button>
               <Button variant="contained" target="_blank" href={buyTShareAddress} className={classes.button}>
-                Buy MSHARE
+                Buy SPOLAR
               </Button>
             </CardContent>
           </Card>
@@ -212,7 +213,7 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>MISKO</h2>
+              <h2>POLAR</h2>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
@@ -251,7 +252,7 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>MSHARE</h2>
+              <h2>SPOLAR</h2>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TSHARE');
@@ -288,7 +289,7 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>MBOND</h2>
+              <h2>PBOND</h2>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TBOND');
@@ -323,7 +324,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>TOMB-FTM Spooky LP</h2>
+              <h2>POLAR-AURORA Spooky LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TOMB-FTM-LP" />
@@ -351,7 +352,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>TSHARE-FTM Spooky LP</h2>
+              <h2>SPOLAR-AURORA Spooky LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TSHARE-FTM-LP" />
