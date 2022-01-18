@@ -22,6 +22,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
+import NameLogo from '../../assets/img/name-logo.png'
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -97,7 +98,8 @@ const Nav = () => {
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">Polaris Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-                Polaris Finance
+                {/*Polaris Finance*/}
+                <img src={NameLogo} width={400}/>
               </Link>
             </Typography>
             <Box mr={5}>
@@ -105,15 +107,15 @@ const Nav = () => {
                 Home
               </Link>
               <Link color="textPrimary" to="/cemetery" className={classes.link}>
-                Cemetery
+                Down
               </Link>
               <Link color="textPrimary" to="/masonry" className={classes.link}>
-                Masonry
+                Sunrise
               </Link>
               <Link color="textPrimary" to="/pit" className={classes.link}>
-                Pit
+                Bond
               </Link>
-              <Link color="textPrimary" to="/sbs" className={classes.link}>
+              {/*<Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
               </Link>
               <Link color="textPrimary" to="/liquidity" className={classes.link}>
@@ -121,7 +123,7 @@ const Nav = () => {
               </Link>
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
-              </Link>
+              </Link>*/}
               <a href="https://docs.polarisfinance.io" className={classes.link}>
                 Docs
               </a>
