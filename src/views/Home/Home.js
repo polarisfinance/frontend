@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
 import Page from '../../components/Page';
 import HomeImage from '../../assets/img/home.png';
-import CashImage from '../../assets/img/crypto_tomb_cash.svg';
-import fork from '../../assets/img/fork.png'
 import Logo from '../../logo.svg'
 import Image from 'material-ui-image';
 import styled from 'styled-components';
