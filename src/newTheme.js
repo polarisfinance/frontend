@@ -13,7 +13,7 @@ const newTheme = createMuiTheme({
     },
     primary: {
       light: '#757ce8',
-      main: '#571eb1',
+      main: '#7BC24F',
       dark: '#2c2560',
       contrastText: '#000',
     },
