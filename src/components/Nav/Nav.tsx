@@ -99,7 +99,7 @@ const Nav = () => {
               {/* <a className={ classes.brandLink } href="/">Polaris Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 {/*Polaris Finance*/}
-                <img src={NameLogo} height={100}/>
+                <img src={NameLogo} height={50}/>
               </Link>
             </Typography>
             <Box mr={5}>
