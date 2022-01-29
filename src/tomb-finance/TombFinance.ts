@@ -46,10 +46,10 @@ export class TombFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
     }
-    this.TOMB = new ERC20(deployments.tomb.address, provider, 'TOMB');
+    this.TOMB = new ERC20(deployments.polar.address, provider, 'TOMB');
     this.TSHARE = new ERC20(deployments.tShare.address, provider, 'TSHARE');
     this.TBOND = new ERC20(deployments.tBond.address, provider, 'TBOND');
-    this.FTM = this.externalTokens['WFTM'];
+    this.FTM = this.externalTokens['AURORA'];
 
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['TOMB-FTM-LP'][0], IUniswapV2PairABI, provider);
@@ -156,7 +156,7 @@ export class TombFinance {
   async getBondStat(): Promise<TokenStat> {
     const { Treasury } = this.contracts;
     const tombStat = await this.getTombStat();
-    const bondTombRatioBN = await Treasury.getBondPremiumRate();
+    const bondTombRatioBN = await Treasury.gepbondPremiumRate();
     const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
     const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
     const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
@@ -212,12 +212,12 @@ export class TombFinance {
 
   async getTombPriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
-    return Treasury.getTombUpdatedPrice();
+    return Treasury.getpolarUpdatedPrice();
   }
 
   async getBondsPurchasable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
-    return Treasury.getBurnableTombLeft();
+    return Treasury.getBurnablepolarLeft();
   }
 
   /**
@@ -290,7 +290,7 @@ export class TombFinance {
       }
       return await poolContract.epochTombPerSecond(0);
     }
-    const rewardPerSecond = await poolContract.tSharePerSecond();
+    const rewardPerSecond = await poolContract.spolarPerSecond();
     if (depositTokenName.startsWith('TOMB')) {
       return rewardPerSecond.mul(35500).div(59500);
     } else {
@@ -336,7 +336,7 @@ export class TombFinance {
 
   async getBondOraclePriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
-    return Treasury.getBondPremiumRate();
+    return Treasury.gepbondPremiumRate();
   }
 
   /**
@@ -506,14 +506,19 @@ export class TombFinance {
   async getWFTMPriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { WFTM, FUSDT } = this.externalTokens;
+    const { AURORA, USDC, ETH } = this.externalTokens;
     try {
-      const fusdt_wftm_lp_pair = this.externalTokens['USDT-FTM-LP'];
-      let ftm_amount_BN = await WFTM.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WFTM.decimal));
-      let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, FUSDT.decimal));
-      return (fusdt_amount / ftm_amount).toString();
+      const aurora_eth_lp_pair = this.externalTokens['AURORA-ETH-LP'];
+      let aurora_amount_BN = await AURORA.balanceOf(aurora_eth_lp_pair.address);
+      let aurora_amount = Number(getFullDisplayBalance(aurora_amount_BN, AURORA.decimal));
+      let eth1_amount_BN = await ETH.balanceOf(aurora_eth_lp_pair.address);
+      let eth1_amount = Number(getFullDisplayBalance(eth1_amount_BN, ETH.decimal));
+      const eth_usdc_lp_pair = this.externalTokens['ETH-USDC-LP'];
+      let eth2_amount_BN = await ETH.balanceOf(eth_usdc_lp_pair.address);
+      let eth2_amount = Number(getFullDisplayBalance(eth2_amount_BN, ETH.decimal));
+      let usdc_amount_BN = await USDC.balanceOf(eth_usdc_lp_pair.address);
+      let usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
+      return ((eth1_amount/aurora_amount)*(usdc_amount/eth2_amount)).toString();
     } catch (err) {
       console.error(`Failed to fetch token price of WFTM: ${err}`);
     }
