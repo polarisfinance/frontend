@@ -107,17 +107,17 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName.includes('TOMB')) {
-    pairName = 'TOMB-FTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + tombAddr;
+    pairName = 'POLAR-AURORA pair';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79/' + tombAddr;
   } else {
-    pairName = 'TSHARE-FTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + tshareAddr;
+    pairName = 'SPOLAR-AURORA pair';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79/' + tshareAddr;
   }
   return (
     <Card>
       <CardContent>
         <StyledLink href={uniswapUrl} target="_blank">
-          {`👻 Provide liquidity for ${pairName} now on SpookySwap 👻`}
+          {`Provide liquidity for ${pairName} now on Trisolaris`}
         </StyledLink>
       </CardContent>
     </Card>
