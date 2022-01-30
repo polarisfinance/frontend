@@ -89,7 +89,7 @@ const Masonry = () => {
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
                     <Typography>
-                      TOMB Price<small>(TWAP)</small>
+                      POLAR Price<small>(TWAP)</small>
                     </Typography>
                     <Typography>{scalingFactor}</Typography>
                   </CardContent>
@@ -106,7 +106,7 @@ const Masonry = () => {
               <Grid item xs={12} md={2} lg={2}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography>TSHARES Staked</Typography>
+                    <Typography>SPOLARS Staked</Typography>
                     <Typography>{getDisplayBalance(totalStaked)}</Typography>
                   </CardContent>
                 </Card>

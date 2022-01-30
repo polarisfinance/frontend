@@ -41,7 +41,7 @@ const Pit: React.FC = () => {
     async (amount: string) => {
       const tx = await tombFinance.buyBonds(amount);
       addTransaction(tx, {
-        summary: `Buy ${Number(amount).toFixed(2)} TBOND with ${amount} TOMB`,
+        summary: `Buy ${Number(amount).toFixed(2)} Polar with ${amount} POLAR`,
       });
     },
     [tombFinance, addTransaction],
@@ -50,7 +50,7 @@ const Pit: React.FC = () => {
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
       const tx = await tombFinance.redeemBonds(amount);
-      addTransaction(tx, { summary: `Redeem ${amount} TBOND` });
+      addTransaction(tx, { summary: `Redeem ${amount} PBOND` });
     },
     [tombFinance, addTransaction],
   );
@@ -71,13 +71,13 @@ const Pit: React.FC = () => {
                 <ExchangeCard
                   action="Purchase"
                   fromToken={tombFinance.TOMB}
-                  fromTokenName="TOMB"
+                  fromTokenName="POLAR"
                   toToken={tombFinance.TBOND}
-                  toTokenName="TBOND"
+                  toTokenName="PBOND"
                   priceDesc={
                     !isBondPurchasable
-                      ? 'TOMB is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' TBOND available for purchase'
+                      ? 'POLAR is over peg'
+                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' PBOND available for purchase'
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
@@ -85,14 +85,14 @@ const Pit: React.FC = () => {
               </StyledCardWrapper>
               <StyledStatsWrapper>
                 <ExchangeStat
-                  tokenName="TOMB"
+                  tokenName="POLAR"
                   description="Last-Hour TWAP Price"
                   price={getDisplayBalance(cashPrice, 18, 4)}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
-                  tokenName="TBOND"
-                  description="Current Price: (TOMB)^2"
+                  tokenName="PBOND"
+                  description="Current Price: (POLAR)^2"
                   price={Number(bondStat?.tokenInFtm).toFixed(2) || '-'}
                 />
               </StyledStatsWrapper>
@@ -100,13 +100,13 @@ const Pit: React.FC = () => {
                 <ExchangeCard
                   action="Redeem"
                   fromToken={tombFinance.TBOND}
-                  fromTokenName="TBOND"
+                  fromTokenName="PBOND"
                   toToken={tombFinance.TOMB}
-                  toTokenName="TOMB"
-                  priceDesc={`${getDisplayBalance(bondBalance)} TBOND Available in wallet`}
+                  toTokenName="POLAR"
+                  priceDesc={`${getDisplayBalance(bondBalance)} PBOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when TOMB > ${BOND_REDEEM_PRICE}FTM` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when POLAR > ${BOND_REDEEM_PRICE}AURORA` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

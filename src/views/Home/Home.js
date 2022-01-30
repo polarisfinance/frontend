@@ -335,8 +335,8 @@ const Home = () => {
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} TOMB /{' '}
-                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} FTM
+                  {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} POLAR /{' '}
+                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} AURORA
                 </span>
               </Box>
               <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
@@ -363,8 +363,8 @@ const Home = () => {
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
-                  {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} TSHARE /{' '}
-                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} FTM
+                  {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} SPOLAR /{' '}
+                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} AURORA
                 </span>
               </Box>
               <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>
