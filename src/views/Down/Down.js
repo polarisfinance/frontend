@@ -9,7 +9,7 @@ import { Alert } from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
-import CemeteryCard from './CemeteryCard';
+import CemeteryCard from './DownCard';
 import CemeteryImage from '../../assets/img/cemetery.png';
 import { createGlobalStyle } from 'styled-components';
 
@@ -35,7 +35,7 @@ const Cemetery = () => {
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-                Cemetery
+                Down
               </Typography>
 
               <Box mt={5}>

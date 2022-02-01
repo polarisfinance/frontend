@@ -106,10 +106,10 @@ const Nav = () => {
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>
-              <Link color="textPrimary" to="/cemetery" className={classes.link}>
+              <Link color="textPrimary" to="/down" className={classes.link}>
                 Down
               </Link>
-              <Link color="textPrimary" to="/masonry" className={classes.link}>
+              <Link color="textPrimary" to="/sunrise" className={classes.link}>
                 Sunrise
               </Link>
               <Link color="textPrimary" to="/pit" className={classes.link}>
@@ -164,8 +164,8 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Cemetery" to="/cemetery" />
-                <ListItemLink primary="Masonry" to="/masonry" />
+                <ListItemLink primary="Down" to="/down" />
+                <ListItemLink primary="Sunrise" to="/sunrise" />
                 <ListItemLink primary="Pit" to="/pit" />
                 <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />

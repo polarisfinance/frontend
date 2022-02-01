@@ -9,7 +9,7 @@ import Value from '../../../components/Value';
 import CardIcon from '../../../components/CardIcon';
 import useClaimRewardTimerMasonry from '../../../hooks/masonry/useClaimRewardTimerMasonry';
 import useClaimRewardCheck from '../../../hooks/masonry/useClaimRewardCheck';
-import ProgressCountdown from './../components/ProgressCountdown';
+import ProgressCountdown from './ProgressCountdown';
 import useHarvestFromMasonry from '../../../hooks/useHarvestFromMasonry';
 import useEarningsOnMasonry from '../../../hooks/useEarningsOnMasonry';
 import useTombStats from '../../../hooks/useTombStats';
