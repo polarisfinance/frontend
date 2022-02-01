@@ -114,7 +114,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: true,
   },
   TombFtmLPTombRewardPool: {
-    name: 'Earn POLAR by POLAR-AURORA LP',
+    name: 'Earn POLAR by POLAR-UST LP',
     poolId: 0,
     sectionInUI: 1,
     contract: 'TombFtmLpTombRewardPool',
@@ -125,7 +125,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: true,
   },
   TombFtmLPTombRewardPoolOld: {
-    name: 'Earn POLAR by POLAR-AURORA LP',
+    name: 'Earn POLAR by POLAR-UST LP',
     poolId: 0,
     sectionInUI: 1,
     contract: 'TombFtmLpTombRewardPoolOld',
@@ -136,7 +136,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: true,
   },
   TombFtmLPTShareRewardPool: {
-    name: 'Earn SPOLAR by POLAR-AURORA LP',
+    name: 'Earn SPOLAR by POLAR-UST LP',
     poolId: 0,
     sectionInUI: 2,
     contract: 'TombFtmLPTShareRewardPool',
@@ -147,7 +147,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   TshareFtmLPTShareRewardPool: {
-    name: 'Earn SPOLAR by SPOLAR-AURORA LP',
+    name: 'Earn SPOLAR by SPOLAR-UST LP',
     poolId: 1,
     sectionInUI: 2,
     contract: 'TshareFtmLPTShareRewardPool',

@@ -146,9 +146,9 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Welcome to Polaris Finance</h2>
-              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 Aurora via seigniorage.</p>
+              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 UST via seigniorage.</p>
               <p>
-                Stake your POLARIS-AURORA LP in the Down to earn SPOLAR rewards. Then stake your earned SPOLAR in the
+                Stake your POLARIS-UST LP in the Down to earn SPOLAR rewards. Then stake your earned SPOLAR in the
                 Sunrise to earn more Polaris!
               </p>
             </Box>
@@ -184,10 +184,10 @@ const Home = () => {
           <Card style={{ height: '100%' }}>
             <CardContent align="center" style={{ marginTop: '2.5%' }}>
               {/* <h2 style={{ marginBottom: '20px' }}>Wallet Balance</h2> */}
-              <Button color="primary" href="/masonry" variant="contained" style={{ marginRight: '10px' }}>
+              <Button color="primary" href="/sunrise" variant="contained" style={{ marginRight: '10px' }}>
                 Stake Now
               </Button>
-              <Button href="/cemetery" variant="contained" style={{ marginRight: '10px' }}>
+              <Button href="/down" variant="contained" style={{ marginRight: '10px' }}>
                 Farm Now
               </Button>
               <Button
@@ -230,7 +230,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} AURORA</span>
+                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} UST</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
@@ -269,7 +269,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} AURORA</span>
+                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} UST</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
@@ -306,7 +306,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} AURORA</span>
+                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} UST</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
@@ -322,7 +322,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>POLAR-AURORA Spooky LP</h2>
+              <h2>POLAR-UST Spooky LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TOMB-FTM-LP" />
@@ -336,7 +336,7 @@ const Home = () => {
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} POLAR /{' '}
-                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} AURORA
+                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} UST
                 </span>
               </Box>
               <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
@@ -350,7 +350,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>SPOLAR-AURORA Spooky LP</h2>
+              <h2>SPOLAR-UST Spooky LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TSHARE-FTM-LP" />
@@ -364,7 +364,7 @@ const Home = () => {
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} SPOLAR /{' '}
-                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} AURORA
+                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} UST
                 </span>
               </Box>
               <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>

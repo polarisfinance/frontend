@@ -22,7 +22,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
 import useTombFinance from '../../../hooks/useTombFinance';
-import ProgressCountdown from './../components/ProgressCountdown';
+import ProgressCountdown from './ProgressCountdown';
 import useStakedBalanceOnMasonry from '../../../hooks/useStakedBalanceOnMasonry';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
 import useUnstakeTimerMasonry from '../../../hooks/masonry/useUnstakeTimerMasonry';
