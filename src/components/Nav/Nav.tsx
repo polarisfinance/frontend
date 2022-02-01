@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     color: '#e0e3bd',
-    'background-color': '#121212',
+    'background-color': '#2b133e',
     // borderBottom: `1px solid ${theme.palette.divider}`,
     padding: '10px',
     marginBottom: '3rem',
@@ -99,7 +99,7 @@ const Nav = () => {
               {/* <a className={ classes.brandLink } href="/">Polaris Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 {/*Polaris Finance*/}
-                <img src={NameLogo} alt='name_logo' height={50}/>
+                <img src={NameLogo} alt='name_logo' height={40}/>
               </Link>
             </Typography>
             <Box mr={5}>
