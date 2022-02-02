@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarTitle: {
     fontFamily: '"Rajdhani", cursive',
-    fontSize: '30px',
+    lineHeight: "20px",
     flexGrow: 1,
   },
   link: {
@@ -99,7 +99,7 @@ const Nav = () => {
               {/* <a className={ classes.brandLink } href="/">Polaris Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 {/*Polaris Finance*/}
-                <img src={NameLogo} alt='name_logo' height={40}/>
+                <img src={NameLogo} alt='name_logo' height={35}/>
               </Link>
             </Typography>
             <Box mr={5}>
@@ -107,7 +107,7 @@ const Nav = () => {
                 Home
               </Link>
               <Link color="textPrimary" to="/down" className={classes.link}>
-                Down
+                Dawn
               </Link>
               <Link color="textPrimary" to="/sunrise" className={classes.link}>
                 Sunrise

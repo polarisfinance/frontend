@@ -148,7 +148,7 @@ const Home = () => {
               <h2>Welcome to Polaris Finance</h2>
               <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 UST via seigniorage.</p>
               <p>
-                Stake your POLARIS-UST LP in the Down to earn SPOLAR rewards. Then stake your earned SPOLAR in the
+                Stake your POLARIS-UST LP in the Dawn to earn SPOLAR rewards. Then stake your earned SPOLAR in the
                 Sunrise to earn more Polaris!
               </p>
             </Box>
@@ -156,7 +156,7 @@ const Home = () => {
         </Grid>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
+          <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px' }}>
             <Alert variant="filled" severity="warning">
               <b>
                 Please visit our{' '}
@@ -322,7 +322,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>POLAR-UST Spooky LP</h2>
+              <h2>POLAR-UST AuroraSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TOMB-FTM-LP" />
@@ -350,7 +350,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>SPOLAR-UST Spooky LP</h2>
+              <h2>SPOLAR-UST AuroraSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TSHARE-FTM-LP" />
