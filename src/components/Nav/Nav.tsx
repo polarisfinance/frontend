@@ -124,7 +124,7 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link>*/}
-              <a href="https://docs.polarisfinance.io" className={classes.link}>
+              <a target="_blank" href="https://docs.polarisfinance.io" className={classes.link}>
                 Docs
               </a>
             </Box>
