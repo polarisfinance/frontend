@@ -19,7 +19,7 @@ import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 
 const Home = lazy(() => import('./views/Home'));
-const Down = lazy(() => import('./views/Down'));
+const Dawn = lazy(() => import('./views/Dawn'));
 const Masonry = lazy(() => import('./views/Sunrise'));
 const Pit = lazy(() => import('./views/Pit'));
 const SBS = lazy(() => import('./views/Sbs'));
@@ -49,8 +49,8 @@ const App: React.FC = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/down">
-              <Down />
+            <Route path="/dawn">
+              <Dawn />
             </Route>
             <Route path="/sunrise">
               <Masonry />

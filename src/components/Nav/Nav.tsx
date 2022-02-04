@@ -106,7 +106,7 @@ const Nav = () => {
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>
-              <Link color="textPrimary" to="/down" className={classes.link}>
+              <Link color="textPrimary" to="/dawn" className={classes.link}>
                 Dawn
               </Link>
               <Link color="textPrimary" to="/sunrise" className={classes.link}>
