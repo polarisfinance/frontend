@@ -164,7 +164,7 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Down" to="/down" />
+                <ListItemLink primary="Dawn" to="/dawn" />
                 <ListItemLink primary="Sunrise" to="/sunrise" />
                 <ListItemLink primary="Pit" to="/pit" />
                 <ListItemLink primary="SBS" to="/sbs" />
