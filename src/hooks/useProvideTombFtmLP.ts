@@ -13,7 +13,7 @@ const useProvideTombFtmLP = () => {
       const tombAmountBn = parseUnits(tombAmount);
       handleTransactionReceipt(
         tombFinance.provideTombFtmLP(ftmAmount, tombAmountBn),
-        `Provide Tomb-FTM LP ${tombAmount} ${ftmAmount} using ${TAX_OFFICE_ADDR}`,
+        `Provide POLAR-NEAR LP ${tombAmount} ${ftmAmount} using ${TAX_OFFICE_ADDR}`,
       );
     },
     [tombFinance, handleTransactionReceipt],

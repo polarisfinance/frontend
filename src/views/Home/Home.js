@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const tombFtmLpStats = useLpStats('TOMB-FTM-LP');
-  const tShareFtmLpStats = useLpStats('TSHARE-FTM-LP');
+  const tombFtmLpStats = useLpStats('POLAR-NEAR-LP');
+  const tShareFtmLpStats = useLpStats('SPOLAR-NEAR-LP');
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
@@ -100,8 +100,8 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const tombLpZap = useZap({ depositTokenName: 'TOMB-FTM-LP' });
-  const tshareLpZap = useZap({ depositTokenName: 'TSHARE-FTM-LP' });
+  const tombLpZap = useZap({ depositTokenName: 'POLAR-NEAR-LP' });
+  const tshareLpZap = useZap({ depositTokenName: 'SPOLAR-NEAR-LP' });
 
   const StyledLink = styled.a`
     font-weight: 700;
@@ -116,7 +116,7 @@ const Home = () => {
         tombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissTombZap();
       }}
-      tokenName={'TOMB-FTM-LP'}
+      tokenName={'POLAR-NEAR-LP'}
     />,
   );
 
@@ -128,7 +128,7 @@ const Home = () => {
         tshareLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissTshareZap();
       }}
-      tokenName={'TSHARE-FTM-LP'}
+      tokenName={'SPOLAR-NEAR-LP'}
     />,
   );
 
@@ -146,10 +146,10 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Welcome to Polaris Finance</h2>
-              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 UST via seigniorage.</p>
+              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via seigniorage.</p>
               <p>
-                Stake your POLARIS-UST LP in the Dawn to earn SPOLAR rewards. Then stake your earned SPOLAR in the
-                Sunrise to earn more Polaris!
+                Stake your POLAR-NEAR LP in the Dawn to earn SPOLAR rewards. Then stake your earned SPOLAR in the
+                Sunrise to earn more POLAR!
               </p>
             </Box>
           </Paper>
@@ -230,7 +230,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} UST</span>
+                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} NEAR</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
@@ -269,7 +269,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} UST</span>
+                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} NEAR</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
@@ -306,7 +306,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} UST</span>
+                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} NEAR</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
@@ -322,10 +322,10 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>POLAR-UST AuroraSwap LP</h2>
+              <h2>POLAR-NEAR AuroraSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="TOMB-FTM-LP" />
+                  <TokenSymbol symbol="POLAR-NEAR-LP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>
@@ -336,7 +336,7 @@ const Home = () => {
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} POLAR /{' '}
-                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} UST
+                  {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} NEAR
                 </span>
               </Box>
               <Box>${tombLPStats?.priceOfOne ? tombLPStats.priceOfOne : '-.--'}</Box>
@@ -350,10 +350,10 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>SPOLAR-UST AuroraSwap LP</h2>
+              <h2>SPOLAR-NEAR AuroraSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="TSHARE-FTM-LP" />
+                  <TokenSymbol symbol="SPOLAR-NEAR-LP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>
@@ -364,7 +364,7 @@ const Home = () => {
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {tshareLPStats?.tokenAmount ? tshareLPStats?.tokenAmount : '-.--'} SPOLAR /{' '}
-                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} UST
+                  {tshareLPStats?.ftmAmount ? tshareLPStats?.ftmAmount : '-.--'} NEAR
                 </span>
               </Box>
               <Box>${tshareLPStats?.priceOfOne ? tshareLPStats.priceOfOne : '-.--'}</Box>

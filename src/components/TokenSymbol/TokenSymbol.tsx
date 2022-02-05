@@ -7,8 +7,8 @@ import tombLogoPNG from '../../assets/img/crypto_tomb_cash.f2b44ef4.png';
 import tShareLogoPNG from '../../assets/img/crypto_tomb_share.bf1a6c52.png';
 import tBondLogo from '../../assets/img/pbond-token.svg';
 
-import tombFtmLpLogo from '../../assets/img/polar-aurora.svg';
-import tshareFtmLpLogo from '../../assets/img/spolar-aurora.svg';
+import polarNearLpLogo from '../../assets/img/polar-aurora.svg';
+import spolarNearLpLogo from '../../assets/img/spolar-aurora.svg';
 
 import auroraLogo from '../../assets/img/aurora_logo.svg';
 import nearLogo from '../../assets/img/near_logo.svg';
@@ -27,8 +27,8 @@ const logosBySymbol: { [title: string]: string } = {
   NEAR: nearLogo,
   LUNA: lunaLogo,
   UST: ustLogo,
-  'TOMB-FTM-LP': tombFtmLpLogo,
-  'TSHARE-FTM-LP': tshareFtmLpLogo,
+  'POLAR-NEAR-LP': polarNearLpLogo,
+  'SPOLAR-NEAR-LP': spolarNearLpLogo,
 };
 
 type LogoProps = {

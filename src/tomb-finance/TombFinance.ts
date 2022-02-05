@@ -51,7 +51,7 @@ export class TombFinance {
     this.FTM = this.externalTokens['AURORA'];
 
     // Uniswap V2 Pair
-    this.TOMBWFTM_LP = new Contract(externalTokens['TOMB-FTM-LP'][0], IUniswapV2PairABI, provider);
+    this.TOMBWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -93,10 +93,10 @@ export class TombFinance {
   //===================================================================
 
   async getTombStat(): Promise<TokenStat> {
-    const { PolarAuroraRewardPool, TombFtmLpTombRewardPool, TombFtmLpTombRewardPoolOld } = this.contracts;
+    const { PolarAuroraRewardPool, PolarNearLpPolarRewardPool, TombFtmLpTombRewardPoolOld } = this.contracts;
     const supply = await this.TOMB.totalSupply();
     const tombRewardPoolSupply = await this.TOMB.balanceOf(PolarAuroraRewardPool.address);
-    const tombRewardPoolSupply2 = await this.TOMB.balanceOf(TombFtmLpTombRewardPool.address);
+    const tombRewardPoolSupply2 = await this.TOMB.balanceOf(PolarNearLpPolarRewardPool.address);
     const tombRewardPoolSupplyOld = await this.TOMB.balanceOf(TombFtmLpTombRewardPoolOld.address);
     const tombCirculatingSupply = supply
       .sub(tombRewardPoolSupply)
@@ -176,12 +176,12 @@ export class TombFinance {
    * CirculatingSupply (always equal to total supply for bonds)
    */
   async getShareStat(): Promise<TokenStat> {
-    const { TombFtmLPTShareRewardPool } = this.contracts;
+    const { PolarNearLpSpolarRewardPool } = this.contracts;
 
     const supply = await this.TSHARE.totalSupply();
 
     const priceInFTM = await this.getTokenPriceFromPancakeswap(this.TSHARE);
-    const tombRewardPoolSupply = await this.TSHARE.balanceOf(TombFtmLPTShareRewardPool.address);
+    const tombRewardPoolSupply = await this.TSHARE.balanceOf(PolarNearLpSpolarRewardPool.address);
     const tShareCirculatingSupply = supply.sub(tombRewardPoolSupply);
     const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
     const priceOfSharesInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
@@ -311,9 +311,9 @@ export class TombFinance {
     if (tokenName === 'WFTM') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
-      if (tokenName === 'TOMB-FTM-LP') {
+      if (tokenName === 'POLAR-NEAR-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
-      } else if (tokenName === 'TSHARE-FTM-LP') {
+      } else if (tokenName === 'SPOLAR-NEAR-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);

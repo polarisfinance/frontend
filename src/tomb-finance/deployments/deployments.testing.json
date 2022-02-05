@@ -5756,7 +5756,7 @@
       }
     ]
   },
-  "TombFtmLpTombRewardPool": {
+  "PolarNearLpPolarRewardPool": {
     "address": "0x96Ddab71d6074f09267A653FE9490ea16D20e20f",
     "abi": [
       {
@@ -6738,7 +6738,7 @@
       }
     ]
   },
-  "TombFtmLPTShareRewardPool": {
+  "PolarNearLpSpolarRewardPool": {
     "address": "0xCFbf6FeC2fa395A64Fdc3feDa25d0057eBaf1AbF",
     "abi": [
       {
@@ -7224,7 +7224,7 @@
       }
     ]
   },
-  "TshareFtmLPTShareRewardPool": {
+  "SpolarNearLpSpolarRewardPool": {
     "address": "0xCFbf6FeC2fa395A64Fdc3feDa25d0057eBaf1AbF",
     "abi": [
       {

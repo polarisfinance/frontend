@@ -106,11 +106,11 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
 
   let pairName: string;
   let uniswapUrl: string;
-  if (bank.depositTokenName.includes('TOMB')) {
-    pairName = 'POLAR-UST pair';
+  if (bank.depositTokenName === 'POLAR-NEAR-LP') {
+    pairName = 'POLAR-NEAR pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79/' + tombAddr;
   } else {
-    pairName = 'SPOLAR-UST pair';
+    pairName = 'SPOLAR-NEAR pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79/' + tshareAddr;
   }
   return (
