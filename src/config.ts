@@ -15,7 +15,7 @@ const configurations: { [env: string]: Configuration } = {
       USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
       ETH: ['0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB', 18],
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
-      ZOO: ['0x2317610e609674e53D9039aaB85D8cAd8485A7c5', 0],
+      UST: ['0x5ce9F0B6AFb36135b5ddBF11705cEB65E634A9dC', 18],
       LUNA: ['0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096', 18],
       'ETH-USDC-LP': ['0x2f41af687164062f118297ca10751f4b55478ae1', 18],
       'TOMB-FTM-LP': ['0x905571987eB16fFd11Bf8F8272B82448Ab0f6397', 18],
@@ -39,7 +39,7 @@ const configurations: { [env: string]: Configuration } = {
       USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
       ETH: ['0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB', 18],
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
-      ZOO: ['0x2317610e609674e53D9039aaB85D8cAd8485A7c5', 0],
+      UST: ['0x5ce9F0B6AFb36135b5ddBF11705cEB65E634A9dC', 18],
       LUNA: ['0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096', 18],
       'ETH-USDC-LP': ['0x2f41af687164062f118297ca10751f4b55478ae1', 18],
       'TOMB-FTM-LP': ['0x905571987eB16fFd11Bf8F8272B82448Ab0f6397', 18],
@@ -102,13 +102,13 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 3,
     closedForStaking: true,
   },
-  TombZooRewardPool: {
-    name: 'Earn TOMB by ZOO',
+  PolarUSTRewardPool: {
+    name: 'Earn POLAR by UST',
     poolId: 3,
     sectionInUI: 0,
-    contract: 'TombZooGenesisRewardPool',
-    depositTokenName: 'ZOO',
-    earnTokenName: 'TOMB',
+    contract: 'PolarUstGenesisRewardPool',
+    depositTokenName: 'UST',
+    earnTokenName: 'POLAR',
     finished: false,
     sort: 4,
     closedForStaking: true,

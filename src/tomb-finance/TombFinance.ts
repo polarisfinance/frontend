@@ -270,11 +270,11 @@ export class TombFinance {
     if (earnTokenName === 'TOMB') {
       if (!contractName.endsWith('TombRewardPool')) {
         const rewardPerSecond = await poolContract.tombPerSecond();
-        if (depositTokenName === 'WFTM') {
+        if (depositTokenName === 'NEAR') {
           return rewardPerSecond.mul(6000).div(11000).div(24);
-        } else if (depositTokenName === 'BOO') {
+        } else if (depositTokenName === 'AURORA') {
           return rewardPerSecond.mul(2500).div(11000).div(24);
-        } else if (depositTokenName === 'ZOO') {
+        } else if (depositTokenName === 'UST') {
           return rewardPerSecond.mul(1000).div(11000).div(24);
         } else if (depositTokenName === 'LUNA') {
           return rewardPerSecond.mul(1500).div(11000).div(24);

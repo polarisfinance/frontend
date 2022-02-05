@@ -12,7 +12,7 @@ import tshareFtmLpLogo from '../../assets/img/spolar-aurora.svg';
 
 import auroraLogo from '../../assets/img/aurora_logo.svg';
 import nearLogo from '../../assets/img/near_logo.svg';
-import zooLogo from '../../assets/img/zoo_logo.svg';
+import ustLogo from '../../assets/img/ust_logo.svg';
 import lunaLogo from '../../assets/img/luna_logo.svg';
 
 const logosBySymbol: { [title: string]: string } = {
@@ -26,7 +26,7 @@ const logosBySymbol: { [title: string]: string } = {
   AURORA: auroraLogo,
   NEAR: nearLogo,
   LUNA: lunaLogo,
-  ZOO: zooLogo,
+  UST: ustLogo,
   'TOMB-FTM-LP': tombFtmLpLogo,
   'TSHARE-FTM-LP': tshareFtmLpLogo,
 };
