@@ -15,15 +15,9 @@ import config from './config';
 import Updaters from './state/Updaters';
 import Loader from './components/Loader';
 import Popups from './components/Popups';
-import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 
 const Home = lazy(() => import('./views/Home'));
-const Dawn = lazy(() => import('./views/Dawn'));
-const Masonry = lazy(() => import('./views/Sunrise'));
-const Pit = lazy(() => import('./views/Pit'));
-const SBS = lazy(() => import('./views/Sbs'));
-const Liquidity = lazy(() => import('./views/Liquidity'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -48,24 +42,6 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/">
               <Home />
-            </Route>
-            <Route path="/dawn">
-              <Dawn />
-            </Route>
-            <Route path="/sunrise">
-              <Masonry />
-            </Route>
-            <Route path="/pit">
-              <Pit />
-            </Route>
-            <Route path="/sbs">
-              <SBS />
-            </Route>
-            <Route path="/regulations">
-              <Regulations />
-            </Route>
-            <Route path="/liquidity">
-              <Liquidity />
             </Route>
             <Route path="*">
               <NoMatch />

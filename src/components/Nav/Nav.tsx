@@ -11,7 +11,6 @@ import {
   useMediaQuery,
   List,
   ListItem,
-  ListItemText,
   Divider,
 } from '@material-ui/core';
 
@@ -106,13 +105,13 @@ const Nav = () => {
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>
-              <Link color="textPrimary" to="/dawn" className={classes.link}>
+              <Link color="textPrimary" to="" className={classes.link}>
                 Dawn
               </Link>
-              <Link color="textPrimary" to="/sunrise" className={classes.link}>
+              <Link color="textPrimary" to="" className={classes.link}>
                 Sunrise
               </Link>
-              <Link color="textPrimary" to="/pit" className={classes.link}>
+              <Link color="textPrimary" to="" className={classes.link}>
                 Bond
               </Link>
               {/*<Link color="textPrimary" to="/sbs" className={classes.link}>
@@ -124,9 +123,9 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link>*/}
-              <a target="_blank" rel="noopener noreferrer" href="https://docs.polarisfinance.io" className={classes.link}>
+              <Link color="textPrimary" to="" className={classes.link}>
                 Docs
-              </a>
+              </Link>
             </Box>
             <AccountButton text="Connect" />
           </>
@@ -163,16 +162,11 @@ const Nav = () => {
               </div>
               <Divider />
               <List>
-                <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Dawn" to="/dawn" />
-                <ListItemLink primary="Sunrise" to="/sunrise" />
-                <ListItemLink primary="Pit" to="/pit" />
-                <ListItemLink primary="SBS" to="/sbs" />
-                <ListItemLink primary="Liquidity" to="/liquidity" />
-                <ListItemLink primary="Regulations" to="/regulations" />
-                <ListItem button component="a" href="https://docs.polarisfinance.io">
-                  <ListItemText>Docs</ListItemText>
-                </ListItem>
+                <ListItemLink primary="Home" to="" />
+                <ListItemLink primary="Dawn" to="" />
+                <ListItemLink primary="Sunrise" to="" />
+                <ListItemLink primary="Pit" to="" />
+                <ListItemLink primary="Docs" to="" />
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />
                 </ListItem>
