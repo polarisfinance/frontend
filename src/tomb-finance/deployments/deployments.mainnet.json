@@ -3812,7 +3812,7 @@
       }
     ]
   },
-  "TombFtmRewardPool": {
+  "PolarAuroraRewardPool": {
     "address": "0xFb392431c0dd8d7f21315aA63bA60C6Bd10A0fcd",
     "abi": [
       {
@@ -4298,7 +4298,7 @@
       }
     ]
   },
-  "TombBooGenesisRewardPool": {
+  "PolarNearGenesisRewardPool": {
     "address": "0xFb392431c0dd8d7f21315aA63bA60C6Bd10A0fcd",
     "abi": [
       {

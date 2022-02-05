@@ -10,8 +10,8 @@ import tBondLogo from '../../assets/img/pbond-token.svg';
 import tombFtmLpLogo from '../../assets/img/polar-aurora.svg';
 import tshareFtmLpLogo from '../../assets/img/spolar-aurora.svg';
 
-import wftmLogo from '../../assets/img/ftm_logo_blue.svg';
-import booLogo from '../../assets/img/spooky.png';
+import auroraLogo from '../../assets/img/aurora_logo.svg';
+import nearLogo from '../../assets/img/near_logo.svg';
 import zooLogo from '../../assets/img/zoo_logo.svg';
 import lunaLogo from '../../assets/img/luna_logo.svg';
 
@@ -23,8 +23,8 @@ const logosBySymbol: { [title: string]: string } = {
   TSHAREPNG: tShareLogoPNG,
   TSHARE: tShareLogo,
   TBOND: tBondLogo,
-  WFTM: wftmLogo,
-  BOO: booLogo,
+  AURORA: auroraLogo,
+  NEAR: nearLogo,
   LUNA: lunaLogo,
   ZOO: zooLogo,
   'TOMB-FTM-LP': tombFtmLpLogo,
