@@ -21,7 +21,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-import NameLogo from '../../assets/img/name_logo.svg'
+import LogoName from '../../assets/img/Logo_name.svg'
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -98,7 +98,7 @@ const Nav = () => {
               {/* <a className={ classes.brandLink } href="/">Polaris Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 {/*Polaris Finance*/}
-                <img src={NameLogo} alt='name_logo' height={35}/>
+                <img src={LogoName} alt='name_logo' height={35}/>
               </Link>
             </Typography>
             <Box mr={5}>
