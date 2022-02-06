@@ -36,7 +36,7 @@ const Home = () => {
           <Image color="none" style={{ width: '300px',height: '300px', paddingTop: '0px' }} src={Logo} />
           <Box mt={5}>
             <Typography sx={{ mt: 10 }} color="textPrimary" align="center" variant="h3">
-              Comming soon
+              Cumming soon
             </Typography>
           </Box>
         </Grid>
