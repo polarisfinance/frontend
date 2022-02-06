@@ -21,7 +21,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-import NameLogo from '../../assets/img/name-logo.svg'
+import NameLogo from '../../assets/img/name_logo.svg'
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
