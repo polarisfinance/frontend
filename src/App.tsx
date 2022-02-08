@@ -55,11 +55,8 @@ const App: React.FC = () => {
             <Route path="/sunrise">
               <Masonry />
             </Route>
-            <Route path="/pit">
+            <Route path="/bond">
               <Pit />
-            </Route>
-            <Route path="/sbs">
-              <SBS />
             </Route>
             <Route path="/regulations">
               <Regulations />
