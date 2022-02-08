@@ -58,9 +58,9 @@ const Cemetery = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn POLAR by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="warning">
-                    All below pools have ended. Please unstake and collect your rewards.
-                  </Alert>
+                  {/* <Alert variant="filled" severity="warning"> 
+                   All below pools have ended. Please unstake and collect your rewards. 
+                      </Alert> */}
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)
