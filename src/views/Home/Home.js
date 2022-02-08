@@ -11,8 +11,6 @@ import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
 import useTombStats from '../../hooks/useTombStats';
 import useLpStats from '../../hooks/useLpStats';
-import useModal from '../../hooks/useModal';
-import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
@@ -22,7 +20,6 @@ import { polar as tombProd, tShare as tShareProd } from '../../tomb-finance/depl
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
 import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
-import ZapModal from '../Bank/components/ZapModal';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
@@ -100,37 +97,13 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const tombLpZap = useZap({ depositTokenName: 'POLAR-NEAR-LP' });
-  const tshareLpZap = useZap({ depositTokenName: 'SPOLAR-NEAR-LP' });
 
   const StyledLink = styled.a`
     font-weight: 700;
     text-decoration: none;
   `;
 
-  const [onPresentTombZap, onDissmissTombZap] = useModal(
-    <ZapModal
-      decimals={18}
-      onConfirm={(zappingToken, tokenName, amount) => {
-        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-        tombLpZap.onZap(zappingToken, tokenName, amount);
-        onDissmissTombZap();
-      }}
-      tokenName={'POLAR-NEAR-LP'}
-    />,
-  );
 
-  const [onPresentTshareZap, onDissmissTshareZap] = useModal(
-    <ZapModal
-      decimals={18}
-      onConfirm={(zappingToken, tokenName, amount) => {
-        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-        tshareLpZap.onZap(zappingToken, tokenName, amount);
-        onDissmissTshareZap();
-      }}
-      tokenName={'SPOLAR-NEAR-LP'}
-    />,
-  );
 
   return (
     <Page>
@@ -329,11 +302,6 @@ const Home = () => {
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                <Button color="primary" disabled={true} onClick={onPresentTombZap} variant="contained">
-                  Zap In
-                </Button>
-              </Box>
-              <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {tombLPStats?.tokenAmount ? tombLPStats?.tokenAmount : '-.--'} POLAR /{' '}
                   {tombLPStats?.ftmAmount ? tombLPStats?.ftmAmount : '-.--'} NEAR
@@ -355,11 +323,6 @@ const Home = () => {
                 <CardIcon>
                   <TokenSymbol symbol="SPOLAR-NEAR-LP" />
                 </CardIcon>
-              </Box>
-              <Box mt={2}>
-                <Button color="primary" onClick={onPresentTshareZap} variant="contained">
-                  Zap In
-                </Button>
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
