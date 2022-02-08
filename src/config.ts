@@ -8,7 +8,7 @@ const configurations: { [env: string]: Configuration } = {
     chainId: ChainId.AURORA,
     networkName: 'Aurora Mainnet',
     ftmscanUrl: 'https://explorer.mainnet.aurora.dev/',
-    defaultProvider: 'http://127.0.0.1:8545',
+    defaultProvider: 'https://mainnet.aurora.dev',
     deployments: require('./tomb-finance/deployments/deployments.testing.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
@@ -16,8 +16,8 @@ const configurations: { [env: string]: Configuration } = {
       AURORA: ['0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79', 18],
       UST: ['0x5ce9F0B6AFb36135b5ddBF11705cEB65E634A9dC', 18],
       LUNA: ['0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096', 18],
-      'POLAR-NEAR-LP': ['0xD0e6f59FF7803b063DF31165Fe89741A609356E2', 18],
-      'SPOLAR-NEAR-LP': ['0x0086E526B1390286dB306Bf5f164237079EB58e2', 18],
+      'POLAR-NEAR-LP': ['0x6098Fa36F143994d12D6E91AB68327213B94bc00', 18],
+      'SPOLAR-NEAR-LP': ['0xA0387d5dDD7734859193090aB0d367fC8A9817a8', 18],
       'NEAR-USDC-LP': ['0x20F8AeFB5697B77E0BB835A8518BE70775cdA1b0', 18],
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
@@ -142,4 +142,4 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   },
 };
 
-export default configurations[process.env.NODE_ENV || 'development'];
+export default configurations[process.env.NODE_ENV || 'production'];
