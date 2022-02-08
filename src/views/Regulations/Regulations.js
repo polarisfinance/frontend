@@ -17,7 +17,7 @@ const BackgroundImage = createGlobalStyle`
 const StyledTableCell = withStyles((theme) => ({
   head: {
     fontSize: 18,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     color: '#2c2560',
     fontWeight: 'bolder',
   },
@@ -95,7 +95,7 @@ const Regulations = () => {
           <TableBody>
             {rows?.map((row, index) => (
               <StyledTableRow
-                style={index % 2 ? { background: 'rgba(255,255,255,0.9)' } : { background: 'rgba(255,255,255,0.8)' }}
+                style={index % 2 ? { background: 'rgba(0,0,0,0.5)' } : { background: 'rgba(0,0,0,0.5)' }}
                 key={row.epoch}
               >
                 <StyledTableCell style={{ color: '#2c2560' }} align="center" component="th" scope="row">

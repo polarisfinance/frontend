@@ -9,7 +9,7 @@ const newTheme = createMuiTheme({
     },
     background: {
       default: '#121212',
-      paper: 'rgba(255, 255, 255, 0.9)',
+      paper: 'rgba(0, 0, 0, 0.5)',
     },
     primary: {
       light: '#757ce8',
