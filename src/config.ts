@@ -32,17 +32,14 @@ const configurations: { [env: string]: Configuration } = {
     defaultProvider: 'https://mainnet.aurora.dev',
     deployments: require('./tomb-finance/deployments/deployments.testing.json'),
     externalTokens: {
-      AURORA: ['0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79', 18],
-      USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
-      ETH: ['0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB', 18],
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
+      USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
+      AURORA: ['0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79', 18],
       UST: ['0x5ce9F0B6AFb36135b5ddBF11705cEB65E634A9dC', 18],
       LUNA: ['0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096', 18],
-      'ETH-USDC-LP': ['0x2f41af687164062f118297ca10751f4b55478ae1', 18],
-      'POLAR-NEAR-LP': ['0xD0e6f59FF7803b063DF31165Fe89741A609356E2', 18],
-      'SPOLAR-NEAR-LP': ['0x0086E526B1390286dB306Bf5f164237079EB58e2', 18],
+      'POLAR-NEAR-LP': ['0x6098Fa36F143994d12D6E91AB68327213B94bc00', 18],
+      'SPOLAR-NEAR-LP': ['0xA0387d5dDD7734859193090aB0d367fC8A9817a8', 18],
       'NEAR-USDC-LP': ['0x20F8AeFB5697B77E0BB835A8518BE70775cdA1b0', 18],
-      WFTM: ['0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79', 18]
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
