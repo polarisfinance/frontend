@@ -77,7 +77,7 @@ const Pit: React.FC = () => {
                   priceDesc={
                     !isBondPurchasable
                       ? 'POLAR is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' PBOND available for purchase'
+                      : getDisplayBalance(bondsPurchasable, 24, 4) + ' PBOND available for purchase'
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
@@ -87,7 +87,7 @@ const Pit: React.FC = () => {
                 <ExchangeStat
                   tokenName="POLAR"
                   description="Last-Hour TWAP Price"
-                  price={getDisplayBalance(cashPrice, 18, 4)}
+                  price={getDisplayBalance(cashPrice, 24, 4)}
                 />
                 <Spacer size="md" />
                 <ExchangeStat

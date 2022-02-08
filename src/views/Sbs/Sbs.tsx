@@ -67,7 +67,7 @@ const Sbs: React.FC = () => {
     setTshareAmount(String(tshareBalance));
     const rateTSharePerTomb = (await tombFinance.getTShareSwapperStat(account)).rateTSharePerTomb;
     const updateTBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateTSharePerTomb))).mul(Number(tshareBalance) * 1e6);
-    setTbondAmount(getDisplayBalance(updateTBondAmount, 18, 6));
+    setTbondAmount(getDisplayBalance(updateTBondAmount, 24, 6));
   };
 
   const handleTShareChange = async (e: any) => {
@@ -81,7 +81,7 @@ const Sbs: React.FC = () => {
     setTshareAmount(inputData);
     const rateTSharePerTomb = (await tombFinance.getTShareSwapperStat(account)).rateTSharePerTomb;
     const updateTBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateTSharePerTomb))).mul(Number(inputData) * 1e6);
-    setTbondAmount(getDisplayBalance(updateTBondAmount, 18, 6));
+    setTbondAmount(getDisplayBalance(updateTBondAmount, 24, 6));
   }
 
   return (

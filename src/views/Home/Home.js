@@ -322,7 +322,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>POLAR-NEAR AuroraSwap LP</h2>
+              <h2>POLAR-NEAR Trisolaris LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="POLAR-NEAR-LP" />
@@ -350,7 +350,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>SPOLAR-NEAR AuroraSwap LP</h2>
+              <h2>SPOLAR-NEAR Trisolaris LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="SPOLAR-NEAR-LP" />

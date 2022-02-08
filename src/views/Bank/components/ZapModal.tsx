@@ -27,7 +27,7 @@ interface ZapProps extends ModalProps {
 const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', decimals = 18 }) => {
   const tombFinance = useTombFinance();
   const { balance } = useWallet();
-  const ftmBalance = (Number(balance) / 1e18).toFixed(4).toString();
+  const ftmBalance = (Number(balance) / 1e24).toFixed(4).toString();
   const tombBalance = useTokenBalance(tombFinance.TOMB);
   const tshareBalance = useTokenBalance(tombFinance.TSHARE);
   const [val, setVal] = useState('');
