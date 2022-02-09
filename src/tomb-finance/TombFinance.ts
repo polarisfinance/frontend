@@ -406,7 +406,7 @@ export class TombFinance {
       if (earnTokenName === 'POLAR') {
         return await pool.pendingPOLAR(poolId, account);
       } else {
-        return await pool.pendingSPOLAR(poolId, account);
+        return await pool.pendingShare(poolId, account);
       }
     } catch (err) {
       console.error(`Failed to call earned() on pool ${pool.address}: ${err.stack}`);
