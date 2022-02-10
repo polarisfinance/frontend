@@ -11,7 +11,7 @@ class ERC20 {
   symbol: string;
   decimal: number;
 
-  constructor(address: string, provider: Signer | Provider, symbol: string, decimal = 24) {
+  constructor(address: string, provider: Signer | Provider, symbol: string, decimal = 18) {
     this.contract = new Contract(address, ABI, provider);
     this.address = address;
     this.symbol = symbol;

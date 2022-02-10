@@ -120,14 +120,14 @@ export class TombFinance {
   async getLPStat(name: string): Promise<LPStat> {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
-    const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 24);
+    const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
     const token0 = name.startsWith('POLAR') ? this.TOMB : this.TSHARE;
     const isTomb = name.startsWith('POLAR');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
-    const tokenAmount = getDisplayBalance(tokenAmountBN, 24);
+    const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
     const ftmAmountBN = await this.FTM.balanceOf(lpToken.address);
-    const ftmAmount = getDisplayBalance(ftmAmountBN, 24);
+    const ftmAmount = getDisplayBalance(ftmAmountBN, 18);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
     const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb);
@@ -154,7 +154,7 @@ export class TombFinance {
     const { Treasury } = this.contracts;
     const tombStat = await this.getTombStat();
     const bondTombRatioBN = await Treasury.gepbondPremiumRate();
-    const modifier = bondTombRatioBN / 1e24 > 1 ? bondTombRatioBN / 1e24 : 1;
+    const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
     const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
     const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
     const supply = await this.TBOND.displayedTotalSupply();
@@ -239,8 +239,8 @@ export class TombFinance {
 
     const tokenPerHour = tokenPerSecond.mul(60).mul(60);
     const totalRewardPricePerYear =
-      Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
-    const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24)));
+      Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(18).mul(365)));
+    const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(18)));
     const totalStakingTokenInPool =
       Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
     const dailyAPR = (totalRewardPricePerDay / totalStakingTokenInPool) * 100;
@@ -531,7 +531,7 @@ export class TombFinance {
 
     const TSHAREPrice = (await this.getShareStat()).priceInDollars;
     const TOMBPrice = (await this.getTombStat()).priceInDollars;
-    const epochRewardsPerShare = lastRewardsReceived / 1e24;
+    const epochRewardsPerShare = lastRewardsReceived / 1e18;
 
     //Mgod formula
     const amountOfRewardsPerDay = epochRewardsPerShare * Number(TOMBPrice) * 4;
@@ -712,7 +712,7 @@ export class TombFinance {
           options: {
             address: asset.address,
             symbol: asset.symbol,
-            decimals: 24,
+            decimals: 18,
             image: assetUrl,
           },
         },
@@ -724,9 +724,9 @@ export class TombFinance {
   async provideTombFtmLP(ftmAmount: string, tombAmount: BigNumber): Promise<TransactionResponse> {
     const { TaxOffice } = this.contracts;
     let overrides = {
-      value: parseUnits(ftmAmount, 24),
+      value: parseUnits(ftmAmount, 18),
     };
-    return await TaxOffice.addLiquidityETHTaxFree(tombAmount, tombAmount.mul(992).div(1000), parseUnits(ftmAmount, 24).mul(992).div(1000), overrides);
+    return await TaxOffice.addLiquidityETHTaxFree(tombAmount, tombAmount.mul(992).div(1000), parseUnits(ftmAmount, 18).mul(992).div(1000), overrides);
   }
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {
@@ -738,7 +738,7 @@ export class TombFinance {
     } else {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve0, _reserve1);
     }
-    return (quote / 1e24).toString();
+    return (quote / 1e18).toString();
   }
 
   /**
