@@ -269,15 +269,15 @@ export class TombFinance {
       if (!contractName.endsWith('PolarRewardPool')) {
         const rewardPerSecond = await poolContract.polarPerSecond();
         if (depositTokenName === 'NEAR') {
-          return rewardPerSecond.mul(20000).div(10000).div(24);
+          return rewardPerSecond.mul(40000).div(10000).div(18);
         } else if (depositTokenName === 'AURORA') {
-          return rewardPerSecond.mul(20000).div(10000).div(24);
+          return rewardPerSecond.mul(20000).div(10000).div(18);
         } else if (depositTokenName === 'UST') {
-          return rewardPerSecond.mul(20000).div(10000).div(24);
+          return rewardPerSecond.mul(20000).div(10000).div(18);
         } else if (depositTokenName === 'LUNA') {
-          return rewardPerSecond.mul(20000).div(10000).div(24);
+          return rewardPerSecond.mul(20000).div(10000).div(18);
         }
-        return rewardPerSecond.div(24);
+        return rewardPerSecond.div(18);
       }
       const poolStartTime = await poolContract.poolStartTime();
       const startDateTime = new Date(poolStartTime.toNumber() * 1000);
