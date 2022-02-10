@@ -131,14 +131,14 @@ export class TombFinance {
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
     const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb);
-    const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
-    const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
+    const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(4).toString();
+    const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(4).toString();
     return {
-      tokenAmount: tokenAmountInOneLP.toFixed(2).toString(),
-      ftmAmount: ftmAmountInOneLP.toFixed(2).toString(),
+      tokenAmount: tokenAmountInOneLP.toFixed(4).toString(),
+      ftmAmount: ftmAmountInOneLP.toFixed(4).toString(),
       priceOfOne: lpTokenPriceFixed,
       totalLiquidity: liquidity,
-      totalSupply: Number(lpTokenSupply).toFixed(2).toString(),
+      totalSupply: Number(lpTokenSupply).toFixed(4).toString(),
     };
   }
 
