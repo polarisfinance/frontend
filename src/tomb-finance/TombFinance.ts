@@ -127,7 +127,7 @@ export class TombFinance {
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
     const ftmAmountBN = await this.FTM.balanceOf(lpToken.address);
-    const ftmAmount = getDisplayBalance(ftmAmountBN, 18);
+    const ftmAmount = getDisplayBalance(ftmAmountBN, 24);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
     const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb);
