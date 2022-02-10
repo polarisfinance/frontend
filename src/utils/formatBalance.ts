@@ -2,7 +2,7 @@ import { BigNumber } from 'ethers';
 
 export const getDisplayBalance = (
   balance: BigNumber,
-  decimals = 24,
+  decimals = 18,
   fractionDigits = 4,
   isTruncated: boolean = false,
 ) => {
