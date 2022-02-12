@@ -136,27 +136,29 @@ const Home = () => {
       <BackgroundImage />
       <Grid container spacing={3}>
         
-        <Grid container>
+        <Grid container >
+          
           {/* Logo */}
-          <Grid item xs={12} sm={2} justify="center">
+          <Grid container item xs={4} sm={4}>
             {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Image color="none" imageStyle={{ width: '150px'}} style={{width: '150px'}} src={AuroraLogo} />
+            <Grid item xs={4}>
+              <Image color="none" imageStyle={{ height:'100px'}} style={{height:'100px',paddingTop: '50px'}} src={AuroraLogo} />
+            </Grid>
+            <Grid item xs={4}>
+              <Image color="none" imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop: '50px'}} src={Plus} />
+            </Grid>
+            <Grid item xs={4}>
+              <Image color="none" imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop: '50px'}} src={NearLogo} />
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={2} justify="center">
+        
+          <Grid item xs={2} sm={2} justifyContent="center" alignItems="center" direction="column">
             {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Image color="none"  imageStyle={{ width: '150px' }} style={{width: '150px'}} src={Plus} />
+            <Image color="none"  imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop: '50px'}} src={Equal} />
           </Grid>
-          <Grid item xs={12} sm={2} justify="center">
+          <Grid item xs={6} sm={6}>
             {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Image color="none" imageStyle={{ width: '150px' }} style={{width: '150px'}} src={NearLogo} />
-          </Grid>
-          <Grid item xs={12} sm={2} justify="center">
-            {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Image color="none"  imageStyle={{ width: '150px' }} style={{width: '150px' }} src={Equal} />
-          </Grid>
-          <Grid item xs={12} sm={2} justify="center">
-            {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Image color="none"  imageStyle={{ width: '825px'}} style={{width: '825px'}} src={NameLogo}  />
+            <Image color="none"  imageStyle={{ height:'100px'}} style={{height:'100px',paddingTop: '50px'}} src={NameLogo}  />
           </Grid>
         </Grid> 
         <Grid container>
