@@ -7,7 +7,7 @@ const configurations: { [env: string]: Configuration } = {
   development: {
     chainId: ChainId.AURORA,
     networkName: 'Aurora Mainnet',
-    ftmscanUrl: 'https://explorer.mainnet.aurora.dev/',
+    ftmscanUrl: 'https://aurorascan.dev/',
     defaultProvider: 'https://mainnet.aurora.dev',
     deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
@@ -28,7 +28,7 @@ const configurations: { [env: string]: Configuration } = {
   production: {
     chainId: ChainId.AURORA,
     networkName: 'Aurora Mainnet',
-    ftmscanUrl: 'https://explorer.mainnet.aurora.dev/',
+    ftmscanUrl: 'https://aurorascan.dev/',
     defaultProvider: 'https://mainnet.aurora.dev',
     deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
