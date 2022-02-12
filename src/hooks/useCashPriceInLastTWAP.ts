@@ -16,8 +16,7 @@ const useCashPriceInLastTWAP = () => {
     const refreshInterval = setInterval(fetchCashPrice, config.refreshInterval);
     return () => clearInterval(refreshInterval);
   }, [setPrice, tombFinance, fetchCashPrice]);
-
-  return price;
+  return price.div(1000000);
 };
 
 export default useCashPriceInLastTWAP;
