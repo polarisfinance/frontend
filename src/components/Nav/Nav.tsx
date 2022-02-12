@@ -34,10 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     color: '#FFFFFF',
-    'background-color': '#2b133e',
+    'background-color': 'rgba(0, 0, 0, 0)',
     // borderBottom: `1px solid ${theme.palette.divider}`,
     padding: '10px',
     marginBottom: '3rem',
+    
   },
   drawer: {
     width: 240,
@@ -60,12 +61,13 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textTransform: 'uppercase',
     color: '#FFFFFF',
-    fontSize: '14px',
+    fontSize: '36px',
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
     },
+    
   },
   brandLink: {
     textDecoration: 'none',
@@ -74,6 +76,9 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'none',
     },
   },
+  box: {
+    flexGrow: 1,
+  }
 }));
 
 const Nav = () => {
@@ -91,18 +96,18 @@ const Nav = () => {
   };
 
   return (
-    <AppBar position="sticky" elevation={0} className={classes.appBar}>
+    <AppBar position="static" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
-            <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+            <Typography variant="h6" color="inherit"  className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">Polaris Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 {/*Polaris Finance*/}
                 <img src={NameLogo} alt='name_logo' height={35}/>
               </Link>
             </Typography>
-            <Box mr={5}>
+            <Box className={classes.box} m="auto">
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>

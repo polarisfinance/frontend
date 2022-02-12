@@ -23,7 +23,8 @@ body {
 .makeStyles-paper-11 h2,
 .MuiTypography-body1,
 .MuiPaper-root,
-.MuiPaper-root h2 {
+.MuiPaper-root h2,
+p,h2,span{
   color: #FFFFFF !important;
 }
 
@@ -58,9 +59,12 @@ footer .a:hover {
 
 .MuiButton-containedPrimary,
 .MuiButton-containedPrimary:hover,
+.MuiButton-containedSecondary,
+.MuiButton-containedSecondary:hover,
 .MuiListItem-button:hover,
 .MuiButtonBase-root:hover {
   color: #fff !important;
+  font-size: 25px !important;
 }
 
 code {
