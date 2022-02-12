@@ -9,15 +9,15 @@ const configurations: { [env: string]: Configuration } = {
     networkName: 'Aurora Mainnet',
     ftmscanUrl: 'https://explorer.mainnet.aurora.dev/',
     defaultProvider: 'https://mainnet.aurora.dev',
-    deployments: require('./tomb-finance/deployments/deployments.testing.json'),
+    deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
       USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
       AURORA: ['0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79', 18],
       UST: ['0x5ce9F0B6AFb36135b5ddBF11705cEB65E634A9dC', 18],
       LUNA: ['0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096', 18],
-      'POLAR-NEAR-LP': ['0x54BdFABf13188369d30CE43A44d864113Db2110c', 18],
-      'SPOLAR-NEAR-LP': ['0xd2daaE2ab8f33058A8475B2784ea25E741d02064', 18],
+      'POLAR-NEAR-LP': ['0x60eaf44D2f7B942598875584d0EFe86029E2E4be', 18],
+      'SPOLAR-NEAR-LP': ['0x82d442d50d74A993530d8907512dcA6CD40b4102', 18],
       'NEAR-USDC-LP': ['0x20F8AeFB5697B77E0BB835A8518BE70775cdA1b0', 18],
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
@@ -30,7 +30,7 @@ const configurations: { [env: string]: Configuration } = {
     networkName: 'Aurora Mainnet',
     ftmscanUrl: 'https://explorer.mainnet.aurora.dev/',
     defaultProvider: 'https://mainnet.aurora.dev',
-    deployments: require('./tomb-finance/deployments/deployments.testing.json'),
+    deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
       USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
