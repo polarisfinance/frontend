@@ -200,8 +200,8 @@ export class TombFinance {
     const tombRewardPoolSupply = await this.TOMB.balanceOf(PolarAuroraGenesisRewardPool.address);
     const tombCirculatingSupply = supply.sub(tombRewardPoolSupply);
     return {
-      tokenInFtm: getDisplayBalance(expectedPrice),
-      priceInDollars: getDisplayBalance(expectedPrice),
+      tokenInFtm: getDisplayBalance(expectedPrice.div(1e6)),
+      priceInDollars: getDisplayBalance(expectedPrice.div(1e6)),
       totalSupply: getDisplayBalance(supply, this.TOMB.decimal, 0),
       circulatingSupply: getDisplayBalance(tombCirculatingSupply, this.TOMB.decimal, 0),
     };
