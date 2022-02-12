@@ -109,11 +109,6 @@ const Home = () => {
     <Page>
       <BackgroundImage />
       <Grid container spacing={3}>
-        {/* Logo */}
-        <Grid container item xs={12} sm={4} justify="center">
-          {/* <Paper>xs=6 sm=3</Paper> */}
-          <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={Logo} />
-        </Grid>
         {/* Explanation text */}
         <Grid item xs={12} sm={8}>
           <Paper>
@@ -127,19 +122,11 @@ const Home = () => {
             </Box>
           </Paper>
         </Grid>
-
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px' }}>
-            <Alert variant="filled" severity="warning">
-              <b>
-                Please visit our{' '}
-                <StyledLink target="_blank" href="https://docs.polarisfinance.io">
-                  documentation
-                </StyledLink>{' '}
-                before purchasing POLAR or SPOLAR!
-              </b>
-            </Alert>
-          </Grid>
+        
+        {/* Logo */}
+        <Grid container item xs={12} sm={4} justify="center">
+          {/* <Paper>xs=6 sm=3</Paper> */}
+          <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={Logo} />
         </Grid>
 
         {/* TVL */}
@@ -153,7 +140,7 @@ const Home = () => {
         </Grid>
 
         {/* Wallet */}
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={12}>
           <Card style={{ height: '100%' }}>
             <CardContent align="center" style={{ marginTop: '2.5%' }}>
               {/* <h2 style={{ marginBottom: '20px' }}>Wallet Balance</h2> */}
@@ -181,7 +168,7 @@ const Home = () => {
         </Grid>
 
         {/* TOMB */}
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
               <h2>POLAR</h2>
@@ -220,7 +207,7 @@ const Home = () => {
         </Grid>
 
         {/* TSHARE */}
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
               <h2>SPOLAR</h2>
@@ -257,7 +244,7 @@ const Home = () => {
         </Grid>
 
         {/* TBOND */}
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={12}>
           <Card>
             <CardContent align="center" style={{ position: 'relative' }}>
               <h2>PBOND</h2>
