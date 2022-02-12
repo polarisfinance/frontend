@@ -200,7 +200,7 @@ const Home = () => {
 
 
         {/* Wallet */}
-        <Grid item xs={12} sm={12} >
+        <Grid container item xs={12} sm={12} >
           
           <Button color="primary" href="/dawn" variant="contained" style={{ marginRight: '10px' }}>
             FARM IN DAWN
