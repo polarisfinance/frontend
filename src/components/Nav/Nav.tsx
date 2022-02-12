@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textTransform: 'uppercase',
     color: '#FFFFFF',
-    fontSize: '36px',
+    fontSize: '27px',
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
