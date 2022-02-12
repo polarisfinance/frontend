@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import {
@@ -16,14 +16,14 @@ import {
 } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
-
+import newTheme from "../../newTheme";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
 import NameLogo from '../../assets/img/name-logo.svg'
-
+import {ThemeContext} from "styled-components";;
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -61,11 +61,14 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textTransform: 'uppercase',
     color: '#FFFFFF',
-    fontSize: '36px',
-    margin: theme.spacing(1, 2),
+    fontFamily: 'Rajdhani regular',
+    fontSize: '25px',
+    margin: theme.spacing(1, 3),
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
+      color: newTheme.palette.primary.main
+
     },
     
   },
