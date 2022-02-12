@@ -24,10 +24,10 @@ const Notice: React.FC<NoticeProps> = ({ color = 'grey', children }) => {
 const StyledPanel = styled.div<NoticeProps>`
   width: 100%;
   background: ${({ color, theme }) =>
-    color === 'grey' ? theme.color.grey[900] : color === 'yellow' ? '#c6840077' : '#689f3877'};
+    color === 'grey' ? theme.color.grey[900] : color === 'yellow' ? '#ba459a' : '#ba459a'};
   color: ${({ color, theme }) =>
     color === 'grey' ? theme.color.grey[400] : color === 'yellow' ? '#ffd54f' : '#8bc34a'};
-  border-radius: 4px;
+  border-radius: 10px;
 `;
 
 const StyledText = styled.span``;

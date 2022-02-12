@@ -15,7 +15,6 @@ import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import { polar as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { polar as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
-
 import AuroraLogo from '../../assets/img/aurora_logo_white.svg'
 import NearLogo from '../../assets/img/near_logo_white.svg'
 import Plus from '../../assets/img/+.svg'
@@ -44,18 +43,18 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   box: {
-    color: "green",
     backgroundImage: `url(${ValueLocked})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'contain',
     backgroundPosition: 'center',
+    backgroundColor: '#6fd44b',
     height: '100%',
-    margin: 'auto',
+    margin: '-24px 12px -12px 12px',
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     color: '#FFFFFF',
-    paddingRight: '12px'
+    borderRadius: '10px',
   },
   card: {
     maxWidth: "40%",
@@ -167,18 +166,17 @@ const Home = () => {
             
             <Box color="primary" p={4}>
               <h2>Welcome to Polaris Finance</h2>
-              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via seigniorage.</p>
-              <p>
-                Stake your POLAR-NEAR LP in the Dawn to earn SPOLAR rewards. Then stake your earned SPOLAR in the
-                Sunrise to earn more POLAR!
-              </p>
+              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via
+                seigniorage. Stake your POLAR-NEAR LP in the Dawn to earn SPOLAR rewards. Then
+                stake your earned SPOLAR in the Sunrise to earn more POLAR!</p>
+
             </Box>
             
           </Grid>
           <Grid item xs={12} sm={6} align="center">
-            <Box className={classes.box}>
-              <span style={{ fontSize: '50px', fontFamily: '"Rajdhani",regular'}}>Total Value Locked</span>
-              <CountUp style={{ fontSize: '60px' }} end={TVL} separator="," prefix="$" />
+            <Box className={classes.box} style={{ paddingTop:'12px'}}>
+              <span style={{ fontSize: '25px', fontFamily: '"Rajdhani",regular'}}>Total Value Locked</span>
+              <CountUp style={{ fontSize: '60px', fontFamily: '"Rajdhani",bold' }} end={TVL} separator="," prefix="$ " />
             </Box>
 
             
@@ -186,7 +184,7 @@ const Home = () => {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px' }}>
-            <Alert variant="filled" severity="warning">
+            <Alert style={{backgroundColor: '#b43387'}} variant="filled" severity="warning">
               <b>
                 Please visit our{' '}
                 <StyledLink target="_blank" href="https://docs.polarisfinance.io">
@@ -202,10 +200,10 @@ const Home = () => {
         {/* Wallet */}
         <Grid container item xs={12} sm={12} >
           
-          <Button color="primary" href="/dawn" variant="contained" style={{ marginRight: '10px' }}>
+          <Button color="primary" href="/dawn" variant="contained" style={{ marginRight: '12px', marginBottom: '12px' }}>
             FARM IN DAWN
           </Button>
-          <Button color="primary" href="/sunrise" variant="contained" style={{ marginRight: '10px' }}>
+          <Button color="primary" href="/sunrise" variant="contained" style={{ marginRight: '12px', marginBottom: '12px' }}>
             STAKE IN SUNRISE
           </Button>
           <Button
@@ -213,18 +211,18 @@ const Home = () => {
             target="_blank"
             href={buyTombAddress}
             variant="contained"
-            style={{ marginRight: '10px' }}
+            style={{ marginRight: '12px', marginBottom: '12px'  }}
             className={classes.button}
           >
             BUY POLAR
           </Button>
-          <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button} style={{ marginRight: '10px' }}>
+          <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
             BUY SPOLAR
           </Button>
-          <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button} style={{ marginRight: '10px' }}>
+          <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
             POLAR CHARTS
           </Button>
-          <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button}>
+          <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
             SPOLAR CHARTS
           </Button>
           
