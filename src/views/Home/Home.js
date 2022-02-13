@@ -135,31 +135,6 @@ const Home = () => {
       <BackgroundImage />
       <Grid container spacing={3}>
         
-        <Grid container >
-          
-          {/* Logo */}
-          <Grid container item xs={4} sm={4}>
-            {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Grid item xs={4}>
-              <Image color="none" imageStyle={{ height:'100px'}} style={{height:'100px',paddingTop: '50px'}} src={AuroraLogo} />
-            </Grid>
-            <Grid item xs={4}>
-              <Image color="none" imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop: '50px'}} src={Plus} />
-            </Grid>
-            <Grid item xs={4}>
-              <Image color="none" imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop: '50px'}} src={NearLogo} />
-            </Grid>
-          </Grid>
-        
-          <Grid item xs={2} sm={2} justifyContent="center" alignItems="center" direction="column">
-            {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Image color="none"  imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop: '50px'}} src={Equal} />
-          </Grid>
-          <Grid item xs={6} sm={6}>
-            {/* <Paper>xs=6 sm=3</Paper> */}   
-            <Image color="none"  imageStyle={{ height:'100px'}} style={{height:'100px',paddingTop: '50px'}} src={NameLogo}  />
-          </Grid>
-        </Grid> 
         <Grid container>
           {/* Explanation text */}
           <Grid item xs={12} sm={6}>
@@ -233,7 +208,7 @@ const Home = () => {
             <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px' }}>
               <Button
                 onClick={() => {
-                  tombFinance.watchAssetInMetamask('TOMB');
+                  tombFinance.watchAssetInMetamask('POLAR');
                 }}
                 color="primary"
                 variant="outlined"
@@ -246,7 +221,7 @@ const Home = () => {
                 <Grid container item sm={4} alignItems='center'>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
-                      <TokenSymbol symbol="TOMB" />
+                      <TokenSymbol symbol="POLAR" />
                     </CardIcon>
                   </Box>          
                   <h2>POLAR</h2>
@@ -285,7 +260,7 @@ const Home = () => {
             <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px'  }}>
               <Button
                 onClick={() => {
-                  tombFinance.watchAssetInMetamask('TSHARE');
+                  tombFinance.watchAssetInMetamask('SPOLAR');
                 }}
                 color="primary"
                 variant="outlined"
@@ -298,7 +273,7 @@ const Home = () => {
                 <Grid container item sm={4} alignItems='center'>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
-                      <TokenSymbol symbol="TSHARE" />
+                      <TokenSymbol symbol="SPOLAR" />
                     </CardIcon>
                   </Box>          
                   <h2>SPOLAR</h2>
@@ -337,7 +312,7 @@ const Home = () => {
             <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px'  }}>
               <Button
                 onClick={() => {
-                  tombFinance.watchAssetInMetamask('TBOND');
+                  tombFinance.watchAssetInMetamask('PBOND');
                 }}
                 color="primary"
                 variant="outlined"
@@ -350,7 +325,7 @@ const Home = () => {
                 <Grid container item sm={4} alignItems='center'>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
-                      <TokenSymbol symbol="TBOND" />
+                      <TokenSymbol symbol="PBOND" />
                     </CardIcon>
                   </Box>          
                   <h2>PBOND</h2>
