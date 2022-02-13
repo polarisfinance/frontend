@@ -83,3 +83,17 @@ code {
   background-color: black !important;
   color: #757ce8 !important;
 }
+
+.MuiPaper-elevation1   {
+  box-shadow: none !important;
+}
+
+.MuiPaper-elevation1,
+.MuiAlert-root,
+.MuiButton-root {
+  border-radius: 10px !important
+}
+
+a.active {
+  text-decoration: underline !important;
+}

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import Page from '../../components/Page';
 import HomeImage from '../../assets/img/home.png';
-import Image from 'material-ui-image';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
 import { createGlobalStyle } from 'styled-components';
@@ -15,16 +14,11 @@ import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import { polar as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { polar as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
-import AuroraLogo from '../../assets/img/aurora_logo_white.svg'
-import NearLogo from '../../assets/img/near_logo_white.svg'
-import Plus from '../../assets/img/+.svg'
-import Equal from '../../assets/img/=.svg'
-import NameLogo from '../../assets/img/name-logo.svg'
 import ValueLocked from '../../assets/img/value_locked.svg'
 
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
-import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Grid } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
@@ -60,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "40%",
     minHeight: "20vh",
     display: "flex",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 }));
 
 const Home = () => {
@@ -205,7 +199,7 @@ const Home = () => {
         {/* TOMB */}
         <Grid item xs={12} sm={12}>
           <Card>
-            <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px' }}>
+            <CardContent className={classes.root} align="center" style={{ position: 'relative',paddingBottom: '16px' }}>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('POLAR');
@@ -232,7 +226,7 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                 </Grid>
-                <Grid item sm={4}>
+                <Grid align="right" item sm={4}>
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}</span>

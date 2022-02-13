@@ -14,10 +14,11 @@ import CemeteryImage from '../../assets/img/cemetery.png';
 import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
+import HomeImage from '../../assets/img/home.png';
 
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${CemeteryImage}) no-repeat !important;
+    background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
@@ -40,7 +41,7 @@ const Cemetery = () => {
 
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom>
                     Earn SPOLAR by staking LP
                   </Typography>
                   <Grid container spacing={3}>
@@ -55,7 +56,7 @@ const Cemetery = () => {
                 </div>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn POLAR by staking LP
                   </Typography>
                   {/* <Alert variant="filled" severity="warning"> 
@@ -73,7 +74,7 @@ const Cemetery = () => {
                 </div>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Genesis Pools
                   </Typography>
                   <Grid container spacing={3}>
