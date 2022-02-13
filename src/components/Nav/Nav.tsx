@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#FFFFFF',
     fontFamily: 'Rajdhani regular',
     fontSize: '25px',
-    margin: theme.spacing(1, 3),
+    margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
