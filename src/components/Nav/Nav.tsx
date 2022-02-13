@@ -209,7 +209,7 @@ const Nav = () => {
                 <Image color="none" imageStyle={{ height:'100px'}} style={{height:'100px',paddingTop:'0px',marginTop:'20px'}} src={AuroraLogo} />
               </Grid>
               <Grid item xs={4}>
-                <Image color="none" imageStyle={{ height:'40px' }} style={{height:'40px',paddingTop:'0px',marginTop:'20px'}} src={Plus} />
+                <Image color="none" imageStyle={{ height:'40px', marginTop: '20px' }} style={{height:'30px',paddingTop:'0px',marginTop:'30px'}} src={Plus} />
               </Grid>
               <Grid item xs={4}>
                 <Image color="none" imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop:'0px',marginTop:'20px'}} src={NearLogo} />
@@ -218,7 +218,7 @@ const Nav = () => {
             <Hidden xsDown>
               <Grid item xs={2} sm={2} alignItems="center" direction="column">
                 {/* <Paper>xs=6 sm=3</Paper> */}   
-                <Image color="none"  imageStyle={{ height:'40px' }} style={{height:'40px',paddingTop:'0px',marginTop:'20px'}} src={Equal} />
+                <Image color="none"  imageStyle={{ height:'20px', marginTop: '20px' }} style={{height:'20px',paddingTop:'0px',marginTop:'40px'}} src={Equal} />
               </Grid>
             </Hidden>
             
