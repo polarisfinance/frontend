@@ -165,8 +165,8 @@ const Home = () => {
           <Grid item xs={12} sm={6}>
             
             <Box color="primary" p={4}>
-              <h2>Welcome to Polaris Finance</h2>
-              <p>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via
+              <h2 style={{fontSize: '28px'}}>Welcome to Polaris Finance</h2>
+              <p style={{fontSize: '20px'}}>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via
                 seigniorage. Stake your POLAR-NEAR LP in the Dawn to earn SPOLAR rewards. Then
                 stake your earned SPOLAR in the Sunrise to earn more POLAR!</p>
 
@@ -184,7 +184,7 @@ const Home = () => {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px' }}>
-            <Alert style={{backgroundColor: '#b43387'}} variant="filled" severity="warning">
+            <Alert style={{backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
               <b>
                 Please visit our{' '}
                 <StyledLink target="_blank" href="https://docs.polarisfinance.io">
@@ -199,7 +199,6 @@ const Home = () => {
 
         {/* Wallet */}
         <Grid container item xs={12} sm={12} >
-          
           <Button color="primary" href="/dawn" variant="contained" style={{ marginRight: '12px', marginBottom: '12px' }}>
             FARM IN DAWN
           </Button>
@@ -231,7 +230,7 @@ const Home = () => {
         {/* TOMB */}
         <Grid item xs={12} sm={12}>
           <Card>
-            <CardContent align="center" style={{ position: 'relative' }}>
+            <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px' }}>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
@@ -283,7 +282,7 @@ const Home = () => {
         {/* Tshare */}
         <Grid item xs={12} sm={12}>
           <Card>
-            <CardContent align="center" style={{ position: 'relative' }}>
+            <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px'  }}>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TSHARE');
@@ -302,7 +301,7 @@ const Home = () => {
                       <TokenSymbol symbol="TSHARE" />
                     </CardIcon>
                   </Box>          
-                  <h2>SPOLAR</h2>
+                  <h2>PBOND</h2>
                 </Grid>
                 <Grid item sm={4}>
                   Current Price
@@ -335,7 +334,7 @@ const Home = () => {
         {/* Tbond */}
         <Grid item xs={12} sm={12}>
           <Card>
-            <CardContent align="center" style={{ position: 'relative' }}>
+            <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px'  }}>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TBOND');
