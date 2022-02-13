@@ -695,13 +695,13 @@ export class TombFinance {
     if (ethereum && ethereum.networkVersion === config.chainId.toString()) {
       let asset;
       let assetUrl;
-      if (assetName === 'TOMB') {
+      if (assetName === 'POLAR') {
         asset = this.TOMB;
         assetUrl = 'https://polarisfinance.io/logos/polar-token.svg';
-      } else if (assetName === 'TSHARE') {
+      } else if (assetName === 'SPOLAR') {
         asset = this.TSHARE;
         assetUrl = 'https://polarisfinance.io/logos/spolar-token.svg';
-      } else if (assetName === 'TBOND') {
+      } else if (assetName === 'PBOND') {
         asset = this.TBOND;
         assetUrl = 'https://polarisfinance.io/logos/pbond-token.svg';
       }
