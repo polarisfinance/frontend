@@ -28,10 +28,10 @@ import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
 import MasonryImage from '../../assets/img/masonry.png';
 import { createGlobalStyle } from 'styled-components';
-
+import HomeImage from '../../assets/img/home.png'
 const BackgroundImage = createGlobalStyle`
   body, html {
-    background: url(${MasonryImage}) no-repeat !important;
+    background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
@@ -67,73 +67,64 @@ const Masonry = () => {
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
             Sunrise
           </Typography>
-          <Box mt={5}>
-            <Grid container justify="center" spacing={3}>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent>
-                    <Typography style={{ textAlign: 'center' }}>Next Epoch</Typography>
-                    <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography>Current Epoch</Typography>
-                    <Typography>{Number(currentEpoch)}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography>
-                      POLAR Price<small>(TWAP)</small>
-                    </Typography>
-                    <Typography>{scalingFactor}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography>APR</Typography>
-                    <Typography>{masonryAPR.toFixed(2)}%</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={2} lg={2}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography>SPOLARS Staked</Typography>
-                    <Typography>{getDisplayBalance(totalStaked)}</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-
-            <Grid container justify="center">
+          <Grid container>
+            <Grid container item xs={12} justify="center">
               <Box mt={3} style={{ width: '600px' }}>
                 <Alert variant="filled" severity="warning">
                   Staked SPOLARs can only be withdrawn after 6 epochs since deposit.
                 </Alert>
               </Box>
             </Grid>
-
-            <Box mt={4}>
-              <StyledBoardroom>
-                <StyledCardsWrapper>
-                  <StyledCardWrapper>
-                    <Harvest />
-                  </StyledCardWrapper>
-                  <Spacer />
-                  <StyledCardWrapper>
-                    <Stake />
-                  </StyledCardWrapper>
-                </StyledCardsWrapper>
-              </StyledBoardroom>
-            </Box>
+            <Grid item xs={12} md={4} justify="center">
+              <Stake />
+            </Grid>
+            <Grid container item xs={12} md={4} alignItems="center" direction="row">
+              <Grid container item xs={12}>
+                <Grid item xs={6} container justify="flex-end">
+                  <Typography style={{ textAlign: 'center' }}>Next Epoch:</Typography>
+                </Grid>
+                <Grid item xs={6} container justify='center'>
+                  <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
+                </Grid>
+              </Grid>
+              <Grid container item xs={12}>
+                <Grid item xs={6} container justify="flex-end">
+                  <Typography>Current Epoch:</Typography>
+                </Grid>
+                <Grid item xs={6} container justify='center'>
+                  <Typography>{Number(currentEpoch)}</Typography>
+                </Grid>
+              </Grid>
+              <Grid container item xs={12}>
+                <Grid item xs={6} container justify="flex-end">
+                  <Typography>
+                    POLAR Price<small>(TWAP)</small>
+                  </Typography>
+                </Grid>
+                <Grid item xs={6} container justify='center'>
+                  <Typography>{scalingFactor}</Typography>
+                </Grid>
+              </Grid>
+              <Grid container item xs={12}>
+                <Grid item xs={6} container justify="flex-end">
+                  <Typography>APR:</Typography>
+                </Grid>
+                <Grid item xs={6} container justify='center'>
+                  <Typography>{masonryAPR.toFixed(2)}%</Typography>
+                </Grid>
+              </Grid>
+              <Grid container item xs={12}>
+                <Grid item xs={6} container justify="flex-end">
+                  <Typography>SPOLARS Staked</Typography>
+                </Grid>
+                <Grid item xs={6} container justify='center'>
+                  <Typography>{getDisplayBalance(totalStaked)}</Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Harvest />              
+            </Grid>
 
             {/* <Grid container justify="center" spacing={3}>
             <Grid item xs={4}>
@@ -164,7 +155,7 @@ const Masonry = () => {
               </Card>
             </Grid>
           </Grid> */}
-          </Box>
+          </Grid>
 
           <Box mt={5}>
             <Grid container justify="center" spacing={3} mt={10}>

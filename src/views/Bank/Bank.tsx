@@ -21,9 +21,6 @@ import useTombFinance from '../../hooks/useTombFinance';
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
-    [theme.breakpoints.up('md')]: {
-      height: '90px',
-    },
   },
   text: {
     fontSize: '40px',
@@ -47,11 +44,10 @@ const Bank: React.FC = () => {
         title={bank?.name}
       />
       <Grid container>
-        <Grid item xs={4}>
-          <StyledCardWrapper>{<Stake bank={bank} />}</StyledCardWrapper>
+        <Grid item xs={12} md={4}>
+          {<Stake bank={bank} />}
         </Grid>
-  
-        <Grid container item xs={4} alignItems="center" direction="row">
+        <Grid container item xs={12} md={4} alignItems="center" direction="row">
           <Grid container item xs={12}>
             <Grid item xs={6} container justify="flex-end" >
               <Typography className={classes.text}>APR:</Typography>
@@ -77,10 +73,8 @@ const Bank: React.FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <StyledCardWrapper>
-            <Harvest bank={bank} />
-          </StyledCardWrapper>
+        <Grid item xs={12} md={4}>
+          <Harvest bank={bank} />
         </Grid>
         <Grid item xs={12}>
           <StyledBank>
