@@ -184,10 +184,10 @@ const Nav = () => {
                 <ListItemLink primary="Home" to="/" />
                 <ListItemLink primary="Dawn" to="/dawn" />
                 <ListItemLink primary="Sunrise" to="/sunrise" />
-                <ListItemLink primary="Pit" to="/pit" />
-                <ListItemLink primary="SBS" to="/sbs" />
+                <ListItemLink primary="Bond" to="/bond" />
+                {/* <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
-                <ListItemLink primary="Regulations" to="/regulations" />
+                <ListItemLink primary="Regulations" to="/regulations" /> */}
                 <ListItem button component="a" href="https://docs.polarisfinance.io">
                   <ListItemText>Docs</ListItemText>
                 </ListItem>
