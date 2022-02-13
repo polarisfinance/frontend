@@ -56,6 +56,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  icon: {
+    [theme.breakpoints.down('850')]: {
+      justifyContent: 'center',
+    },
+    alignItems: 'center'
+    
+  }
 }));
 
 const Home = () => {
@@ -212,21 +219,21 @@ const Home = () => {
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
               </Button>
               <Grid container alignItems='center'>
-                <Grid container item sm={4} alignItems='center'>
+                <Grid container item xs={12} sm={4} className={classes.icon}>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
                       <TokenSymbol symbol="POLAR" />
                     </CardIcon>
-                  </Box>          
-                  <h2>POLAR</h2>
+                  </Box> 
+                  <h2>POLAR</h2>                             
                 </Grid>
-                <Grid item sm={4}>
+                <Grid item xs={12} sm={4}>
                   Current Price
                   <Box>
                     <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                 </Grid>
-                <Grid item sm={4}>
+                <Grid item xs={12} sm={4}>
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}</span>
@@ -264,21 +271,21 @@ const Home = () => {
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
               </Button>
               <Grid container alignItems='center'>
-                <Grid container item sm={4} alignItems='center'>
+                <Grid container item xs={12} sm={4} className={classes.icon}>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
                       <TokenSymbol symbol="SPOLAR" />
                     </CardIcon>
                   </Box>          
-                  <h2>SPOLAR</h2>
+                  <h2 width={80}>SPOLAR</h2>
                 </Grid>
-                <Grid item sm={4}>
+                <Grid item xs={12} sm={4}>
                   Current Price
                   <Box>
                     <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} NEAR</span>
                   </Box>
                 </Grid>
-                <Grid item sm={4}>
+                <Grid item xs={12} sm={4}>
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}</span>
@@ -316,7 +323,7 @@ const Home = () => {
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
               </Button>
               <Grid container alignItems='center'>
-                <Grid container item sm={4} alignItems='center'>
+                <Grid  container item xs={12} sm={4} className={classes.icon}>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
                       <TokenSymbol symbol="PBOND" />
@@ -324,13 +331,13 @@ const Home = () => {
                   </Box>          
                   <h2>PBOND</h2>
                 </Grid>
-                <Grid item sm={4}>
+                <Grid item xs={12} sm={4}>
                   Current Price
                   <Box>
                     <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                 </Grid>
-                <Grid item sm={4}>
+                <Grid item xs={12} sm={4}>
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)}</span>
