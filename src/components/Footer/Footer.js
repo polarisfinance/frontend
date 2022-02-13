@@ -5,6 +5,7 @@ import TwitterImage from '../../assets/img/twitter.svg';
 import GithubImage from '../../assets/img/github.svg';
 import TelegramImage from '../../assets/img/telegram.svg';
 import DiscordImage from '../../assets/img/discord.svg';
+import MediumImage from '../../assets/img/medium.svg'
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -50,6 +51,14 @@ const Footer = () => {
             </Typography>
           </Grid>
           <Grid item xs={6} style={{ textAlign: 'right' }}>
+            <a
+              href="https://medium.com/@PolarisFinance"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
+              <img alt="medium" src={MediumImage} className={classes.img} />
+            </a>
             <a
               href="https://twitter.com/PolarisFinance_"
               rel="noopener noreferrer"
