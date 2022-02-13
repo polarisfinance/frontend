@@ -301,7 +301,7 @@ const Home = () => {
                       <TokenSymbol symbol="TSHARE" />
                     </CardIcon>
                   </Box>          
-                  <h2>PBOND</h2>
+                  <h2>SPOLAR</h2>
                 </Grid>
                 <Grid item sm={4}>
                   Current Price
@@ -353,7 +353,7 @@ const Home = () => {
                       <TokenSymbol symbol="TBOND" />
                     </CardIcon>
                   </Box>          
-                  <h2>SPOLAR</h2>
+                  <h2>PBOND</h2>
                 </Grid>
                 <Grid item sm={4}>
                   Current Price
