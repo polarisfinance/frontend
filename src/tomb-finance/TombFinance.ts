@@ -45,9 +45,9 @@ export class TombFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
     }
-    this.TOMB = new ERC20(deployments.polar.address, provider, 'TOMB');
-    this.TSHARE = new ERC20(deployments.tShare.address, provider, 'TSHARE');
-    this.TBOND = new ERC20(deployments.tBond.address, provider, 'TBOND');
+    this.TOMB = new ERC20(deployments.polar.address, provider, 'POLAR');
+    this.TSHARE = new ERC20(deployments.tShare.address, provider, 'SPOLAR');
+    this.TBOND = new ERC20(deployments.tBond.address, provider, 'PBOND');
     this.FTM = this.externalTokens['NEAR'];
 
     // Uniswap V2 Pair
@@ -697,13 +697,13 @@ export class TombFinance {
       let assetUrl;
       if (assetName === 'TOMB') {
         asset = this.TOMB;
-        assetUrl = 'https://tomb.finance/presskit/tomb_icon_noBG.png';
+        assetUrl = 'https://polarisfinance.io/logos/polar-token.svg';
       } else if (assetName === 'TSHARE') {
         asset = this.TSHARE;
-        assetUrl = 'https://tomb.finance/presskit/tshare_icon_noBG.png';
+        assetUrl = 'https://polarisfinance.io/logos/spolar-token.svg';
       } else if (assetName === 'TBOND') {
         asset = this.TBOND;
-        assetUrl = 'https://tomb.finance/presskit/tbond_icon_noBG.png';
+        assetUrl = 'https://polarisfinance.io/logos/pbond-token.svg';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
