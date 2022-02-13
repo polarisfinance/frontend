@@ -226,7 +226,7 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                 </Grid>
-                <Grid align="right" item sm={4}>
+                <Grid item sm={4}>
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}</span>
