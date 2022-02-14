@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
       height: '90px',
     },
   },
+  text: {
+    fontSize: '20px',
+  }
 }));
 
 const Masonry = () => {
@@ -67,8 +70,8 @@ const Masonry = () => {
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
             Sunrise
           </Typography>
-          <Grid container>
-            <Grid container item xs={12} justify="center">
+          <Grid container  className={classes.text}>
+            <Grid container item xs={12} justify="center"  className={classes.text}>
               <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
                 <Typography style={{backgroundColor: 'none', fontSize: '30px', textAlign: 'center'}}>
                   Staked SPOLARs can only be withdrawn after 6 epochs since deposit.
@@ -81,44 +84,44 @@ const Masonry = () => {
             <Grid container item xs={12} md={4} alignItems="center" direction="row">
               <Grid container item xs={12}>
                 <Grid item xs={6} container justify="flex-end">
-                  <Typography style={{ textAlign: 'center' }}>Next Epoch:</Typography>
+                  <Typography  className={classes.text} style={{ textAlign: 'center' }}>Next Epoch:</Typography>
                 </Grid>
                 <Grid item xs={6} container justify='center'>
-                  <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
+                  <ProgressCountdown  className={classes.text} base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
                 <Grid item xs={6} container justify="flex-end">
-                  <Typography>Current Epoch:</Typography>
+                  <Typography  className={classes.text}>Current Epoch:</Typography>
                 </Grid>
                 <Grid item xs={6} container justify='center'>
-                  <Typography>{Number(currentEpoch)}</Typography>
+                  <Typography  className={classes.text}>{Number(currentEpoch)}</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
                 <Grid item xs={6} container justify="flex-end">
-                  <Typography>
-                    POLAR Price<small>(TWAP)</small>
+                  <Typography className={classes.text}>
+                    POLAR Price<small>(TWAP)</small>:
                   </Typography>
                 </Grid>
                 <Grid item xs={6} container justify='center'>
-                  <Typography>{scalingFactor}</Typography>
+                  <Typography className={classes.text}>{scalingFactor}</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
                 <Grid item xs={6} container justify="flex-end">
-                  <Typography>APR:</Typography>
+                  <Typography className={classes.text}>APR:</Typography>
                 </Grid>
                 <Grid item xs={6} container justify='center'>
-                  <Typography>{masonryAPR.toFixed(2)}%</Typography>
+                  <Typography className={classes.text}>{masonryAPR.toFixed(2)}%</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
                 <Grid item xs={6} container justify="flex-end">
-                  <Typography>SPOLARS Staked</Typography>
+                  <Typography className={classes.text}>SPOLARS Staked:</Typography>
                 </Grid>
                 <Grid item xs={6} container justify='center'>
-                  <Typography>{getDisplayBalance(totalStaked)}</Typography>
+                  <Typography className={classes.text}>{getDisplayBalance(totalStaked)}</Typography>
                 </Grid>
               </Grid>
             </Grid>

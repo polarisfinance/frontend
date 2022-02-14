@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
   },
   text: {
-    fontSize: '40px',
+    fontSize: '22px',
   }
 }));
 
