@@ -8,6 +8,7 @@ import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
 import useTombFinance from '../../hooks/useTombFinance';
 import TokenSymbol from '../TokenSymbol';
+import {Grid} from '@material-ui/core';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tombFinance = useTombFinance();
@@ -25,7 +26,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
     <Modal>
       <ModalTitle text="My Wallet" />
 
-      <Balances>
+      <Grid container justify='center'>
         <StyledBalanceWrapper>
           <TokenSymbol symbol="POLAR" />
           <StyledBalance>
@@ -49,7 +50,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
             <Label text="PBOND Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
-      </Balances>
+      </Grid>
     </Modal>
   );
 };
@@ -77,7 +78,7 @@ const StyledBalanceWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 0 ${(props) => props.theme.spacing[3]}px;
+  margin: 16px;
 `;
 
 export default AccountModal;
