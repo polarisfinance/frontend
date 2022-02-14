@@ -54,13 +54,6 @@ const WalletProviderModal = ({ open, handleClose }) => {
             }}
             title="WalletConnect"
           />
-          <WalletCard
-            icon={<img src={coingBaseLogo} alt="Coinbase wallet logo" style={{ height: 32 }} />}
-            onConnect={() => {
-              connect('walletlink');
-            }}
-            title="Coinbase Wallet"
-          />
         </List>
       </div>
     </Modal>
