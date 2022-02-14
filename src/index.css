@@ -16,7 +16,8 @@ h4 {
 html,
 body {
   overflow-y: auto;
-  height: 100%;
+  height: fill-available;
+  height: -webkit-fill-available;
 }
 
 .makeStyles-paper-11,
@@ -33,7 +34,9 @@ body {
   content: '';
   top: 0;
   left: 0;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
   width: 100%;
   background-position: center center !important;
   background-attachment: fixed !important;
