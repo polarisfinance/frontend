@@ -31,11 +31,6 @@ const BackgroundImage = createGlobalStyle`
 `;
 
 const useStyles = makeStyles((theme) => ({
-  button: {
-    [theme.breakpoints.down('415')]: {
-      marginTop: '10px',
-    },
-  },
   box: {
     backgroundImage: `url(${ValueLocked})`,
     backgroundRepeat: 'no-repeat',
