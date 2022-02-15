@@ -44,6 +44,9 @@ const Cemetery = () => {
                   <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Genesis Pools
                   </Typography>
+                  <Alert style={{marginBottom: '20px', backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
+                  <b>Genesis pools start on Friday 17.2. 2022 at 14:00 UTC</b>
+                  </Alert>
                   <Grid container spacing={3}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 0)
@@ -54,11 +57,15 @@ const Cemetery = () => {
                       ))}
                   </Grid>
                 </div>
-
+                
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
+                
                   <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn SPOLAR by staking LP
                   </Typography>
+                  <Alert style={{marginBottom: '20px', backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
+                  <b>All bellow pools start on Friday 18.2. 2022 at 14:00 UTC</b>
+                  </Alert>
                   <Grid container spacing={3}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
@@ -77,6 +84,7 @@ const Cemetery = () => {
                   {/* <Alert variant="filled" severity="warning"> 
                    All below pools have ended. Please unstake and collect your rewards. 
                       </Alert> */}
+                  
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)
