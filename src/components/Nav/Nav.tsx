@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textTransform: 'uppercase',
     color: '#FFFFFF',
-    fontFamily: 'Rajdhani regular',
+    fontFamily: '"Rajdhani",regular',
     fontSize: '25px',
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
