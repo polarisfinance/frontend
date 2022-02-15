@@ -14,10 +14,11 @@ import CemeteryImage from '../../assets/img/cemetery.png';
 import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
+import HomeImage from '../../assets/img/home.png';
 
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${CemeteryImage}) no-repeat !important;
+    background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
@@ -39,8 +40,23 @@ const Cemetery = () => {
               </Typography>
 
               <Box mt={5}>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                    Genesis Pools
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 0)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn SPOLAR by staking LP
                   </Typography>
                   <Grid container spacing={3}>
@@ -55,12 +71,12 @@ const Cemetery = () => {
                 </div>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn POLAR by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="warning">
-                    All below pools have ended. Please unstake and collect your rewards.
-                  </Alert>
+                  {/* <Alert variant="filled" severity="warning"> 
+                   All below pools have ended. Please unstake and collect your rewards. 
+                      </Alert> */}
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)
@@ -72,20 +88,7 @@ const Cemetery = () => {
                   </Grid>
                 </div>
 
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
-                    Genesis Pools
-                  </Typography>
-                  <Grid container spacing={3}>
-                    {activeBanks
-                      .filter((bank) => bank.sectionInUI === 0)
-                      .map((bank) => (
-                        <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
-                        </React.Fragment>
-                      ))}
-                  </Grid>
-                </div>
+                
               </Box>
             </Container>
           ) : (

@@ -9,19 +9,20 @@ const newTheme = createMuiTheme({
     },
     background: {
       default: '#121212',
-      paper: 'rgba(255, 255, 255, 0.9)',
+      paper: 'rgba(71,32,123,0.7)',
+      paper2: 'rgba(71,32,123,0.9)',
     },
     primary: {
       light: '#757ce8',
-      main: '#7BC24F',
+      main: '#70D44B',
       dark: '#2c2560',
       contrastText: '#000',
     },
     secondary: {
       light: '#ff7961',
-      main: '#f44336',
+      main: '#3636BA',
       dark: '#ba000d',
-      contrastText: '#000',
+      contrastText: '#FFF',
     },
     action: {
       disabledBackground: '#CDCDCD',

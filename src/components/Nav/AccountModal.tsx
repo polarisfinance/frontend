@@ -8,6 +8,7 @@ import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
 import useTombFinance from '../../hooks/useTombFinance';
 import TokenSymbol from '../TokenSymbol';
+import {Grid} from '@material-ui/core';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tombFinance = useTombFinance();
@@ -25,37 +26,37 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
     <Modal>
       <ModalTitle text="My Wallet" />
 
-      <Balances>
+      <Grid container justify='center'>
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="TOMB" />
+          <TokenSymbol symbol="POLAR" />
           <StyledBalance>
             <StyledValue>{displayTombBalance}</StyledValue>
-            <Label text="TOMB Available" />
+            <Label text="POLAR Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="TSHARE" />
+          <TokenSymbol symbol="SPOLAR" />
           <StyledBalance>
             <StyledValue>{displayTshareBalance}</StyledValue>
-            <Label text="TSHARE Available" />
+            <Label text="SPOLAR Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper>
-          <TokenSymbol symbol="TBOND" />
+          <TokenSymbol symbol="PBOND" />
           <StyledBalance>
             <StyledValue>{displayTbondBalance}</StyledValue>
-            <Label text="TBOND Available" />
+            <Label text="PBOND Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
-      </Balances>
+      </Grid>
     </Modal>
   );
 };
 
 const StyledValue = styled.div`
-  //color: ${(props) => props.theme.color.grey[300]};
+  //color: rgba(71,32,123,0.9);
   font-size: 30px;
   font-weight: 700;
 `;
@@ -77,7 +78,7 @@ const StyledBalanceWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 0 ${(props) => props.theme.spacing[3]}px;
+  margin: 16px;
 `;
 
 export default AccountModal;

@@ -35,18 +35,18 @@ const Button: React.FC<ButtonProps> = ({ children, disabled, href, onClick, size
     case 'sm':
       buttonPadding = spacing[3];
       buttonSize = 36;
-      fontSize = 14;
+      fontSize = 35;
       break;
     case 'lg':
       buttonPadding = spacing[4];
       buttonSize = 72;
-      fontSize = 16;
+      fontSize = 35;
       break;
     case 'md':
     default:
       buttonPadding = spacing[4];
       buttonSize = 56;
-      fontSize = 16;
+      fontSize = 35;
   }
 
   const ButtonChild = useMemo(() => {

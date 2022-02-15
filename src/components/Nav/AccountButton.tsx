@@ -12,12 +12,18 @@ const AccountButton: React.FC<AccountButtonProps> = ({ text }) => {
 
   return (
     <div>
+      {!account ? (
+        <Button onClick={handleWalletProviderOpen} color="primary" variant="contained">
+          {buttonText}
+        </Button>
+      ) : (
+        <Button variant="contained" color="secondary" onClick={onPresentAccountModal}>
+          My Wallet
+        </Button>
+      )}
 
-      <Button color="primary" variant="contained">
-        {buttonText}
-      </Button>
-
-
+      <WalletProviderModal open={isWalletProviderOpen} handleClose={handleWalletProviderClose} />
+      {/* <AccountModal open={isAccountModalOpen} handleClose={handleAccountModalClose}/> */}
     </div>
   );
 };

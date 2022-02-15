@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     width: '400px',
     maxWidth: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper2,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
     outline: 'none',
@@ -53,13 +53,6 @@ const WalletProviderModal = ({ open, handleClose }) => {
               connect('walletconnect');
             }}
             title="WalletConnect"
-          />
-          <WalletCard
-            icon={<img src={coingBaseLogo} alt="Coinbase wallet logo" style={{ height: 32 }} />}
-            onConnect={() => {
-              connect('walletlink');
-            }}
-            title="Coinbase Wallet"
           />
         </List>
       </div>

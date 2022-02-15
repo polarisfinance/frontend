@@ -13,7 +13,7 @@ const ExchangeStat: React.FC<ExchangeStatProps> = ({ tokenName, description, pri
   return (
     <Card>
       <StyledCardContentInner>
-        <StyledCardTitle>{`💰 ${tokenName} = ${price} UST`}</StyledCardTitle>
+        <StyledCardTitle>{`${tokenName} = ${price} NEAR`}</StyledCardTitle>
         <StyledDesc>{description}</StyledDesc>
       </StyledCardContentInner>
     </Card>
@@ -29,6 +29,7 @@ const StyledCardTitle = styled.div`
 const StyledDesc = styled.span`
   //color: ${(props) => props.theme.color.grey[300]};
   text-align: center;
+  padding-bottom: 10px;
 `;
 
 const StyledCardContentInner = styled.div`

@@ -18,10 +18,10 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../tomb-finance/constants';
-
+import HomeImage from '../../assets/img/home.png'
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${PitImage}) no-repeat !important;
+    background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
@@ -106,7 +106,7 @@ const Pit: React.FC = () => {
                   priceDesc={`${getDisplayBalance(bondBalance)} PBOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when POLAR > ${BOND_REDEEM_PRICE}UST` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when POLAR > ${BOND_REDEEM_PRICE}NEAR` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

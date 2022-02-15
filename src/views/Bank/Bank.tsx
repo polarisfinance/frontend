@@ -21,10 +21,10 @@ import useTombFinance from '../../hooks/useTombFinance';
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
-    [theme.breakpoints.up('md')]: {
-      height: '90px',
-    },
   },
+  text: {
+    fontSize: '22px',
+  }
 }));
 
 const Bank: React.FC = () => {
@@ -43,54 +43,52 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      <Box>
-        <Grid container justify="center" spacing={3} style={{ marginBottom: '50px' }}>
-          <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
-              <CardContent style={{ textAlign: 'center' }}>
-                <Typography>APR</Typography>
-                <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%</Typography>
-              </CardContent>
-            </Card>
+      <Grid container>
+        <Grid item xs={12} md={4}>
+          {<Stake bank={bank} />}
+        </Grid>
+        <Grid container item xs={12} md={4} alignItems="center" direction="row">
+          <Grid container item xs={12}>
+            <Grid item xs={6} container justify="flex-end" >
+              <Typography className={classes.text}>APR:</Typography>
+            </Grid>
+            <Grid item xs={6} container justify="center">
+              <Typography className={classes.text}>{bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%</Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
-              <CardContent style={{ textAlign: 'center' }}>
-                <Typography>Daily APR</Typography>
-                <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</Typography>
-              </CardContent>
-            </Card>
+          <Grid container item xs={12}>
+            <Grid item xs={6} container justify="flex-end" >
+              <Typography className={classes.text}>Daily APR:</Typography>
+            </Grid>
+            <Grid item xs={6} container justify='center'>
+              <Typography className={classes.text}>{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
-              <CardContent style={{ textAlign: 'center' }}>
-                <Typography>TVL</Typography>
-                <Typography>${statsOnPool?.TVL}</Typography>
-              </CardContent>
-            </Card>
+          <Grid container item xs={12}>
+            <Grid item xs={6} container justify="flex-end">
+              <Typography className={classes.text}>TVL:</Typography>
+            </Grid>
+            <Grid item xs={6} container justify='center'>
+              <Typography className={classes.text}>${statsOnPool?.TVL}</Typography>
+            </Grid>
           </Grid>
         </Grid>
-      </Box>
-      <Box mt={5}>
-        <StyledBank>
-          <StyledCardsWrapper>
-            <StyledCardWrapper>
-              <Harvest bank={bank} />
-            </StyledCardWrapper>
-            <Spacer />
-            <StyledCardWrapper>{<Stake bank={bank} />}</StyledCardWrapper>
-          </StyledCardsWrapper>
-          <Spacer size="lg" />
-          {bank.depositTokenName.includes('LP') && <LPTokenHelpText bank={bank} />}
-          <Spacer size="lg" />
-          <div>
-            <Button onClick={onRedeem} color="primary" variant="contained">
-              Claim & Withdraw
-            </Button>
-          </div>
-          <Spacer size="lg" />
-        </StyledBank>
-      </Box>
+        <Grid item xs={12} md={4}>
+          <Harvest bank={bank} />
+        </Grid>
+        <Grid item xs={12}>
+          <StyledBank>
+            {bank.depositTokenName.includes('LP') && <LPTokenHelpText  bank={bank} />}
+            <div style={{marginTop: '20px'}}>
+              <Button onClick={onRedeem} color="primary" variant="contained">
+                Claim & Withdraw
+              </Button>
+            </div>
+          </StyledBank>
+        </Grid>
+        
+      
+      </Grid>
     </>
   ) : !bank ? (
     <BankNotFound />
@@ -114,13 +112,9 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d/' + tshareAddr;
   }
   return (
-    <Card>
-      <CardContent>
-        <StyledLink href={uniswapUrl} target="_blank">
+        <StyledLink style={{marginTop: '20px'}} href={uniswapUrl} target="_blank">
           {`Provide liquidity for ${pairName} now on Trisolaris`}
         </StyledLink>
-      </CardContent>
-    </Card>
   );
 };
 

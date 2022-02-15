@@ -14,7 +14,7 @@ export const purple = {
 export const red = {
   100: '#C1C1FF',
   200: '#7575FF',
-  500: '#9090FF',
+  500: '#bdbdbd',
 };
 
 export const grey = {
@@ -26,7 +26,7 @@ export const grey = {
   600: '#757575',
   700: '#616161',
   800: '#424242',
-  900: '#212121',
+  900: '#FFFFFF',
 };
 
 export const bg = '#000000';
