@@ -109,7 +109,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   },
   PolarUSDCRewardPool: {
     name: 'Earn POLAR by USDC',
-    poolId: 1,
+    poolId: 4,
     sectionInUI: 0,
     contract: 'PolarUsdcGenesisRewardPool',
     depositTokenName: 'USDC',
