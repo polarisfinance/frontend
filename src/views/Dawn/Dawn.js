@@ -40,8 +40,23 @@ const Cemetery = () => {
               </Typography>
 
               <Box mt={5}>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                    Genesis Pools
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 0)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn SPOLAR by staking LP
                   </Typography>
                   <Grid container spacing={3}>
@@ -73,20 +88,7 @@ const Cemetery = () => {
                   </Grid>
                 </div>
 
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
-                    Genesis Pools
-                  </Typography>
-                  <Grid container spacing={3}>
-                    {activeBanks
-                      .filter((bank) => bank.sectionInUI === 0)
-                      .map((bank) => (
-                        <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
-                        </React.Fragment>
-                      ))}
-                  </Grid>
-                </div>
+                
               </Box>
             </Container>
           ) : (

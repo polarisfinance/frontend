@@ -14,6 +14,8 @@ import auroraLogo from '../../assets/img/aurora_logo.svg';
 import nearLogo from '../../assets/img/near_logo.svg';
 import ustLogo from '../../assets/img/ust_logo.svg';
 import lunaLogo from '../../assets/img/luna_logo.svg';
+import usdcLogo from '../../assets/img/USDC.png';
+
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -27,6 +29,7 @@ const logosBySymbol: { [title: string]: string } = {
   NEAR: nearLogo,
   LUNA: lunaLogo,
   UST: ustLogo,
+  USDC: usdcLogo,
   'POLAR-NEAR-LP': polarNearLpLogo,
   'SPOLAR-NEAR-LP': spolarNearLpLogo,
 };

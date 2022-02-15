@@ -107,6 +107,17 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 4,
     closedForStaking: false,
   },
+  PolarUSDCRewardPool: {
+    name: 'Earn POLAR by USDC',
+    poolId: 1,
+    sectionInUI: 0,
+    contract: 'PolarUsdcGenesisRewardPool',
+    depositTokenName: 'USDC',
+    earnTokenName: 'POLAR',
+    finished: false,
+    sort: 5,
+    closedForStaking: false,
+  },
   PolarNearLpPolarRewardPool: {
     name: 'Earn POLAR by POLAR-NEAR LP',
     poolId: 0,
