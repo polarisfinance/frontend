@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme, useMediaQuery, Container, Grid, Typography, Link } from '@material-ui/core';
@@ -7,7 +6,6 @@ import GithubImage from '../../assets/img/github.svg';
 import TelegramImage from '../../assets/img/telegram.svg';
 import DiscordImage from '../../assets/img/discord.svg';
 import MediumImage from '../../assets/img/medium.svg';
-import KycBadge from '../../assets/img/KYC-Badge.png';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -17,19 +15,21 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '15px',
     width: '100%',
     color: 'white',
-
+    backgroundColor: '#2b133e',
     textAlign: 'center',
     height: '1.3rem',
 
   },
   link: {
-    height: '30px',
+    width: '24px',
+    height: '24px',
     display: 'inline',
     marginLeft: '20px',
   },
 
   img: {
-    height: '30px',
+    width: '24px',
+    height: '24px',
   },
 
   middle: {
@@ -52,7 +52,7 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container>
           { !Small ?
-          <Grid item container xs={4} alignContent='center'>
+          <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary" align="left">
               {'Copyright © '}
               <Link color="inherit" href="/">
@@ -63,17 +63,29 @@ const Footer = () => {
           </Grid>
           :
           null}
-          <Grid item xs={12} sm={8} className={classes.middle}>
-            <a href="https://medium.com/@PolarisFinance" rel="noopener noreferrer" target="_blank" className={classes.link} >
-              <img alt="medium" src={KycBadge} className={classes.img} />
-            </a>
-            <a href="https://medium.com/@PolarisFinance" rel="noopener noreferrer" target="_blank" className={classes.link} >
+          <Grid  xs={12} sm={6} className={classes.middle}>
+            <a
+              href="https://medium.com/@PolarisFinance"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
               <img alt="medium" src={MediumImage} className={classes.img} />
             </a>
-            <a href="https://twitter.com/PolarisFinance_" rel="noopener noreferrer" target="_blank" className={classes.link} >
+            <a
+              href="https://twitter.com/PolarisFinance_"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
               <img alt="twitter" src={TwitterImage} className={classes.img} />
             </a>
-            <a href="https://github.com/polarisfinance" rel="noopener noreferrer" target="_blank" className={classes.link} >
+            <a
+              href="https://github.com/polarisfinance"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
               <img alt="github" src={GithubImage} className={classes.img} />
             </a>
             <a href="https://t.me/polarisfinance" rel="noopener noreferrer" target="_blank" className={classes.link}>
