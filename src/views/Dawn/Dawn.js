@@ -45,7 +45,7 @@ const Cemetery = () => {
                     Genesis Pools
                   </Typography>
                   <Alert style={{marginBottom: '20px', backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
-                  <b>Genesis pools start on Friday 17.2. 2022 at 14:00 UTC</b>
+                  <b>Genesis pools start on Thursday 17.2. 2022 at 14:00 UTC</b>
                   </Alert>
                   <Grid container spacing={3}>
                     {activeBanks
