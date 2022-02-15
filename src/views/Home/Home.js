@@ -193,7 +193,7 @@ const Home = () => {
           <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
             BUY SPOLAR
           </Button>
-          <Button color="secondary" variant="contained" target="_blank" href='https://dexscreener.com/aurora/0x60eaf44d2f7b942598875584d0efe86029e2e4be' className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
+          <Button color="secondary" variant="contained" target="_blank" href='https://dexscreener.com/aurora/0x3fa4d0145a0b6ad0584b1ad5f61cb490a04d8242' className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
             POLAR CHARTS
           </Button>
           <Button color="secondary" variant="contained" target="_blank" href='https://dexscreener.com/aurora/0xadf9d0c77c70fcb1fdb868f54211288fce9937df' className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
