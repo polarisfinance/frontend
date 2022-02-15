@@ -232,7 +232,7 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                   <Box>
-                  <span style={{ fontSize: '20px',marginRight:"20px"}}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
+                  <span style={{ fontSize: '20px'}}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -289,7 +289,7 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} NEAR</span>
                   </Box>
                   <Box>
-                    <span style={{ fontSize: '20px',marginRight:"20px"}}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
+                    <span style={{ fontSize: '20px'}}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -346,7 +346,7 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                   <Box>
-                    <span style={{ fontSize: '20px',marginRight:"20px"}}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
+                    <span style={{ fontSize: '20px'}}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
                   </Box>
                 </Grid>
                 <Grid item xs={12}
