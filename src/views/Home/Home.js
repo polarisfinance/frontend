@@ -23,6 +23,9 @@ import { Box, Button, Card, CardContent, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 
+// countdown
+import LaunchCountdown from '../../components/LaunchCountdown'
+
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
@@ -124,11 +127,12 @@ const Home = () => {
     text-decoration: none;
   `;
 
-
+  
 
   return (
     <Page>
       <BackgroundImage />
+      {/* <LaunchCountdown deadline={new Date(1645106400*1000)} description='hello'></LaunchCountdown> */}
       <Grid container spacing={3}>
         
         <Grid container>
