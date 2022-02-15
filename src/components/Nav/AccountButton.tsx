@@ -32,7 +32,7 @@ const AccountButton: React.FC<AccountButtonProps> = ({ text }) => {
           {buttonText}
         </Button>
       ) : (
-        <Button variant="contained" onClick={onPresentAccountModal}>
+        <Button variant="contained" color="secondary" onClick={onPresentAccountModal}>
           My Wallet
         </Button>
       )}
