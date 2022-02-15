@@ -64,7 +64,7 @@ const Footer = () => {
           :
           null}
           <Grid item xs={12} sm={8} className={classes.middle}>
-            <a href="https://medium.com/@PolarisFinance" rel="noopener noreferrer" target="_blank" className={classes.link} >
+            <a href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/" rel="noopener noreferrer" target="_blank" className={classes.link} >
               <img alt="medium" src={KycBadge} className={classes.img} />
             </a>
             <a href="https://medium.com/@PolarisFinance" rel="noopener noreferrer" target="_blank" className={classes.link} >

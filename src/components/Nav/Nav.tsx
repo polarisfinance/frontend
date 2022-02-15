@@ -192,6 +192,9 @@ const Nav = () => {
                 <ListItem button component="a" href="https://docs.polarisfinance.io">
                   <ListItemText>Docs</ListItemText>
                 </ListItem>
+                <ListItem button component="a" href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/">
+                  <ListItemText>KYC</ListItemText>
+                </ListItem>
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />
                 </ListItem>
