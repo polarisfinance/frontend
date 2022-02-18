@@ -61,9 +61,9 @@ const Cemetery = () => {
                   <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn POLAR by staking LP
                   </Typography>
-                  {/* <Alert variant="filled" severity="warning"> 
-                   All below pools have ended. Please unstake and collect your rewards. 
-                      </Alert> */}
+                  <Alert style={{marginBottom: '20px', backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
+                  <b>All below pools have ended. Please unstake and collect your rewards.</b>
+                  </Alert>
                   
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -80,9 +80,7 @@ const Cemetery = () => {
                   <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Genesis Pools
                   </Typography>
-                  <Alert style={{marginBottom: '20px', backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
-                  <b>All below pools have ended. Please unstake and collect your rewards.</b>
-                  </Alert>
+                  
                   <Grid container spacing={3}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 0)
