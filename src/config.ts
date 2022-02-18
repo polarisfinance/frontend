@@ -72,7 +72,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'POLAR',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarNearRewardPool: {
     name: 'Earn POLAR by NEAR',
@@ -83,7 +83,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'POLAR',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarLunaRewardPool: {
     name: 'Earn POLAR by LUNA',
@@ -94,7 +94,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'POLAR',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarUSTRewardPool: {
     name: 'Earn POLAR by UST',
@@ -105,7 +105,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'POLAR',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarUSDCRewardPool: {
     name: 'Earn POLAR by USDC',
@@ -116,7 +116,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'POLAR',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarNearLpPolarRewardPool: {
     name: 'Earn POLAR by POLAR-NEAR LP',

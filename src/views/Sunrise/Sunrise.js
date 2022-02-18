@@ -77,9 +77,6 @@ const Masonry = () => {
                   Staked SPOLARs can only be withdrawn after 6 epochs since deposit.
                 </Typography>
               </Box>
-              <Alert style={{marginBottom: '20px', backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
-                <b>Sunrise starts on Friday 18.2. 2022 at 14:00 UTC</b>
-              </Alert>
             </Grid>
             <Grid item xs={12} md={4} justify="center">
               <Stake />
