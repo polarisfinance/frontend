@@ -146,6 +146,9 @@ const Nav = () => {
               <a target="_blank" rel="noopener noreferrer" href="https://docs.polarisfinance.io" className={classes.link}>
                 Docs
               </a>
+              <a target="_blank" rel="noopener noreferrer" href="https://www.vaporwave.farm/#/aurora" className={classes.link}>
+                AC
+              </a>
               <a target="_blank" rel="noopener noreferrer" href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/" className={classes.link}>
                 KYC
               </a>
