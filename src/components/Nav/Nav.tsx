@@ -134,6 +134,9 @@ const Nav = () => {
               <Link color="textPrimary" to="/bond" className={classes.link}>
                 Bond
               </Link>
+              <Link color="textPrimary" to="/strategy" className={classes.link}>
+                Strategy
+              </Link>
               {/*<Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
               </Link>
@@ -192,11 +195,15 @@ const Nav = () => {
                 <ListItemLink primary="Dawn" to="/dawn" />
                 <ListItemLink primary="Sunrise" to="/sunrise" />
                 <ListItemLink primary="Bond" to="/bond" />
+                <ListItemLink primary="Strategy" to="/strategy" />
                 {/* <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
                 <ListItemLink primary="Regulations" to="/regulations" /> */}
                 <ListItem button component="a" href="https://docs.polarisfinance.io">
                   <ListItemText>Docs</ListItemText>
+                </ListItem>
+                <ListItem button component="a" href="https://www.vaporwave.farm/#/aurora">
+                  <ListItemText>AC</ListItemText>
                 </ListItem>
                 <ListItem button component="a" href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/">
                   <ListItemText>KYC</ListItemText>
