@@ -217,6 +217,11 @@ export class TombFinance {
     return Treasury.getBurnablepolarLeft();
   }
 
+  async getBondsRedeemable(): Promise<BigNumber> {
+    const { Treasury } = this.contracts;
+    return Treasury.getRedeemableBonds();
+  }
+
   /**
    * Calculates the TVL, APR and daily APR of a provided pool/bank
    * @param bank
@@ -289,9 +294,9 @@ export class TombFinance {
     }
     const rewardPerSecond = await poolContract.spolarPerSecond();
     if (depositTokenName.startsWith('POLAR')) {
-      return rewardPerSecond.mul(35500).div(59500);
+      return rewardPerSecond.mul(32800).div(41000);
     } else {
-      return rewardPerSecond.mul(24000).div(59500);
+      return rewardPerSecond.mul(8200).div(41000);
     }
   }
 
