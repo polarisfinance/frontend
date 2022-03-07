@@ -13,6 +13,7 @@ import config, { bankDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
 import { FTM_TICKER, SPOOKY_ROUTER_ADDR, TOMB_TICKER } from '../utils/constants';
+import React, { useMemo } from 'react';
 /**
  * An API module of Tomb Finance contracts.
  * All contract-interacting domain logic should be defined in here.
@@ -295,8 +296,15 @@ export class TombFinance {
     const rewardPerSecond = await poolContract.spolarPerSecond();
     if (depositTokenName.startsWith('POLAR')) {
       return rewardPerSecond.mul(32800).div(41000);
-    } else {
-      return rewardPerSecond.mul(8200).div(41000);
+    } 
+    if (depositTokenName.startsWith('SPOLAR')) {
+      return rewardPerSecond.mul(6200).div(41000);
+    } 
+    if (depositTokenName.startsWith('PBOND')) {
+      return rewardPerSecond.mul(700).div(41000);
+    } 
+    else {
+      return rewardPerSecond.mul(1300).div(41000);
     }
   }
 
@@ -493,11 +501,23 @@ export class TombFinance {
 
     const wftm = new Token(chainId, NEAR[0], NEAR[1]);
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+    
+    
     try {
-      const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
-      const priceInBUSD = new Route([wftmToToken], token);
-
-      return priceInBUSD.midPrice.toFixed(4);
+      if (tokenContract.symbol == 'PBOND') {
+        const { Treasury } = this.contracts;
+        const tombStat = await this.getTombStat();
+        const bondTombRatioBN = await Treasury.gepbondPremiumRate();
+        const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
+        const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier/10).toFixed(2);
+        return priceOfTBondInDollars
+      }
+      else {
+        const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
+        const priceInBUSD = new Route([wftmToToken], token);
+        return priceInBUSD.midPrice.toFixed(4);
+      }
+      
     } catch (err) {
       console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
     }
