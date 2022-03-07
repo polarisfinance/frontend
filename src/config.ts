@@ -43,7 +43,7 @@ const configurations: { [env: string]: Configuration } = {
       'SPOLAR-NEAR-LP': ['0xADf9D0C77c70FCb1fDB868F54211288fCE9937DF', 18],
       'NEAR-USDC-LP': ['0x20F8AeFB5697B77E0BB835A8518BE70775cdA1b0', 18],
       POLAR: ['0xf0f3b9Eee32b1F490A4b8720cf6F005d4aE9eA86', 18],
-      PBOND: ['0xf0f3b9Eee32b1F490A4b8720cf6F005d4aE9eA86', 18],
+      PBOND: ['0x3a4773e600086A753862621A26a2E3274610da43', 18],
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
