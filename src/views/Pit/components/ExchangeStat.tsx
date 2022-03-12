@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Card } from '@material-ui/core';
+import { ImportantDevices, NoEncryptionOutlined, SportsRugbySharp } from '@material-ui/icons';
 
 interface ExchangeStatProps {
   tokenName: string;
@@ -11,7 +12,7 @@ interface ExchangeStatProps {
 
 const ExchangeStat: React.FC<ExchangeStatProps> = ({ tokenName, description, price }) => {
   return (
-    <Card>
+    <Card style={{ backgroundColor: 'rgba(0,0,0,0)' }}>
       <StyledCardContentInner>
         <StyledCardTitle>{`${tokenName} = ${price} NEAR`}</StyledCardTitle>
         <StyledDesc>{description}</StyledDesc>

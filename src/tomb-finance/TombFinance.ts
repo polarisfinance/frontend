@@ -94,13 +94,11 @@ export class TombFinance {
   //===================================================================
 
   async getTombStat(): Promise<TokenStat> {
-    const { PolarAuroraGenesisRewardPool, PolarNearLpPolarRewardPool} = this.contracts;
+    const { PolarAuroraGenesisRewardPool, PolarNearLpPolarRewardPool } = this.contracts;
     const supply = await this.TOMB.totalSupply();
     const tombRewardPoolSupply = await this.TOMB.balanceOf(PolarAuroraGenesisRewardPool.address);
     const tombRewardPoolSupply2 = await this.TOMB.balanceOf(PolarNearLpPolarRewardPool.address);
-    const tombCirculatingSupply = supply
-      .sub(tombRewardPoolSupply)
-      .sub(tombRewardPoolSupply2);
+    const tombCirculatingSupply = supply.sub(tombRewardPoolSupply).sub(tombRewardPoolSupply2);
     const priceInFTM = await this.getTokenPriceFromPancakeswap(this.TOMB);
     const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
     const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
@@ -213,6 +211,11 @@ export class TombFinance {
     return Treasury.getpolarUpdatedPrice();
   }
 
+  async getPolarPreviousEpochTwap(): Promise<BigNumber> {
+    const { Treasury } = this.contracts;
+    return Treasury.previousEpochpolarPrice();
+  }
+
   async getBondsPurchasable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getBurnablepolarLeft();
@@ -296,14 +299,13 @@ export class TombFinance {
     const rewardPerSecond = await poolContract.spolarPerSecond();
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(32800).div(41000);
-    } 
+    }
     if (depositTokenName.startsWith('SPOLAR')) {
       return rewardPerSecond.mul(6150).div(41000);
-    } 
+    }
     if (depositTokenName.startsWith('PBOND')) {
       return rewardPerSecond.mul(615).div(41000);
-    } 
-    else {
+    } else {
       return rewardPerSecond.mul(1435).div(41000);
     }
   }
@@ -501,41 +503,36 @@ export class TombFinance {
 
     const wftm = new Token(chainId, NEAR[0], NEAR[1]);
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
-    
-    
+
     try {
       if (tokenContract.symbol == 'PBOND') {
         const { Treasury } = this.contracts;
         const tombStat = await this.getTombStat();
         const bondTombRatioBN = await Treasury.gepbondPremiumRate();
         const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
-        const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier/10).toFixed(2);
-        return priceOfTBondInDollars
-      }
-      else {
+        const priceOfTBondInDollars = ((Number(tombStat.priceInDollars) * modifier) / 10).toFixed(2);
+        return priceOfTBondInDollars;
+      } else {
         const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
         const priceInBUSD = new Route([wftmToToken], token);
         return priceInBUSD.midPrice.toFixed(4);
       }
-      
     } catch (err) {
       console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
     }
   }
 
-
-
   async getWFTMPriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { NEAR, USDC} = this.externalTokens;
+    const { NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
       let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
       let near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
       let usdc_amount_BN = await USDC.balanceOf(near_usdc_lp_pair.address);
       let usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
-      return (usdc_amount/near_amount).toString();
+      return (usdc_amount / near_amount).toString();
     } catch (err) {
       console.error(`Failed to fetch token price of WFTM: ${err}`);
     }
@@ -751,7 +748,12 @@ export class TombFinance {
     let overrides = {
       value: parseUnits(ftmAmount, 18),
     };
-    return await TaxOffice.addLiquidityETHTaxFree(tombAmount, tombAmount.mul(992).div(1000), parseUnits(ftmAmount, 18).mul(992).div(1000), overrides);
+    return await TaxOffice.addLiquidityETHTaxFree(
+      tombAmount,
+      tombAmount.mul(992).div(1000),
+      parseUnits(ftmAmount, 18).mul(992).div(1000),
+      overrides,
+    );
   }
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {

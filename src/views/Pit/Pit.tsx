@@ -19,7 +19,8 @@ import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import useBondsRedeemable from '../../hooks/useBondsRedeemable';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../tomb-finance/constants';
-import HomeImage from '../../assets/img/home.png'
+import HomeImage from '../../assets/img/home.png';
+import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
@@ -36,8 +37,8 @@ const Pit: React.FC = () => {
   const cashPrice = useCashPriceInLastTWAP();
   const bondsPurchasable = useBondsPurchasable();
   const bondsRedeemable = useBondsRedeemable();
-
   const bondBalance = useTokenBalance(tombFinance?.TBOND);
+  const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
@@ -90,6 +91,12 @@ const Pit: React.FC = () => {
                   tokenName="POLAR"
                   description="Last-Hour TWAP Price"
                   price={getDisplayBalance(cashPrice, 18, 4)}
+                />
+                <Spacer size="md" />
+                <ExchangeStat
+                  tokenName="POLAR"
+                  description="Previous Epoch TWAP Price"
+                  price={getDisplayBalance(polarPreviousEpochTwap, 18, 4)}
                 />
                 <Spacer size="md" />
                 <ExchangeStat

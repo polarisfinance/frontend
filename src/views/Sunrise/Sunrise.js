@@ -28,7 +28,8 @@ import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
 import MasonryImage from '../../assets/img/masonry.png';
 import { createGlobalStyle } from 'styled-components';
-import HomeImage from '../../assets/img/home.png'
+import HomeImage from '../../assets/img/home.png';
+import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
 const BackgroundImage = createGlobalStyle`
   body, html {
     background: url(${HomeImage}) no-repeat !important;
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize: '20px',
-  }
+  },
 }));
 
 const Masonry = () => {
@@ -61,7 +62,7 @@ const Masonry = () => {
   const canWithdraw = useWithdrawCheck();
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
   const { to } = useTreasuryAllocationTimes();
-
+  const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
   return (
     <Page>
       <BackgroundImage />
@@ -70,10 +71,10 @@ const Masonry = () => {
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
             Sunrise
           </Typography>
-          <Grid container  className={classes.text}>
-            <Grid container item xs={12} justify="center"  className={classes.text}>
+          <Grid container className={classes.text}>
+            <Grid container item xs={12} justify="center" className={classes.text}>
               <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
-                <Typography style={{backgroundColor: 'none', fontSize: '30px', textAlign: 'center'}}>
+                <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}>
                   Staked SPOLARs can only be withdrawn after 6 epochs since deposit.
                 </Typography>
               </Box>
@@ -83,50 +84,68 @@ const Masonry = () => {
             </Grid>
             <Grid container item xs={12} md={4} alignItems="center" direction="row">
               <Grid container item xs={12}>
-                <Grid item xs={6} container justify="flex-end">
-                  <Typography  className={classes.text} style={{ textAlign: 'center' }}>Next Epoch:</Typography>
+                <Grid item xs={7} container justify="flex-end">
+                  <Typography className={classes.text} style={{ textAlign: 'center' }}>
+                    Next Epoch:
+                  </Typography>
                 </Grid>
-                <Grid item xs={6} container justify='center'>
-                  <ProgressCountdown  className={classes.text} base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
+                <Grid item xs={5} container justify="center">
+                  <ProgressCountdown
+                    className={classes.text}
+                    base={moment().toDate()}
+                    hideBar={true}
+                    deadline={to}
+                    description="Next Epoch"
+                  />
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
-                <Grid item xs={6} container justify="flex-end">
-                  <Typography  className={classes.text}>Current Epoch:</Typography>
+                <Grid item xs={7} container justify="flex-end">
+                  <Typography className={classes.text}>Current Epoch:</Typography>
                 </Grid>
-                <Grid item xs={6} container justify='center'>
-                  <Typography  className={classes.text}>{Number(currentEpoch)}</Typography>
+                <Grid item xs={5} container justify="center">
+                  <Typography className={classes.text}>{Number(currentEpoch)}</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
-                <Grid item xs={6} container justify="flex-end">
+                <Grid item xs={7} container justify="flex-end">
                   <Typography className={classes.text}>
                     POLAR Price<small>(TWAP)</small>:
                   </Typography>
                 </Grid>
-                <Grid item xs={6} container justify='center'>
+                <Grid item xs={5} container justify="center">
                   <Typography className={classes.text}>{scalingFactor}</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
-                <Grid item xs={6} container justify="flex-end">
+                <Grid item xs={7} container justify="flex-end">
+                  <Typography className={classes.text}>
+                    Previous Epoch<small>(TWAP)</small>:
+                  </Typography>
+                </Grid>
+                <Grid item xs={5} container justify="center">
+                  <Typography className={classes.text}>{getDisplayBalance(polarPreviousEpochTwap)}</Typography>
+                </Grid>
+              </Grid>
+              <Grid container item xs={12}>
+                <Grid item xs={7} container justify="flex-end">
                   <Typography className={classes.text}>APR:</Typography>
                 </Grid>
-                <Grid item xs={6} container justify='center'>
+                <Grid item xs={5} container justify="center">
                   <Typography className={classes.text}>{masonryAPR.toFixed(2)}%</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
-                <Grid item xs={6} container justify="flex-end">
+                <Grid item xs={7} container justify="flex-end">
                   <Typography className={classes.text}>SPOLARS Staked:</Typography>
                 </Grid>
-                <Grid item xs={6} container justify='center'>
+                <Grid item xs={5} container justify="center">
                   <Typography className={classes.text}>{getDisplayBalance(totalStaked)}</Typography>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Harvest />              
+              <Harvest />
             </Grid>
 
             {/* <Grid container justify="center" spacing={3}>
