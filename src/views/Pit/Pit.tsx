@@ -25,6 +25,7 @@ const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
+    background-position: center center !important;
   }
 `;
 

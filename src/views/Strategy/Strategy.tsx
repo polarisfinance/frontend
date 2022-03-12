@@ -1,17 +1,17 @@
-import React, { /*useCallback, useEffect, */useMemo, useState } from 'react';
+import React, { /*useCallback, useEffect, */ useMemo, useState } from 'react';
 import Page from '../../components/Page';
-import HomeImage from '../../assets/img/home.png'
+import HomeImage from '../../assets/img/home.png';
 import { createGlobalStyle } from 'styled-components';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
 import UnlockWallet from '../../components/UnlockWallet';
 import PageHeader from '../../components/PageHeader';
-import { Box,/* Paper, Typography,*/ Button, Grid } from '@material-ui/core';
+import { Box, /* Paper, Typography,*/ Button, Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useTombFinance from '../../hooks/useTombFinance';
-import { getDisplayBalance/*, getBalance*/ } from '../../utils/formatBalance';
-import { BigNumber/*, ethers*/ } from 'ethers';
+import { getDisplayBalance /*, getBalance*/ } from '../../utils/formatBalance';
+import { BigNumber /*, ethers*/ } from 'ethers';
 import useSwapTBondToTShare from '../../hooks/TShareSwapper/useSwapTBondToTShare';
 import useApprove, { ApprovalState } from '../../hooks/useApprove';
 import useTShareSwapperStats from '../../hooks/TShareSwapper/useTShareSwapperStats';
@@ -20,22 +20,32 @@ import Card from '../../components/Card';
 import CardContent from '../../components/CardContent';
 import TokenSymbol from '../../components/TokenSymbol';
 import Image from 'material-ui-image';
-import Strategy6040 from '../../assets/img/60-40_strategy.png'
-import StrategyAlive from '../../assets/img/keep_protocol_alive.png'
+import Strategy6040 from '../../assets/img/60-40_strategy.png';
+import StrategyAlive from '../../assets/img/keep_protocol_alive.png';
 
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
+    background-position: center center !important;
   }
 `;
 const Strategy: React.FC = () => {
   return (
     <Page>
-      <BackgroundImage/>
-      <Image color="none" imageStyle={{ height:'auto', position: 'relative'}} style={{height:'auto', position: 'relative', paddingTop: '0px'}} src={Strategy6040} />
-      <Image color="none" imageStyle={{ height:'auto', position: 'relative'}} style={{height:'auto', position: 'relative', paddingTop: '48px'}} src={StrategyAlive} />
-
+      <BackgroundImage />
+      <Image
+        color="none"
+        imageStyle={{ height: 'auto', position: 'relative' }}
+        style={{ height: 'auto', position: 'relative', paddingTop: '0px' }}
+        src={Strategy6040}
+      />
+      <Image
+        color="none"
+        imageStyle={{ height: 'auto', position: 'relative' }}
+        style={{ height: 'auto', position: 'relative', paddingTop: '48px' }}
+        src={StrategyAlive}
+      />
     </Page>
   );
 };

@@ -14,7 +14,7 @@ import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import { polar as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { polar as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
-import ValueLocked from '../../assets/img/value_locked.svg'
+import ValueLocked from '../../assets/img/value_locked.svg';
 
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
@@ -24,12 +24,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
 
 // countdown
-import LaunchCountdown from '../../components/LaunchCountdown'
+import LaunchCountdown from '../../components/LaunchCountdown';
 
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
+    background-position: center center !important;
   }
 `;
 
@@ -42,25 +43,24 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#6fd44b',
     height: '60%',
     margin: '48px 12px -12px 12px',
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     color: '#FFFFFF',
     borderRadius: '10px',
   },
   card: {
-    maxWidth: "40%",
-    minHeight: "20vh",
-    display: "flex",
-    alignItems: "center",
+    maxWidth: '40%',
+    minHeight: '20vh',
+    display: 'flex',
+    alignItems: 'center',
   },
   icon: {
     [theme.breakpoints.down('850')]: {
       justifyContent: 'center',
     },
-    alignItems: 'center'
-    
-  }
+    alignItems: 'center',
+  },
 }));
 
 const Home = () => {
@@ -121,45 +121,43 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-
   const StyledLink = styled.a`
     font-weight: 700;
     text-decoration: none;
   `;
-
-  
 
   return (
     <Page>
       <BackgroundImage />
       {/* <LaunchCountdown deadline={new Date(1645106400*1000)} description='hello'></LaunchCountdown> */}
       <Grid container spacing={3}>
-        
         <Grid container>
           {/* Explanation text */}
           <Grid item xs={12} sm={6}>
-            
             <Box color="primary" p={4}>
-              <h2 style={{fontSize: '28px'}}>Welcome to Polaris Finance</h2>
-              <p style={{fontSize: '20px'}}>The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via
-                seigniorage. Stake your POLAR-NEAR LP in the Dawn to earn SPOLAR rewards. Then
-                stake your earned SPOLAR in the Sunrise to earn more POLAR!</p>
-
+              <h2 style={{ fontSize: '28px' }}>Welcome to Polaris Finance</h2>
+              <p style={{ fontSize: '20px' }}>
+                The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via seigniorage. Stake
+                your POLAR-NEAR LP in the Dawn to earn SPOLAR rewards. Then stake your earned SPOLAR in the Sunrise to
+                earn more POLAR!
+              </p>
             </Box>
-            
           </Grid>
           <Grid item xs={12} sm={6} align="center">
-            <Box className={classes.box} style={{ paddingTop:'12px'}}>
-              <span style={{ fontSize: '25px', fontFamily: '"Rajdhani",regular'}}>Total Value Locked</span>
-              <CountUp style={{ fontSize: '60px', fontFamily: '"Rajdhani",bold' }} end={TVL} separator="," prefix="$ " />
+            <Box className={classes.box} style={{ paddingTop: '12px' }}>
+              <span style={{ fontSize: '25px', fontFamily: '"Rajdhani",regular' }}>Total Value Locked</span>
+              <CountUp
+                style={{ fontSize: '60px', fontFamily: '"Rajdhani",bold' }}
+                end={TVL}
+                separator=","
+                prefix="$ "
+              />
             </Box>
-
-            
           </Grid>
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px' }}>
-            <Alert style={{backgroundColor: '#b43387',fontSize: '20px'}} variant="filled" severity="warning">
+            <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
               <b>
                 Please visit our{' '}
                 <StyledLink target="_blank" href="https://docs.polarisfinance.io">
@@ -171,13 +169,22 @@ const Home = () => {
           </Grid>
         </Grid>
 
-
         {/* Wallet */}
-        <Grid container item xs={12} sm={12} >
-          <Button color="primary" href="/dawn" variant="contained" style={{ marginRight: '12px', marginBottom: '12px' }}>
+        <Grid container item xs={12} sm={12}>
+          <Button
+            color="primary"
+            href="/dawn"
+            variant="contained"
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
             FARM IN DAWN
           </Button>
-          <Button color="primary" href="/sunrise" variant="contained" style={{ marginRight: '12px', marginBottom: '12px' }}>
+          <Button
+            color="primary"
+            href="/sunrise"
+            variant="contained"
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
             STAKE IN SUNRISE
           </Button>
           <Button
@@ -185,27 +192,51 @@ const Home = () => {
             target="_blank"
             href={buyTombAddress}
             variant="contained"
-            style={{ marginRight: '12px', marginBottom: '12px'  }}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
             className={classes.button}
           >
             BUY POLAR
           </Button>
-          <Button color="secondary" variant="contained" target="_blank" href={buyTShareAddress} className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            target="_blank"
+            href={buyTShareAddress}
+            className={classes.button}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
             BUY SPOLAR
           </Button>
-          <Button color="secondary" variant="contained" target="_blank" href='https://dexscreener.com/aurora/0x3fa4d0145a0b6ad0584b1ad5f61cb490a04d8242' className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            target="_blank"
+            href="https://dexscreener.com/aurora/0x3fa4d0145a0b6ad0584b1ad5f61cb490a04d8242"
+            className={classes.button}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
             POLAR CHARTS
           </Button>
-          <Button color="secondary" variant="contained" target="_blank" href='https://dexscreener.com/aurora/0xadf9d0c77c70fcb1fdb868f54211288fce9937df' className={classes.button} style={{ marginRight: '12px', marginBottom: '12px' }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            target="_blank"
+            href="https://dexscreener.com/aurora/0xadf9d0c77c70fcb1fdb868f54211288fce9937df"
+            className={classes.button}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
             SPOLAR CHARTS
           </Button>
-          
         </Grid>
 
         {/* TOMB */}
         <Grid item xs={12} sm={12}>
           <Card>
-            <CardContent className={classes.root} align="center" style={{ position: 'relative',paddingBottom: '16px' }}>
+            <CardContent
+              className={classes.root}
+              align="center"
+              style={{ position: 'relative', paddingBottom: '16px' }}
+            >
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('POLAR');
@@ -217,14 +248,14 @@ const Home = () => {
                 +&nbsp;
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
               </Button>
-              <Grid container alignItems='center'>
+              <Grid container alignItems="center">
                 <Grid container item xs={12} sm={4} className={classes.icon}>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
                       <TokenSymbol symbol="POLAR" />
                     </CardIcon>
-                  </Box> 
-                  <h2>POLAR</h2>                             
+                  </Box>
+                  <h2>POLAR</h2>
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   Current Price
@@ -232,7 +263,7 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                   <Box>
-                  <span style={{ fontSize: '20px'}}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
+                    <span style={{ fontSize: '20px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -252,17 +283,17 @@ const Home = () => {
           </Grid>
           */}
           <Grid item>
-            <span style={{ fontSize: '20px',marginRight:"20px" }}>Circulating Supply: {tombCirculatingSupply}</span>
+            <span style={{ fontSize: '20px', marginRight: '20px' }}>Circulating Supply: {tombCirculatingSupply}</span>
           </Grid>
           <Grid item>
-            <span style={{ fontSize: '20px',paddingRight:'12px'}}>Total Supply: {tombTotalSupply}</span>
+            <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tombTotalSupply}</span>
           </Grid>
         </Grid>
-        
+
         {/* Tshare */}
         <Grid item xs={12} sm={12}>
           <Card>
-            <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px'  }}>
+            <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('SPOLAR');
@@ -274,13 +305,13 @@ const Home = () => {
                 +&nbsp;
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
               </Button>
-              <Grid container alignItems='center'>
+              <Grid container alignItems="center">
                 <Grid container item xs={12} sm={4} className={classes.icon}>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
                       <TokenSymbol symbol="SPOLAR" />
                     </CardIcon>
-                  </Box>          
+                  </Box>
                   <h2 width={80}>SPOLAR</h2>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -289,13 +320,15 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} NEAR</span>
                   </Box>
                   <Box>
-                    <span style={{ fontSize: '20px'}}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
+                    <span style={{ fontSize: '20px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   Market Cap:
                   <Box>
-                    <span style={{ fontSize: '30px' }}>${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}</span>
+                    <span style={{ fontSize: '30px' }}>
+                      ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}
+                    </span>
                   </Box>
                 </Grid>
               </Grid>
@@ -309,17 +342,17 @@ const Home = () => {
           </Grid>
           */}
           <Grid item>
-            <span style={{ fontSize: '20px',marginRight:"20px" }}>Circulating Supply: {tShareCirculatingSupply}</span>
+            <span style={{ fontSize: '20px', marginRight: '20px' }}>Circulating Supply: {tShareCirculatingSupply}</span>
           </Grid>
           <Grid item>
-            <span style={{ fontSize: '20px',paddingRight:'12px'}}>Total Supply: {tShareTotalSupply}</span>
+            <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tShareTotalSupply}</span>
           </Grid>
         </Grid>
-              
+
         {/* Tbond */}
         <Grid item xs={12} sm={12}>
           <Card>
-            <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px'  }}>
+            <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
               <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('PBOND');
@@ -331,13 +364,13 @@ const Home = () => {
                 +&nbsp;
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
               </Button>
-              <Grid container alignItems='center'>
-                <Grid  container item xs={12} sm={4} className={classes.icon}>
+              <Grid container alignItems="center">
+                <Grid container item xs={12} sm={4} className={classes.icon}>
                   <Box mr={5} ml={5} mt={2}>
                     <CardIcon>
                       <TokenSymbol symbol="PBOND" />
                     </CardIcon>
-                  </Box>          
+                  </Box>
                   <h2>PBOND</h2>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -346,14 +379,15 @@ const Home = () => {
                     <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} NEAR</span>
                   </Box>
                   <Box>
-                    <span style={{ fontSize: '20px'}}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
+                    <span style={{ fontSize: '20px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
                   </Box>
                 </Grid>
-                <Grid item xs={12}
-                 sm={4}>
+                <Grid item xs={12} sm={4}>
                   Market Cap:
                   <Box>
-                    <span style={{ fontSize: '30px' }}>${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)}</span>
+                    <span style={{ fontSize: '30px' }}>
+                      ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)}
+                    </span>
                   </Box>
                 </Grid>
               </Grid>
@@ -367,10 +401,10 @@ const Home = () => {
           </Grid>
           */}
           <Grid item>
-            <span style={{ fontSize: '20px',marginRight:"20px" }}>Circulating Supply: {tBondCirculatingSupply}</span>
+            <span style={{ fontSize: '20px', marginRight: '20px' }}>Circulating Supply: {tBondCirculatingSupply}</span>
           </Grid>
           <Grid item>
-            <span style={{ fontSize: '20px',paddingRight:'12px'}}>Total Supply: {tBondTotalSupply}</span>
+            <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tBondTotalSupply}</span>
           </Grid>
         </Grid>
       </Grid>
