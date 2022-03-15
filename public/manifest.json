@@ -2,7 +2,7 @@
   "short_name": "Polaris Finance",
   "name": "Polaris Finance",
   "description": "The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via seigniorage.",
-  "iconPath": "logo.svg",
+  "iconPath": "logo.png",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
