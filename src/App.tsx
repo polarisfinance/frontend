@@ -20,8 +20,12 @@ import { RefreshContextProvider } from './contexts/RefreshContext';
 
 const Home = lazy(() => import('./views/Home'));
 const Dawn = lazy(() => import('./views/Dawn'));
-const Masonry = lazy(() => import('./views/Sunrise'));
+const Sunrise_splitter = lazy(() => import('./views/Sunrise_splitter'));
+const PolarSunrise = lazy(() => import('./views/Sunrise'));
+const LunarSunrise = lazy(() => import('./views/LunarSunrise'));
 const Pit = lazy(() => import('./views/Pit'));
+const LunarBond = lazy(() => import('./views/LunarBond'));
+const BondSplitter = lazy(() => import('./views/Bond_splitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
 const Liquidity = lazy(() => import('./views/Liquidity'));
 
@@ -53,10 +57,22 @@ const App: React.FC = () => {
               <Dawn />
             </Route>
             <Route path="/sunrise">
-              <Masonry />
+              <Sunrise_splitter />
+            </Route>
+            <Route path="/polar_sunrise">
+              <PolarSunrise />
+            </Route>
+            <Route path="/lunar_sunrise">
+              <LunarSunrise />
             </Route>
             <Route path="/bond">
+              <BondSplitter />
+            </Route>
+            <Route path="/polar_bond">
               <Pit />
+            </Route>
+            <Route path="/lunar_bond">
+              <LunarBond />
             </Route>
             <Route path="/liquidity">
               <Liquidity />

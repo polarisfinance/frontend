@@ -12,8 +12,16 @@ import useLpStats from '../../hooks/useLpStats';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-import { polar as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
-import { polar as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
+import {
+  polar as tombTesting,
+  tShare as tShareTesting,
+  lunar as lunarTesting,
+} from '../../tomb-finance/deployments/deployments.testing.json';
+import {
+  polar as tombProd,
+  tShare as tShareProd,
+  lunar as lunarProd,
+} from '../../tomb-finance/deployments/deployments.mainnet.json';
 import ValueLocked from '../../assets/img/value_locked.svg';
 
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
@@ -22,6 +30,9 @@ import { Box, Button, Card, CardContent, Grid } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
+
+import useLunarStats from '../../hooks/useLunarStats';
+import useLunarBondStats from '../../hooks/useLunarBondStats';
 
 // countdown
 import LaunchCountdown from '../../components/LaunchCountdown';
@@ -73,18 +84,25 @@ const Home = () => {
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
 
+  const lunarStats = useLunarStats();
+  const lBondStats = useLunarBondStats();
+
   let polar;
   let tShare;
+  let lunar;
   if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     polar = tombTesting;
     tShare = tShareTesting;
+    lunar = lunarTesting;
   } else {
     polar = tombProd;
     tShare = tShareProd;
+    lunar = lunarProd;
   }
 
   const buyTombAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + polar.address;
   const buyTShareAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + tShare.address;
+  const buyLunarAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + lunar.address;
 
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
@@ -95,6 +113,17 @@ const Home = () => {
   const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(4) : null), [tombStats]);
   const tombCirculatingSupply = useMemo(() => (tombStats ? String(tombStats.circulatingSupply) : null), [tombStats]);
   const tombTotalSupply = useMemo(() => (tombStats ? String(tombStats.totalSupply) : null), [tombStats]);
+
+  const lunarPriceInLUNA = useMemo(() => (lunarStats ? Number(lunarStats.tokenInFtm).toFixed(4) : null), [lunarStats]);
+  const lunarPriceInDollars = useMemo(
+    () => (lunarStats ? Number(lunarStats.priceInDollars).toFixed(2) : null),
+    [lunarStats],
+  );
+  const lunarCirculatingSupply = useMemo(
+    () => (lunarStats ? String(lunarStats.circulatingSupply) : null),
+    [lunarStats],
+  );
+  const lunarTotalSupply = useMemo(() => (lunarStats ? String(lunarStats.totalSupply) : null), [lunarStats]);
 
   const tSharePriceInDollars = useMemo(
     () => (tShareStats ? Number(tShareStats.priceInDollars).toFixed(2) : null),
@@ -120,6 +149,17 @@ const Home = () => {
     [tBondStats],
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
+
+  const lBondPriceInDollars = useMemo(
+    () => (lBondStats ? Number(lBondStats.priceInDollars).toFixed(2) : null),
+    [lBondStats],
+  );
+  const lBondPriceInFTM = useMemo(() => (lBondStats ? Number(lBondStats.tokenInFtm).toFixed(4) : null), [lBondStats]);
+  const lBondCirculatingSupply = useMemo(
+    () => (lBondStats ? String(lBondStats.circulatingSupply) : null),
+    [lBondStats],
+  );
+  const lBondTotalSupply = useMemo(() => (lBondStats ? String(lBondStats.totalSupply) : null), [lBondStats]);
 
   const StyledLink = styled.a`
     font-weight: 700;
@@ -163,7 +203,7 @@ const Home = () => {
                 <StyledLink target="_blank" href="https://docs.polarisfinance.io">
                   documentation
                 </StyledLink>{' '}
-                before purchasing POLAR or SPOLAR!
+                before purchasing POLAR, SPOLAR or LUNAR!
               </b>
             </Alert>
           </Grid>
@@ -211,6 +251,16 @@ const Home = () => {
             color="secondary"
             variant="contained"
             target="_blank"
+            href={buyLunarAddress}
+            className={classes.button}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
+            BUY LUNAR
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            target="_blank"
             href="https://dexscreener.com/aurora/0x3fa4d0145a0b6ad0584b1ad5f61cb490a04d8242"
             className={classes.button}
             style={{ marginRight: '12px', marginBottom: '12px' }}
@@ -227,6 +277,136 @@ const Home = () => {
           >
             SPOLAR CHARTS
           </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            target="_blank"
+            href="https://dexscreener.com/aurora/0xadf9d0c77c70fcb1fdb868f54211288fce9937df"
+            className={classes.button}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
+            LUNAR CHARTS
+          </Button>
+        </Grid>
+        {/* LUNAR */}
+        <Grid item xs={12} sm={12}>
+          <Card>
+            <CardContent
+              className={classes.root}
+              align="center"
+              style={{ position: 'relative', paddingBottom: '16px' }}
+            >
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('LUNAR');
+                }}
+                color="primary"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
+              <Grid container alignItems="center">
+                <Grid container item xs={12} sm={4} className={classes.icon}>
+                  <Box mr={5} ml={5} mt={2}>
+                    <CardIcon>
+                      <TokenSymbol symbol="LUNAR" />
+                    </CardIcon>
+                  </Box>
+                  <h2>LUNAR</h2>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  Current Price
+                  <Box>
+                    <span style={{ fontSize: '30px' }}>{lunarPriceInLUNA ? lunarPriceInLUNA : '-.----'} LUNA</span>
+                  </Box>
+                  <Box>
+                    <span style={{ fontSize: '20px' }}>${lunarPriceInDollars ? lunarPriceInDollars : '-.--'}</span>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  Market Cap:
+                  <Box>
+                    <span style={{ fontSize: '30px' }}>
+                      ${(lunarCirculatingSupply * lunarPriceInDollars).toFixed(2)}
+                    </span>
+                  </Box>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid container justify="flex-end">
+          {/*
+          <Grid item>
+            <span style={{ fontSize: '20px',marginRight:"20px"}}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
+          </Grid>
+          */}
+          <Grid item>
+            <span style={{ fontSize: '20px', marginRight: '20px' }}>Circulating Supply: {lunarCirculatingSupply}</span>
+          </Grid>
+          <Grid item>
+            <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {lunarTotalSupply}</span>
+          </Grid>
+        </Grid>
+        {/* LBOND */}
+        <Grid item xs={12} sm={12}>
+          <Card>
+            <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('PBOND');
+                }}
+                color="primary"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
+              <Grid container alignItems="center">
+                <Grid container item xs={12} sm={4} className={classes.icon}>
+                  <Box mr={5} ml={5} mt={2}>
+                    <CardIcon>
+                      <TokenSymbol symbol="LBOND" />
+                    </CardIcon>
+                  </Box>
+                  <h2>LBOND</h2>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  Current Price
+                  <Box>
+                    <span style={{ fontSize: '30px' }}>{lBondPriceInFTM ? lBondPriceInFTM : '-.----'} NEAR</span>
+                  </Box>
+                  <Box>
+                    <span style={{ fontSize: '20px' }}>${lBondPriceInDollars ? lBondPriceInDollars : '-.--'}</span>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  Market Cap:
+                  <Box>
+                    <span style={{ fontSize: '30px' }}>
+                      ${(lBondCirculatingSupply * lBondPriceInDollars).toFixed(2)}
+                    </span>
+                  </Box>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid container justify="flex-end">
+          {/*
+          <Grid item>
+            <span style={{ fontSize: '20px',marginRight:"20px"}}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
+          </Grid>
+          */}
+          <Grid item>
+            <span style={{ fontSize: '20px', marginRight: '20px' }}>Circulating Supply: {lBondCirculatingSupply}</span>
+          </Grid>
+          <Grid item>
+            <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {lBondTotalSupply}</span>
+          </Grid>
         </Grid>
 
         {/* TOMB */}

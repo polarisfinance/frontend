@@ -41,6 +41,28 @@ const Cemetery = () => {
               </Typography>
 
               <Box mt={5}>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 4).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    Lunar Genesis Pools
+                  </Typography>
+
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 4)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography
                     align="center"
@@ -100,7 +122,7 @@ const Cemetery = () => {
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
-                    Genesis Pools
+                    Polar Genesis Pools
                   </Typography>
 
                   <Grid container spacing={3}>

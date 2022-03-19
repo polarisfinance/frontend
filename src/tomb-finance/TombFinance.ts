@@ -14,6 +14,7 @@ import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
 import { FTM_TICKER, SPOOKY_ROUTER_ADDR, TOMB_TICKER } from '../utils/constants';
 import React, { useMemo } from 'react';
+import LunarSunrise from '../views/LunarSunrise';
 /**
  * An API module of Tomb Finance contracts.
  * All contract-interacting domain logic should be defined in here.
@@ -33,6 +34,9 @@ export class TombFinance {
   TBOND: ERC20;
   FTM: ERC20;
 
+  LUNAR: ERC20;
+  LBOND: ERC20;
+
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
     const provider = getDefaultProvider();
@@ -50,6 +54,9 @@ export class TombFinance {
     this.TSHARE = new ERC20(deployments.tShare.address, provider, 'SPOLAR');
     this.TBOND = new ERC20(deployments.tBond.address, provider, 'PBOND');
     this.FTM = this.externalTokens['NEAR'];
+
+    this.LUNAR = new ERC20(deployments.lunar.address, provider, 'LUNAR');
+    this.LBOND = new ERC20(deployments.lBond.address, provider, 'LBOND');
 
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
@@ -111,6 +118,23 @@ export class TombFinance {
     };
   }
 
+  async getLunarStat(): Promise<TokenStat> {
+    const { LunarLunaGenesisRewardPool } = this.contracts;
+    const supply = await this.LUNAR.totalSupply();
+    const LunarLunaGenesisRewardPoolSupply = await this.LUNAR.balanceOf(LunarLunaGenesisRewardPool.address);
+    const LunarCirculatingSupply = supply.sub(LunarLunaGenesisRewardPoolSupply);
+    const priceInLUNA = await this.getTokenPriceLunar(this.LUNAR);
+    const priceOfOneLUNA = await this.getLUNAPrice();
+    const priceOfLUNARInDollars = (Number(priceInLUNA) * Number(priceOfOneLUNA)).toFixed(2);
+
+    return {
+      tokenInFtm: priceInLUNA,
+      priceInDollars: priceOfLUNARInDollars,
+      totalSupply: getDisplayBalance(supply, this.LUNAR.decimal, 0),
+      circulatingSupply: getDisplayBalance(LunarCirculatingSupply, this.LUNAR.decimal, 0),
+    };
+  }
+
   /**
    * Calculates various stats for the requested LP
    * @param name of the LP token to load stats for
@@ -165,6 +189,22 @@ export class TombFinance {
     };
   }
 
+  async getLunarBondStat(): Promise<TokenStat> {
+    const { lunarTreasury } = this.contracts;
+    const tombStat = await this.getLunarStat();
+    const bondTombRatioBN = await lunarTreasury.gepbondPremiumRate();
+    const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
+    const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
+    const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
+    const supply = await this.LBOND.displayedTotalSupply();
+    return {
+      tokenInFtm: bondPriceInFTM,
+      priceInDollars: priceOfTBondInDollars,
+      totalSupply: supply,
+      circulatingSupply: supply,
+    };
+  }
+
   /**
    * @returns TokenStat for TSHARE
    * priceInFTM
@@ -206,9 +246,29 @@ export class TombFinance {
     };
   }
 
+  async getLunarStatInEstimatedTWAP(): Promise<TokenStat> {
+    const { LunarOracle, LunarLunaGenesisRewardPool } = this.contracts;
+    const expectedPrice = await LunarOracle.twap(this.LUNAR.address, ethers.utils.parseEther('1'));
+
+    const supply = await this.LUNAR.totalSupply();
+    const tombRewardPoolSupply = await this.LUNAR.balanceOf(LunarLunaGenesisRewardPool.address);
+    const tombCirculatingSupply = supply.sub(tombRewardPoolSupply);
+    return {
+      tokenInFtm: getDisplayBalance(expectedPrice),
+      priceInDollars: getDisplayBalance(expectedPrice),
+      totalSupply: getDisplayBalance(supply, this.LUNAR.decimal, 0),
+      circulatingSupply: getDisplayBalance(tombCirculatingSupply, this.LUNAR.decimal, 0),
+    };
+  }
+
   async getTombPriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getpolarUpdatedPrice();
+  }
+
+  async getLunarPriceInLastTWAP(): Promise<BigNumber> {
+    const { lunarTreasury } = this.contracts;
+    return lunarTreasury.getlunarUpdatedPrice();
   }
 
   async getPolarPreviousEpochTwap(): Promise<BigNumber> {
@@ -216,14 +276,29 @@ export class TombFinance {
     return Treasury.previousEpochpolarPrice();
   }
 
+  async getLunarPreviousEpochTwap(): Promise<BigNumber> {
+    const { lunarTreasury } = this.contracts;
+    return lunarTreasury.previousEpochlunarPrice();
+  }
+
   async getBondsPurchasable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getBurnablepolarLeft();
   }
 
+  async getBondsPurchasableLunar(): Promise<BigNumber> {
+    const { lunarTreasury } = this.contracts;
+    return lunarTreasury.getBurnablelunarLeft();
+  }
+
   async getBondsRedeemable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.getRedeemableBonds();
+  }
+
+  async getBondsRedeemableLunar(): Promise<BigNumber> {
+    const { lunarTreasury } = this.contracts;
+    return lunarTreasury.getRedeemableBonds();
   }
 
   /**
@@ -296,6 +371,21 @@ export class TombFinance {
       }
       return await poolContract.epochPolarPerSecond(0);
     }
+    if (earnTokenName === 'LUNAR') {
+      const rewardPerSecond = await poolContract.lunarPerSecond();
+      if (depositTokenName === 'LUNA') {
+        return rewardPerSecond.mul(50000).div(10000).div(18);
+      } else if (depositTokenName === 'POLAR-NEAR-LP') {
+        return rewardPerSecond.mul(20000).div(10000).div(18);
+      } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
+        return rewardPerSecond.mul(10000).div(10000).div(18);
+      } else if (depositTokenName === 'POLAR') {
+        return rewardPerSecond.mul(5000).div(10000).div(18);
+      } else if (depositTokenName === 'PBOND') {
+        return rewardPerSecond.mul(5000).div(10000).div(18);
+      }
+      return rewardPerSecond.div(18);
+    }
     const rewardPerSecond = await poolContract.spolarPerSecond();
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(32800).div(41000);
@@ -328,6 +418,8 @@ export class TombFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
       } else if (tokenName === 'SPOLAR-NEAR-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
+      } else if (tokenName === 'LUNAR-LUNA-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.LUNAR, false);
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -344,6 +436,11 @@ export class TombFinance {
   async getCurrentEpoch(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
     return Treasury.epoch();
+  }
+
+  async getCurrentEpochLunar(): Promise<BigNumber> {
+    const { lunarTreasury } = this.contracts;
+    return lunarTreasury.epoch();
   }
 
   async getBondOraclePriceInLastTWAP(): Promise<BigNumber> {
@@ -387,7 +484,10 @@ export class TombFinance {
     const masonrytShareBalanceOf = await this.TSHARE.balanceOf(this.currentMasonry().address);
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
 
-    return totalValue + masonryTVL;
+    const lunarSunriseSpolarBalanceOf = await this.TSHARE.balanceOf(this.currentLunarSunrise().address);
+    const lunarSunriseTVL =
+      Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
+    return totalValue + masonryTVL + lunarSunriseTVL;
   }
 
   /**
@@ -420,6 +520,9 @@ export class TombFinance {
     try {
       if (earnTokenName === 'POLAR') {
         return await pool.pendingPOLAR(poolId, account);
+      }
+      if (earnTokenName === 'LUNAR') {
+        return await pool.pendingLUNAR(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
       }
@@ -491,6 +594,13 @@ export class TombFinance {
     return this.contracts.Masonry;
   }
 
+  currentLunarSunrise(): Contract {
+    if (!this.masonryVersionOfUser) {
+      //throw new Error('you must unlock the wallet to continue.');
+    }
+    return this.contracts.lunarSunrise;
+  }
+
   isOldMasonryMember(): boolean {
     return this.masonryVersionOfUser !== 'latest';
   }
@@ -502,6 +612,33 @@ export class TombFinance {
     const { NEAR } = this.config.externalTokens;
 
     const wftm = new Token(chainId, NEAR[0], NEAR[1]);
+    const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+
+    try {
+      if (tokenContract.symbol == 'PBOND') {
+        const { Treasury } = this.contracts;
+        const tombStat = await this.getTombStat();
+        const bondTombRatioBN = await Treasury.gepbondPremiumRate();
+        const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
+        const priceOfTBondInDollars = ((Number(tombStat.priceInDollars) * modifier) / 10).toFixed(2);
+        return priceOfTBondInDollars;
+      } else {
+        const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
+        const priceInBUSD = new Route([wftmToToken], token);
+        return priceInBUSD.midPrice.toFixed(4);
+      }
+    } catch (err) {
+      console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
+    }
+  }
+
+  async getTokenPriceLunar(tokenContract: ERC20): Promise<string> {
+    const ready = await this.provider.ready;
+    if (!ready) return;
+    const { chainId } = this.config;
+    const { LUNA } = this.config.externalTokens;
+
+    const wftm = new Token(chainId, LUNA[0], LUNA[1]);
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
 
     try {
@@ -538,6 +675,30 @@ export class TombFinance {
     }
   }
 
+  async getLUNAPrice(): Promise<string> {
+    const ready = await this.provider.ready;
+    if (!ready) return;
+    const { LUNA, NEAR, USDC } = this.externalTokens;
+    try {
+      const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
+      var near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
+      var near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      var usdc_amount_BN = await USDC.balanceOf(near_usdc_lp_pair.address);
+      var usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
+      const near_price = usdc_amount / near_amount;
+
+      const luna_near_lp_pair = this.externalTokens['LUNA-NEAR-LP'];
+      var luna_amount_BN = await LUNA.balanceOf(luna_near_lp_pair.address);
+      var luna_amount = Number(getFullDisplayBalance(luna_amount_BN, LUNA.decimal));
+      var near_amount_BN = await NEAR.balanceOf(luna_near_lp_pair.address);
+      var near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      const luna_price = near_amount / luna_amount;
+      return (near_price * luna_price).toString();
+    } catch (err) {
+      console.error(`Failed to fetch token price of LUNA: ${err}`);
+    }
+  }
+
   //===================================================================
   //===================================================================
   //===================== MASONRY METHODS =============================
@@ -563,12 +724,36 @@ export class TombFinance {
     return realAPR;
   }
 
+  async getLunarSunriseAPR() {
+    const Masonry = this.currentLunarSunrise();
+    const latestSnapshotIndex = await Masonry.latestSnapshotIndex();
+    const lastHistory = await Masonry.masonryHistory(latestSnapshotIndex);
+
+    const lastRewardsReceived = lastHistory[1];
+
+    const TSHAREPrice = (await this.getShareStat()).priceInDollars;
+    const TOMBPrice = (await this.getLunarStat()).priceInDollars;
+    const epochRewardsPerShare = lastRewardsReceived / 1e18;
+
+    //Mgod formula
+    const amountOfRewardsPerDay = epochRewardsPerShare * Number(TOMBPrice) * 4;
+    const masonrytShareBalanceOf = await this.TSHARE.balanceOf(Masonry.address);
+    const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
+    const realAPR = ((amountOfRewardsPerDay * 100) / masonryTVL) * 365;
+    return realAPR;
+  }
+
   /**
    * Checks if the user is allowed to retrieve their reward from the Masonry
    * @returns true if user can withdraw reward, false if they can't
    */
   async canUserClaimRewardFromMasonry(): Promise<boolean> {
     const Masonry = this.currentMasonry();
+    return await Masonry.canClaimReward(this.myAccount);
+  }
+
+  async canUserClaimRewardFromLunarSunrise(): Promise<boolean> {
+    const Masonry = this.currentLunarSunrise();
     return await Masonry.canClaimReward(this.myAccount);
   }
 
@@ -585,6 +770,15 @@ export class TombFinance {
     return result;
   }
 
+  async canUserUnstakeFromLunarSunrise(): Promise<boolean> {
+    const LunarSunrise = this.currentLunarSunrise();
+    const canWithdraw = await LunarSunrise.canWithdraw(this.myAccount);
+    const stakedAmount = await this.getStakedSharesOnLunarSunrise();
+    const notStaked = Number(getDisplayBalance(stakedAmount, this.TSHARE.decimal)) === 0;
+    const result = notStaked ? true : canWithdraw;
+    return result;
+  }
+
   async timeUntilClaimRewardFromMasonry(): Promise<BigNumber> {
     // const Masonry = this.currentMasonry();
     // const mason = await Masonry.masons(this.myAccount);
@@ -596,12 +790,22 @@ export class TombFinance {
     return await Masonry.totalSupply();
   }
 
+  async getTotalStakedInLunarSunrise(): Promise<BigNumber> {
+    const Masonry = this.currentLunarSunrise();
+    return await Masonry.totalSupply();
+  }
+
   async stakeShareToMasonry(amount: string): Promise<TransactionResponse> {
     if (this.isOldMasonryMember()) {
       throw new Error("you're using old masonry. please withdraw and deposit the TSHARE again.");
     }
     const Masonry = this.currentMasonry();
     return await Masonry.stake(decimalToBalance(amount));
+  }
+
+  async stakeShareToLunarSunrise(amount: string): Promise<TransactionResponse> {
+    const LunarSunrise = this.currentLunarSunrise();
+    return await LunarSunrise.stake(decimalToBalance(amount));
   }
 
   async getStakedSharesOnMasonry(): Promise<BigNumber> {
@@ -612,6 +816,11 @@ export class TombFinance {
     return await Masonry.balanceOf(this.myAccount);
   }
 
+  async getStakedSharesOnLunarSunrise(): Promise<BigNumber> {
+    const LunarSunrise = this.currentLunarSunrise();
+    return await LunarSunrise.balanceOf(this.myAccount);
+  }
+
   async getEarningsOnMasonry(): Promise<BigNumber> {
     const Masonry = this.currentMasonry();
     if (this.masonryVersionOfUser === 'v1') {
@@ -620,9 +829,19 @@ export class TombFinance {
     return await Masonry.earned(this.myAccount);
   }
 
+  async getEarningsOnLunarSunrise(): Promise<BigNumber> {
+    const Masonry = this.currentLunarSunrise();
+    return await Masonry.earned(this.myAccount);
+  }
+
   async withdrawShareFromMasonry(amount: string): Promise<TransactionResponse> {
     const Masonry = this.currentMasonry();
     return await Masonry.withdraw(decimalToBalance(amount));
+  }
+
+  async withdrawShareFromLunarSunrise(amount: string): Promise<TransactionResponse> {
+    const LunarSunrise = this.currentLunarSunrise();
+    return await LunarSunrise.withdraw(decimalToBalance(amount));
   }
 
   async harvestCashFromMasonry(): Promise<TransactionResponse> {
@@ -633,14 +852,33 @@ export class TombFinance {
     return await Masonry.claimReward();
   }
 
+  async harvestLunarFromLunarSunrise(): Promise<TransactionResponse> {
+    const Masonry = this.currentLunarSunrise();
+    return await Masonry.claimReward();
+  }
+
   async exitFromMasonry(): Promise<TransactionResponse> {
     const Masonry = this.currentMasonry();
     return await Masonry.exit();
   }
 
+  async exitFromLunarSunrise(): Promise<TransactionResponse> {
+    const LunarMasonry = this.currentLunarSunrise();
+    return await LunarMasonry.exit();
+  }
+
   async getTreasuryNextAllocationTime(): Promise<AllocationTime> {
     const { Treasury } = this.contracts;
     const nextEpochTimestamp: BigNumber = await Treasury.nextEpochPoint();
+    const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
+    const prevAllocation = new Date(Date.now());
+
+    return { from: prevAllocation, to: nextAllocation };
+  }
+
+  async getLunarTreasuryNextAllocationTime(): Promise<AllocationTime> {
+    const { lunarTreasury } = this.contracts;
+    const nextEpochTimestamp: BigNumber = await lunarTreasury.nextEpochPoint();
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
     const prevAllocation = new Date(Date.now());
 
@@ -679,6 +917,33 @@ export class TombFinance {
     }
   }
 
+  async getUserClaimRewardTimeLunar(): Promise<AllocationTime> {
+    const { lunarSunrise, lunarTreasury } = this.contracts;
+    const nextEpochTimestamp = await lunarSunrise.nextEpochPoint(); //in unix timestamp
+    const currentEpoch = await lunarSunrise.epoch();
+    const mason = await lunarSunrise.masons(this.myAccount);
+    const startTimeEpoch = mason.epochTimerStart;
+    const period = await lunarTreasury.PERIOD();
+    const periodInHours = period / 60 / 60; // 6 hours, period is displayed in seconds which is 21600
+    const rewardLockupEpochs = await lunarSunrise.rewardLockupEpochs();
+    const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(rewardLockupEpochs);
+
+    const fromDate = new Date(Date.now());
+    if (targetEpochForClaimUnlock - currentEpoch <= 0) {
+      return { from: fromDate, to: fromDate };
+    } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      return { from: fromDate, to: toDate };
+    } else {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      const delta = targetEpochForClaimUnlock - currentEpoch - 1;
+      const endDate = moment(toDate)
+        .add(delta * periodInHours, 'hours')
+        .toDate();
+      return { from: fromDate, to: endDate };
+    }
+  }
+
   /**
    * This method calculates and returns in a from to to format
    * the period the user needs to wait before being allowed to unstake
@@ -694,6 +959,33 @@ export class TombFinance {
     const period = await Treasury.PERIOD();
     const PeriodInHours = period / 60 / 60;
     const withdrawLockupEpochs = await Masonry.withdrawLockupEpochs();
+    const fromDate = new Date(Date.now());
+    const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
+    const stakedAmount = await this.getStakedSharesOnMasonry();
+    if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
+      return { from: fromDate, to: fromDate };
+    } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      return { from: fromDate, to: toDate };
+    } else {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      const delta = targetEpochForClaimUnlock - Number(currentEpoch) - 1;
+      const endDate = moment(toDate)
+        .add(delta * PeriodInHours, 'hours')
+        .toDate();
+      return { from: fromDate, to: endDate };
+    }
+  }
+
+  async getUserUnstakeTimeLunarSunrise(): Promise<AllocationTime> {
+    const { lunarSunrise, lunarTreasury } = this.contracts;
+    const nextEpochTimestamp = await lunarSunrise.nextEpochPoint();
+    const currentEpoch = await lunarSunrise.epoch();
+    const mason = await lunarSunrise.masons(this.myAccount);
+    const startTimeEpoch = mason.epochTimerStart;
+    const period = await lunarTreasury.PERIOD();
+    const PeriodInHours = period / 60 / 60;
+    const withdrawLockupEpochs = await lunarSunrise.withdrawLockupEpochs();
     const fromDate = new Date(Date.now());
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
     const stakedAmount = await this.getStakedSharesOnMasonry();
