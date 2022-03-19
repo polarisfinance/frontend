@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Card, CardContent } from '@material-ui/core';
@@ -17,7 +17,8 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import { Bank } from '../../../tomb-finance';
 import useTombStats from '../../../hooks/useTombStats';
 import useShareStats from '../../../hooks/usetShareStats';
-
+import useLunarStats from '../../../hooks/useLunarStats';
+import { TokenStat } from '../../../tomb-finance/types';
 interface HarvestProps {
   bank: Bank;
 }
@@ -27,6 +28,7 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const { onReward } = useHarvest(bank);
   const tombStats = useTombStats();
   const tShareStats = useShareStats();
+  const lunarStats = useLunarStats();
   let tokenName;
   if (bank.earnTokenName === 'SPOLAR') {
     tokenName = 'SPOLAR';
@@ -35,7 +37,14 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   } else if (bank.earnTokenName === 'LUNAR') {
     tokenName = 'LUNAR';
   }
-  const tokenStats = bank.earnTokenName === 'SPOLAR' ? tShareStats : tombStats;
+  var tokenStats: { priceInDollars: any; tokenInFtm?: string; totalSupply?: string; circulatingSupply?: string };
+  if (bank.earnTokenName === 'SPOLAR') {
+    tokenStats = tShareStats;
+  } else if (bank.earnTokenName === 'POLAR') {
+    tokenStats = tombStats;
+  } else if (bank.earnTokenName === 'LUNAR') {
+    tokenStats = lunarStats;
+  }
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],

@@ -1020,7 +1020,10 @@ export class TombFinance {
         assetUrl = 'https://polarisfinance.io/logos/pbond-token.svg';
       } else if (assetName === 'LUNAR') {
         asset = this.LUNAR;
-        assetUrl = 'https://polarisfinance.io/logos/pbond-token.svg';
+        assetUrl = 'https://polarisfinance.io/logos/lunar-token.svg';
+      } else if (assetName === 'LBOND') {
+        asset = this.LUNAR;
+        assetUrl = 'https://polarisfinance.io/logos/lbond-token.svg';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',

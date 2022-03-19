@@ -7,10 +7,10 @@ import tombLogoPNG from '../../assets/img/crypto_tomb_cash.f2b44ef4.png';
 import tShareLogoPNG from '../../assets/img/crypto_tomb_share.bf1a6c52.png';
 import pbondLogo from '../../assets/img/pbond-token.svg';
 
-import lunarLogo from '../../assets/img/lunar-token.png';
+import lunarLogo from '../../assets/img/lunar-token.svg';
 import aurisLogo from '../../assets/img/auris-token.png';
 import lunarLunaLpLogo from '../../assets/img/lunar-luna.png';
-import lbondLogo from '../../assets/img/lbond-token.png';
+import lbondLogo from '../../assets/img/lbond-token.svg';
 import abondLogo from '../../assets/img/abond-token.png';
 
 import polarNearLpLogo from '../../assets/img/polar-aurora.svg';
