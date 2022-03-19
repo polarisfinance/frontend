@@ -116,7 +116,7 @@ const Pit: React.FC = () => {
                   priceDesc={`${getDisplayBalance(bondsRedeemable)} LBOND Redeemable`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when LUNAR > ${BOND_REDEEM_PRICE}NEAR` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when LUNAR > ${BOND_REDEEM_PRICE}LUNA` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

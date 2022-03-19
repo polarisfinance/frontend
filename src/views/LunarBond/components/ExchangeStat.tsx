@@ -14,7 +14,7 @@ const ExchangeStat: React.FC<ExchangeStatProps> = ({ tokenName, description, pri
   return (
     <Card style={{ backgroundColor: 'rgba(0,0,0,0)' }}>
       <StyledCardContentInner>
-        <StyledCardTitle>{`${tokenName} = ${price} NEAR`}</StyledCardTitle>
+        <StyledCardTitle>{`${tokenName} = ${price} LUNA`}</StyledCardTitle>
         <StyledDesc>{description}</StyledDesc>
       </StyledCardContentInner>
     </Card>
