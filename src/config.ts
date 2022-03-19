@@ -221,9 +221,20 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 2,
     closedForStaking: false,
   },
+  LunarSpolarRewardPool: {
+    name: 'Earn LUNAR by SPOLAR',
+    poolId: 4,
+    sectionInUI: 4,
+    contract: 'LunarSpolarNearGenesisRewardPool',
+    depositTokenName: 'SPOLAR',
+    earnTokenName: 'LUNAR',
+    finished: false,
+    sort: 3,
+    closedForStaking: false,
+  },
   LunarPolarRewardPool: {
     name: 'Earn LUNAR by POLAR',
-    poolId: 3,
+    poolId: 4,
     sectionInUI: 4,
     contract: 'LunarPolarGenesisRewardPool',
     depositTokenName: 'POLAR',
@@ -234,7 +245,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   },
   LunarPbondRewardPool: {
     name: 'Earn LUNAR by PBOND',
-    poolId: 4,
+    poolId: 5,
     sectionInUI: 4,
     contract: 'LunarPbondGenesisRewardPool',
     depositTokenName: 'PBOND',
@@ -250,9 +261,9 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     contract: 'LunarLunaLPSpolarRewardPool',
     depositTokenName: 'LUNAR-LUNA-LP',
     earnTokenName: 'SPOLAR',
-    finished: false,
+    finished: true,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
 };
 
