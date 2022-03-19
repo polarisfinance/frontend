@@ -8,11 +8,9 @@ const CemeteryCard = ({ bank }) => {
   return (
     <Grid item xs={12} md={12} lg={12}>
       <Card>
-        <CardContent align="center" style={{ position: 'relative',paddingBottom: '16px' }}>
-
-
-          <Grid container alignItems='center'>
-            <Grid container item sm={4} alignItems='center'>
+        <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
+          <Grid container alignItems="center">
+            <Grid container item sm={4} alignItems="center">
               <Box mr={5} ml={5} mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol={bank.depositTokenName} />
@@ -22,7 +20,7 @@ const CemeteryCard = ({ bank }) => {
                 {bank.depositTokenName}
               </Typography>
             </Grid>
-            
+
             <Grid item sm={4}>
               <Typography color="textSecondary">
                 {/* {bank.name} */}
@@ -34,7 +32,6 @@ const CemeteryCard = ({ bank }) => {
                 VIEW & STAKE
               </Button>
             </Grid>
-            
           </Grid>
         </CardContent>
       </Card>

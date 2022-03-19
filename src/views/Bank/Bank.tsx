@@ -17,6 +17,7 @@ import useStatsForPool from '../../hooks/useStatsForPool';
 import useRedeem from '../../hooks/useRedeem';
 import { Bank as BankEntity } from '../../tomb-finance';
 import useTombFinance from '../../hooks/useTombFinance';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize: '22px',
-  }
+  },
 }));
 
 const Bank: React.FC = () => {
@@ -43,32 +44,37 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
+      {bank.depositTokenName.includes('LUNA') && <TaxFeeAlert />}
       <Grid container>
         <Grid item xs={12} md={4}>
           {<Stake bank={bank} />}
         </Grid>
         <Grid container item xs={12} md={4} alignItems="center" direction="row">
           <Grid container item xs={12}>
-            <Grid item xs={6} container justify="flex-end" >
+            <Grid item xs={6} container justify="flex-end">
               <Typography className={classes.text}>APR:</Typography>
             </Grid>
             <Grid item xs={6} container justify="center">
-              <Typography className={classes.text}>{bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%</Typography>
+              <Typography className={classes.text}>
+                {bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%
+              </Typography>
             </Grid>
           </Grid>
           <Grid container item xs={12}>
-            <Grid item xs={6} container justify="flex-end" >
+            <Grid item xs={6} container justify="flex-end">
               <Typography className={classes.text}>Daily APR:</Typography>
             </Grid>
-            <Grid item xs={6} container justify='center'>
-              <Typography className={classes.text}>{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</Typography>
+            <Grid item xs={6} container justify="center">
+              <Typography className={classes.text}>
+                {bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%
+              </Typography>
             </Grid>
           </Grid>
           <Grid container item xs={12}>
             <Grid item xs={6} container justify="flex-end">
               <Typography className={classes.text}>TVL:</Typography>
             </Grid>
-            <Grid item xs={6} container justify='center'>
+            <Grid item xs={6} container justify="center">
               <Typography className={classes.text}>${statsOnPool?.TVL}</Typography>
             </Grid>
           </Grid>
@@ -78,16 +84,14 @@ const Bank: React.FC = () => {
         </Grid>
         <Grid item xs={12}>
           <StyledBank>
-            {bank.depositTokenName.includes('LP') && <LPTokenHelpText  bank={bank} />}
-            <div style={{marginTop: '20px'}}>
+            {bank.depositTokenName.includes('LP') && <LPTokenHelpText bank={bank} />}
+            <div style={{ marginTop: '20px' }}>
               <Button onClick={onRedeem} color="primary" variant="contained">
                 Claim & Withdraw
               </Button>
             </div>
           </StyledBank>
         </Grid>
-        
-      
       </Grid>
     </>
   ) : !bank ? (
@@ -112,9 +116,21 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d/' + tshareAddr;
   }
   return (
-        <StyledLink style={{marginTop: '20px'}} href={uniswapUrl} target="_blank">
-          {`Provide liquidity for ${pairName} now on Trisolaris`}
-        </StyledLink>
+    <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
+      {`Provide liquidity for ${pairName} now on Trisolaris`}
+    </StyledLink>
+  );
+};
+
+const TaxFeeAlert: React.FC = () => {
+  return (
+    <Alert
+      style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
+      variant="filled"
+      severity="warning"
+    >
+      <b>This Pool has 1% fee on deposit.</b>
+    </Alert>
   );
 };
 

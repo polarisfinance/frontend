@@ -42,6 +42,13 @@ const Cemetery = () => {
 
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 4).length === 0}>
+                  <Alert
+                    style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
+                    variant="filled"
+                    severity="warning"
+                  >
+                    <b>Genesis farming will start earning the rewards on 20.03.2022 14:00 UTC </b>
+                  </Alert>
                   <Typography
                     align="center"
                     color="textPrimary"
@@ -86,22 +93,16 @@ const Cemetery = () => {
                 </div>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="h4"
-                    gutterBottom
-                    style={{ marginTop: '20px' }}
-                  >
-                    Earn POLAR by staking LP
-                  </Typography>
                   <Alert
-                    style={{ marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
+                    style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
                     variant="filled"
                     severity="warning"
                   >
                     <b>All below pools have ended. Please unstake and collect your rewards.</b>
                   </Alert>
+                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ margin: '0px' }}>
+                    Earn POLAR by staking LP
+                  </Typography>
 
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
