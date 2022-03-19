@@ -76,7 +76,7 @@ export class TombFinance {
     for (const [name, contract] of Object.entries(this.contracts)) {
       this.contracts[name] = contract.connect(this.signer);
     }
-    const tokens = [this.TOMB, this.TSHARE, this.TBOND, ...Object.values(this.externalTokens)];
+    const tokens = [this.TOMB, this.TSHARE, this.TBOND, this.LUNAR, this.LBOND, ...Object.values(this.externalTokens)];
     for (const token of tokens) {
       token.connect(this.signer);
     }
@@ -458,6 +458,11 @@ export class TombFinance {
     return await Treasury.buyBonds(decimalToBalance(amount), treasuryTombPrice);
   }
 
+  async buyLunarBonds(amount: string | number): Promise<TransactionResponse> {
+    const { lunarTreasury } = this.contracts;
+    const treasuryTombPrice = await lunarTreasury.getlunarPrice();
+    return await lunarTreasury.buyBonds(decimalToBalance(amount), treasuryTombPrice);
+  }
   /**
    * Redeem bonds for cash.
    * @param amount amount of bonds to redeem.
@@ -466,6 +471,11 @@ export class TombFinance {
     const { Treasury } = this.contracts;
     const priceForTomb = await Treasury.getpolarPrice();
     return await Treasury.redeemBonds(decimalToBalance(amount), priceForTomb);
+  }
+  async redeemLunarBonds(amount: string): Promise<TransactionResponse> {
+    const { lunarTreasury } = this.contracts;
+    const priceForTomb = await lunarTreasury.getlunarPrice();
+    return await lunarTreasury.redeemBonds(decimalToBalance(amount), priceForTomb);
   }
 
   async getTotalValueLocked(): Promise<Number> {

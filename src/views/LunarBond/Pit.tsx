@@ -43,7 +43,7 @@ const Pit: React.FC = () => {
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
-      const tx = await tombFinance.buyBonds(amount);
+      const tx = await tombFinance.buyLunarBonds(amount);
       addTransaction(tx, {
         summary: `Buy ${Number(amount).toFixed(2)} Polar with ${amount} POLAR`,
       });
@@ -81,7 +81,7 @@ const Pit: React.FC = () => {
                   priceDesc={
                     !isBondPurchasable
                       ? 'LUNAR is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' PBOND available for purchase'
+                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' LBOND available for purchase'
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}

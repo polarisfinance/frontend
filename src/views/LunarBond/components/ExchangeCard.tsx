@@ -43,9 +43,9 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
 }) => {
   const catchError = useCatchError();
   const {
-    contracts: { Treasury },
+    contracts: { lunarTreasury },
   } = useTombFinance();
-  const [approveStatus, approve] = useApprove(fromToken, Treasury.address);
+  const [approveStatus, approve] = useApprove(fromToken, lunarTreasury.address);
 
   const balance = useTokenBalance(fromToken);
   const [onPresent, onDismiss] = useModal(
