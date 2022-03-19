@@ -27,8 +27,14 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const { onReward } = useHarvest(bank);
   const tombStats = useTombStats();
   const tShareStats = useShareStats();
-
-  const tokenName = bank.earnTokenName === 'SPOLAR' ? 'SPOLAR' : 'POLAR';
+  let tokenName;
+  if (bank.earnTokenName === 'SPOLAR') {
+    tokenName = 'SPOLAR';
+  } else if (bank.earnTokenName === 'POLAR') {
+    tokenName = 'POLAR';
+  } else if (bank.earnTokenName === 'LUNAR') {
+    tokenName = 'LUNAR';
+  }
   const tokenStats = bank.earnTokenName === 'SPOLAR' ? tShareStats : tombStats;
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
@@ -41,7 +47,7 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <TokenSymbol symbol={bank.earnToken.symbol} />
+              <TokenSymbol symbol={bank.earnTokenName} />
             </CardIcon>
             <Value value={getDisplayBalance(earnings)} />
             <Label text={`≈ $${earnedInDollars}`} />

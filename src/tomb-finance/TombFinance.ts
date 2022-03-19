@@ -1018,6 +1018,9 @@ export class TombFinance {
       } else if (assetName === 'PBOND') {
         asset = this.TBOND;
         assetUrl = 'https://polarisfinance.io/logos/pbond-token.svg';
+      } else if (assetName === 'LUNAR') {
+        asset = this.LUNAR;
+        assetUrl = 'https://polarisfinance.io/logos/pbond-token.svg';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
