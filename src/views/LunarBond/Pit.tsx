@@ -53,7 +53,7 @@ const Pit: React.FC = () => {
 
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
-      const tx = await tombFinance.redeemBonds(amount);
+      const tx = await tombFinance.redeemLunarBonds(amount);
       addTransaction(tx, { summary: `Redeem ${amount} PBOND` });
     },
     [tombFinance, addTransaction],

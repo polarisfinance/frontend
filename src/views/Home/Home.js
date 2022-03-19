@@ -281,7 +281,7 @@ const Home = () => {
             color="secondary"
             variant="contained"
             target="_blank"
-            href="https://dexscreener.com/aurora/0xadf9d0c77c70fcb1fdb868f54211288fce9937df"
+            href="https://dexscreener.com/aurora/0x3e50da46cB79d1f9F08445984f207278796CE2d2"
             className={classes.button}
             style={{ marginRight: '12px', marginBottom: '12px' }}
           >
@@ -535,7 +535,7 @@ const Home = () => {
             <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
               <Button
                 onClick={() => {
-                  tombFinance.watchAssetInMetamask('PBOND');
+                  tombFinance.watchAssetInMetamask('LBOND');
                 }}
                 color="primary"
                 variant="outlined"
