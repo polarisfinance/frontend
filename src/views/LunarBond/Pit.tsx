@@ -38,7 +38,7 @@ const Pit: React.FC = () => {
   const cashPrice = useCashPriceInLastTWAP();
   const bondsPurchasable = useBondsPurchasable();
   const bondsRedeemable = useBondsRedeemable();
-  const bondBalance = useTokenBalance(tombFinance?.TBOND);
+  const bondBalance = useTokenBalance(tombFinance?.LBOND);
   const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
 
   const handleBuyBonds = useCallback(
