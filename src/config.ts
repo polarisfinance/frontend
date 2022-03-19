@@ -55,6 +55,7 @@ const configurations: { [env: string]: Configuration } = {
       LUNAR: ['0xAB683BC708A26ce7eA5789cF59A264ACbDB58541', 18],
       LBOND: ['0x08651Cc507468b3ebCEc31E8902491cd25302255', 18],
       'LUNA-NEAR-LP': ['0xdf8cbf89ad9b7dafdd3e37acec539eecc8c47914', 18],
+      SPOLAR: ['0x9D6fc90b25976E40adaD5A3EdD08af9ed7a21729', 18],
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
