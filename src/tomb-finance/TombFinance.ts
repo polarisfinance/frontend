@@ -1032,7 +1032,7 @@ export class TombFinance {
         asset = this.LUNAR;
         assetUrl = 'https://polarisfinance.io/logos/lunar-token.svg';
       } else if (assetName === 'LBOND') {
-        asset = this.LUNAR;
+        asset = this.LBOND;
         assetUrl = 'https://polarisfinance.io/logos/lbond-token.svg';
       }
       await ethereum.request({

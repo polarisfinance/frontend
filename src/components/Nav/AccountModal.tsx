@@ -8,7 +8,7 @@ import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
 import useTombFinance from '../../hooks/useTombFinance';
 import TokenSymbol from '../TokenSymbol';
-import {Grid} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tombFinance = useTombFinance();
@@ -22,11 +22,17 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tbondBalance = useTokenBalance(tombFinance.TBOND);
   const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
 
+  const lunarBalance = useTokenBalance(tombFinance.LUNAR);
+  const displayLunarBalance = useMemo(() => getDisplayBalance(lunarBalance), [lunarBalance]);
+
+  const lbondBalance = useTokenBalance(tombFinance.LBOND);
+  const displayLbondBalance = useMemo(() => getDisplayBalance(lbondBalance), [lbondBalance]);
+
   return (
     <Modal>
       <ModalTitle text="My Wallet" />
 
-      <Grid container justify='center'>
+      <Grid container justify="center">
         <StyledBalanceWrapper>
           <TokenSymbol symbol="POLAR" />
           <StyledBalance>
@@ -48,6 +54,21 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           <StyledBalance>
             <StyledValue>{displayTbondBalance}</StyledValue>
             <Label text="PBOND Available" />
+          </StyledBalance>
+        </StyledBalanceWrapper>
+
+        <StyledBalanceWrapper>
+          <TokenSymbol symbol="LUNAR" />
+          <StyledBalance>
+            <StyledValue>{displayLunarBalance}</StyledValue>
+            <Label text="LUNAR Available" />
+          </StyledBalance>
+        </StyledBalanceWrapper>
+        <StyledBalanceWrapper>
+          <TokenSymbol symbol="LBOND" />
+          <StyledBalance>
+            <StyledValue>{displayLbondBalance}</StyledValue>
+            <Label text="LBOND Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
       </Grid>

@@ -271,7 +271,7 @@ const Home = () => {
             color="secondary"
             variant="contained"
             target="_blank"
-            href="https://dexscreener.com/aurora/0x43dDBeaEC439569C001d8504e440E7Cb3a8046D0"
+            href="https://dexscreener.com/aurora/0x3e50da46cB79d1f9F08445984f207278796CE2d2"
             className={classes.button}
             style={{ marginRight: '12px', marginBottom: '12px' }}
           >
@@ -281,7 +281,7 @@ const Home = () => {
             color="secondary"
             variant="contained"
             target="_blank"
-            href="https://dexscreener.com/aurora/0x3e50da46cB79d1f9F08445984f207278796CE2d2"
+            href="https://dexscreener.com/aurora/0xadf9d0c77c70fcb1fdb868f54211288fce9937df"
             className={classes.button}
             style={{ marginRight: '12px', marginBottom: '12px' }}
           >
