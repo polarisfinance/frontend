@@ -556,7 +556,7 @@ const Home = () => {
                 <Grid item xs={12} sm={4}>
                   Current Price
                   <Box>
-                    <span style={{ fontSize: '30px' }}>{lBondPriceInFTM ? lBondPriceInFTM : '-.----'} NEAR</span>
+                    <span style={{ fontSize: '30px' }}>{lBondPriceInFTM ? lBondPriceInFTM : '-.----'} LUNA</span>
                   </Box>
                   <Box>
                     <span style={{ fontSize: '20px' }}>${lBondPriceInDollars ? lBondPriceInDollars : '-.--'}</span>
