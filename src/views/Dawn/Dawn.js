@@ -90,9 +90,6 @@ const Cemetery = () => {
                         </React.Fragment>
                       ))}
                   </Grid>
-                </div>
-
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
                   <Alert
                     style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
                     variant="filled"
@@ -100,10 +97,28 @@ const Cemetery = () => {
                   >
                     <b>All below pools have ended. Please unstake and collect your rewards.</b>
                   </Alert>
-                  <Typography align="center" color="textPrimary" variant="h4" gutterBottom style={{ margin: '0px' }}>
+
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 3)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
                     Earn POLAR by staking LP
                   </Typography>
-
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)

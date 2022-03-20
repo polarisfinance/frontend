@@ -181,13 +181,13 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   PbondSpolarRewardPool: {
     name: 'Earn SPOLAR by PBOND',
     poolId: 3,
-    sectionInUI: 2,
+    sectionInUI: 3,
     contract: 'PbondSpolarRewardPool',
     depositTokenName: 'PBOND',
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 9,
-    closedForStaking: false,
+    closedForStaking: true,
   },
 
   LunarLunaRewardPool: {
