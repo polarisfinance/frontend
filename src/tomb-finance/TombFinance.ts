@@ -313,7 +313,15 @@ export class TombFinance {
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    const stat = bank.earnTokenName === 'POLAR' ? await this.getTombStat() : await this.getShareStat();
+    let stat;
+    if (bank.earnTokenName === 'POLAR') {
+      stat = await this.getTombStat();
+    } else if (bank.earnTokenName === 'SPOLAR') {
+      stat = await this.getShareStat();
+    } else {
+      stat = await this.getLunarStat();
+    }
+
     const tokenPerSecond = await this.getTokenPerSecond(
       bank.earnTokenName,
       bank.contract,
