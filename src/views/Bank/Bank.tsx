@@ -105,15 +105,19 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const tombFinance = useTombFinance();
   const tombAddr = tombFinance.TOMB.address;
   const tshareAddr = tombFinance.TSHARE.address;
+  const lunarAddr = tombFinance.LUNAR.address;
 
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName === 'POLAR-NEAR-LP') {
     pairName = 'POLAR-NEAR pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d/' + tombAddr;
-  } else {
+  } else if (bank.depositTokenName === 'SPOLAR-NEAR-LP') {
     pairName = 'SPOLAR-NEAR pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d/' + tshareAddr;
+  } else {
+    pairName = 'LUNAR-LUNA pair';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096/' + lunarAddr;
   }
   return (
     <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
