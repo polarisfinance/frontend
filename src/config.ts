@@ -263,9 +263,9 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     contract: 'LunarLunaLPSpolarRewardPool',
     depositTokenName: 'LUNAR-LUNA-LP',
     earnTokenName: 'SPOLAR',
-    finished: true,
+    finished: false,
     sort: 1,
-    closedForStaking: true,
+    closedForStaking: false,
   },
 };
 

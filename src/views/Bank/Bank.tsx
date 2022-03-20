@@ -44,7 +44,7 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank.depositTokenName.includes('LUNA') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('LUNA') && <TaxFeeAlert />}
       <Grid container>
         <Grid item xs={12} md={4}>
           {<Stake bank={bank} />}
