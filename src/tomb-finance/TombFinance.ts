@@ -396,15 +396,15 @@ export class TombFinance {
     }
     const rewardPerSecond = await poolContract.spolarPerSecond();
     if (depositTokenName.startsWith('POLAR-NEAR')) {
-      return rewardPerSecond.mul(20000).div(41000);
+      return rewardPerSecond.mul(20500).div(41000);
     } else if (depositTokenName.startsWith('SPOLAR')) {
-      return rewardPerSecond.mul(12000).div(41000);
+      return rewardPerSecond.mul(12300).div(41000);
     } else if (depositTokenName.startsWith('PBOND')) {
       return rewardPerSecond.mul(0).div(41000);
     } else if (depositTokenName.startsWith('POLAR')) {
-      return rewardPerSecond.mul(400).div(41000);
+      return rewardPerSecond.mul(410).div(41000);
     } else {
-      return rewardPerSecond.mul(8600).div(41000);
+      return rewardPerSecond.mul(7790).div(41000);
     }
   }
 
