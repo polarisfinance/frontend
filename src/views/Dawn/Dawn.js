@@ -41,35 +41,6 @@ const Cemetery = () => {
               </Typography>
 
               <Box mt={5}>
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 4).length === 0}>
-                  <Alert
-                    style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
-                    variant="filled"
-                    severity="warning"
-                  >
-                    <b>Genesis farming will start earning the rewards on 20.03.2022 14:00 UTC </b>
-                  </Alert>
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="h4"
-                    gutterBottom
-                    style={{ marginTop: '20px' }}
-                  >
-                    Lunar Genesis Pools
-                  </Typography>
-
-                  <Grid container spacing={3}>
-                    {activeBanks
-                      .filter((bank) => bank.sectionInUI === 4)
-                      .map((bank) => (
-                        <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
-                        </React.Fragment>
-                      ))}
-                  </Grid>
-                </div>
-
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography
                     align="center"
@@ -108,7 +79,27 @@ const Cemetery = () => {
                       ))}
                   </Grid>
                 </div>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 4).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    Lunar Genesis Pools
+                  </Typography>
 
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 4)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
                   <Typography
                     align="center"

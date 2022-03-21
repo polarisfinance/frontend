@@ -199,7 +199,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'LUNAR',
     finished: false,
     sort: 0,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   LunarPolarNearRewardPool: {
     name: 'Earn LUNAR by POLAR/NEAR LP',
@@ -210,7 +210,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'LUNAR',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   LunarSpolarNearRewardPool: {
     name: 'Earn LUNAR by SPOLAR/NEAR LP',
@@ -221,7 +221,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'LUNAR',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   LunarSpolarRewardPool: {
     name: 'Earn LUNAR by SPOLAR',
@@ -232,7 +232,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'LUNAR',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   LunarPolarRewardPool: {
     name: 'Earn LUNAR by POLAR',
@@ -243,7 +243,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'LUNAR',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   LunarPbondRewardPool: {
     name: 'Earn LUNAR by PBOND',
@@ -254,7 +254,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'LUNAR',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   LunarLunaSpolarRewardPool: {
     name: 'Earn SPOLAR by LUNAR/LUNA LP',
