@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Box, Button, Card, CardContent } from '@material-ui/core';
-
 import CardIcon from '../../../components/CardIcon';
 
 import Label from '../../../components/Label';
