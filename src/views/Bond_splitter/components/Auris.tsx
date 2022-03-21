@@ -33,7 +33,7 @@ const Stake: React.FC = () => {
                 to={'/polar_sunrise'}
                 disabled={true}
               >
-                Comming Soon
+                Coming Soon
               </Button>
             </StyledCardActions>
           </StyledCardContentInner>
