@@ -145,7 +145,6 @@ export class TombFinance {
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
     const token0 = name.startsWith('POLAR') ? this.TOMB : this.TSHARE;
-    const isTomb = name.startsWith('POLAR');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
@@ -153,7 +152,7 @@ export class TombFinance {
     const ftmAmount = getDisplayBalance(ftmAmountBN, 24);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
-    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb);
+    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0);
     const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(4).toString();
     const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(4).toString();
     return {
@@ -423,11 +422,11 @@ export class TombFinance {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
       if (tokenName === 'POLAR-NEAR-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
+        tokenPrice = await this.getLPTokenPrice(token, this.TOMB);
       } else if (tokenName === 'SPOLAR-NEAR-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
+        tokenPrice = await this.getLPTokenPrice(token, this.TSHARE);
       } else if (tokenName === 'LUNAR-LUNA-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this.LUNAR, false);
+        tokenPrice = await this.getLPTokenPrice(token, this.LUNAR);
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -516,11 +515,19 @@ export class TombFinance {
    * @param isTomb sanity check for usage of tomb token or tShare
    * @returns price of the LP token
    */
-  async getLPTokenPrice(lpToken: ERC20, token: ERC20, isTomb: boolean): Promise<string> {
+  async getLPTokenPrice(lpToken: ERC20, token: ERC20): Promise<string> {
     const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
-    const stat = isTomb === true ? await this.getTombStat() : await this.getShareStat();
+    let stat;
+    if (token.symbol === 'POLAR') {
+      stat = await this.getTombStat();
+    } else if (token.symbol === 'LUNAR') {
+      stat = await this.getLunarStat();
+    } else {
+      stat = await this.getShareStat();
+    }
+
     const priceOfToken = stat.priceInDollars;
     const tokenInLP = Number(tokenSupply) / Number(totalSupply);
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
@@ -1006,7 +1013,7 @@ export class TombFinance {
     const withdrawLockupEpochs = await lunarSunrise.withdrawLockupEpochs();
     const fromDate = new Date(Date.now());
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
-    const stakedAmount = await this.getStakedSharesOnMasonry();
+    const stakedAmount = await this.getStakedSharesOnLunarSunrise();
     if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
       return { from: fromDate, to: fromDate };
     } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
