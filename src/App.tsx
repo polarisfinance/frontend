@@ -28,6 +28,7 @@ const LunarBond = lazy(() => import('./views/LunarBond'));
 const BondSplitter = lazy(() => import('./views/Bond_splitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
 const Liquidity = lazy(() => import('./views/Liquidity'));
+const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -79,6 +80,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/strategy">
               <Strategy />
+            </Route>
+            <Route path="/legacy_dawn">
+              <LegacyDawn />
             </Route>
             <Route path="*">
               <NoMatch />
