@@ -179,9 +179,10 @@ const Home = () => {
             <Box color="primary" p={4}>
               <h2 style={{ fontSize: '28px' }}>Welcome to Polaris Finance</h2>
               <p style={{ fontSize: '20px' }}>
-                The first algorithmic stablecoin on Aurora chain, pegged to the price of 1 NEAR via seigniorage. Stake
-                your POLAR-NEAR LP in the Dawn to earn SPOLAR rewards. Then stake your earned SPOLAR in the Sunrise to
-                earn more POLAR!
+                The very first algorithmic stablecoins ecosystem on Aurora / NEAR. We are bringing multiple pegged
+                assets 1:1 to native coins via seigniorage. Farm LUNA/LUNAR or NEAR/POLAR to get SPOLAR - governance
+                token that controls inflation and expansion of all pegged assets. Stake Your SPOLAR in sunrise to earn
+                more POLAR and LUNAR!
               </p>
             </Box>
           </Grid>
