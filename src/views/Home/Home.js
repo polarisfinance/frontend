@@ -185,7 +185,7 @@ const Home = () => {
               </p>
             </Box>
           </Grid>
-          <Grid container xs={12} sm={6} align="center">
+          <Grid item xs={12} sm={6} align="center">
             <Box className={classes.box} style={{ paddingTop: '12px' }}>
               <span style={{ fontSize: '25px', fontFamily: '"Rajdhani",regular' }}>Total Value Locked</span>
               <CountUp
