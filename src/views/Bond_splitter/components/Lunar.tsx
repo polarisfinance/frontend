@@ -21,7 +21,7 @@ const Stake: React.FC = () => {
               <CardIcon>
                 <TokenSymbol symbol="LBOND" />
               </CardIcon>
-              <Value value={'LUNAR Bond'} />
+              <Value value={'LUNAR BOND'} />
               <Label text="BOND room for $LUNAR" />
             </StyledCardHeader>
             <StyledCardActions>
