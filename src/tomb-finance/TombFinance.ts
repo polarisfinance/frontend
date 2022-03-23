@@ -418,6 +418,7 @@ export class TombFinance {
   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
     const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
+    const getBondPrice = await this.getBondStat();
     if (tokenName === 'NEAR') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
@@ -427,6 +428,8 @@ export class TombFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.TSHARE);
       } else if (tokenName === 'LUNAR-LUNA-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.LUNAR);
+      } else if (tokenName === 'PBOND') {
+        tokenPrice = getBondPrice.priceInDollars;
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
