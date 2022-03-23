@@ -49,7 +49,7 @@ const Cemetery = () => {
                   >
                     <b>All below pools have ended. Please unstake and collect your rewards.</b>
                   </Alert>
-                  <Typography
+                  {/*<Typography
                     align="center"
                     color="textPrimary"
                     variant="h4"
@@ -66,7 +66,7 @@ const Cemetery = () => {
                           <CemeteryCard bank={bank} />
                         </React.Fragment>
                       ))}
-                  </Grid>
+                      </Grid>*/}
                 </div>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 4).length === 0}>
                   <Typography

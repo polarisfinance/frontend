@@ -399,9 +399,9 @@ export class TombFinance {
     } else if (depositTokenName.startsWith('SPOLAR')) {
       return rewardPerSecond.mul(12300).div(41000);
     } else if (depositTokenName.startsWith('PBOND')) {
-      return rewardPerSecond.mul(0).div(41000);
+      return rewardPerSecond.mul(100).div(41000);
     } else if (depositTokenName.startsWith('POLAR')) {
-      return rewardPerSecond.mul(410).div(41000);
+      return rewardPerSecond.mul(310).div(41000);
     } else {
       return rewardPerSecond.mul(7790).div(41000);
     }
