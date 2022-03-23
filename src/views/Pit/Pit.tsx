@@ -12,6 +12,7 @@ import Spacer from '../../components/Spacer';
 import useBondStats from '../../hooks/useBondStats';
 import useTombFinance from '../../hooks/useTombFinance';
 import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
+import useCashPriceInPreviousTWAP from '../../hooks/useCashPriceInPreviousTWAP';
 import { useTransactionAdder } from '../../state/transactions/hooks';
 import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
@@ -36,6 +37,7 @@ const Pit: React.FC = () => {
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
   const cashPrice = useCashPriceInLastTWAP();
+  const previousTwap = useCashPriceInPreviousTWAP();
   const bondsPurchasable = useBondsPurchasable();
   const bondsRedeemable = useBondsRedeemable();
   const bondBalance = useTokenBalance(tombFinance?.TBOND);
@@ -58,7 +60,7 @@ const Pit: React.FC = () => {
     },
     [tombFinance, addTransaction],
   );
-  const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
+  const isBondRedeemable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
   const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInFtm) < 1.01, [bondStat]);
 
   return (
