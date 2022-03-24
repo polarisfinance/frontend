@@ -61,7 +61,7 @@ const Pit: React.FC = () => {
     [tombFinance, addTransaction],
   );
   const isBondRedeemable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
-  const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInFtm) < 1.01, [bondStat]);
+  const isBondPurchasable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
 
   return (
     <Switch>
