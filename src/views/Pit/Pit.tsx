@@ -61,7 +61,10 @@ const Pit: React.FC = () => {
     [tombFinance, addTransaction],
   );
   const isBondRedeemable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
-  const isBondPurchasable = useMemo(() => Number(polarPreviousEpochTwap) < 1.01, [polarPreviousEpochTwap]);
+  const isBondPurchasable = useMemo(
+    () => Number(getDisplayBalance(polarPreviousEpochTwap, 18, 4)) < 1.01,
+    [polarPreviousEpochTwap],
+  );
 
   return (
     <Switch>
