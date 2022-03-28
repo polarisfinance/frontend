@@ -76,7 +76,7 @@ const Masonry = () => {
             <Grid container item xs={12} justify="center" className={classes.text}>
               <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
                 <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}>
-                  Staked SPOLARs can only be withdrawn after 6 epochs since deposit.
+                  Staked SPOLARs can only be withdrawn after 3 epochs since deposit.
                 </Typography>
               </Box>
             </Grid>
