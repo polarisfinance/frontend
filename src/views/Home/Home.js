@@ -102,9 +102,7 @@ const Home = () => {
 
   const buyTombAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + polar.address;
   const buyTShareAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + tShare.address;
-  const buyLunarAddress =
-    'https://www.trisolaris.io/#/swap?inputCurrency=0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096&outputCurrency=' +
-    lunar.address;
+  const buyLunarAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + lunar.address;
 
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
