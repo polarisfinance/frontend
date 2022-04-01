@@ -5,10 +5,9 @@ import { useParams } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Box, Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
+import { Button, Typography, Grid } from '@material-ui/core';
 
 import PageHeader from '../../components/PageHeader';
-import Spacer from '../../components/Spacer';
 import UnlockWallet from '../../components/UnlockWallet';
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
@@ -162,24 +161,7 @@ const StyledLink = styled.a`
   text-decoration: underline;
 `;
 
-const StyledCardsWrapper = styled.div`
-  display: flex;
-  width: 600px;
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-`;
 
-const StyledCardWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
 
 const Center = styled.div`
   display: flex;

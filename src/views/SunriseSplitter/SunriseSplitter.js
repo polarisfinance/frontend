@@ -1,13 +1,10 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 
-import styled from 'styled-components';
-
 import Lunar from './components/Lunar';
 import Polar from './components/Polar';
 import Auris from './components/Auris';
 import { makeStyles } from '@material-ui/core/styles';
-
 import { Box, Typography, Grid } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
@@ -72,33 +69,5 @@ const Masonry = () => {
     </Page>
   );
 };
-
-const StyledBoardroom = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const StyledCardsWrapper = styled.div`
-  display: flex;
-  width: 600px;
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-`;
-
-const StyledCardWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
 
 export default Masonry;

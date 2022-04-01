@@ -8,7 +8,6 @@ import CountUp from 'react-countup';
 import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
 import useTombStats from '../../hooks/useTombStats';
-import useLpStats from '../../hooks/useLpStats';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
@@ -33,9 +32,6 @@ import useTombFinance from '../../hooks/useTombFinance';
 
 import useLunarStats from '../../hooks/useLunarStats';
 import useLunarBondStats from '../../hooks/useLunarBondStats';
-
-// countdown
-import LaunchCountdown from '../../components/LaunchCountdown';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -77,8 +73,6 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const tombFtmLpStats = useLpStats('POLAR-NEAR-LP');
-  const tShareFtmLpStats = useLpStats('SPOLAR-NEAR-LP');
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
@@ -104,8 +98,6 @@ const Home = () => {
   const buyTShareAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + tShare.address;
   const buyLunarAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + lunar.address;
 
-  const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
-  const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   const tombPriceInDollars = useMemo(
     () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
     [tombStats],

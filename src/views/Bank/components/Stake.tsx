@@ -1,17 +1,12 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
-// import Button from '../../../components/Button';
 import { Button, Card, CardContent } from '@material-ui/core';
-// import Card from '../../../components/Card';
-// import CardContent from '../../../components/CardContent';
 import CardIcon from '../../../components/CardIcon';
 import { AddIcon, RemoveIcon } from '../../../components/icons';
-//import FlashOnIcon from '@material-ui/icons/FlashOn';
 import IconButton from '../../../components/IconButton';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
-import { ThemeContext } from 'styled-components';
 
 import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
@@ -65,7 +60,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     />,
   );
 
-  const [onPresentZap, onDissmissZap] = useModal(
+  const [onDissmissZap] = useModal(
     <ZapModal
       decimals={bank.depositToken.decimal}
       onConfirm={(zappingToken, tokenName, amount) => {
@@ -96,7 +91,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>
-              <TokenSymbol symbol={bank.depositToken.symbol}/>
+              <TokenSymbol symbol={bank.depositToken.symbol} />
             </CardIcon>
             <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />
             <Label text={`≈ $${earnedInDollars}`} />
@@ -123,9 +118,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                   <RemoveIcon />
                 </IconButton>
                 <StyledActionSpacer />
-                
-                  
-                
+
                 <StyledActionSpacer />
                 <IconButton
                   disabled={bank.closedForStaking}

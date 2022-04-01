@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
 
 import TokenSymbol from '../../components/TokenSymbol';
 import CardIcon from '../../components/CardIcon';

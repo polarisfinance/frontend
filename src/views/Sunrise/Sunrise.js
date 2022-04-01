@@ -1,15 +1,12 @@
 import React, { useMemo } from 'react';
 import { useWallet } from 'use-wallet';
 import moment from 'moment';
-import styled from 'styled-components';
-import Spacer from '../../components/Spacer';
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Box, Card, CardContent, Button, Typography, Grid } from '@material-ui/core';
+import { Box, Button, Typography, Grid } from '@material-ui/core';
 
-import { Alert } from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
@@ -26,7 +23,6 @@ import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnMasonry';
 import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheck';
 import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
-import MasonryImage from '../../assets/img/masonry.png';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
@@ -199,33 +195,5 @@ const Masonry = () => {
     </Page>
   );
 };
-
-const StyledBoardroom = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const StyledCardsWrapper = styled.div`
-  display: flex;
-  width: 600px;
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-`;
-
-const StyledCardWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
 
 export default Masonry;

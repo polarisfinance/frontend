@@ -4,7 +4,6 @@ import { Modal, List } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import metamaskLogo from '../../assets/img/metamask-fox.svg';
 import walletConnectLogo from '../../assets/img/wallet-connect.svg';
-import coingBaseLogo from '../../assets/img/coinbase_logo.jpeg';
 import { useWallet } from 'use-wallet';
 
 const useStyles = makeStyles((theme) => ({

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Button, Card, CardContent } from '@material-ui/core';
@@ -18,7 +18,6 @@ import { Bank } from '../../../tomb-finance';
 import useTombStats from '../../../hooks/useTombStats';
 import useShareStats from '../../../hooks/usetShareStats';
 import useLunarStats from '../../../hooks/useLunarStats';
-import { TokenStat } from '../../../tomb-finance/types';
 interface HarvestProps {
   bank: Bank;
 }

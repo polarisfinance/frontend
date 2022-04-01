@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Card } from '@material-ui/core';
-import { ImportantDevices, NoEncryptionOutlined, SportsRugbySharp } from '@material-ui/icons';
 
 interface ExchangeStatProps {
   tokenName: string;

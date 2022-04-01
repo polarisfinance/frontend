@@ -1,7 +1,6 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 
-import styled from 'styled-components';
 
 import Lunar from './components/Lunar';
 import Polar from './components/Polar';

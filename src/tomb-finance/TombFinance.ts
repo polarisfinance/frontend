@@ -13,8 +13,6 @@ import config, { bankDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
 import { FTM_TICKER, SPOOKY_ROUTER_ADDR, TOMB_TICKER } from '../utils/constants';
-import React, { useMemo } from 'react';
-import LunarSunrise from '../views/LunarSunrise';
 /**
  * An API module of Tomb Finance contracts.
  * All contract-interacting domain logic should be defined in here.
@@ -506,7 +504,7 @@ export class TombFinance {
     let totalValue = 0;
     for (const bankInfo of Object.values(bankDefinitions)) {
       const pool = this.contracts[bankInfo.contract];
-      if (bankInfo.closedForStaking == true) continue;
+      if (bankInfo.closedForStaking === true) continue;
       const token = this.externalTokens[bankInfo.depositTokenName];
       const [tokenPrice, tokenAmountInPool] = await Promise.all([
         this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token),
@@ -663,7 +661,7 @@ export class TombFinance {
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
 
     try {
-      if (tokenContract.symbol == 'PBOND') {
+      if (tokenContract.symbol === 'PBOND') {
         const { Treasury } = this.contracts;
         const [tombStat, bondTombRatioBN] = await Promise.all([this.getTombStat(), Treasury.gepbondPremiumRate()]);
         const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
@@ -689,7 +687,7 @@ export class TombFinance {
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
 
     try {
-      if (tokenContract.symbol == 'PBOND') {
+      if (tokenContract.symbol === 'PBOND') {
         const { Treasury } = this.contracts;
         const [tombStat, bondTombRatioBN] = await Promise.all([this.getTombStat(), Treasury.gepbondPremiumRate()]);
         const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
@@ -729,17 +727,17 @@ export class TombFinance {
     const { LUNA, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
-      var near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
-      var near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
-      var usdc_amount_BN = await USDC.balanceOf(near_usdc_lp_pair.address);
-      var usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
+      let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
+      let near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      let usdc_amount_BN = await USDC.balanceOf(near_usdc_lp_pair.address);
+      let usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
       const near_price = usdc_amount / near_amount;
 
       const luna_near_lp_pair = this.externalTokens['LUNA-NEAR-LP'];
       var luna_amount_BN = await LUNA.balanceOf(luna_near_lp_pair.address);
       var luna_amount = Number(getFullDisplayBalance(luna_amount_BN, LUNA.decimal));
-      var near_amount_BN = await NEAR.balanceOf(luna_near_lp_pair.address);
-      var near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      near_amount_BN = await NEAR.balanceOf(luna_near_lp_pair.address);
+      near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
       const luna_price = near_amount / luna_amount;
       return (near_price * luna_price).toString();
     } catch (err) {

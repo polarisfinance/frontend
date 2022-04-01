@@ -88,13 +88,6 @@ const StyledBalance = styled.div`
   flex-direction: column;
 `;
 
-const Balances = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: ${(props) => props.theme.spacing[4]}px;
-`;
-
 const StyledBalanceWrapper = styled.div`
   align-items: center;
   display: flex;

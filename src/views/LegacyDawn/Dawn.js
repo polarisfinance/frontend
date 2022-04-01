@@ -10,7 +10,6 @@ import { Alert } from '@material-ui/lab';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import CemeteryCard from './DawnCard';
-import CemeteryImage from '../../assets/img/cemetery.png';
 import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';

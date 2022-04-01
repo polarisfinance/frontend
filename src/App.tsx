@@ -15,12 +15,11 @@ import config from './config';
 import Updaters from './state/Updaters';
 import Loader from './components/Loader';
 import Popups from './components/Popups';
-import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 
 const Home = lazy(() => import('./views/Home'));
 const Dawn = lazy(() => import('./views/Dawn'));
-const Sunrise_splitter = lazy(() => import('./views/Sunrise_splitter'));
+const SunriseSplitter = lazy(() => import('./views/SunriseSplitter'));
 const PolarSunrise = lazy(() => import('./views/Sunrise'));
 const LunarSunrise = lazy(() => import('./views/LunarSunrise'));
 const Pit = lazy(() => import('./views/Pit'));
@@ -58,7 +57,7 @@ const App: React.FC = () => {
               <Dawn />
             </Route>
             <Route path="/sunrise">
-              <Sunrise_splitter />
+              <SunriseSplitter />
             </Route>
             <Route path="/polar_sunrise">
               <PolarSunrise />
