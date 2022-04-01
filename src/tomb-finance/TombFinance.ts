@@ -503,8 +503,6 @@ export class TombFinance {
 
   async getTotalValueLocked(): Promise<Number> {
     let totalValue = 0;
-    console.time('tvl time');
-    console.time('pools');
     for (const bankInfo of Object.values(bankDefinitions)) {
       const pool = this.contracts[bankInfo.contract];
       if (bankInfo.closedForStaking == true) continue;
@@ -517,8 +515,6 @@ export class TombFinance {
       const poolValue = Number.isNaN(value) ? 0 : value;
       totalValue += poolValue;
     }
-    console.timeEnd('pools');
-    console.time('masonry');
     const [ShareStat, masonrytShareBalanceOf, lunarSunriseSpolarBalanceOf] = await Promise.all([
       this.getShareStat(),
       this.TSHARE.balanceOf(this.currentMasonry().address),
@@ -529,8 +525,6 @@ export class TombFinance {
 
     const lunarSunriseTVL =
       Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
-    console.timeEnd('masonry');
-    console.timeEnd('tvl time');
     return totalValue + masonryTVL + lunarSunriseTVL;
   }
 
