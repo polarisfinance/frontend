@@ -102,14 +102,15 @@ export class TombFinance {
 
   async getTombStat(): Promise<TokenStat> {
     const { PolarAuroraGenesisRewardPool, PolarNearLpPolarRewardPool } = this.contracts;
-    const supply = await this.TOMB.totalSupply();
-    const tombRewardPoolSupply = await this.TOMB.balanceOf(PolarAuroraGenesisRewardPool.address);
-    const tombRewardPoolSupply2 = await this.TOMB.balanceOf(PolarNearLpPolarRewardPool.address);
+    const [supply, tombRewardPoolSupply, tombRewardPoolSupply2, priceInFTM, priceOfOneFTM] = await Promise.all([
+      this.TOMB.totalSupply(),
+      this.TOMB.balanceOf(PolarAuroraGenesisRewardPool.address),
+      this.TOMB.balanceOf(PolarNearLpPolarRewardPool.address),
+      this.getTokenPriceFromPancakeswap(this.TOMB),
+      this.getWFTMPriceFromPancakeswap(),
+    ]);
     const tombCirculatingSupply = supply.sub(tombRewardPoolSupply).sub(tombRewardPoolSupply2);
-    const priceInFTM = await this.getTokenPriceFromPancakeswap(this.TOMB);
-    const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
     const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
-
     return {
       tokenInFtm: priceInFTM,
       priceInDollars: priceOfTombInDollars,
@@ -120,11 +121,13 @@ export class TombFinance {
 
   async getLunarStat(): Promise<TokenStat> {
     const { LunarLunaGenesisRewardPool } = this.contracts;
-    const supply = await this.LUNAR.totalSupply();
-    const LunarLunaGenesisRewardPoolSupply = await this.LUNAR.balanceOf(LunarLunaGenesisRewardPool.address);
+    const [supply,LunarLunaGenesisRewardPoolSupply,priceInLUNA,priceOfOneLUNA] = await Promise.all([
+      this.LUNAR.totalSupply(),
+      this.LUNAR.balanceOf(LunarLunaGenesisRewardPool.address),
+      this.getTokenPriceLunar(this.LUNAR),
+      this.getLUNAPrice()
+    ])
     const LunarCirculatingSupply = supply.sub(LunarLunaGenesisRewardPoolSupply);
-    const priceInLUNA = await this.getTokenPriceLunar(this.LUNAR);
-    const priceOfOneLUNA = await this.getLUNAPrice();
     const priceOfLUNARInDollars = (Number(priceInLUNA) * Number(priceOfOneLUNA)).toFixed(2);
 
     return {
@@ -174,12 +177,14 @@ export class TombFinance {
    */
   async getBondStat(): Promise<TokenStat> {
     const { Treasury } = this.contracts;
-    const tombStat = await this.getTombStat();
-    const bondTombRatioBN = await Treasury.gepbondPremiumRate();
+    const [tombStat, bondTombRatioBN, supply] = await Promise.all([
+      this.getTombStat(),
+      Treasury.gepbondPremiumRate(),
+      this.TBOND.displayedTotalSupply()
+    ])
     const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
     const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
     const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
-    const supply = await this.TBOND.displayedTotalSupply();
     return {
       tokenInFtm: bondPriceInFTM,
       priceInDollars: priceOfTBondInDollars,
@@ -190,12 +195,14 @@ export class TombFinance {
 
   async getLunarBondStat(): Promise<TokenStat> {
     const { lunarTreasury } = this.contracts;
-    const tombStat = await this.getLunarStat();
-    const bondTombRatioBN = await lunarTreasury.gepbondPremiumRate();
+    const [tombStat,bondTombRatioBN,supply] = await Promise.all([
+      this.getLunarStat(),
+      lunarTreasury.gepbondPremiumRate(),
+      this.LBOND.displayedTotalSupply()
+    ])
     const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
     const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
     const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
-    const supply = await this.LBOND.displayedTotalSupply();
     return {
       tokenInFtm: bondPriceInFTM,
       priceInDollars: priceOfTBondInDollars,
@@ -214,12 +221,13 @@ export class TombFinance {
   async getShareStat(): Promise<TokenStat> {
     const { PolarNearLpSpolarRewardPool } = this.contracts;
 
-    const supply = await this.TSHARE.totalSupply();
-
-    const priceInFTM = await this.getTokenPriceFromPancakeswap(this.TSHARE);
-    const tombRewardPoolSupply = await this.TSHARE.balanceOf(PolarNearLpSpolarRewardPool.address);
+    const [supply,priceInFTM,tombRewardPoolSupply,priceOfOneFTM] = await Promise.all([
+      this.TSHARE.totalSupply(),
+      this.getTokenPriceFromPancakeswap(this.TSHARE),
+      this.TSHARE.balanceOf(PolarNearLpSpolarRewardPool.address),
+      this.getWFTMPriceFromPancakeswap()
+    ])
     const tShareCirculatingSupply = supply.sub(tombRewardPoolSupply);
-    const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
     const priceOfSharesInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
 
     return {
@@ -419,9 +427,8 @@ export class TombFinance {
    */
   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
-    const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
-    const getBondPrice = await this.getBondStat();
     if (tokenName === 'NEAR') {
+      const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
       tokenPrice = priceOfOneFtmInDollars;
     } else {
       if (tokenName === 'POLAR-NEAR-LP') {
@@ -431,9 +438,13 @@ export class TombFinance {
       } else if (tokenName === 'LUNAR-LUNA-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.LUNAR);
       } else if (tokenName === 'PBOND') {
+        const getBondPrice = await this.getBondStat();
         tokenPrice = getBondPrice.priceInDollars;
       } else {
-        tokenPrice = await this.getTokenPriceFromPancakeswap(token);
+        let [tokenPrice, priceOfOneFtmInDollars] = await Promise.all([
+          this.getTokenPriceFromPancakeswap(token),
+          this.getWFTMPriceFromPancakeswap(),
+        ]);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
       }
     }
@@ -492,23 +503,34 @@ export class TombFinance {
 
   async getTotalValueLocked(): Promise<Number> {
     let totalValue = 0;
+    console.time('tvl time');
+    console.time('pools');
     for (const bankInfo of Object.values(bankDefinitions)) {
       const pool = this.contracts[bankInfo.contract];
+      if (bankInfo.closedForStaking == true) continue;
       const token = this.externalTokens[bankInfo.depositTokenName];
-      const tokenPrice = await this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token);
-      const tokenAmountInPool = await token.balanceOf(pool.address);
+      const [tokenPrice, tokenAmountInPool] = await Promise.all([
+        this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token),
+        token.balanceOf(pool.address),
+      ]);
       const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal)) * Number(tokenPrice);
       const poolValue = Number.isNaN(value) ? 0 : value;
       totalValue += poolValue;
     }
-
-    const TSHAREPrice = (await this.getShareStat()).priceInDollars;
-    const masonrytShareBalanceOf = await this.TSHARE.balanceOf(this.currentMasonry().address);
+    console.timeEnd('pools');
+    console.time('masonry');
+    const [ShareStat, masonrytShareBalanceOf, lunarSunriseSpolarBalanceOf] = await Promise.all([
+      this.getShareStat(),
+      this.TSHARE.balanceOf(this.currentMasonry().address),
+      this.TSHARE.balanceOf(this.currentLunarSunrise().address),
+    ]);
+    const TSHAREPrice = ShareStat.priceInDollars;
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
 
-    const lunarSunriseSpolarBalanceOf = await this.TSHARE.balanceOf(this.currentLunarSunrise().address);
     const lunarSunriseTVL =
       Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
+    console.timeEnd('masonry');
+    console.timeEnd('tvl time');
     return totalValue + masonryTVL + lunarSunriseTVL;
   }
 
@@ -521,9 +543,10 @@ export class TombFinance {
    * @returns price of the LP token
    */
   async getLPTokenPrice(lpToken: ERC20, token: ERC20): Promise<string> {
-    const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
+    const [lpTokenSupply, tokenBalance] = await Promise.all([lpToken.totalSupply(), token.balanceOf(lpToken.address)]);
+    const totalSupply = getFullDisplayBalance(lpTokenSupply, lpToken.decimal);
     //Get amount of tokenA
-    const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
+    const tokenSupply = getFullDisplayBalance(tokenBalance, token.decimal);
     let stat;
     if (token.symbol === 'POLAR') {
       stat = await this.getTombStat();
@@ -647,8 +670,7 @@ export class TombFinance {
     try {
       if (tokenContract.symbol == 'PBOND') {
         const { Treasury } = this.contracts;
-        const tombStat = await this.getTombStat();
-        const bondTombRatioBN = await Treasury.gepbondPremiumRate();
+        const [tombStat, bondTombRatioBN] = await Promise.all([this.getTombStat(), Treasury.gepbondPremiumRate()]);
         const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
         const priceOfTBondInDollars = ((Number(tombStat.priceInDollars) * modifier) / 10).toFixed(2);
         return priceOfTBondInDollars;
@@ -674,8 +696,10 @@ export class TombFinance {
     try {
       if (tokenContract.symbol == 'PBOND') {
         const { Treasury } = this.contracts;
-        const tombStat = await this.getTombStat();
-        const bondTombRatioBN = await Treasury.gepbondPremiumRate();
+        const [tombStat,bondTombRatioBN] = await Promise.all([
+          this.getTombStat(),
+          Treasury.gepbondPremiumRate()
+        ])
         const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
         const priceOfTBondInDollars = ((Number(tombStat.priceInDollars) * modifier) / 10).toFixed(2);
         return priceOfTBondInDollars;
@@ -695,9 +719,11 @@ export class TombFinance {
     const { NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
-      let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
+      let [near_amount_BN, usdc_amount_BN] = await Promise.all([
+        NEAR.balanceOf(near_usdc_lp_pair.address),
+        USDC.balanceOf(near_usdc_lp_pair.address),
+      ]);
       let near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
-      let usdc_amount_BN = await USDC.balanceOf(near_usdc_lp_pair.address);
       let usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
       return (usdc_amount / near_amount).toString();
     } catch (err) {
