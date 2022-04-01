@@ -189,7 +189,7 @@ const Home = () => {
           </Grid>
         </Grid>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px' }}>
+          <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
             <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
               <b>
                 Please visit our{' '}

@@ -14,25 +14,23 @@ import {
   ListItemText,
   Divider,
   Grid,
-  Hidden
+  Hidden,
 } from '@material-ui/core';
 import Image from 'material-ui-image';
-import AuroraLogo from '../../assets/img/aurora_logo_white.svg'
-import NearLogo from '../../assets/img/near_logo_white.svg'
-import Plus from '../../assets/img/+.svg'
-import Equal from '../../assets/img/=.svg'
-import NameLogo from '../../assets/img/name-logo.svg'
+import AuroraLogo from '../../assets/img/aurora_logo_white.svg';
+import NearLogo from '../../assets/img/near_logo_white.svg';
+import Plus from '../../assets/img/+.svg';
+import Equal from '../../assets/img/=.svg';
+import NameLogo from '../../assets/img/name-logo.svg';
 import { Container } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
-import newTheme from "../../newTheme";
+import newTheme from '../../newTheme';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-
-
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -48,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
     // borderBottom: `1px solid ${theme.palette.divider}`,
     padding: '10px',
     marginBottom: '3rem',
-    
   },
   drawer: {
     width: 240,
@@ -65,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarTitle: {
     fontFamily: '"Rajdhani", cursive',
-    lineHeight: "20px",
+    lineHeight: '20px',
     flexGrow: 1,
   },
   link: {
@@ -77,10 +74,8 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
-      color: newTheme.palette.primary.main
-
+      color: newTheme.palette.primary.main,
     },
-    
   },
   brandLink: {
     textDecoration: 'none',
@@ -91,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
   box: {
     flexGrow: 1,
-  }
+  },
 }));
 
 const Nav = () => {
@@ -113,11 +108,11 @@ const Nav = () => {
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
-            <Typography variant="h6" color="inherit"  className={classes.toolbarTitle}>
+            <Typography variant="h6" color="inherit" className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">Polaris Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 {/*Polaris Finance*/}
-                <img src={NameLogo} alt='name_logo' height={35}/>
+                <img src={NameLogo} alt="name_logo" height={35} />
               </Link>
             </Typography>
             <Box className={classes.box} m="auto">
@@ -145,13 +140,28 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link>*/}
-              <a target="_blank" rel="noopener noreferrer" href="https://docs.polarisfinance.io" className={classes.link}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://docs.polarisfinance.io"
+                className={classes.link}
+              >
                 Docs
               </a>
-              <a target="_blank" rel="noopener noreferrer" href="https://www.vaporwave.farm/#/aurora" className={classes.link}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.vaporwave.farm/#/aurora"
+                className={classes.link}
+              >
                 AC
               </a>
-              <a target="_blank" rel="noopener noreferrer" href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/" className={classes.link}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
+                className={classes.link}
+              >
                 KYC
               </a>
             </Box>
@@ -204,7 +214,11 @@ const Nav = () => {
                 <ListItem button component="a" href="https://www.vaporwave.farm/#/aurora">
                   <ListItemText>AC</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/">
+                <ListItem
+                  button
+                  component="a"
+                  href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
+                >
                   <ListItemText>KYC</ListItemText>
                 </ListItem>
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -215,38 +229,60 @@ const Nav = () => {
           </>
         )}
       </Toolbar>
-        <Container maxWidth="lg" style={{ marginTop: '10px' }}>
-          <Grid container>
-            {/* Logo */}
-            <Grid container item xs={12} sm={4}>
-              {/* <Paper>xs=6 sm=3</Paper> */}   
-              <Grid item xs={4}>
-                <Image color="none" imageStyle={{ height:'100px'}} style={{height:'100px',paddingTop:'0px',marginTop:'20px'}} src={AuroraLogo} />
-              </Grid>
-              <Grid item xs={4}>
-                <Image color="none" imageStyle={{ height:'40px', marginTop: '20px' }} style={{height:'30px',paddingTop:'0px',marginTop:'30px'}} src={Plus} />
-              </Grid>
-              <Grid item xs={4}>
-                <Image color="none" imageStyle={{ height:'100px' }} style={{height:'100px',paddingTop:'0px',marginTop:'20px'}} src={NearLogo} />
-              </Grid>
+      <Container maxWidth="lg" style={{ marginTop: '10px' }}>
+        <Grid container>
+          {/* Logo */}
+          <Grid container item xs={12} sm={4}>
+            {/* <Paper>xs=6 sm=3</Paper> */}
+            <Grid item xs={4}>
+              <Image
+                color="none"
+                imageStyle={{ height: '100px' }}
+                style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
+                src={AuroraLogo}
+              />
             </Grid>
-            <Hidden xsDown>
-              <Grid item xs={2} sm={2} alignItems="center" direction="column">
-                {/* <Paper>xs=6 sm=3</Paper> */}   
-                <Image color="none"  imageStyle={{ height:'20px', marginTop: '20px' }} style={{height:'20px',paddingTop:'0px',marginTop:'40px'}} src={Equal} />
-              </Grid>
-            </Hidden>
-            
-            <Grid item xs={12} sm={6} >
-              {/* <Paper>xs=6 sm=3</Paper> */}   
-              <Image color="none"  imageStyle={{ height:'100px'}} style={{height:'100px',paddingTop:'0px',marginTop:'20px'}} src={NameLogo}  />
+            <Grid item xs={4}>
+              <Image
+                color="none"
+                imageStyle={{ height: '40px', marginTop: '20px' }}
+                style={{ height: '30px', paddingTop: '0px', marginTop: '30px' }}
+                src={Plus}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Image
+                color="none"
+                imageStyle={{ height: '100px' }}
+                style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
+                src={NearLogo}
+              />
             </Grid>
           </Grid>
-          
-          
-        </Container> 
+          <Hidden xsDown>
+            <Grid item xs={2} sm={2}>
+              {/* <Paper>xs=6 sm=3</Paper> */}
+              <Image
+                color="none"
+                imageStyle={{ height: '20px', marginTop: '20px' }}
+                style={{ height: '20px', paddingTop: '0px', marginTop: '40px' }}
+                src={Equal}
+              />
+            </Grid>
+          </Hidden>
+
+          <Grid item xs={12} sm={6}>
+            {/* <Paper>xs=6 sm=3</Paper> */}
+            <Image
+              color="none"
+              imageStyle={{ height: '100px' }}
+              style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
+              src={NameLogo}
+            />
+          </Grid>
+        </Grid>
+      </Container>
     </AppBar>
-    
   );
 };
 
