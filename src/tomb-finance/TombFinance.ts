@@ -121,12 +121,12 @@ export class TombFinance {
 
   async getLunarStat(): Promise<TokenStat> {
     const { LunarLunaGenesisRewardPool } = this.contracts;
-    const [supply,LunarLunaGenesisRewardPoolSupply,priceInLUNA,priceOfOneLUNA] = await Promise.all([
+    const [supply, LunarLunaGenesisRewardPoolSupply, priceInLUNA, priceOfOneLUNA] = await Promise.all([
       this.LUNAR.totalSupply(),
       this.LUNAR.balanceOf(LunarLunaGenesisRewardPool.address),
       this.getTokenPriceLunar(this.LUNAR),
-      this.getLUNAPrice()
-    ])
+      this.getLUNAPrice(),
+    ]);
     const LunarCirculatingSupply = supply.sub(LunarLunaGenesisRewardPoolSupply);
     const priceOfLUNARInDollars = (Number(priceInLUNA) * Number(priceOfOneLUNA)).toFixed(2);
 
@@ -180,8 +180,8 @@ export class TombFinance {
     const [tombStat, bondTombRatioBN, supply] = await Promise.all([
       this.getTombStat(),
       Treasury.gepbondPremiumRate(),
-      this.TBOND.displayedTotalSupply()
-    ])
+      this.TBOND.displayedTotalSupply(),
+    ]);
     const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
     const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
     const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
@@ -195,11 +195,11 @@ export class TombFinance {
 
   async getLunarBondStat(): Promise<TokenStat> {
     const { lunarTreasury } = this.contracts;
-    const [tombStat,bondTombRatioBN,supply] = await Promise.all([
+    const [tombStat, bondTombRatioBN, supply] = await Promise.all([
       this.getLunarStat(),
       lunarTreasury.gepbondPremiumRate(),
-      this.LBOND.displayedTotalSupply()
-    ])
+      this.LBOND.displayedTotalSupply(),
+    ]);
     const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
     const bondPriceInFTM = (Number(tombStat.tokenInFtm) * modifier).toFixed(2);
     const priceOfTBondInDollars = (Number(tombStat.priceInDollars) * modifier).toFixed(2);
@@ -221,12 +221,12 @@ export class TombFinance {
   async getShareStat(): Promise<TokenStat> {
     const { PolarNearLpSpolarRewardPool } = this.contracts;
 
-    const [supply,priceInFTM,tombRewardPoolSupply,priceOfOneFTM] = await Promise.all([
+    const [supply, priceInFTM, tombRewardPoolSupply, priceOfOneFTM] = await Promise.all([
       this.TSHARE.totalSupply(),
       this.getTokenPriceFromPancakeswap(this.TSHARE),
       this.TSHARE.balanceOf(PolarNearLpSpolarRewardPool.address),
-      this.getWFTMPriceFromPancakeswap()
-    ])
+      this.getWFTMPriceFromPancakeswap(),
+    ]);
     const tShareCirculatingSupply = supply.sub(tombRewardPoolSupply);
     const priceOfSharesInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
 
@@ -427,8 +427,9 @@ export class TombFinance {
    */
   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
+    let priceOfOneFtmInDollars;
     if (tokenName === 'NEAR') {
-      const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
+      priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
       tokenPrice = priceOfOneFtmInDollars;
     } else {
       if (tokenName === 'POLAR-NEAR-LP') {
@@ -441,7 +442,7 @@ export class TombFinance {
         const getBondPrice = await this.getBondStat();
         tokenPrice = getBondPrice.priceInDollars;
       } else {
-        let [tokenPrice, priceOfOneFtmInDollars] = await Promise.all([
+        [tokenPrice, priceOfOneFtmInDollars] = await Promise.all([
           this.getTokenPriceFromPancakeswap(token),
           this.getWFTMPriceFromPancakeswap(),
         ]);
@@ -690,10 +691,7 @@ export class TombFinance {
     try {
       if (tokenContract.symbol == 'PBOND') {
         const { Treasury } = this.contracts;
-        const [tombStat,bondTombRatioBN] = await Promise.all([
-          this.getTombStat(),
-          Treasury.gepbondPremiumRate()
-        ])
+        const [tombStat, bondTombRatioBN] = await Promise.all([this.getTombStat(), Treasury.gepbondPremiumRate()]);
         const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
         const priceOfTBondInDollars = ((Number(tombStat.priceInDollars) * modifier) / 10).toFixed(2);
         return priceOfTBondInDollars;
