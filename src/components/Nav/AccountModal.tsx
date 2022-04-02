@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
@@ -9,6 +9,8 @@ import ModalTitle from '../ModalTitle';
 import useTombFinance from '../../hooks/useTombFinance';
 import TokenSymbol from '../TokenSymbol';
 import { Grid } from '@material-ui/core';
+import { useWallet } from 'use-wallet';
+import { Button } from '@material-ui/core';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tombFinance = useTombFinance();
@@ -28,10 +30,21 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const lbondBalance = useTokenBalance(tombFinance.LBOND);
   const displayLbondBalance = useMemo(() => getDisplayBalance(lbondBalance), [lbondBalance]);
 
+  const { reset } = useWallet();
+
   return (
     <Modal>
       <ModalTitle text="My Wallet" />
-
+      <Button
+        onClick={() => {
+          reset();
+          onDismiss();
+        }}
+        variant="contained"
+        style={{ position: 'absolute', top: '18px', right: '18px', backgroundColor: '#b43387' }}
+      >
+        Disconnect
+      </Button>
       <Grid container justify="center">
         <StyledBalanceWrapper>
           <TokenSymbol symbol="POLAR" />

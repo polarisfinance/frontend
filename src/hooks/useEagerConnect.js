@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 // import { connectorLocalStorageKey, ConnectorNames } from '@pancakeswap/uikit'
 import { useWallet } from 'use-wallet';
 
+let connected = false;
 const useEagerConnect = () => {
   // const { login } = useAuth()
   const { account, connect, connector } = useWallet();
@@ -12,8 +13,11 @@ const useEagerConnect = () => {
 
   useEffect(() => {
     const connectorId = window.localStorage.getItem('connectorId');
-    if (connectorId && !account) {
-      connect(connectorId);
+    if (!connected) {
+      if (connectorId && !account) {
+        connect(connectorId);
+      }
+      connected = true;
     }
   }, [connect, account]);
 };

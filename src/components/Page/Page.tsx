@@ -4,7 +4,7 @@ import useEagerConnect from '../../hooks/useEagerConnect';
 
 import Footer from '../Footer';
 import Nav from '../Nav';
-
+let connected = false;
 const Page: React.FC = ({ children }) => {
   useEagerConnect();
   return (
