@@ -10,7 +10,7 @@ const useStakeToLunarSunrise = () => {
     (amount: string) => {
       handleTransactionReceipt(
         tombFinance.stakeShareToLunarSunrise(amount),
-        `Stake ${amount} SPOLAR to the lunar sunrise`,
+        `Stake ${amount} SPOLAR to the LUNAR Sunrise`,
       );
     },
     [tombFinance, handleTransactionReceipt],
