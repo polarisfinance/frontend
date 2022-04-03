@@ -48,11 +48,6 @@ const Masonry = () => {
             Bond
           </Typography>
           <Grid container className={classes.text}>
-            <Grid container item xs={12} justify="center" className={classes.text}>
-              <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
-                <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}></Typography>
-              </Box>
-            </Grid>
             <Grid
               item
               xs={12}
