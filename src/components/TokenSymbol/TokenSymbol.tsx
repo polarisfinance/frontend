@@ -13,6 +13,7 @@ import lunarLunaLpLogo from '../../assets/img/lunar-luna.png';
 import lbondLogo from '../../assets/img/lbond-token.svg';
 import abondLogo from '../../assets/img/abond-token.png';
 import tripolarLogo from '../../assets/img/tripolar-token.svg';
+import tribondLogo from '../../assets/img/tribond-token.svg';
 
 import polarNearLpLogo from '../../assets/img/polar-aurora.svg';
 import spolarNearLpLogo from '../../assets/img/spolar-aurora.svg';
@@ -46,6 +47,7 @@ const logosBySymbol: { [title: string]: string } = {
   ABOND: abondLogo,
   'POLAR-STNEAR-LP': polarStNearLpLogo,
   TRIPOLAR: tripolarLogo,
+  TRIBOND: tribondLogo,
 };
 
 type LogoProps = {
