@@ -12,9 +12,11 @@ import aurisLogo from '../../assets/img/auris-token.png';
 import lunarLunaLpLogo from '../../assets/img/lunar-luna.png';
 import lbondLogo from '../../assets/img/lbond-token.svg';
 import abondLogo from '../../assets/img/abond-token.png';
+import tripolarLogo from '../../assets/img/tripolar-token.svg';
 
 import polarNearLpLogo from '../../assets/img/polar-aurora.svg';
 import spolarNearLpLogo from '../../assets/img/spolar-aurora.svg';
+import polarStNearLpLogo from '../../assets/img/polar-stnear.svg';
 
 import auroraLogo from '../../assets/img/aurora_logo.svg';
 import nearLogo from '../../assets/img/near_logo.svg';
@@ -42,6 +44,8 @@ const logosBySymbol: { [title: string]: string } = {
   'LUNAR-LUNA-LP': lunarLunaLpLogo,
   LBOND: lbondLogo,
   ABOND: abondLogo,
+  'POLAR-STNEAR-LP': polarStNearLpLogo,
+  TRIPOLAR: tripolarLogo,
 };
 
 type LogoProps = {
