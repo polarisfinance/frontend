@@ -20,7 +20,7 @@ const Stake: React.FC = () => {
               <CardIcon>
                 <TokenSymbol symbol="TRIBOND" />
               </CardIcon>
-              <Value value={'TRIBOND BOND'} />
+              <Value value={'TRIPOLAR BOND'} />
               <Label text="BOND room for $TRIPOLAR" />
             </StyledCardHeader>
             <StyledCardActions>
