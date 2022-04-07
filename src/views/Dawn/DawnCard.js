@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
+import styled from 'styled-components';
 
 import TokenSymbol from '../../components/TokenSymbol';
 import CardIcon from '../../components/CardIcon';
@@ -31,6 +32,13 @@ const CemeteryCard = ({ bank }) => {
               <Button color="primary" size="small" variant="contained" component={Link} to={`/dawn/${bank.contract}`}>
                 VIEW & STAKE
               </Button>
+              {bank.depositTokenName.startsWith('POLAR-STNEAR') && (
+                <Box style={{ marginTop: '10px' }}>
+                  <StyledLink href={'https://metapool.app/dapp/mainnet/metapool-aurora/'} target="_blank">
+                    Get STNEAR ↗
+                  </StyledLink>
+                </Box>
+              )}
             </Grid>
           </Grid>
         </CardContent>
@@ -38,5 +46,10 @@ const CemeteryCard = ({ bank }) => {
     </Grid>
   );
 };
-
+const StyledLink = styled.a`
+  font-weight: 700;
+  text-decoration: none;
+  color: white;
+  text-decoration: underline;
+`;
 export default CemeteryCard;

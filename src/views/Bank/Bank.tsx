@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Button, Typography, Grid } from '@material-ui/core';
+import { Box, Button, Typography, Grid } from '@material-ui/core';
 
 import PageHeader from '../../components/PageHeader';
 import UnlockWallet from '../../components/UnlockWallet';
@@ -84,6 +84,13 @@ const Bank: React.FC = () => {
         <Grid item xs={12}>
           <StyledBank>
             {bank.depositTokenName.includes('LP') && <LPTokenHelpText bank={bank} />}
+            {bank.depositTokenName.startsWith('POLAR-STNEAR') && (
+              <Box style={{ marginTop: '10px' }}>
+                <StyledLink href={'https://metapool.app/dapp/mainnet/metapool-aurora/'} target="_blank">
+                  Get STNEAR ↗
+                </StyledLink>
+              </Box>
+            )}
             <div style={{ marginTop: '20px' }}>
               <Button onClick={onRedeem} color="primary" variant="contained">
                 Claim & Withdraw
@@ -114,10 +121,14 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   } else if (bank.depositTokenName === 'SPOLAR-NEAR-LP') {
     pairName = 'SPOLAR-NEAR pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d/' + tshareAddr;
+  } else if (bank.depositTokenName === 'POLAR-STNEAR-LP') {
+    pairName = 'POLAR-STNEAR pair';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0x07F9F7f963C5cD2BBFFd30CcfB964Be114332E30/' + tombAddr;
   } else {
     pairName = 'LUNAR-LUNA pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096/' + lunarAddr;
   }
+
   return (
     <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
       {`Provide liquidity for ${pairName} now on Trisolaris`}
@@ -160,8 +171,6 @@ const StyledLink = styled.a`
   color: white;
   text-decoration: underline;
 `;
-
-
 
 const Center = styled.div`
   display: flex;

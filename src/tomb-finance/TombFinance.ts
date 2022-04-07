@@ -399,15 +399,20 @@ export class TombFinance {
       }
       return rewardPerSecond.div(18);
     }
-    const rewardPerSecond = await poolContract.spolarPerSecond();
-    const PolarNear = await poolContract.poolInfo(0);
-    const LunarAtluna = await poolContract.poolInfo(4);
+    const [rewardPerSecond, PolarNear, LunarAtluna, PolarStNear] = await Promise.all([
+      poolContract.spolarPerSecond(),
+      poolContract.poolInfo(0),
+      poolContract.poolInfo(4),
+      poolContract.poolInfo(5),
+    ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('SPOLAR')) {
       return rewardPerSecond.mul(12300).div(41000);
     } else if (depositTokenName.startsWith('PBOND')) {
       return rewardPerSecond.mul(100).div(41000);
+    } else if (depositTokenName.startsWith('POLAR-STNEAR')) {
+      return rewardPerSecond.mul(PolarStNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR')) {
       return rewardPerSecond.mul(310).div(41000);
     } else {
@@ -436,6 +441,8 @@ export class TombFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.TSHARE);
       } else if (tokenName === 'LUNAR-LUNA-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.LUNAR);
+      } else if (tokenName === 'POLAR-STNEAR-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.TOMB);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getBondStat();
         tokenPrice = getBondPrice.priceInDollars;
