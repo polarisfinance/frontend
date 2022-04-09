@@ -104,7 +104,7 @@ const Providers: React.FC = ({ children }) => {
             walletlink: {
               url: config.defaultProvider,
               appName: 'Polaris Finance',
-              appLogoUrl: 'https://github.com/tombfinance/tombfinance-assets/blob/master/logo_tomb_NoBG.png',
+              appLogoUrl: 'https://polarisfinance.io/logo.png',
             },
           }}
         >
