@@ -33,6 +33,9 @@ import useTombFinance from '../../hooks/useTombFinance';
 import useLunarStats from '../../hooks/useLunarStats';
 import useLunarBondStats from '../../hooks/useLunarBondStats';
 
+import useTripolarStats from '../../hooks/useTripolarStats';
+import useTripolarBondStats from '../../hooks/useTripolarBondStats';
+
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
@@ -81,6 +84,8 @@ const Home = () => {
   const lunarStats = useLunarStats();
   const lBondStats = useLunarBondStats();
 
+  const tripolarStats = useTripolarStats();
+  const triBondStats = useTripolarBondStats();
   let polar;
   let tShare;
   let lunar;
@@ -117,6 +122,23 @@ const Home = () => {
   );
   const lunarTotalSupply = useMemo(() => (lunarStats ? String(lunarStats.totalSupply) : null), [lunarStats]);
 
+  const tripolarPriceInXTRI = useMemo(
+    () => (tripolarStats ? Number(tripolarStats.tokenInFtm).toFixed(4) : null),
+    [tripolarStats],
+  );
+  const tripolarPriceInDollars = useMemo(
+    () => (tripolarStats ? Number(tripolarStats.priceInDollars).toFixed(2) : null),
+    [tripolarStats],
+  );
+  const tripolarCirculatingSupply = useMemo(
+    () => (tripolarStats ? String(tripolarStats.circulatingSupply) : null),
+    [tripolarStats],
+  );
+  const tripolarTotalSupply = useMemo(
+    () => (tripolarStats ? String(tripolarStats.totalSupply) : null),
+    [tripolarStats],
+  );
+
   const tSharePriceInDollars = useMemo(
     () => (tShareStats ? Number(tShareStats.priceInDollars).toFixed(2) : null),
     [tShareStats],
@@ -152,6 +174,20 @@ const Home = () => {
     [lBondStats],
   );
   const lBondTotalSupply = useMemo(() => (lBondStats ? String(lBondStats.totalSupply) : null), [lBondStats]);
+
+  const triBondPriceInDollars = useMemo(
+    () => (triBondStats ? Number(triBondStats.priceInDollars).toFixed(2) : null),
+    [triBondStats],
+  );
+  const triBondPriceInFTM = useMemo(
+    () => (triBondStats ? Number(triBondStats.tokenInFtm).toFixed(4) : null),
+    [triBondStats],
+  );
+  const triBondCirculatingSupply = useMemo(
+    () => (triBondStats ? String(triBondStats.circulatingSupply) : null),
+    [triBondStats],
+  );
+  const triBondTotalSupply = useMemo(() => (triBondStats ? String(triBondStats.totalSupply) : null), [triBondStats]);
 
   const StyledLink = styled.a`
     font-weight: 700;
@@ -280,6 +316,74 @@ const Home = () => {
           >
             SPOLAR CHARTS
           </Button>
+        </Grid>
+        {/* TRIPOLAR */}
+        <Grid item xs={12} sm={12}>
+          <Card>
+            <CardContent
+              className={classes.root}
+              align="center"
+              style={{ position: 'relative', paddingBottom: '16px' }}
+            >
+              <Button
+                onClick={() => {
+                  tombFinance.watchAssetInMetamask('TRIPOLAR');
+                }}
+                color="primary"
+                variant="outlined"
+                style={{ position: 'absolute', top: '10px', right: '10px' }}
+              >
+                +&nbsp;
+                <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+              </Button>
+              <Grid container alignItems="center">
+                <Grid container item xs={12} sm={4} className={classes.icon}>
+                  <Box mr={5} ml={5} mt={2}>
+                    <CardIcon>
+                      <TokenSymbol symbol="TRIPOLAR" />
+                    </CardIcon>
+                  </Box>
+                  <h2>TRIPOLAR</h2>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  Current Price
+                  <Box>
+                    <span style={{ fontSize: '30px' }}>
+                      {tripolarPriceInXTRI ? tripolarPriceInXTRI : '-.----'} XTRI
+                    </span>
+                  </Box>
+                  <Box>
+                    <span style={{ fontSize: '20px' }}>
+                      ${tripolarPriceInDollars ? tripolarPriceInDollars : '-.--'}
+                    </span>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  Market Cap:
+                  <Box>
+                    <span style={{ fontSize: '30px' }}>
+                      ${(tripolarCirculatingSupply * tripolarPriceInDollars).toFixed(2)}
+                    </span>
+                  </Box>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid container justify="flex-end">
+          {/*
+          <Grid item>
+            <span style={{ fontSize: '20px',marginRight:"20px"}}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
+          </Grid>
+          */}
+          <Grid item>
+            <span style={{ fontSize: '20px', marginRight: '20px' }}>
+              Circulating Supply: {tripolarCirculatingSupply}
+            </span>
+          </Grid>
+          <Grid item>
+            <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tripolarTotalSupply}</span>
+          </Grid>
         </Grid>
         {/* LUNAR */}
         <Grid item xs={12} sm={12}>

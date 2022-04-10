@@ -26,8 +26,9 @@ const Pit = lazy(() => import('./views/Pit'));
 const LunarBond = lazy(() => import('./views/LunarBond'));
 const BondSplitter = lazy(() => import('./views/Bond_splitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
-const Liquidity = lazy(() => import('./views/Liquidity'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
+const TripolarSunrise = lazy(() => import('./views/TripolarSunrise'));
+const TripolarBond = lazy(() => import('./views/TripolarBond'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -65,6 +66,9 @@ const App: React.FC = () => {
             <Route path="/lunar_sunrise">
               <LunarSunrise />
             </Route>
+            <Route path="/tripolar_sunrise">
+              <TripolarSunrise />
+            </Route>
             <Route path="/bond">
               <BondSplitter />
             </Route>
@@ -74,8 +78,8 @@ const App: React.FC = () => {
             <Route path="/lunar_bond">
               <LunarBond />
             </Route>
-            <Route path="/liquidity">
-              <Liquidity />
+            <Route path="/tripolar_bond">
+              <TripolarBond />
             </Route>
             <Route path="/strategy">
               <Strategy />
@@ -104,7 +108,7 @@ const Providers: React.FC = ({ children }) => {
             walletlink: {
               url: config.defaultProvider,
               appName: 'Polaris Finance',
-              appLogoUrl: 'https://github.com/tombfinance/tombfinance-assets/blob/master/logo_tomb_NoBG.png',
+              appLogoUrl: 'https://polarisfinance.io/logo.png',
             },
           }}
         >

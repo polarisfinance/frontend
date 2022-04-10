@@ -30,6 +30,12 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const lbondBalance = useTokenBalance(tombFinance.LBOND);
   const displayLbondBalance = useMemo(() => getDisplayBalance(lbondBalance), [lbondBalance]);
 
+  const tripolarBalance = useTokenBalance(tombFinance.TRIPOLAR);
+  const displayTripolarBalance = useMemo(() => getDisplayBalance(tripolarBalance), [tripolarBalance]);
+
+  const tribondBalance = useTokenBalance(tombFinance.TRIBOND);
+  const displayTribondBalance = useMemo(() => getDisplayBalance(tribondBalance), [tribondBalance]);
+
   const { reset } = useWallet();
 
   return (
@@ -82,6 +88,21 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           <StyledBalance>
             <StyledValue>{displayLbondBalance}</StyledValue>
             <Label text="LBOND Available" />
+          </StyledBalance>
+        </StyledBalanceWrapper>
+
+        <StyledBalanceWrapper>
+          <TokenSymbol symbol="TRIPOLAR" />
+          <StyledBalance>
+            <StyledValue>{displayTripolarBalance}</StyledValue>
+            <Label text="TRIPOLAR Available" />
+          </StyledBalance>
+        </StyledBalanceWrapper>
+        <StyledBalanceWrapper>
+          <TokenSymbol symbol="TRIBOND" />
+          <StyledBalance>
+            <StyledValue>{displayTribondBalance}</StyledValue>
+            <Label text="TRIBOND Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
       </Grid>

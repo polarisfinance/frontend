@@ -75,7 +75,7 @@ const Cemetery = () => {
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
-                    Lunar Genesis Pools
+                    LUNAR Genesis Pools
                   </Typography>
 
                   <Grid container spacing={3}>
@@ -117,7 +117,7 @@ const Cemetery = () => {
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
-                    Polar Genesis Pools
+                    POLAR Genesis Pools
                   </Typography>
 
                   <Grid container spacing={3}>

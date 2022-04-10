@@ -5,7 +5,6 @@ import Bank from '../Bank';
 
 import { Box, Container, Typography, Grid, Button } from '@material-ui/core';
 
-
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import CemeteryCard from './DawnCard';
@@ -39,6 +38,27 @@ const Cemetery = () => {
               </Typography>
 
               <Box mt={5}>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 3).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    TRIPOLAR Genesis Pools
+                  </Typography>
+
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 3)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography
                     align="center"
@@ -59,25 +79,25 @@ const Cemetery = () => {
                         </React.Fragment>
                       ))}
                   </Grid>
-                  <Grid container justifyContent="flex-end" direction="row" alignItems="flex-end">
-                    <Grid item align="center" xs={12}>
-                      <Button
-                        color="primary"
-                        href="/legacy_dawn"
-                        variant="contained"
-                        style={{
-                          marginTop: '30px',
-                          /* 
+                </div>
+                <Grid container justifyContent="flex-end" direction="row" alignItems="flex-end">
+                  <Grid item align="center" xs={12}>
+                    <Button
+                      color="primary"
+                      href="/legacy_dawn"
+                      variant="contained"
+                      style={{
+                        marginTop: '30px',
+                        /* 
                           backgroundColor: 'rgb(0,0,0,0)',
                           boxShadow: 'none',
                           */
-                        }}
-                      >
-                        Legacy Dawn
-                      </Button>
-                    </Grid>
+                      }}
+                    >
+                      Legacy Dawn
+                    </Button>
                   </Grid>
-                </div>
+                </Grid>
               </Box>
             </Container>
           ) : (
