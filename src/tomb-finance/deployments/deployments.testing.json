@@ -631,7 +631,7 @@
     ]
   },
   "TripolarOracle": {
-    "address": "0xb028D816B5f679c2aABBEa809EA70D523F8c7707",
+    "address": "0x0716Cff30e9f50379C996324c3ab77c4C16612Af",
     "abi": [
       {
         "inputs": [
