@@ -75,8 +75,6 @@ const Masonry = () => {
             </Grid>
           </Grid>
           <Grid container className={classes.text}>
-            <Grid container item xs={12} justify="center" className={classes.text}></Grid>
-
             <Grid
               item
               xs={12}
