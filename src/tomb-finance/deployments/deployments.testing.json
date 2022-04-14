@@ -631,7 +631,7 @@
     ]
   },
   "TripolarOracle": {
-    "address": "0x0716Cff30e9f50379C996324c3ab77c4C16612Af",
+    "address": "0x93D05cEAd11B43b37a8FF018B70C4B2f7D0eE774",
     "abi": [
       {
         "inputs": [
@@ -1698,7 +1698,7 @@
     ]
   },
   "tripolar": {
-    "address": "0x7E7cF2434233d322Fa439A438a941A61C01aad61",
+    "address": "0xe6D2f4692D77b75e53C1939cE0a97113ACab1e2e",
     "abi": [
       { "inputs": [], "stateMutability": "nonpayable", "type": "constructor", "name": "constructor" },
       {
@@ -2703,7 +2703,7 @@
     ]
   },
   "triBond": {
-    "address": "0x7B521A6ff00a9d7e8eb41D5D2A830690D47A247A",
+    "address": "0x3Db7A916D5983Bf1D8f9bF44270Dd685D5E63d53",
     "abi": [
       { "inputs": [], "stateMutability": "nonpayable", "type": "constructor", "name": "constructor" },
       {
@@ -4746,7 +4746,7 @@
     ]
   },
   "tripolarTreasury": {
-    "address": "0x6aFD0DEd48385258762e3691E0CbCDD9DB391cdA",
+    "address": "0x3A12DcA0c4f91E54E7501eC4f1829386970577F3",
     "abi": [
       {
         "anonymous": false,
@@ -6180,7 +6180,7 @@
     ]
   },
   "tripolarSunrise": {
-    "address": "0x345Bf4e07A0CD22241aa2951cDF0505D5b37CEd9",
+    "address": "0x182aac88A16C5d4ABFf109d103ECBACAC4D7a9a3",
     "abi": [
       {
         "anonymous": false,
@@ -6440,7 +6440,7 @@
     ]
   },
   "TripolarXtriGenesisRewardPool": {
-    "address": "0x03B80DD42CEa787DDe35218bd4Ee5AC8Db9f2B5a",
+    "address": "0x85BD1d669465FB5DdA82120Cc82700801d30F295",
     "abi": [
       {
         "inputs": [
@@ -6690,7 +6690,7 @@
     ]
   },
   "TripolarLunarLunaGenesisRewardPool": {
-    "address": "0x03B80DD42CEa787DDe35218bd4Ee5AC8Db9f2B5a",
+    "address": "0x85BD1d669465FB5DdA82120Cc82700801d30F295",
     "abi": [
       {
         "inputs": [
@@ -6940,7 +6940,7 @@
     ]
   },
   "TripolarPolarNearGenesisRewardPool": {
-    "address": "0x03B80DD42CEa787DDe35218bd4Ee5AC8Db9f2B5a",
+    "address": "0x85BD1d669465FB5DdA82120Cc82700801d30F295",
     "abi": [
       {
         "inputs": [
@@ -7190,7 +7190,7 @@
     ]
   },
   "TripolarSpolarGenesisRewardPool": {
-    "address": "0x03B80DD42CEa787DDe35218bd4Ee5AC8Db9f2B5a",
+    "address": "0x85BD1d669465FB5DdA82120Cc82700801d30F295",
     "abi": [
       {
         "inputs": [
@@ -7440,7 +7440,7 @@
     ]
   },
   "TripolarSpolarNearGenesisRewardPool": {
-    "address": "0x03B80DD42CEa787DDe35218bd4Ee5AC8Db9f2B5a",
+    "address": "0x85BD1d669465FB5DdA82120Cc82700801d30F295",
     "abi": [
       {
         "inputs": [
