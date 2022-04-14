@@ -1409,6 +1409,9 @@ export class TombFinance {
       } else if (assetName === 'TRIPOLAR') {
         asset = this.TRIPOLAR;
         assetUrl = 'https://polarisfinance.io/logos/tripolar-token.svg';
+      } else if (assetName === 'TRIBOND') {
+        asset = this.TRIBOND;
+        assetUrl = 'https://polarisfinance.io/logos/tribond-token.svg';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',

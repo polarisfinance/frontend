@@ -46,7 +46,7 @@ const Pit: React.FC = () => {
     async (amount: string) => {
       const tx = await tombFinance.buyTripolarBonds(amount);
       addTransaction(tx, {
-        summary: `Buy ${Number(amount).toFixed(2)} TRIBOND with ${amount} XTRI`,
+        summary: `Buy ${Number(amount).toFixed(2)} TRIBOND with ${amount} TRIPOLAR`,
       });
     },
     [tombFinance, addTransaction],
