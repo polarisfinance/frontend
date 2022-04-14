@@ -13,6 +13,8 @@ import { createGlobalStyle } from 'styled-components';
 import useBanks from '../../hooks/useBanks';
 import HomeImage from '../../assets/img/home.png';
 
+import { Alert } from '@material-ui/lab';
+
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
@@ -34,24 +36,18 @@ const Cemetery = () => {
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-                Dawn
+                TRIPOLAR Genesis
               </Typography>
-
+              <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
+                <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
+                  <b>16.04.2022 14:00 UTC - 17.04.2022 14:00 UTC</b>
+                </Alert>
+              </Grid>
               <Box mt={5}>
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="h4"
-                    gutterBottom
-                    style={{ marginTop: '20px' }}
-                  >
-                    Earn SPOLAR by staking LP
-                  </Typography>
-
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 3).length === 0}>
                   <Grid container spacing={3}>
                     {activeBanks
-                      .filter((bank) => bank.sectionInUI === 2)
+                      .filter((bank) => bank.sectionInUI === 3)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
                           <CemeteryCard bank={bank} />
@@ -59,6 +55,7 @@ const Cemetery = () => {
                       ))}
                   </Grid>
                 </div>
+
                 <Grid container justifyContent="flex-end" direction="row" alignItems="flex-end">
                   <Grid item align="center" xs={12}>
                     <Button
