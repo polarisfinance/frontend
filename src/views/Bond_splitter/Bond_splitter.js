@@ -74,7 +74,7 @@ const Masonry = () => {
               justify="center"
               style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
             >
-              <Auris />
+              <Tribond />
             </Grid>
           </Grid>
           <Grid container className={classes.text}>
@@ -85,7 +85,7 @@ const Masonry = () => {
               justify="center"
               style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
             >
-              <Tribond />
+              <Auris />
             </Grid>
           </Grid>
         </>
