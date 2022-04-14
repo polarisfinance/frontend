@@ -82,11 +82,7 @@ const Pit: React.FC = () => {
                   fromTokenName="LUNAR"
                   toToken={tombFinance.LBOND}
                   toTokenName="LBOND"
-                  priceDesc={
-                    !isBondPurchasable
-                      ? 'LUNAR is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' LBOND available for purchase'
-                  }
+                  priceDesc={!isBondPurchasable ? 'LUNAR is over peg' : 'LBOND is available for purchase'}
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
                 />

@@ -242,7 +242,7 @@ const Home = () => {
                 <StyledLink target="_blank" href="https://docs.polarisfinance.io">
                   documentation
                 </StyledLink>{' '}
-                before purchasing POLAR, SPOLAR or LUNAR!
+                before purchasing any of our tokens!
               </b>
             </Alert>
           </Grid>
