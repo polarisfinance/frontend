@@ -25,7 +25,7 @@ const CemeteryCard = ({ bank }) => {
             <Grid item sm={4}>
               <Typography color="textSecondary">
                 {/* {bank.name} */}
-                Deposit {bank.depositTokenName.toUpperCase()} Earn {` ${bank.earnTokenName}`}
+                Deposit {bank.depositTokenName} Earn {` ${bank.earnTokenName}`}
               </Typography>
             </Grid>
             <Grid item sm={4}>
