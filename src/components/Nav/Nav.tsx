@@ -19,7 +19,7 @@ import {
 import Image from 'material-ui-image';
 import AuroraLogo from '../../assets/img/aurora_logo_white.svg';
 import NearLogo from '../../assets/img/near_logo_white.svg';
-import Plus from '../../assets/img/+.svg';
+import Plus from '../../assets/img/plus.svg';
 import Equal from '../../assets/img/=.svg';
 import NameLogo from '../../assets/img/name-logo.svg';
 import { Container } from '@material-ui/core';
