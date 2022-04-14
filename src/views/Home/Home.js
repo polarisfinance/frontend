@@ -779,17 +779,17 @@ const Home = () => {
                 <Grid item xs={12} sm={3}>
                   Current Price
                   <Box>
-                    <span style={{ fontSize: '30px' }}>{lBondPriceInFTM ? lBondPriceInFTM : '-.----'} LUNA</span>
+                    <span style={{ fontSize: '30px' }}>{triBondPriceInFTM ? triBondPriceInFTM : '-.----'} XTRI</span>
                   </Box>
                   <Box>
-                    <span style={{ fontSize: '20px' }}>${lBondPriceInDollars ? lBondPriceInDollars : '-.--'}</span>
+                    <span style={{ fontSize: '20px' }}>${triBondPriceInDollars ? triBondPriceInDollars : '-.--'}</span>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={3}>
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${(lBondCirculatingSupply * lBondPriceInDollars).toFixed(2)}
+                      ${(triBondCirculatingSupply * triBondPriceInDollars).toFixed(2)}
                     </span>
                   </Box>
                 </Grid>
