@@ -201,7 +201,12 @@ const Home = () => {
 
   const StyledLink = styled.a`
     font-weight: 700;
-    text-decoration: none;
+    text-decoration: underline;
+    color: white;
+  `;
+  const StyledNormalLink = styled.a`
+    text-decoration: underline;
+    color: white;
   `;
 
   return (
@@ -216,9 +221,16 @@ const Home = () => {
               <h2 style={{ fontSize: '28px' }}>Welcome to Polaris Finance</h2>
               <p style={{ fontSize: '20px' }}>
                 The very first algorithmic stablecoins ecosystem on Aurora / NEAR. We are bringing multiple pegged
-                assets 1:1 to native coins via seigniorage. Farm LUNA/LUNAR or NEAR/POLAR to get SPOLAR - governance
-                token that controls inflation and expansion of all pegged assets. Stake Your SPOLAR in sunrise to earn
-                more POLAR and LUNAR!
+                assets 1:1 to native coins via seigniorage. Provide liquidity in{' '}
+                <StyledNormalLink target="_blank" href="/dawn">
+                  DAWN
+                </StyledNormalLink>{' '}
+                Farms to get SPOLAR - governance token that controls inflation and expansion of all pegged assets. Stake
+                your SPOLAR in{' '}
+                <StyledNormalLink target="_blank" href="/sunrise">
+                  SUNRISE
+                </StyledNormalLink>{' '}
+                to earn more POLAR, LUNAR and TRIPOLAR.
               </p>
             </Box>
           </Grid>
@@ -659,6 +671,17 @@ const Home = () => {
                       &nbsp;
                     </Button>
                   </Grid>
+                  <Grid item xs={4} sm={12}>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      href="/polar_bond"
+                      className={classes.button}
+                      style={{ minWidth: '70px', maxWidth: '70px', marginTop: '12px' }}
+                    >
+                      BOND
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </CardContent>
@@ -723,6 +746,17 @@ const Home = () => {
                       &nbsp;
                     </Button>
                   </Grid>
+                  <Grid item xs={4} sm={12}>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      href="/lunar_bond"
+                      className={classes.button}
+                      style={{ minWidth: '70px', maxWidth: '70px', marginTop: '12px' }}
+                    >
+                      BOND
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </CardContent>
@@ -785,6 +819,17 @@ const Home = () => {
                       &nbsp;
                       <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
                       &nbsp;
+                    </Button>
+                  </Grid>
+                  <Grid item xs={4} sm={12}>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      href="/tripolar_bond"
+                      className={classes.button}
+                      style={{ minWidth: '70px', maxWidth: '70px', marginTop: '12px' }}
+                    >
+                      BOND
                     </Button>
                   </Grid>
                 </Grid>
