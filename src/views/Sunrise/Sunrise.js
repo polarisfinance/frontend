@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { Box, Button, Typography, Grid } from '@material-ui/core';
 
-
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 
@@ -66,7 +65,7 @@ const Masonry = () => {
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            Sunrise
+            POLAR Sunrise
           </Typography>
           <Grid container className={classes.text}>
             <Grid container item xs={12} justify="center" className={classes.text}>

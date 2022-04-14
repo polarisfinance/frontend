@@ -26,6 +26,9 @@ import ProgressCountdown from './components/ProgressCountdown';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 import usePolarPreviousEpochTwap from '../../hooks/useLunarPreviousEpochTwap';
+
+import Image from 'material-ui-image';
+import Fire from '../../assets/img/fire.svg';
 const BackgroundImage = createGlobalStyle`
   body, html {
     background: url(${HomeImage}) no-repeat !important;
@@ -65,12 +68,32 @@ const Masonry = () => {
       <BackgroundImage />
       {!!account ? (
         <>
-          <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            Sunrise
+          <Typography color="textPrimary" align="center" variant="h3">
+            LUNAR Sunrise
           </Typography>
           <Grid container className={classes.text}>
             <Grid container item xs={12} justify="center" className={classes.text}>
               <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
+                <Grid container item justify="center" mb={10}>
+                  <Image
+                    color="none"
+                    imageStyle={{ height: '50px', width: '50px' }}
+                    style={{ height: '50px', width: '50px', paddingTop: '0px', marginTop: '20px' }}
+                    src={Fire}
+                  />
+                  <Image
+                    color="none"
+                    imageStyle={{ height: '50px', width: '50px' }}
+                    style={{ height: '50px', width: '50px', paddingTop: '0px', marginTop: '20px' }}
+                    src={Fire}
+                  />
+                  <Image
+                    color="none"
+                    imageStyle={{ height: '50px', width: '50px' }}
+                    style={{ height: '50px', width: '50px', paddingTop: '0px', marginTop: '20px' }}
+                    src={Fire}
+                  />
+                </Grid>
                 <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}>
                   Staked SPOLARs can only be withdrawn after 3 epochs since deposit.
                 </Typography>
