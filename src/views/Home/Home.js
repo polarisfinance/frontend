@@ -222,15 +222,9 @@ const Home = () => {
               <p style={{ fontSize: '20px' }}>
                 The very first algorithmic stablecoins ecosystem on Aurora / NEAR. We are bringing multiple pegged
                 assets 1:1 to native coins via seigniorage. Provide liquidity in{' '}
-                <StyledNormalLink target="_blank" href="/dawn">
-                  DAWN
-                </StyledNormalLink>{' '}
-                Farms to get SPOLAR - governance token that controls inflation and expansion of all pegged assets. Stake
-                your SPOLAR in{' '}
-                <StyledNormalLink target="_blank" href="/sunrise">
-                  SUNRISE
-                </StyledNormalLink>{' '}
-                to earn more POLAR, LUNAR and TRIPOLAR.
+                <StyledNormalLink href="/dawn_splitter">DAWN</StyledNormalLink> Farms to get SPOLAR - governance token
+                that controls inflation and expansion of all pegged assets. Stake your SPOLAR in{' '}
+                <StyledNormalLink href="/sunrise">SUNRISE</StyledNormalLink> to earn more POLAR, LUNAR and TRIPOLAR.
               </p>
             </Box>
           </Grid>

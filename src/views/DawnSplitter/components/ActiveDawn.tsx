@@ -25,13 +25,7 @@ const Stake: React.FC = () => {
               <Label text="Stake your assets to earn $SPOLAR" />
             </StyledCardHeader>
             <StyledCardActions>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginTop: '20px' }}
-                component={Link}
-                to={'/active_dawn'}
-              >
+              <Button variant="contained" color="primary" style={{ marginTop: '20px' }} component={Link} to={'/dawn'}>
                 VIEW AND STAKE
               </Button>
             </StyledCardActions>

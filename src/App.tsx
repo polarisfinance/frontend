@@ -56,7 +56,7 @@ const App: React.FC = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/active_dawn">
+            <Route path="/dawn">
               <Dawn />
             </Route>
             <Route path="/sunrise">
@@ -89,7 +89,7 @@ const App: React.FC = () => {
             <Route path="/legacy_dawn">
               <LegacyDawn />
             </Route>
-            <Route path="/dawn">
+            <Route path="/dawn_splitter">
               <DawnSplitter />
             </Route>
             <Route path="/genesis_dawn">
