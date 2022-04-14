@@ -536,7 +536,7 @@ const Home = () => {
                   Current Price
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      {tripolarPriceInXTRI ? tripolarPriceInXTRI : '-.----'} XTRI
+                      {tripolarPriceInXTRI ? tripolarPriceInXTRI : '-.----'} xTRI
                     </span>
                   </Box>
                   <Box>
@@ -757,7 +757,7 @@ const Home = () => {
                 <Grid item xs={12} sm={3}>
                   Current Price
                   <Box>
-                    <span style={{ fontSize: '30px' }}>{triBondPriceInFTM ? triBondPriceInFTM : '-.----'} XTRI</span>
+                    <span style={{ fontSize: '30px' }}>{triBondPriceInFTM ? triBondPriceInFTM : '-.----'} xTRI</span>
                   </Box>
                   <Box>
                     <span style={{ fontSize: '20px' }}>${triBondPriceInDollars ? triBondPriceInDollars : '-.--'}</span>

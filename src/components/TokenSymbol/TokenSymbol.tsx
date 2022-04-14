@@ -44,8 +44,8 @@ const logosBySymbol: { [title: string]: string } = {
   ABOND: abondLogo,
   TRIPOLAR: tripolarLogo,
   TRIBOND: tribondLogo,
-  XTRI: xtriLogo,
-  'TRIPOLAR-XTRI-LP': tripolarXtriLpLogo,
+  xTRI: xtriLogo,
+  'TRIPOLAR-xTRI-LP': tripolarXtriLpLogo,
 };
 
 type LogoProps = {

@@ -548,7 +548,7 @@ export class TombFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.LUNAR);
       } else if (tokenName === 'POLAR-STNEAR-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB);
-      } else if (tokenName === 'TRIPOLAR-XTRI-LP') {
+      } else if (tokenName === 'TRIPOLAR-xTRI-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getBondStat();
@@ -855,9 +855,9 @@ export class TombFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
     const { chainId } = this.config;
-    const { XTRI } = this.config.externalTokens;
+    const { xTRI } = this.config.externalTokens;
 
-    const wftm = new Token(chainId, XTRI[0], XTRI[1]);
+    const wftm = new Token(chainId, xTRI[0], xTRI[1]);
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
 
     try {
@@ -925,7 +925,7 @@ export class TombFinance {
   async getXtriPrice(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { XTRI, STNEAR, NEAR, USDC } = this.externalTokens;
+    const {xTRI, STNEAR, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
       let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
@@ -941,15 +941,15 @@ export class TombFinance {
       near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
       const stnear_price = near_amount / stnear_amount;
 
-      const xtri_stnear_lp_pair = this.externalTokens['STNEAR-XTRI-LP'];
-      var xtri_amount_BN = await XTRI.balanceOf(xtri_stnear_lp_pair.address);
-      var xtri_amount = Number(getFullDisplayBalance(xtri_amount_BN, XTRI.decimal));
+      const xtri_stnear_lp_pair = this.externalTokens['STNEAR-xTRI-LP'];
+      var xtri_amount_BN = await xTRI.balanceOf(xtri_stnear_lp_pair.address);
+      var xtri_amount = Number(getFullDisplayBalance(xtri_amount_BN, xTRI.decimal));
       stnear_amount_BN = await STNEAR.balanceOf(xtri_stnear_lp_pair.address);
       stnear_amount = Number(getFullDisplayBalance(stnear_amount_BN, STNEAR.decimal));
       const xtri_price = stnear_amount / xtri_amount;
       return (near_price * stnear_price * xtri_price).toString();
     } catch (err) {
-      console.error(`Failed to fetch token price of XTRI: ${err}`);
+      console.error(`Failed to fetch token price of xTRI: ${err}`);
     }
   }
   //===================================================================
