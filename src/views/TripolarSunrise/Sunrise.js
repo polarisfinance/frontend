@@ -107,7 +107,7 @@ const Masonry = () => {
               <Grid container item xs={12}>
                 <Grid item xs={7} container justify="flex-end">
                   <Typography className={classes.text}>
-                    LUNAR Price<small>(TWAP)</small>:
+                    TRIPOLAR Price<small>(TWAP)</small>:
                   </Typography>
                 </Grid>
                 <Grid item xs={5} container justify="center">

@@ -15,11 +15,13 @@ import {
   polar as tombTesting,
   tShare as tShareTesting,
   lunar as lunarTesting,
+  tripolar as tripolarTesting,
 } from '../../tomb-finance/deployments/deployments.testing.json';
 import {
   polar as tombProd,
   tShare as tShareProd,
   lunar as lunarProd,
+  tripolar as tripolarProd,
 } from '../../tomb-finance/deployments/deployments.mainnet.json';
 import ValueLocked from '../../assets/img/value_locked.svg';
 
@@ -89,19 +91,23 @@ const Home = () => {
   let polar;
   let tShare;
   let lunar;
+  let tripolar;
   if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     polar = tombTesting;
     tShare = tShareTesting;
     lunar = lunarTesting;
+    tripolar = tripolarTesting;
   } else {
     polar = tombProd;
     tShare = tShareProd;
     lunar = lunarProd;
+    tripolar = tripolarProd;
   }
 
   const buyTombAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + polar.address;
   const buyTShareAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + tShare.address;
   const buyLunarAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + lunar.address;
+  const buyTripolarAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + tripolar.address;
 
   const tombPriceInDollars = useMemo(
     () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
@@ -280,6 +286,16 @@ const Home = () => {
             color="secondary"
             variant="contained"
             target="_blank"
+            href={buyTripolarAddress}
+            className={classes.button}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
+            BUY TRIPOLAR
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            target="_blank"
             href={buyTShareAddress}
             className={classes.button}
             style={{ marginRight: '12px', marginBottom: '12px' }}
@@ -305,6 +321,16 @@ const Home = () => {
             style={{ marginRight: '12px', marginBottom: '12px' }}
           >
             LUNAR CHARTS
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            target="_blank"
+            href="https://dexscreener.com/aurora/0x3e50da46cB79d1f9F08445984f207278796CE2d2"
+            className={classes.button}
+            style={{ marginRight: '12px', marginBottom: '12px' }}
+          >
+            TRIPOLAR CHARTS
           </Button>
           <Button
             color="secondary"
