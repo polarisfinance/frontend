@@ -248,25 +248,6 @@ const Home = () => {
           </Grid>
         </Grid>
 
-        {/* Wallet */}
-        <Grid container item xs={12} sm={12}>
-          <Button
-            color="primary"
-            href="/dawn"
-            variant="contained"
-            style={{ marginRight: '12px', marginBottom: '12px' }}
-          >
-            FARM IN DAWN
-          </Button>
-          <Button
-            color="primary"
-            href="/sunrise"
-            variant="contained"
-            style={{ marginRight: '12px', marginBottom: '12px' }}
-          >
-            STAKE IN SUNRISE
-          </Button>
-        </Grid>
         {/* Tshare */}
         <Grid item xs={12} sm={12}>
           <Card>
@@ -443,7 +424,6 @@ const Home = () => {
             <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tombTotalSupply}</span>
           </Grid>
         </Grid>
-
         {/* LUNAR */}
         <Grid item xs={12} sm={12}>
           <Card>
@@ -535,7 +515,6 @@ const Home = () => {
             <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {lunarTotalSupply}</span>
           </Grid>
         </Grid>
-
         {/* TRIPOLAR */}
         <Grid item xs={12} sm={12}>
           <Card>
@@ -634,7 +613,6 @@ const Home = () => {
             <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tripolarTotalSupply}</span>
           </Grid>
         </Grid>
-
         {/* Tbond */}
         <Grid item xs={12} sm={12}>
           <Card>
