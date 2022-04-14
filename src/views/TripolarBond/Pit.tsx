@@ -113,7 +113,7 @@ const Pit: React.FC = () => {
                   fromTokenName="TRIBOND"
                   toToken={tombFinance.TRIPOLAR}
                   toTokenName="TRIPOLAR"
-                  priceDesc={`${getDisplayBalance(bondsRedeemable)} LBOND Redeemable`}
+                  priceDesc={`${getDisplayBalance(bondsRedeemable)} TRIBOND Redeemable`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
                   disabledDescription={!isBondRedeemable ? `Enabled when TRIPOLAR > ${BOND_REDEEM_PRICE}XTRI` : null}
