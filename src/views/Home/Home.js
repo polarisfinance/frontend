@@ -592,7 +592,7 @@ const Home = () => {
                       color="secondary"
                       variant="contained"
                       target="_blank"
-                      href="https://dexscreener.com/aurora/0x3e50da46cB79d1f9F08445984f207278796CE2d2"
+                      href="https://dexscreener.com/aurora/0x85f155FDCf2a951fd95734eCEB99F875b84a2E27"
                       className={classes.button}
                       style={{ minWidth: '70px', maxWidth: '70px', marginTop: '12px' }}
                     >
