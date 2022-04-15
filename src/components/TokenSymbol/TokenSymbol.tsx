@@ -3,13 +3,10 @@ import React from 'react';
 //Graveyard ecosystem logos
 import polarLogo from '../../assets/img/polar-token.svg';
 import spolarLogo from '../../assets/img/spolar-token.svg';
-import tombLogoPNG from '../../assets/img/crypto_tomb_cash.f2b44ef4.png';
-import tShareLogoPNG from '../../assets/img/crypto_tomb_share.bf1a6c52.png';
 import pbondLogo from '../../assets/img/pbond-token.svg';
 
 import lunarLogo from '../../assets/img/lunar-token.svg';
 import aurisLogo from '../../assets/img/auris-token.png';
-import lunarLunaLpLogo from '../../assets/img/lunar-luna.png';
 import lbondLogo from '../../assets/img/lbond-token.svg';
 import abondLogo from '../../assets/img/abond-token.png';
 import tripolarLogo from '../../assets/img/tripolar-token.svg';
@@ -17,20 +14,20 @@ import tribondLogo from '../../assets/img/tribond-token.svg';
 
 import polarNearLpLogo from '../../assets/img/polar-aurora.svg';
 import spolarNearLpLogo from '../../assets/img/spolar-aurora.svg';
-import polarStNearLpLogo from '../../assets/img/polar-stnear.svg';
+import lunarLunaLpLogo from '../../assets/img/lunar-luna.svg';
+import tripolarXtriLpLogo from '../../assets/img/tripolar-xtri.svg';
 
 import auroraLogo from '../../assets/img/aurora_logo.svg';
 import nearLogo from '../../assets/img/near_logo.svg';
 import ustLogo from '../../assets/img/ust_logo.svg';
 import lunaLogo from '../../assets/img/luna_logo.svg';
 import usdcLogo from '../../assets/img/USDC.png';
+import xtriLogo from '../../assets/img/xtri_logo.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
   POLAR: polarLogo,
-  TOMBPNG: tombLogoPNG,
-  TSHAREPNG: tShareLogoPNG,
   SPOLAR: spolarLogo,
   PBOND: pbondLogo,
   AURORA: auroraLogo,
@@ -45,9 +42,10 @@ const logosBySymbol: { [title: string]: string } = {
   'LUNAR-LUNA-LP': lunarLunaLpLogo,
   LBOND: lbondLogo,
   ABOND: abondLogo,
-  'POLAR-STNEAR-LP': polarStNearLpLogo,
   TRIPOLAR: tripolarLogo,
   TRIBOND: tribondLogo,
+  xTRI: xtriLogo,
+  'TRIPOLAR-xTRI-LP': tripolarXtriLpLogo,
 };
 
 type LogoProps = {

@@ -46,7 +46,7 @@ const Pit: React.FC = () => {
     async (amount: string) => {
       const tx = await tombFinance.buyBonds(amount);
       addTransaction(tx, {
-        summary: `Buy ${Number(amount).toFixed(2)} Polar with ${amount} POLAR`,
+        summary: `Buy ${Number(amount).toFixed(2)} POLAR with ${amount} POLAR`,
       });
     },
     [tombFinance, addTransaction],
@@ -82,11 +82,7 @@ const Pit: React.FC = () => {
                   fromTokenName="POLAR"
                   toToken={tombFinance.TBOND}
                   toTokenName="PBOND"
-                  priceDesc={
-                    !isBondPurchasable
-                      ? 'POLAR is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' PBOND available for purchase'
-                  }
+                  priceDesc={!isBondPurchasable ? 'POLAR is over peg' : 'PBOND is available for purchase'}
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
                 />

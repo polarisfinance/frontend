@@ -30,10 +30,9 @@ const Stake: React.FC = () => {
                 color="primary"
                 style={{ marginTop: '20px' }}
                 component={Link}
-                to={'/polar_sunrise'}
-                disabled={true}
+                to={'/tripolar_sunrise'}
               >
-                Coming Soon
+                View and Stake
               </Button>
             </StyledCardActions>
           </StyledCardContentInner>

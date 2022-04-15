@@ -26,8 +26,11 @@ const Pit = lazy(() => import('./views/Pit'));
 const LunarBond = lazy(() => import('./views/LunarBond'));
 const BondSplitter = lazy(() => import('./views/Bond_splitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
-const Liquidity = lazy(() => import('./views/Liquidity'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
+const TripolarSunrise = lazy(() => import('./views/TripolarSunrise'));
+const TripolarBond = lazy(() => import('./views/TripolarBond'));
+const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
+const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -65,6 +68,9 @@ const App: React.FC = () => {
             <Route path="/lunar_sunrise">
               <LunarSunrise />
             </Route>
+            <Route path="/tripolar_sunrise">
+              <TripolarSunrise />
+            </Route>
             <Route path="/bond">
               <BondSplitter />
             </Route>
@@ -74,14 +80,20 @@ const App: React.FC = () => {
             <Route path="/lunar_bond">
               <LunarBond />
             </Route>
-            <Route path="/liquidity">
-              <Liquidity />
+            <Route path="/tripolar_bond">
+              <TripolarBond />
             </Route>
             <Route path="/strategy">
               <Strategy />
             </Route>
             <Route path="/legacy_dawn">
               <LegacyDawn />
+            </Route>
+            <Route path="/dawn_splitter">
+              <DawnSplitter />
+            </Route>
+            <Route path="/genesis_dawn">
+              <GenesisDawn />
             </Route>
             <Route path="*">
               <NoMatch />
