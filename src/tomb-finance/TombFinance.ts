@@ -488,18 +488,11 @@ export class TombFinance {
     }
     if (earnTokenName === 'TRIPOLAR') {
       const rewardPerSecond = await poolContract.tripolarPerSecond();
-      if (depositTokenName === 'LUNA') {
-        return rewardPerSecond.mul(50000).div(10000).div(18);
-      } else if (depositTokenName === 'POLAR-NEAR-LP') {
-        return rewardPerSecond.mul(20000).div(10000).div(18);
-      } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
-        return rewardPerSecond.mul(10000).div(10000).div(18);
-      } else if (depositTokenName === 'POLAR') {
-        return rewardPerSecond.mul(5000).div(10000).div(18);
-      } else if (depositTokenName === 'PBOND') {
-        return rewardPerSecond.mul(5000).div(10000).div(18);
+      if (depositTokenName === 'xTRI') {
+        return rewardPerSecond.mul(60000).div(100000).div(18);
+      } else {
+        return rewardPerSecond.mul(10000).div(100000).div(18);
       }
-      return rewardPerSecond.div(18);
     }
     const [rewardPerSecond, PolarNear, LunarAtluna, PolarStNear, Tripolar] = await Promise.all([
       poolContract.spolarPerSecond(),
@@ -925,7 +918,7 @@ export class TombFinance {
   async getXtriPrice(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const {xTRI, STNEAR, NEAR, USDC } = this.externalTokens;
+    const { xTRI, STNEAR, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
       let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
