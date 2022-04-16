@@ -226,7 +226,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: true,
   },
   TripolarXtriRewardPool: {
-    name: 'Earn PTRI by xTRI',
+    name: 'Earn TRIPOLAR by xTRI',
     poolId: 0,
     sectionInUI: 3,
     contract: 'TripolarXtriGenesisRewardPool',
@@ -237,7 +237,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   TripolarPolarNearRewardPool: {
-    name: 'Earn PTRI by POLAR/NEAR LP',
+    name: 'Earn TRIPOLAR by POLAR/NEAR LP',
     poolId: 1,
     sectionInUI: 3,
     contract: 'TripolarPolarNearGenesisRewardPool',
@@ -248,7 +248,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   TripolarSpolarNearRewardPool: {
-    name: 'Earn PTRI by SPOLAR/NEAR LP',
+    name: 'Earn TRIPOLAR by SPOLAR/NEAR LP',
     poolId: 2,
     sectionInUI: 3,
     contract: 'TripolarSpolarNearGenesisRewardPool',
@@ -259,7 +259,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   TripolarLunarLunaRewardPool: {
-    name: 'Earn PTRI by LUNAR/LUNA LP',
+    name: 'Earn TRIPOLAR by LUNAR/LUNA LP',
     poolId: 3,
     sectionInUI: 3,
     contract: 'TripolarLunarLunaGenesisRewardPool',
@@ -270,7 +270,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
   TripolarSpolarRewardPool: {
-    name: 'Earn PTRI by SPOLAR',
+    name: 'Earn TRIPOLAR by SPOLAR',
     poolId: 4,
     sectionInUI: 3,
     contract: 'TripolarSpolarGenesisRewardPool',
