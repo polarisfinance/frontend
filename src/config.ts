@@ -289,7 +289,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 0,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   LunarLunaSpolarRewardPool: {
     name: 'Earn SPOLAR by LUNAR/LUNA LP',
