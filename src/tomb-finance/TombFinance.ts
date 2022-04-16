@@ -624,15 +624,12 @@ export class TombFinance {
   }
 
   async getTotalValueLocked(): Promise<Number> {
-    console.time();
     let totalValue = 0;
     let bankListPrice = [];
     let bankListBalance = [];
     let bankListNames = [];
-
     let bankDictPrice = {};
     let bankDictBalance = {};
-
     for (const bankInfo of Object.values(bankDefinitions)) {
       const pool = this.contracts[bankInfo.contract];
       if (bankInfo.closedForStaking === true) continue;
@@ -641,21 +638,17 @@ export class TombFinance {
       bankListBalance.push(token.balanceOf(pool.address));
       bankListNames.push(bankInfo.contract);
     }
-
     bankListPrice = await Promise.all(bankListPrice);
     bankListBalance = await Promise.all(bankListBalance);
-
     for (let i = 0; i < bankListNames.length; i++) {
       bankDictPrice[bankListNames[i]] = bankListPrice[i];
       bankDictBalance[bankListNames[i]] = bankListBalance[i];
     }
-
     for (const bankInfo of Object.values(bankDefinitions)) {
       if (bankInfo.closedForStaking === true) continue;
       const token = this.externalTokens[bankInfo.depositTokenName];
       const tokenPrice = bankDictPrice[bankInfo.contract];
       const tokenAmountInPool = bankDictBalance[bankInfo.contract];
-
       const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal)) * Number(tokenPrice);
       const poolValue = Number.isNaN(value) ? 0 : value;
       totalValue += poolValue;
@@ -668,12 +661,10 @@ export class TombFinance {
     ]);
     const TSHAREPrice = ShareStat.priceInDollars;
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
-
     const lunarSunriseTVL =
       Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
     const tripolarSunriseTVL =
       Number(getDisplayBalance(tripolarSunriseBalance, this.TSHARE.decimal)) * Number(TSHAREPrice);
-    console.timeEnd();
     return totalValue + masonryTVL + lunarSunriseTVL + tripolarSunriseTVL;
   }
 
