@@ -489,9 +489,9 @@ export class TombFinance {
     if (earnTokenName === 'TRIPOLAR') {
       const rewardPerSecond = await poolContract.tripolarPerSecond();
       if (depositTokenName === 'xTRI') {
-        return rewardPerSecond.mul(60000).div(10000).div(18);
+        return rewardPerSecond.mul(30000).div(50000);
       } else {
-        return rewardPerSecond.mul(10000).div(10000).div(18);
+        return rewardPerSecond.mul(5000).div(50000);
       }
     }
     const [rewardPerSecond, PolarNear, LunarAtluna, PolarStNear, Tripolar] = await Promise.all([
