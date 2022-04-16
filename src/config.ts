@@ -333,7 +333,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PbondSpolarRewardPool: {
     name: 'Earn SPOLAR by PBOND',
@@ -344,7 +344,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
 };
 
