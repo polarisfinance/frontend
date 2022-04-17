@@ -31,6 +31,7 @@ const TripolarSunrise = lazy(() => import('./views/TripolarSunrise'));
 const TripolarBond = lazy(() => import('./views/TripolarBond'));
 const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
 const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
+const TripolarSunriseOld = lazy(() => import('./views/TripolarSunriseOld'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -70,6 +71,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/tripolar_sunrise">
               <TripolarSunrise />
+            </Route>
+            <Route path="/tripolar_sunrise_old">
+              <TripolarSunriseOld />
             </Route>
             <Route path="/bond">
               <BondSplitter />

@@ -11,21 +11,22 @@ import { Box, Button, Typography, Grid } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 
-import useRedeemOnLunarSunrise from '../../hooks/useRedeemOnTripolarSunrise';
-import useStakedBalanceOnLunarSunrise from '../../hooks/useStakedBalanceOnTripolarSunrise';
+import useRedeemOnLunarSunrise from '../../hooks/useRedeemOnTripolarSunriseOld';
+import useStakedBalanceOnLunarSunrise from '../../hooks/useStakedBalanceOnTripolarSunriseOld';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import useCurrentEpoch from '../../hooks/useCurrentEpochTripolar';
 import useFetchMasonryAPR from '../../hooks/useFetchTripolarSunriseAPR';
 
 import useCashPriceInEstimatedTWAP from '../../hooks/useCashPriceInEstimatedTWAPTripolar';
 import useTreasuryAllocationTimes from '../../hooks/useTripolarTreasuryAllocationTimes';
-import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnTripolarSunrise';
-import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheckTripolarSunrise';
-import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheckTripolarSunrise';
+import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnTripolarSunriseOld';
+import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheckTripolarSunriseOld';
+import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheckTripolarSunriseOld';
 import ProgressCountdown from './components/ProgressCountdown';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 import usePolarPreviousEpochTwap from '../../hooks/useTripolarPreviousEpochTwap';
+import { Alert } from '@material-ui/lab';
 const BackgroundImage = createGlobalStyle`
   body, html {
     background: url(${HomeImage}) no-repeat !important;
@@ -66,14 +67,14 @@ const Masonry = () => {
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            TRIPOLAR Sunrise
+            RETIRED TRIPOLAR Sunrise
           </Typography>
           <Grid container className={classes.text}>
             <Grid container item xs={12} justify="center" className={classes.text}>
               <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
-                <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}>
-                  Staked SPOLARs can only be withdrawn after 3 epochs since deposit.
-                </Typography>
+                <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
+                  <b>Please withdraw your SPOLAR and migrate them to the NEW TRIPOLAR Sunrise.</b>
+                </Alert>
               </Box>
             </Grid>
             <Grid item xs={12} md={4} justify="center">
@@ -129,7 +130,7 @@ const Masonry = () => {
                   <Typography className={classes.text}>APR:</Typography>
                 </Grid>
                 <Grid item xs={5} container justify="center">
-                  <Typography className={classes.text}>{masonryAPR.toFixed(2)}%</Typography>
+                  <Typography className={classes.text}>0%</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>

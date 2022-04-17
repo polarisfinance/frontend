@@ -1056,6 +1056,11 @@ export class TombFinance {
     const Masonry = this.currentTripolarSunrise();
     return await Masonry.canClaimReward(this.myAccount);
   }
+
+  async canUserClaimRewardFromTripolarSunriseOld(): Promise<boolean> {
+    const Masonry = this.contracts.tripolarSunriseOld;
+    return await Masonry.canClaimReward(this.myAccount);
+  }
   /**
    * Checks if the user is allowed to retrieve their reward from the Masonry
    * @returns true if user can withdraw reward, false if they can't
@@ -1087,6 +1092,15 @@ export class TombFinance {
     return result;
   }
 
+  async canUserUnstakeFromTripolarSunriseOld(): Promise<boolean> {
+    const TripolarSunrise = this.contracts.tripolarSunriseOld;
+    const canWithdraw = await TripolarSunrise.canWithdraw(this.myAccount);
+    const stakedAmount = await this.getStakedSharesOnTripolarSunriseOld();
+    const notStaked = Number(getDisplayBalance(stakedAmount, this.TSHARE.decimal)) === 0;
+    const result = notStaked ? true : canWithdraw;
+    return result;
+  }
+
   async timeUntilClaimRewardFromMasonry(): Promise<BigNumber> {
     // const Masonry = this.currentMasonry();
     // const mason = await Masonry.masons(this.myAccount);
@@ -1105,6 +1119,11 @@ export class TombFinance {
 
   async getTotalStakedInTripolarSunrise(): Promise<BigNumber> {
     const Masonry = this.currentTripolarSunrise();
+    return await Masonry.totalSupply();
+  }
+
+  async getTotalStakedInTripolarSunriseOld(): Promise<BigNumber> {
+    const Masonry = this.contracts.tripolarSunriseOld;
     return await Masonry.totalSupply();
   }
 
@@ -1144,6 +1163,11 @@ export class TombFinance {
     return await TripolarSunrise.balanceOf(this.myAccount);
   }
 
+  async getStakedSharesOnTripolarSunriseOld(): Promise<BigNumber> {
+    const TripolarSunrise = this.contracts.tripolarSunriseOld;
+    return await TripolarSunrise.balanceOf(this.myAccount);
+  }
+
   async getEarningsOnMasonry(): Promise<BigNumber> {
     const Masonry = this.currentMasonry();
     if (this.masonryVersionOfUser === 'v1') {
@@ -1159,6 +1183,11 @@ export class TombFinance {
 
   async getEarningsOnTripolarSunrise(): Promise<BigNumber> {
     const Masonry = this.currentTripolarSunrise();
+    return await Masonry.earned(this.myAccount);
+  }
+
+  async getEarningsOnTripolarSunriseOld(): Promise<BigNumber> {
+    const Masonry = this.contracts.tripolarSunriseOld;
     return await Masonry.earned(this.myAccount);
   }
 
@@ -1195,6 +1224,11 @@ export class TombFinance {
     return await Masonry.claimReward();
   }
 
+  async harvestTripolarFromTripolarSunriseOld(): Promise<TransactionResponse> {
+    const Masonry = this.contracts.tripolarSunriseOld;
+    return await Masonry.claimReward();
+  }
+
   async exitFromMasonry(): Promise<TransactionResponse> {
     const Masonry = this.currentMasonry();
     return await Masonry.exit();
@@ -1207,6 +1241,11 @@ export class TombFinance {
 
   async exitFromTripolarSunrise(): Promise<TransactionResponse> {
     const TripolarMasonry = this.currentTripolarSunrise();
+    return await TripolarMasonry.exit();
+  }
+
+  async exitFromTripolarSunriseOld(): Promise<TransactionResponse> {
+    const TripolarMasonry = this.contracts.tripolarSUnriseOld;
     return await TripolarMasonry.exit();
   }
 
@@ -1323,6 +1362,33 @@ export class TombFinance {
     }
   }
 
+  async getUserClaimRewardTimeTripolarOld(): Promise<AllocationTime> {
+    const { tripolarSunriseOld, tripolarTreasuryOld } = this.contracts;
+    const nextEpochTimestamp = await tripolarSunriseOld.nextEpochPoint(); //in unix timestamp
+    const currentEpoch = await tripolarSunriseOld.epoch();
+    const mason = await tripolarSunriseOld.masons(this.myAccount);
+    const startTimeEpoch = mason.epochTimerStart;
+    const period = await tripolarTreasuryOld.PERIOD();
+    const periodInHours = period / 60 / 60; // 6 hours, period is displayed in seconds which is 21600
+    const rewardLockupEpochs = await tripolarSunriseOld.rewardLockupEpochs();
+    const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(rewardLockupEpochs);
+
+    const fromDate = new Date(Date.now());
+    if (targetEpochForClaimUnlock - currentEpoch <= 0) {
+      return { from: fromDate, to: fromDate };
+    } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      return { from: fromDate, to: toDate };
+    } else {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      const delta = targetEpochForClaimUnlock - currentEpoch - 1;
+      const endDate = moment(toDate)
+        .add(delta * periodInHours, 'hours')
+        .toDate();
+      return { from: fromDate, to: endDate };
+    }
+  }
+
   /**
    * This method calculates and returns in a from to to format
    * the period the user needs to wait before being allowed to unstake
@@ -1395,6 +1461,33 @@ export class TombFinance {
     const fromDate = new Date(Date.now());
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
     const stakedAmount = await this.getStakedSharesOnTripolarSunrise();
+    if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
+      return { from: fromDate, to: fromDate };
+    } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      return { from: fromDate, to: toDate };
+    } else {
+      const toDate = new Date(nextEpochTimestamp * 1000);
+      const delta = targetEpochForClaimUnlock - Number(currentEpoch) - 1;
+      const endDate = moment(toDate)
+        .add(delta * PeriodInHours, 'hours')
+        .toDate();
+      return { from: fromDate, to: endDate };
+    }
+  }
+
+  async getUserUnstakeTimeTripolarSunriseOld(): Promise<AllocationTime> {
+    const { tripolarSunriseOld, tripolarTreasuryOld } = this.contracts;
+    const nextEpochTimestamp = await tripolarSunriseOld.nextEpochPoint();
+    const currentEpoch = await tripolarSunriseOld.epoch();
+    const mason = await tripolarSunriseOld.masons(this.myAccount);
+    const startTimeEpoch = mason.epochTimerStart;
+    const period = await tripolarTreasuryOld.PERIOD();
+    const PeriodInHours = period / 60 / 60;
+    const withdrawLockupEpochs = await tripolarSunriseOld.withdrawLockupEpochs();
+    const fromDate = new Date(Date.now());
+    const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
+    const stakedAmount = await this.getStakedSharesOnTripolarSunriseOld();
     if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
       return { from: fromDate, to: fromDate };
     } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
