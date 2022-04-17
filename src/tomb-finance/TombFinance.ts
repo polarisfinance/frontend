@@ -1206,6 +1206,11 @@ export class TombFinance {
     return await TripolarSunrise.withdraw(decimalToBalance(amount));
   }
 
+  async withdrawShareFromTripolarSunriseOld(amount: string): Promise<TransactionResponse> {
+    const TripolarSunrise = this.contracts.tripolarSunriseOld;
+    return await TripolarSunrise.withdraw(decimalToBalance(amount));
+  }
+
   async harvestCashFromMasonry(): Promise<TransactionResponse> {
     const Masonry = this.currentMasonry();
     if (this.masonryVersionOfUser === 'v1') {
@@ -1245,7 +1250,7 @@ export class TombFinance {
   }
 
   async exitFromTripolarSunriseOld(): Promise<TransactionResponse> {
-    const TripolarMasonry = this.contracts.tripolarSUnriseOld;
+    const TripolarMasonry = this.contracts.tripolarSunriseOld;
     return await TripolarMasonry.exit();
   }
 

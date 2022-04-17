@@ -28,7 +28,7 @@ import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDo
 import useUnstakeTimerMasonry from '../../../hooks/masonry/useUnstakeTimerTripolarSunriseOld';
 import TokenSymbol from '../../../components/TokenSymbol';
 import useStakeToLunarSunrise from '../../../hooks/useStakeToTripolarSunrise';
-import useWithdrawFromLunarSunrise from '../../../hooks/useWithdrawFromTripolarSunrise';
+import useWithdrawFromLunarSunrise from '../../../hooks/useWithdrawFromTripolarSunriseOld';
 
 const Stake: React.FC = () => {
   const tombFinance = useTombFinance();
