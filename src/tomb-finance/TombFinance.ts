@@ -624,7 +624,6 @@ export class TombFinance {
   }
 
   async getTotalValueLocked(): Promise<Number> {
-    console.time();
     let totalValue = 0;
     let bankListPrice = [];
     let bankListBalance = [];
@@ -682,7 +681,6 @@ export class TombFinance {
       Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
     const tripolarSunriseTVL =
       Number(getDisplayBalance(tripolarSunriseBalance, this.TSHARE.decimal)) * Number(TSHAREPrice);
-    console.timeEnd();
     return totalValue + masonryTVL + lunarSunriseTVL + tripolarSunriseTVL;
   }
 
