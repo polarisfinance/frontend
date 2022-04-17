@@ -624,6 +624,7 @@ export class TombFinance {
   }
 
   async getTotalValueLocked(): Promise<Number> {
+    console.time();
     let totalValue = 0;
     let bankListPrice = [];
     let bankListBalance = [];
@@ -638,8 +639,29 @@ export class TombFinance {
       bankListBalance.push(token.balanceOf(pool.address));
       bankListNames.push(bankInfo.contract);
     }
-    bankListPrice = await Promise.all(bankListPrice);
-    bankListBalance = await Promise.all(bankListBalance);
+    let bankListPricePromise;
+    let bankListBalancePromise;
+    bankListPricePromise = Promise.all(bankListPrice);
+    bankListBalancePromise = Promise.all(bankListBalance);
+    let ShareStat;
+    let masonrytShareBalanceOf;
+    let lunarSunriseSpolarBalanceOf;
+    let tripolarSunriseBalance;
+    [
+      bankListPrice,
+      bankListBalance,
+      ShareStat,
+      masonrytShareBalanceOf,
+      lunarSunriseSpolarBalanceOf,
+      tripolarSunriseBalance,
+    ] = await Promise.all([
+      bankListPricePromise,
+      bankListBalancePromise,
+      this.getShareStat(),
+      this.TSHARE.balanceOf(this.currentMasonry().address),
+      this.TSHARE.balanceOf(this.currentLunarSunrise().address),
+      this.TSHARE.balanceOf(this.currentTripolarSunrise().address),
+    ]);
     for (let i = 0; i < bankListNames.length; i++) {
       bankDictPrice[bankListNames[i]] = bankListPrice[i];
       bankDictBalance[bankListNames[i]] = bankListBalance[i];
@@ -653,18 +675,14 @@ export class TombFinance {
       const poolValue = Number.isNaN(value) ? 0 : value;
       totalValue += poolValue;
     }
-    const [ShareStat, masonrytShareBalanceOf, lunarSunriseSpolarBalanceOf, tripolarSunriseBalance] = await Promise.all([
-      this.getShareStat(),
-      this.TSHARE.balanceOf(this.currentMasonry().address),
-      this.TSHARE.balanceOf(this.currentLunarSunrise().address),
-      this.TSHARE.balanceOf(this.currentTripolarSunrise().address),
-    ]);
+
     const TSHAREPrice = ShareStat.priceInDollars;
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
     const lunarSunriseTVL =
       Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
     const tripolarSunriseTVL =
       Number(getDisplayBalance(tripolarSunriseBalance, this.TSHARE.decimal)) * Number(TSHAREPrice);
+    console.timeEnd();
     return totalValue + masonryTVL + lunarSunriseTVL + tripolarSunriseTVL;
   }
 
