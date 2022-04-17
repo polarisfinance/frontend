@@ -40,10 +40,7 @@ const Cemetery = () => {
               </Typography>
               <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
                 <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
-                  <b>
-                    Genesis pools will start to earn rewards on 16.04.2022 14:00 UTC and will last 24hrs. You can
-                    prestake now.
-                  </b>
+                  <b>Genesis pools has ended. Please withdraw your assets.</b>
                 </Alert>
               </Grid>
               <Box mt={5}>
