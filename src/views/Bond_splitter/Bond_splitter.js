@@ -41,7 +41,7 @@ const Masonry = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      <BackgroundImage style={{ height: '100%', width: '100%', flex: 1 }} />
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
