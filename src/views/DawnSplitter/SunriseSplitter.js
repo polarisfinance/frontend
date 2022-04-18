@@ -47,7 +47,6 @@ const Masonry = () => {
               item
               xs={12}
               md={6}
-              justify="center"
               style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
             >
               <ActiveDawn />
@@ -57,7 +56,6 @@ const Masonry = () => {
               item
               xs={12}
               md={6}
-              justify="center"
               style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
             >
               <GenesisDawn />

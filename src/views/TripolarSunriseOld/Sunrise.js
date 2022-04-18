@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useWallet } from 'use-wallet';
 import moment from 'moment';
+
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,21 +11,22 @@ import { Box, Button, Typography, Grid } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 
-import useRedeemOnMasonry from '../../hooks/useRedeemOnMasonry';
-import useStakedBalanceOnMasonry from '../../hooks/useStakedBalanceOnMasonry';
+import useRedeemOnLunarSunrise from '../../hooks/useRedeemOnTripolarSunriseOld';
+import useStakedBalanceOnLunarSunrise from '../../hooks/useStakedBalanceOnTripolarSunriseOld';
 import { getDisplayBalance } from '../../utils/formatBalance';
-import useCurrentEpoch from '../../hooks/useCurrentEpoch';
-import useFetchMasonryAPR from '../../hooks/useFetchMasonryAPR';
+import useCurrentEpoch from '../../hooks/useCurrentEpochTripolar';
+import useFetchMasonryAPR from '../../hooks/useFetchTripolarSunriseAPR';
 
-import useCashPriceInEstimatedTWAP from '../../hooks/useCashPriceInEstimatedTWAP';
-import useTreasuryAllocationTimes from '../../hooks/useTreasuryAllocationTimes';
-import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnMasonry';
-import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheck';
-import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
+import useCashPriceInEstimatedTWAP from '../../hooks/useCashPriceInEstimatedTWAPTripolar';
+import useTreasuryAllocationTimes from '../../hooks/useTripolarTreasuryAllocationTimes';
+import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnTripolarSunriseOld';
+import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheckTripolarSunriseOld';
+import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheckTripolarSunriseOld';
 import ProgressCountdown from './components/ProgressCountdown';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
-import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
+import usePolarPreviousEpochTwap from '../../hooks/useTripolarPreviousEpochTwap';
+import { Alert } from '@material-ui/lab';
 const BackgroundImage = createGlobalStyle`
   body, html {
     background: url(${HomeImage}) no-repeat !important;
@@ -48,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
 const Masonry = () => {
   const classes = useStyles();
   const { account } = useWallet();
-  const { onRedeem } = useRedeemOnMasonry();
-  const stakedBalance = useStakedBalanceOnMasonry();
+  const { onRedeem } = useRedeemOnLunarSunrise();
+  const stakedBalance = useStakedBalanceOnLunarSunrise();
   const currentEpoch = useCurrentEpoch();
   const cashStat = useCashPriceInEstimatedTWAP();
   const totalStaked = useTotalStakedOnMasonry();
@@ -65,14 +67,14 @@ const Masonry = () => {
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            POLAR Sunrise
+            RETIRED TRIPOLAR Sunrise
           </Typography>
           <Grid container className={classes.text}>
             <Grid container item xs={12} justify="center" className={classes.text}>
               <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
-                <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}>
-                  Staked SPOLARs can only be withdrawn after 3 epochs since deposit.
-                </Typography>
+                <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
+                  <b>Please withdraw your SPOLAR and migrate them to the NEW TRIPOLAR Sunrise.</b>
+                </Alert>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -106,7 +108,7 @@ const Masonry = () => {
               <Grid container item xs={12}>
                 <Grid item xs={7} container justify="flex-end">
                   <Typography className={classes.text}>
-                    POLAR Price<small>(TWAP)</small>:
+                    TRIPOLAR Price<small>(TWAP)</small>:
                   </Typography>
                 </Grid>
                 <Grid item xs={5} container justify="center">
@@ -128,7 +130,7 @@ const Masonry = () => {
                   <Typography className={classes.text}>APR:</Typography>
                 </Grid>
                 <Grid item xs={5} container justify="center">
-                  <Typography className={classes.text}>{masonryAPR.toFixed(2)}%</Typography>
+                  <Typography className={classes.text}>0%</Typography>
                 </Grid>
               </Grid>
               <Grid container item xs={12}>
@@ -143,36 +145,6 @@ const Masonry = () => {
             <Grid item xs={12} md={4}>
               <Harvest />
             </Grid>
-
-            {/* <Grid container justify="center" spacing={3}>
-            <Grid item xs={4}>
-              <Card>
-                <CardContent align="center">
-                  <Typography>Rewards</Typography>
-
-                </CardContent>
-                <CardActions style={{justifyContent: 'center'}}>
-                  <Button color="primary" variant="outlined">Claim Reward</Button>
-                </CardActions>
-                <CardContent align="center">
-                  <Typography>Claim Countdown</Typography>
-                  <Typography>00:00:00</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={4}>
-              <Card>
-                <CardContent align="center">
-                  <Typography>Stakings</Typography>
-                  <Typography>{getDisplayBalance(stakedBalance)}</Typography>
-                </CardContent>
-                <CardActions style={{justifyContent: 'center'}}>
-                  <Button>+</Button>
-                  <Button>-</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          </Grid> */}
           </Grid>
 
           <Box mt={5}>

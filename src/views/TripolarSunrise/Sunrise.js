@@ -66,7 +66,7 @@ const Masonry = () => {
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            Sunrise
+            TRIPOLAR Sunrise
           </Typography>
           <Grid container className={classes.text}>
             <Grid container item xs={12} justify="center" className={classes.text}>
@@ -76,7 +76,7 @@ const Masonry = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} justify="center">
+            <Grid item xs={12} md={4} >
               <Stake />
             </Grid>
             <Grid container item xs={12} md={4} alignItems="center" direction="row">

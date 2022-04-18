@@ -234,7 +234,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'TRIPOLAR',
     finished: false,
     sort: 0,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarPolarNearRewardPool: {
     name: 'Earn TRIPOLAR by POLAR/NEAR LP',
@@ -245,7 +245,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'TRIPOLAR',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarSpolarNearRewardPool: {
     name: 'Earn TRIPOLAR by SPOLAR/NEAR LP',
@@ -256,7 +256,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'TRIPOLAR',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarLunarLunaRewardPool: {
     name: 'Earn TRIPOLAR by LUNAR/LUNA LP',
@@ -267,7 +267,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'TRIPOLAR',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarSpolarRewardPool: {
     name: 'Earn TRIPOLAR by SPOLAR',
@@ -278,7 +278,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'TRIPOLAR',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarXtriSpolarRewardPool: {
     name: 'Earn SPOLAR by TRIPOLAR/xTRI LP',
@@ -327,24 +327,24 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   PolarSpolarRewardPool: {
     name: 'Earn SPOLAR by POLAR',
     poolId: 2,
-    sectionInUI: 2,
+    sectionInUI: 5,
     contract: 'PolarSpolarRewardPool',
     depositTokenName: 'POLAR',
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PbondSpolarRewardPool: {
     name: 'Earn SPOLAR by PBOND',
     poolId: 3,
-    sectionInUI: 2,
+    sectionInUI: 5,
     contract: 'PbondSpolarRewardPool',
     depositTokenName: 'PBOND',
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
 };
 

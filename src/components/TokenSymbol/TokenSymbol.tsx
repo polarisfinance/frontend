@@ -11,6 +11,7 @@ import lbondLogo from '../../assets/img/lbond-token.svg';
 import abondLogo from '../../assets/img/abond-token.png';
 import tripolarLogo from '../../assets/img/tripolar-token.svg';
 import tribondLogo from '../../assets/img/tribond-token.svg';
+import tripolarOldLogo from '../../assets/img/tripolar-token-old.svg';
 
 import polarNearLpLogo from '../../assets/img/polar-aurora.svg';
 import spolarNearLpLogo from '../../assets/img/spolar-aurora.svg';
@@ -46,6 +47,7 @@ const logosBySymbol: { [title: string]: string } = {
   TRIBOND: tribondLogo,
   xTRI: xtriLogo,
   'TRIPOLAR-xTRI-LP': tripolarXtriLpLogo,
+  TRIPOLAROLD: tripolarOldLogo
 };
 
 type LogoProps = {

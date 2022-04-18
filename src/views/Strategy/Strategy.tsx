@@ -22,18 +22,21 @@ const Strategy: React.FC = () => {
         imageStyle={{ height: 'auto', position: 'relative' }}
         style={{ height: 'auto', position: 'relative', paddingTop: '0px' }}
         src={Strategy6040}
+        animationDuration={0}
+        disableTransition={true}
+        disableSpinner={true}
       />
       <Image
         color="none"
         imageStyle={{ height: 'auto', position: 'relative' }}
         style={{ height: 'auto', position: 'relative', paddingTop: '48px' }}
         src={StrategyAlive}
+        animationDuration={0}
+        disableTransition={true}
+        disableSpinner={true}
       />
     </Page>
   );
 };
-
-
-
 
 export default Strategy;
