@@ -77,7 +77,7 @@ const Masonry = () => {
                 </Alert>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} justify="center">
+            <Grid item xs={12} md={4}>
               <Stake />
             </Grid>
             <Grid container item xs={12} md={4} alignItems="center" direction="row">

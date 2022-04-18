@@ -26,6 +26,9 @@ const Stake: React.FC = () => {
                   imageStyle={{ height: '50px', width: '50px' }}
                   style={{ height: '50px', width: '50px', paddingTop: '0px', marginTop: '20px' }}
                   src={Fire}
+                  animationDuration={0}
+                  disableTransition={true}
+                  disableSpinner={true}
                 />
                 <CardIcon>
                   <TokenSymbol symbol="LUNAR" />
@@ -35,6 +38,9 @@ const Stake: React.FC = () => {
                   imageStyle={{ height: '50px', width: '50px' }}
                   style={{ height: '50px', width: '50px', paddingTop: '0px', marginTop: '20px' }}
                   src={Fire}
+                  animationDuration={0}
+                  disableTransition={true}
+                  disableSpinner={true}
                 />
               </Grid>
               <Value value={'LUNAR Sunrise'} />

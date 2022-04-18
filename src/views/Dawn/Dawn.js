@@ -59,7 +59,7 @@ const Cemetery = () => {
                       ))}
                   </Grid>
                 </div>
-                <Grid container justifyContent="flex-end" direction="row" alignItems="flex-end">
+                <Grid container direction="row" alignItems="flex-end">
                   <Grid item align="center" xs={12}>
                     <Button
                       color="primary"

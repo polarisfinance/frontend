@@ -74,6 +74,9 @@ const Masonry = () => {
               imageStyle={{ height: '45px', width: '45px' }}
               style={{ height: '50px', width: '50px', paddingTop: '0px', marginRight: '10px', marginBottom: '10px' }}
               src={Fire}
+              animationDuration={0}
+              disableTransition={true}
+              disableSpinner={true}
             />
             <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
               LUNAR Sunrise
@@ -83,6 +86,9 @@ const Masonry = () => {
               imageStyle={{ height: '45px', width: '45px' }}
               style={{ height: '50px', width: '50px', paddingTop: '0px', marginBottom: '10px', marginLeft: '7px' }}
               src={Fire}
+              animationDuration={0}
+              disableTransition={true}
+              disableSpinner={true}
             />
           </Grid>
           <Grid container className={classes.text}>
@@ -93,7 +99,7 @@ const Masonry = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} justify="center">
+            <Grid item xs={12} md={4}>
               <Stake />
             </Grid>
             <Grid container item xs={12} md={4} alignItems="center" direction="row">
