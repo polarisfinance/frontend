@@ -624,12 +624,14 @@ export class TombFinance {
   }
 
   async getTotalValueLocked(): Promise<Number> {
-    let totalValue = 0;
-    let bankListPrice = [];
-    let bankListBalance = [];
-    let bankListNames = [];
-    let bankDictPrice = {};
-    let bankDictBalance = {};
+    let [totalValue, bankListPrice, bankListBalance, bankListNames, bankDictPrice, bankDictBalance] = [
+      0,
+      [],
+      [],
+      [],
+      {},
+      {},
+    ];
     for (const bankInfo of Object.values(bankDefinitions)) {
       const pool = this.contracts[bankInfo.contract];
       if (bankInfo.closedForStaking === true) continue;
@@ -638,32 +640,28 @@ export class TombFinance {
       bankListBalance.push(token.balanceOf(pool.address));
       bankListNames.push(bankInfo.contract);
     }
-    let bankListPricePromise;
-    let bankListBalancePromise;
-    bankListPricePromise = Promise.all(bankListPrice);
-    bankListBalancePromise = Promise.all(bankListBalance);
-    let ShareStat;
-    let masonrytShareBalanceOf;
-    let lunarSunriseSpolarBalanceOf;
-    let tripolarSunriseBalance;
-    [
-      bankListPrice,
-      bankListBalance,
-      ShareStat,
+    let bankListPricePromise = Promise.all(bankListPrice);
+    let bankListBalancePromise = Promise.all(bankListBalance);
+    let [
+      bankPrice,
+      bankBalance,
       masonrytShareBalanceOf,
       lunarSunriseSpolarBalanceOf,
       tripolarSunriseBalance,
+      priceInFTM,
+      priceOfOneFTM,
     ] = await Promise.all([
       bankListPricePromise,
       bankListBalancePromise,
-      this.getShareStat(),
       this.TSHARE.balanceOf(this.currentMasonry().address),
       this.TSHARE.balanceOf(this.currentLunarSunrise().address),
       this.TSHARE.balanceOf(this.currentTripolarSunrise().address),
+      this.getTokenPriceFromPancakeswap(this.TSHARE),
+      this.getWFTMPriceFromPancakeswap(),
     ]);
     for (let i = 0; i < bankListNames.length; i++) {
-      bankDictPrice[bankListNames[i]] = bankListPrice[i];
-      bankDictBalance[bankListNames[i]] = bankListBalance[i];
+      bankDictPrice[bankListNames[i]] = bankPrice[i];
+      bankDictBalance[bankListNames[i]] = bankBalance[i];
     }
     for (const bankInfo of Object.values(bankDefinitions)) {
       if (bankInfo.closedForStaking === true) continue;
@@ -674,8 +672,7 @@ export class TombFinance {
       const poolValue = Number.isNaN(value) ? 0 : value;
       totalValue += poolValue;
     }
-
-    const TSHAREPrice = ShareStat.priceInDollars;
+    const TSHAREPrice = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
     const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
     const lunarSunriseTVL =
       Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.TSHARE.decimal)) * Number(TSHAREPrice);
