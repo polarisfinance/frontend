@@ -18,11 +18,11 @@ const Stake: React.FC = () => {
         <CardContent>
           <StyledCardContentInner>
             <CardIcon>
-              <TokenSymbol symbol="TRIPOLAR" />
+              <TokenSymbol symbol="TRIPOLAROLD" />
             </CardIcon>
             <StyledCardHeader>
               <Value value={'TRIPOLAR GENESIS'} />
-              <Label text="Stake your assets to earn $TRIPOLAR" />
+              <Label text="Please withdraw your assets" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button
@@ -32,7 +32,7 @@ const Stake: React.FC = () => {
                 component={Link}
                 to={'/genesis_dawn'}
               >
-                View and Stake
+                Unstake
               </Button>
             </StyledCardActions>
           </StyledCardContentInner>
