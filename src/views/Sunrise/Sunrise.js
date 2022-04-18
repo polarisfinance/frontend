@@ -25,6 +25,9 @@ import ProgressCountdown from './components/ProgressCountdown';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
+
+import Image from 'material-ui-image';
+import Fire from '../../assets/img/fire.gif';
 const BackgroundImage = createGlobalStyle`
   body, html {
     background: url(${HomeImage}) no-repeat !important;
@@ -64,9 +67,29 @@ const Masonry = () => {
       <BackgroundImage />
       {!!account ? (
         <>
-          <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            POLAR Sunrise
-          </Typography>
+          <Grid container item justify="center">
+            <Image
+              color="none"
+              imageStyle={{ height: '45px', width: '45px' }}
+              style={{ height: '50px', width: '50px', paddingTop: '0px', marginRight: '10px', marginBottom: '10px' }}
+              src={Fire}
+              animationDuration={0}
+              disableTransition={true}
+              disableSpinner={true}
+            />
+            <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
+              POLAR Sunrise
+            </Typography>
+            <Image
+              color="none"
+              imageStyle={{ height: '45px', width: '45px' }}
+              style={{ height: '50px', width: '50px', paddingTop: '0px', marginBottom: '10px', marginLeft: '7px' }}
+              src={Fire}
+              animationDuration={0}
+              disableTransition={true}
+              disableSpinner={true}
+            />
+          </Grid>
           <Grid container className={classes.text}>
             <Grid container item xs={12} justify="center" className={classes.text}>
               <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
@@ -174,7 +197,6 @@ const Masonry = () => {
             </Grid>
           </Grid> */}
           </Grid>
-
           <Box mt={5}>
             <Grid container justify="center" spacing={3} mt={10}>
               <Button
