@@ -125,7 +125,7 @@ const CemeteryCard = ({ bank }) => {
               </Grid>
               <Grid item xs={6}>
                 <Button color="primary" size="small" variant="contained" component={Link} to={`/dawn/${bank.contract}`}>
-                  VIEW & STAKE
+                  VIEW
                 </Button>
               </Grid>
 
