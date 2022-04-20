@@ -61,7 +61,7 @@ const CemeteryCard = ({ bank }) => {
       <Card>
         <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
           <Grid container alignItems="center">
-            <Grid container item xs={12} sm={4} alignItems="center">
+            <Grid container item xs={12} md={4} alignItems="center">
               <Box mr={5} ml={5} mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol={bank.depositTokenName} />
@@ -71,8 +71,8 @@ const CemeteryCard = ({ bank }) => {
                 {bankDepositName}
               </Typography>
             </Grid>
-            <Grid container item xs={12} sm={4} alignItems="center">
-              <Grid item xs={4}>
+            <Grid container item xs={12} md={6} alignItems="center">
+              <Grid item xs={4} sm={3}>
                 <Typography variant="h5" component="h2">
                   Daily:
                 </Typography>
@@ -80,7 +80,7 @@ const CemeteryCard = ({ bank }) => {
                   {bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} sm={3}>
                 <Typography variant="h5" component="h2">
                   APR:
                 </Typography>
@@ -88,7 +88,7 @@ const CemeteryCard = ({ bank }) => {
                   {bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={4} sm={3}>
                 <Typography variant="h5" component="h2">
                   TVL:
                 </Typography>
@@ -96,35 +96,39 @@ const CemeteryCard = ({ bank }) => {
                   ${statsOnPool?.TVL}
                 </Typography>
               </Grid>
-            </Grid>
-            <Grid container item sm={2} alignItems="center">
-              <Grid item xs={12}>
-                <Typography variant="h5" component="h2">
-                  To Claim:
-                </Typography>
-              </Grid>
-              <Grid container item xs={12} justify="center" alignItems="center">
-                <Grid item>
-                  <Typography variant="h6" component="h2" style={{ marginRight: '5px' }}>
-                    {`${Number(getDisplayBalance(earnings)).toFixed(2)}`}
+              <Grid container item xs={12} sm={3} alignItems="center">
+                <Grid item xs={12}>
+                  <Typography variant="h5" component="h2">
+                    To Claim:
                   </Typography>
                 </Grid>
-                <Grid item>
-                  <Typography variant="subtitle1" component="h6">
-                    {` ≈ $${earnedInDollars}`}
-                  </Typography>
+                <Grid container item xs={12} justify="center" alignItems="center">
+                  <Grid item>
+                    <Typography variant="h6" component="h2" style={{ marginRight: '5px' }}>
+                      {`${Number(getDisplayBalance(earnings)).toFixed(2)}`}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1" component="h6">
+                      {` ≈ $${earnedInDollars}`}
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item sm={1}>
-              <Button onClick={onReward} disabled={earnings.eq(0)} size="small" color="primary" variant="contained">
-                Claim
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={1}>
-              <Button color="primary" size="small" variant="contained" component={Link} to={`/dawn/${bank.contract}`}>
-                VIEW & STAKE
-              </Button>
+
+            <Grid container item xs={12} md={2}>
+              <Grid item xs={6}>
+                <Button onClick={onReward} disabled={earnings.eq(0)} size="small" color="primary" variant="contained">
+                  Claim
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button color="primary" size="small" variant="contained" component={Link} to={`/dawn/${bank.contract}`}>
+                  VIEW & STAKE
+                </Button>
+              </Grid>
+
               {bank.depositTokenName.startsWith('POLAR-STNEAR') && (
                 <Box style={{ marginTop: '10px' }}>
                   <StyledLink href={'https://metapool.app/dapp/mainnet/metapool-aurora/'} target="_blank">
