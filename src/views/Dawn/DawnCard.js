@@ -106,7 +106,7 @@ const CemeteryCard = ({ bank }) => {
               <Grid container item xs={12} justify="center" alignItems="center">
                 <Grid item>
                   <Typography variant="h6" component="h2" style={{ marginRight: '5px' }}>
-                    {`${Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal)).toFixed(2)}`}
+                    {`${Number(getDisplayBalance(earnings)).toFixed(2)}`}
                   </Typography>
                 </Grid>
                 <Grid item>
