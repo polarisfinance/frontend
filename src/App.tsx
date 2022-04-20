@@ -93,9 +93,11 @@ const App: React.FC = () => {
             <Route path="/legacy_dawn">
               <LegacyDawn />
             </Route>
+            {/*
             <Route path="/dawn_splitter">
               <DawnSplitter />
             </Route>
+            */}
             <Route path="/genesis_dawn">
               <GenesisDawn />
             </Route>

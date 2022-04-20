@@ -67,6 +67,27 @@ const Cemetery = () => {
                       ))}
                       </Grid>*/}
                 </div>
+
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 3).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    TRIPOLAR Genesis Pools
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 3)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 5).length === 0}>
                   <Typography
                     align="center"
