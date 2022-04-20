@@ -27,7 +27,7 @@ import ValueLocked from '../../assets/img/value_locked.svg';
 
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
-import { Box, Button, Card, CardContent, Grid } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Grid, Hidden } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useTombFinance from '../../hooks/useTombFinance';
@@ -38,6 +38,13 @@ import useLunarBondStats from '../../hooks/useLunarBondStats';
 import useTripolarStats from '../../hooks/useTripolarStats';
 import useTripolarBondStats from '../../hooks/useTripolarBondStats';
 
+import { Container } from '@material-ui/core';
+import Image from 'material-ui-image';
+import AuroraLogo from '../../assets/img/aurora_logo_white.svg';
+import NearLogo from '../../assets/img/near_logo_white.svg';
+import Plus from '../../assets/img/plus.svg';
+import Equal from '../../assets/img/=.svg';
+import NameLogo from '../../assets/img/name-logo.svg';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
@@ -213,6 +220,74 @@ const Home = () => {
     <Page>
       <BackgroundImage />
       {/* <LaunchCountdown deadline={new Date(1645106400*1000)} description='hello'></LaunchCountdown> */}
+      <Container maxWidth="lg" style={{ marginTop: '10px', marginBottom: '3rem', padding: '0px' }}>
+        <Grid container>
+          {/* Logo */}
+          <Grid container item xs={12} sm={4}>
+            {/* <Paper>xs=6 sm=3</Paper> */}
+            <Grid item xs={4}>
+              <Image
+                color="none"
+                imageStyle={{ height: '100px' }}
+                style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
+                src={AuroraLogo}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Image
+                color="none"
+                imageStyle={{ height: '40px', marginTop: '20px' }}
+                style={{ height: '30px', paddingTop: '0px', marginTop: '30px' }}
+                src={Plus}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Image
+                color="none"
+                imageStyle={{ height: '100px' }}
+                style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
+                src={NearLogo}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
+              />
+            </Grid>
+          </Grid>
+          <Hidden xsDown>
+            <Grid item xs={2} sm={2}>
+              {/* <Paper>xs=6 sm=3</Paper> */}
+              <Image
+                color="none"
+                imageStyle={{ height: '20px', marginTop: '20px' }}
+                style={{ height: '20px', paddingTop: '0px', marginTop: '40px' }}
+                src={Equal}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
+              />
+            </Grid>
+          </Hidden>
+
+          <Grid item xs={12} sm={6}>
+            {/* <Paper>xs=6 sm=3</Paper> */}
+            <Image
+              color="none"
+              imageStyle={{ height: '100px' }}
+              style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
+              src={NameLogo}
+              animationDuration={0}
+              disableTransition={true}
+              disableSpinner={true}
+            />
+          </Grid>
+        </Grid>
+      </Container>
       <Grid container spacing={3}>
         <Grid container>
           {/* Explanation text */}
