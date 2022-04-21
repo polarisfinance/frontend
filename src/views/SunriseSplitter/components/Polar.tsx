@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Box, Button, Card, CardContent } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Grid } from '@material-ui/core';
 
 import CardIcon from '../../../components/CardIcon';
 
@@ -10,6 +10,8 @@ import Value from '../../../components/Value';
 
 import TokenSymbol from '../../../components/TokenSymbol';
 import { Link } from 'react-router-dom';
+import Image from 'material-ui-image';
+import Fire from '../../../assets/img/fire.gif';
 
 const Stake: React.FC = () => {
   return (
@@ -18,9 +20,29 @@ const Stake: React.FC = () => {
         <CardContent>
           <StyledCardContentInner>
             <StyledCardHeader>
-              <CardIcon>
-                <TokenSymbol symbol="POLAR" />
-              </CardIcon>
+              <Grid container item justify="center">
+                <Image
+                  color="none"
+                  imageStyle={{ height: '50px', width: '50px' }}
+                  style={{ height: '50px', width: '50px', paddingTop: '0px', marginTop: '20px' }}
+                  src={Fire}
+                  animationDuration={0}
+                  disableTransition={true}
+                  disableSpinner={true}
+                />
+                <CardIcon>
+                  <TokenSymbol symbol="POLAR" />
+                </CardIcon>
+                <Image
+                  color="none"
+                  imageStyle={{ height: '50px', width: '50px' }}
+                  style={{ height: '50px', width: '50px', paddingTop: '0px', marginTop: '20px' }}
+                  src={Fire}
+                  animationDuration={0}
+                  disableTransition={true}
+                  disableSpinner={true}
+                />
+              </Grid>
               <Value value={'POLAR Sunrise'} />
               <Label text="Stake your $SPOLAR to earn $POLAR" />
             </StyledCardHeader>

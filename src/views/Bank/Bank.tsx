@@ -112,6 +112,7 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const tombAddr = tombFinance.TOMB.address;
   const tshareAddr = tombFinance.TSHARE.address;
   const lunarAddr = tombFinance.LUNAR.address;
+  const tripolarAddr = tombFinance.TRIPOLAR.address;
 
   let pairName: string;
   let uniswapUrl: string;
@@ -124,9 +125,12 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   } else if (bank.depositTokenName === 'POLAR-STNEAR-LP') {
     pairName = 'POLAR-STNEAR pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x07F9F7f963C5cD2BBFFd30CcfB964Be114332E30/' + tombAddr;
-  } else {
+  } else if (bank.depositTokenName === 'LUNAR-LUNA-LP') {
     pairName = 'LUNAR-LUNA pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096/' + lunarAddr;
+  } else {
+    pairName = 'TRIPOLAR-xTRI pair';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0x802119e4e253D5C19aA06A5d567C5a41596D6803/' + tripolarAddr;
   }
 
   return (

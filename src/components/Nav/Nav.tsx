@@ -19,7 +19,7 @@ import {
 import Image from 'material-ui-image';
 import AuroraLogo from '../../assets/img/aurora_logo_white.svg';
 import NearLogo from '../../assets/img/near_logo_white.svg';
-import Plus from '../../assets/img/+.svg';
+import Plus from '../../assets/img/plus.svg';
 import Equal from '../../assets/img/=.svg';
 import NameLogo from '../../assets/img/name-logo.svg';
 import { Container } from '@material-ui/core';
@@ -131,15 +131,6 @@ const Nav = () => {
               <Link color="textPrimary" to="/strategy" className={classes.link}>
                 Strategy
               </Link>
-              {/*<Link color="textPrimary" to="/sbs" className={classes.link}>
-                SBS
-              </Link>
-              <Link color="textPrimary" to="/liquidity" className={classes.link}>
-                Liquidity
-              </Link>
-              <Link color="textPrimary" to="/regulations" className={classes.link}>
-                Regulations
-              </Link>*/}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -240,6 +231,9 @@ const Nav = () => {
                 imageStyle={{ height: '100px' }}
                 style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
                 src={AuroraLogo}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
               />
             </Grid>
             <Grid item xs={4}>
@@ -248,6 +242,9 @@ const Nav = () => {
                 imageStyle={{ height: '40px', marginTop: '20px' }}
                 style={{ height: '30px', paddingTop: '0px', marginTop: '30px' }}
                 src={Plus}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
               />
             </Grid>
             <Grid item xs={4}>
@@ -256,6 +253,9 @@ const Nav = () => {
                 imageStyle={{ height: '100px' }}
                 style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
                 src={NearLogo}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
               />
             </Grid>
           </Grid>
@@ -267,6 +267,9 @@ const Nav = () => {
                 imageStyle={{ height: '20px', marginTop: '20px' }}
                 style={{ height: '20px', paddingTop: '0px', marginTop: '40px' }}
                 src={Equal}
+                animationDuration={0}
+                disableTransition={true}
+                disableSpinner={true}
               />
             </Grid>
           </Hidden>
@@ -278,6 +281,9 @@ const Nav = () => {
               imageStyle={{ height: '100px' }}
               style={{ height: '100px', paddingTop: '0px', marginTop: '20px' }}
               src={NameLogo}
+              animationDuration={0}
+              disableTransition={true}
+              disableSpinner={true}
             />
           </Grid>
         </Grid>

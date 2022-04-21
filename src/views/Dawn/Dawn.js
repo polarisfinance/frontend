@@ -5,7 +5,6 @@ import Bank from '../Bank';
 
 import { Box, Container, Typography, Grid, Button } from '@material-ui/core';
 
-
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import CemeteryCard from './DawnCard';
@@ -59,25 +58,25 @@ const Cemetery = () => {
                         </React.Fragment>
                       ))}
                   </Grid>
-                  <Grid container justifyContent="flex-end" direction="row" alignItems="flex-end">
-                    <Grid item align="center" xs={12}>
-                      <Button
-                        color="primary"
-                        href="/legacy_dawn"
-                        variant="contained"
-                        style={{
-                          marginTop: '30px',
-                          /* 
+                </div>
+                <Grid container direction="row" alignItems="flex-end">
+                  <Grid item align="center" xs={12}>
+                    <Button
+                      color="primary"
+                      href="/legacy_dawn"
+                      variant="contained"
+                      style={{
+                        marginTop: '30px',
+                        /* 
                           backgroundColor: 'rgb(0,0,0,0)',
                           boxShadow: 'none',
                           */
-                        }}
-                      >
-                        Legacy Dawn
-                      </Button>
-                    </Grid>
+                      }}
+                    >
+                      Legacy Dawn
+                    </Button>
                   </Grid>
-                </div>
+                </Grid>
               </Box>
             </Container>
           ) : (

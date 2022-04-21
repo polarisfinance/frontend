@@ -41,51 +41,27 @@ const Masonry = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      <BackgroundImage style={{ height: '100%', width: '100%', flex: 1 }} />
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
             Bond
           </Typography>
           <Grid container className={classes.text}>
-            <Grid
-              item
-              xs={12}
-              md={4}
-              justify="center"
-              style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
-            >
+            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
               <Polar />
             </Grid>
 
-            <Grid
-              item
-              xs={12}
-              md={4}
-              justify="center"
-              style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
-            >
+            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
               <Lunar />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              md={4}
-              justify="center"
-              style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
-            >
-              <Auris />
+            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
+              <Tribond />
             </Grid>
           </Grid>
           <Grid container className={classes.text}>
-            <Grid
-              item
-              xs={12}
-              md={4}
-              justify="center"
-              style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
-            >
-              <Tribond />
+            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
+              <Auris />
             </Grid>
           </Grid>
         </>
