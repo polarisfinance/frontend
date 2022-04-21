@@ -17,6 +17,7 @@ import polarNearLpLogo from '../../assets/img/polar-aurora.svg';
 import spolarNearLpLogo from '../../assets/img/spolar-aurora.svg';
 import lunarLunaLpLogo from '../../assets/img/lunar-luna.svg';
 import tripolarXtriLpLogo from '../../assets/img/tripolar-xtri.svg';
+import polarStnearLpLogo from '../../assets/img/polar-stnear.svg';
 
 import auroraLogo from '../../assets/img/aurora_logo.svg';
 import nearLogo from '../../assets/img/near_logo.svg';
@@ -47,7 +48,8 @@ const logosBySymbol: { [title: string]: string } = {
   TRIBOND: tribondLogo,
   xTRI: xtriLogo,
   'TRIPOLAR-xTRI-LP': tripolarXtriLpLogo,
-  TRIPOLAROLD: tripolarOldLogo
+  TRIPOLAROLD: tripolarOldLogo,
+  'POLAR-STNEAR-LP': polarStnearLpLogo,
 };
 
 type LogoProps = {
