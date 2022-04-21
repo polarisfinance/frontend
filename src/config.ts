@@ -292,7 +292,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'TRIPOLAR-xTRI-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 0,
+    sort: 4,
     closedForStaking: false,
   },
   LunarLunaSpolarRewardPool: {
@@ -303,7 +303,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'LUNAR-LUNA-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 0,
+    sort: 3,
     closedForStaking: false,
   },
   PolarNearLpSpolarRewardPool: {
@@ -337,7 +337,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'SPOLAR-NEAR-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 3,
+    sort: 0,
     closedForStaking: false,
   },
   PolarSpolarRewardPool: {
