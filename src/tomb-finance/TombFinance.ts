@@ -17,6 +17,11 @@ import { FTM_TICKER, SPOOKY_ROUTER_ADDR, TOMB_TICKER } from '../utils/constants'
  * An API module of Tomb Finance contracts.
  * All contract-interacting domain logic should be defined in here.
  */
+function numberWithSpaces(x: Number) {
+  var parts = x.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return parts.join('.');
+}
 export class TombFinance {
   myAccount: string;
   provider: ethers.providers.Web3Provider;
@@ -432,7 +437,7 @@ export class TombFinance {
     return {
       dailyAPR: dailyAPR.toFixed(2).toString(),
       yearlyAPR: yearlyAPR.toFixed(2).toString(),
-      TVL: TVL.toFixed(2).toString(),
+      TVL: numberWithSpaces(Number(TVL.toFixed(2))),
     };
   }
 

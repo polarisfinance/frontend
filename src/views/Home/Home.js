@@ -80,6 +80,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function numberWithSpaces(x) {
+  var parts = x.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return parts.join('.');
+}
+
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
@@ -231,12 +237,7 @@ const Home = () => {
           <Grid item xs={12} sm={6} align="center">
             <Box className={classes.box} style={{ paddingTop: '12px' }}>
               <span style={{ fontSize: '25px', fontFamily: '"Rajdhani",regular' }}>Total Value Locked</span>
-              <CountUp
-                style={{ fontSize: '60px', fontFamily: '"Rajdhani",bold' }}
-                end={TVL}
-                separator=","
-                prefix="$ "
-              />
+              <CountUp style={{ fontSize: '60px', fontFamily: '"Rajdhani",bold' }} end={TVL} separator=" " prefix="$" />
             </Box>
           </Grid>
         </Grid>
@@ -280,7 +281,7 @@ const Home = () => {
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}
+                      ${numberWithSpaces(Number((tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)))}
                     </span>
                   </Box>
                 </Grid>
@@ -370,7 +371,9 @@ const Home = () => {
                 <Grid item xs={12} sm={3}>
                   Market Cap:
                   <Box>
-                    <span style={{ fontSize: '30px' }}>${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}</span>
+                    <span style={{ fontSize: '30px' }}>
+                      ${numberWithSpaces(Number(tombCirculatingSupply * tombPriceInDollars).toFixed(2))}
+                    </span>
                   </Box>
                 </Grid>
                 <Grid container item xs={12} sm={2} justify="center">
@@ -460,7 +463,7 @@ const Home = () => {
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${(lunarCirculatingSupply * lunarPriceInDollars).toFixed(2)}
+                      ${numberWithSpaces(Number(lunarCirculatingSupply * lunarPriceInDollars).toFixed(2))}
                     </span>
                   </Box>
                 </Grid>
@@ -555,7 +558,7 @@ const Home = () => {
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${(tripolarCirculatingSupply * tripolarPriceInDollars).toFixed(2)}
+                      ${numberWithSpaces(Number(tripolarCirculatingSupply * tripolarPriceInDollars).toFixed(2))}
                     </span>
                   </Box>
                 </Grid>
@@ -645,7 +648,7 @@ const Home = () => {
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)}
+                      ${numberWithSpaces(Number(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2))}
                     </span>
                   </Box>
                 </Grid>
@@ -720,7 +723,7 @@ const Home = () => {
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${(lBondCirculatingSupply * lBondPriceInDollars).toFixed(2)}
+                      ${numberWithSpaces(Number(lBondCirculatingSupply * lBondPriceInDollars).toFixed(2))}
                     </span>
                   </Box>
                 </Grid>
@@ -795,7 +798,7 @@ const Home = () => {
                   Market Cap:
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${(triBondCirculatingSupply * triBondPriceInDollars).toFixed(2)}
+                      ${numberWithSpaces(Number(triBondCirculatingSupply * triBondPriceInDollars).toFixed(2))}
                     </span>
                   </Box>
                 </Grid>
