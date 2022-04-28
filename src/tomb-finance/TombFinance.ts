@@ -516,11 +516,12 @@ export class TombFinance {
       return rewardPerSecond.mul(0).div(41000);
     } else if (depositTokenName.startsWith('POLAR-STNEAR')) {
       return rewardPerSecond.mul(PolarStNear.allocPoint).div(41000);
-    } else if (depositTokenName.startsWith('POLAR')) {
+    } else if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(0).div(41000);
     } else if (depositTokenName.startsWith('TRIPOLAR')) {
       return rewardPerSecond.mul(Tripolar.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR-LUNAR')) {
+      console.log(PolarLunar.allocPoint);
       return rewardPerSecond.mul(PolarLunar.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
