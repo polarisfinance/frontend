@@ -499,25 +499,29 @@ export class TombFinance {
         return rewardPerSecond.mul(5000).div(50000);
       }
     }
-    const [rewardPerSecond, PolarNear, LunarAtluna, PolarStNear, Tripolar] = await Promise.all([
+    const [rewardPerSecond, SpolarNear, PolarNear, LunarAtluna, PolarStNear, Tripolar, PolarLunar] = await Promise.all([
       poolContract.spolarPerSecond(),
+      poolContract.poolInfo(1),
       poolContract.poolInfo(0),
       poolContract.poolInfo(4),
       poolContract.poolInfo(5),
       poolContract.poolInfo(6),
+      poolContract.poolInfo(7),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('SPOLAR')) {
-      return rewardPerSecond.mul(12300).div(41000);
+      return rewardPerSecond.mul(SpolarNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('PBOND')) {
-      return rewardPerSecond.mul(100).div(41000);
+      return rewardPerSecond.mul(0).div(41000);
     } else if (depositTokenName.startsWith('POLAR-STNEAR')) {
       return rewardPerSecond.mul(PolarStNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR')) {
-      return rewardPerSecond.mul(310).div(41000);
+      return rewardPerSecond.mul(0).div(41000);
     } else if (depositTokenName.startsWith('TRIPOLAR')) {
       return rewardPerSecond.mul(Tripolar.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('POLAR-LUNAR')) {
+      return rewardPerSecond.mul(PolarLunar.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
@@ -548,6 +552,8 @@ export class TombFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB);
       } else if (tokenName === 'TRIPOLAR-xTRI-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
+      } else if (tokenName === 'POLAR-LUNAR-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.TOMB);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getBondStat();
         tokenPrice = getBondPrice.priceInDollars;

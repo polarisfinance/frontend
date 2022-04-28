@@ -6,6 +6,7 @@ export type Configuration = {
   networkName: string;
   ftmscanUrl: string;
   defaultProvider: string;
+  defaultWssProvider: string;
   deployments: Deployments;
   externalTokens: { [contractName: string]: [string, number] };
   config?: EthereumConfig;

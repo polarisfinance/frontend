@@ -29,7 +29,6 @@ const Strategy = lazy(() => import('./views/Strategy'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
 const TripolarSunrise = lazy(() => import('./views/TripolarSunrise'));
 const TripolarBond = lazy(() => import('./views/TripolarBond'));
-const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
 const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
 const TripolarSunriseOld = lazy(() => import('./views/TripolarSunriseOld'));
 

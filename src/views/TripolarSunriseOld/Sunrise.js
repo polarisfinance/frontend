@@ -15,7 +15,6 @@ import useRedeemOnLunarSunrise from '../../hooks/useRedeemOnTripolarSunriseOld';
 import useStakedBalanceOnLunarSunrise from '../../hooks/useStakedBalanceOnTripolarSunriseOld';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import useCurrentEpoch from '../../hooks/useCurrentEpochTripolar';
-import useFetchMasonryAPR from '../../hooks/useFetchTripolarSunriseAPR';
 
 import useCashPriceInEstimatedTWAP from '../../hooks/useCashPriceInEstimatedTWAPTripolar';
 import useTreasuryAllocationTimes from '../../hooks/useTripolarTreasuryAllocationTimes';
@@ -55,7 +54,6 @@ const Masonry = () => {
   const currentEpoch = useCurrentEpoch();
   const cashStat = useCashPriceInEstimatedTWAP();
   const totalStaked = useTotalStakedOnMasonry();
-  const masonryAPR = useFetchMasonryAPR();
   const canClaimReward = useClaimRewardCheck();
   const canWithdraw = useWithdrawCheck();
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);

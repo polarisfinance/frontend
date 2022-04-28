@@ -8,7 +8,7 @@ import Tripolar from './components/Tripolar';
 import OldTripolar from './components/OldTripolar';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';

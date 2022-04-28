@@ -15,7 +15,6 @@ import useCashPriceInPreviousTWAP from '../../hooks/useCashPriceInPreviousTWAP';
 import { useTransactionAdder } from '../../state/transactions/hooks';
 import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
-import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import useBondsRedeemable from '../../hooks/useBondsRedeemable';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../tomb-finance/constants';
@@ -37,7 +36,6 @@ const Pit: React.FC = () => {
   const bondStat = useBondStats();
   const cashPrice = useCashPriceInLastTWAP();
   const previousTwap = useCashPriceInPreviousTWAP();
-  const bondsPurchasable = useBondsPurchasable();
   const bondsRedeemable = useBondsRedeemable();
   const bondBalance = useTokenBalance(tombFinance?.TBOND);
   const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
