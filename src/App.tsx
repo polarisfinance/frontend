@@ -16,6 +16,7 @@ import Updaters from './state/Updaters';
 import Loader from './components/Loader';
 import Popups from './components/Popups';
 import { RefreshContextProvider } from './contexts/RefreshContext';
+import ReactGA from 'react-ga';
 
 const Home = lazy(() => import('./views/Home'));
 const Dawn = lazy(() => import('./views/Dawn'));
@@ -39,6 +40,9 @@ const NoMatch = () => (
 );
 
 const App: React.FC = () => {
+  ReactGA.initialize('G-CMFY1MSGGL');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   // Clear localStorage for mobile users
   if (typeof localStorage.version_app === 'undefined' || localStorage.version_app !== '1.1') {
     localStorage.clear();
