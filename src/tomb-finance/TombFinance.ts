@@ -553,7 +553,7 @@ export class TombFinance {
       } else if (tokenName === 'TRIPOLAR-xTRI-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
       } else if (tokenName === 'POLAR-LUNAR-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this.TOMB);
+        tokenPrice = await this.getLPTokenPricePolarLunar(token, this.TOMB, this.LUNAR);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getBondStat();
         tokenPrice = getBondPrice.priceInDollars;
@@ -719,6 +719,28 @@ export class TombFinance {
     const priceOfToken = stat.priceInDollars;
     const tokenInLP = Number(tokenSupply) / Number(totalSupply);
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
+      .toString();
+    return tokenPrice;
+  }
+
+  async getLPTokenPricePolarLunar(lpToken: ERC20, token0: ERC20, token1: ERC20): Promise<string> {
+    const [lpTokenSupply, token0Balance, token1Balance, statToken0, statToken1] = await Promise.all([
+      lpToken.totalSupply(),
+      token0.balanceOf(lpToken.address),
+      token1.balanceOf(lpToken.address),
+      this.getTombStat(),
+      this.getLunarStat(),
+    ]);
+    const totalSupply = getFullDisplayBalance(lpTokenSupply, lpToken.decimal);
+    //Get amount of tokenA
+    const token0Supply = getFullDisplayBalance(token0Balance, token0.decimal);
+    const token1Supply = getFullDisplayBalance(token1Balance, token1.decimal);
+
+    const priceOfToken0 = statToken0.priceInDollars;
+    const priceOfToken1 = statToken1.priceInDollars;
+    const token0InLP = Number(token0Supply) / Number(totalSupply);
+    const token1InLP = Number(token1Supply) / Number(totalSupply);
+    const tokenPrice = (Number(priceOfToken0) * token0InLP + Number(priceOfToken1) * token1InLP) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
       .toString();
     return tokenPrice;
   }
