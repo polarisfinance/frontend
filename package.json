@@ -43,7 +43,8 @@
     "styled-components": "^5.1.1",
     "typescript": "^3.9.7",
     "use-wallet": "OGBoogieTomb/use-wallet",
-    "web3": "^1.2.11"
+    "web3": "^1.2.11",
+    "web3-providers-ws": "^1.7.3"
   },
   "scripts": {
     "start": "react-scripts start",

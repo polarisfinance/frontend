@@ -16854,6 +16854,14 @@ web3-core-helpers@1.7.0:
     web3-eth-iban "1.7.0"
     web3-utils "1.7.0"
 
+web3-core-helpers@1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/web3-core-helpers/-/web3-core-helpers-1.7.3.tgz#9a8d7830737d0e9c48694b244f4ce0f769ba67b9"
+  integrity sha512-qS2t6UKLhRV/6C7OFHtMeoHphkcA+CKUr2vfpxy4hubs3+Nj28K9pgiqFuvZiXmtEEwIAE2A28GBOC3RdcSuFg==
+  dependencies:
+    web3-eth-iban "1.7.3"
+    web3-utils "1.7.3"
+
 web3-core-method@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/web3-core-method/-/web3-core-method-1.2.1.tgz#9df1bafa2cd8be9d9937e01c6a47fc768d15d90a"
@@ -17404,6 +17412,14 @@ web3-eth-iban@1.7.0:
     bn.js "^4.11.9"
     web3-utils "1.7.0"
 
+web3-eth-iban@1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/web3-eth-iban/-/web3-eth-iban-1.7.3.tgz#47433a73380322bba04e17b91fccd4a0e63a390a"
+  integrity sha512-1GPVWgajwhh7g53mmYDD1YxcftQniIixMiRfOqlnA1w0mFGrTbCoPeVaSQ3XtSf+rYehNJIZAUeDBnONVjXXmg==
+  dependencies:
+    bn.js "^4.11.9"
+    web3-utils "1.7.3"
+
 web3-eth-personal@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/web3-eth-personal/-/web3-eth-personal-1.2.1.tgz#244e9911b7b482dc17c02f23a061a627c6e47faf"
@@ -17801,6 +17817,15 @@ web3-providers-ws@1.7.0:
     web3-core-helpers "1.7.0"
     websocket "^1.0.32"
 
+web3-providers-ws@^1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/web3-providers-ws/-/web3-providers-ws-1.7.3.tgz#87564facc47387c9004a043a6686e4881ed6acfe"
+  integrity sha512-PpykGbkkkKtxPgv7U4ny4UhnkqSZDfLgBEvFTXuXLAngbX/qdgfYkhIuz3MiGplfL7Yh93SQw3xDjImXmn2Rgw==
+  dependencies:
+    eventemitter3 "4.0.4"
+    web3-core-helpers "1.7.3"
+    websocket "^1.0.32"
+
 web3-shh@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/web3-shh/-/web3-shh-1.2.1.tgz#4460e3c1e07faf73ddec24ccd00da46f89152b0c"
@@ -17906,6 +17931,19 @@ web3-utils@1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/web3-utils/-/web3-utils-1.7.0.tgz#c59f0fd43b2449357296eb54541810b99b1c771c"
   integrity sha512-O8Tl4Ky40Sp6pe89Olk2FsaUkgHyb5QAXuaKo38ms3CxZZ4d3rPGfjP9DNKGm5+IUgAZBNpF1VmlSmNCqfDI1w==
+  dependencies:
+    bn.js "^4.11.9"
+    ethereum-bloom-filters "^1.0.6"
+    ethereumjs-util "^7.1.0"
+    ethjs-unit "0.1.6"
+    number-to-bn "1.7.0"
+    randombytes "^2.1.0"
+    utf8 "3.0.0"
+
+web3-utils@1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/web3-utils/-/web3-utils-1.7.3.tgz#b214d05f124530d8694ad364509ac454d05f207c"
+  integrity sha512-g6nQgvb/bUpVUIxJE+ezVN+rYwYmlFyMvMIRSuqpi1dk6ApDD00YNArrk7sPcZnjvxOJ76813Xs2vIN2rgh4lg==
   dependencies:
     bn.js "^4.11.9"
     ethereum-bloom-filters "^1.0.6"
