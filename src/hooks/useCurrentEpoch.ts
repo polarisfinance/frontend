@@ -3,7 +3,7 @@ import usePolarisFinance from './usePolarisFinance';
 import { BigNumber } from 'ethers';
 import useRefresh from './useRefresh';
 
-const useCurrentEpoch = () => {
+const useCurrentEpoch = (token: string) => {
   const [currentEpoch, setCurrentEpoch] = useState<BigNumber>(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
   const { slowRefresh } = useRefresh();
@@ -11,13 +11,13 @@ const useCurrentEpoch = () => {
   useEffect(() => {
     async function fetchCurrentEpoch() {
       try {
-        setCurrentEpoch(await polarisFinance.getCurrentEpoch());
+        setCurrentEpoch(await polarisFinance.getCurrentEpoch(token));
       } catch (err) {
         console.error(err);
       }
     }
     fetchCurrentEpoch();
-  }, [setCurrentEpoch, polarisFinance, slowRefresh]);
+  }, [setCurrentEpoch, polarisFinance, slowRefresh, token]);
 
   return currentEpoch;
 };

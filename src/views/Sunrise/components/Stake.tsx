@@ -23,20 +23,20 @@ import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
 import usePolarisFinance from '../../../hooks/usePolarisFinance';
 import ProgressCountdown from './ProgressCountdown';
-import useStakedBalanceOnMasonry from '../../../hooks/useStakedBalanceOnMasonry';
+import useStakedBalanceOnSunrise from '../../../hooks/useStakedBalanceOnSunrise';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
-import useUnstakeTimerMasonry from '../../../hooks/masonry/useUnstakeTimerMasonry';
+import useUnstakeTimerSunrise from '../../../hooks/masonry/useUnstakeTimerSunrise';
 import TokenSymbol from '../../../components/TokenSymbol';
-import useStakeToMasonry from '../../../hooks/useStakeToMasonry';
-import useWithdrawFromMasonry from '../../../hooks/useWithdrawFromMasonry';
+import useStakeToSunrise from '../../../hooks/useStakeToSunrise';
+import useWithdrawFromSunrise from '../../../hooks/useWithdrawFromSunrise';
 
 const Stake: React.FC = () => {
   const polarisFinance = usePolarisFinance();
   const [approveStatus, approve] = useApprove(polarisFinance.SPOLAR, polarisFinance.contracts.Masonry.address);
 
   const tokenBalance = useTokenBalance(polarisFinance.SPOLAR);
-  const stakedBalance = useStakedBalanceOnMasonry();
-  const { from, to } = useUnstakeTimerMasonry();
+  const stakedBalance = useStakedBalanceOnSunrise('POLAR');
+  const { from, to } = useUnstakeTimerSunrise('POLAR');
 
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('SPOLAR', polarisFinance.SPOLAR);
   const tokenPriceInDollars = useMemo(
@@ -48,9 +48,9 @@ const Stake: React.FC = () => {
   );
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const { onStake } = useStakeToMasonry();
-  const { onWithdraw } = useWithdrawFromMasonry();
-  const canWithdrawFromMasonry = useWithdrawCheck();
+  const { onStake } = useStakeToSunrise('POLAR');
+  const { onWithdraw } = useWithdrawFromSunrise('POLAR');
+  const canWithdrawFromMasonry = useWithdrawCheck('POLAR');
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal

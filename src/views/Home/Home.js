@@ -7,9 +7,7 @@ import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
-import useTombStats from '../../hooks/useTombStats';
-import useBondStats from '../../hooks/useBondStats';
-import usetShareStats from '../../hooks/usetShareStats';
+import useStats from '../../hooks/useStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import {
   polar as polarTesting,
@@ -31,12 +29,6 @@ import { Box, Button, Card, CardContent, Grid } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 import usePolarisFinance from '../../hooks/usePolarisFinance';
-
-import useLunarStats from '../../hooks/useLunarStats';
-import useLunarBondStats from '../../hooks/useLunarBondStats';
-
-import useTripolarStats from '../../hooks/useTripolarStats';
-import useTripolarBondStats from '../../hooks/useTripolarBondStats';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -89,16 +81,16 @@ function numberWithSpaces(x) {
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const tombStats = useTombStats();
-  const tShareStats = usetShareStats();
-  const tBondStats = useBondStats();
+  const tombStats = useStats('POLAR');
+  const tShareStats = useStats('SPOLAR');
+  const tBondStats = useStats('PBOND');
   const polarisFinance = usePolarisFinance();
 
-  const lunarStats = useLunarStats();
-  const lBondStats = useLunarBondStats();
+  const lunarStats = useStats('LUNAR');
+  const lBondStats = useStats('LBOND');
 
-  const tripolarStats = useTripolarStats();
-  const triBondStats = useTripolarBondStats();
+  const tripolarStats = useStats('TRIPOLAR');
+  const triBondStats = useStats('TRIBOND');
   let polar;
   let sPolar;
   let lunar;

@@ -8,10 +8,10 @@ import PageHeader from '../../components/PageHeader';
 import ExchangeCard from './components/ExchangeCard';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
-import useBondStats from '../../hooks/useBondStats';
+import useStats from '../../hooks/useStats';
 import usePolarisFinance from '../../hooks/usePolarisFinance';
-import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
-import useCashPriceInPreviousTWAP from '../../hooks/useCashPriceInPreviousTWAP';
+import useTokenPriceInLastTWAP from '../../hooks/useTokenPriceInLastTWAP';
+import useTokenPreviousEpochTWAP from '../../hooks/useTokenPreviousEpochTWAP';
 import { useTransactionAdder } from '../../state/transactions/hooks';
 import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
@@ -19,7 +19,6 @@ import useBondsRedeemable from '../../hooks/useBondsRedeemable';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../polaris-finance/constants';
 import HomeImage from '../../assets/img/home.png';
-import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
@@ -33,16 +32,15 @@ const Pit: React.FC = () => {
   const { account } = useWallet();
   const polarisFinance = usePolarisFinance();
   const addTransaction = useTransactionAdder();
-  const bondStat = useBondStats();
-  const cashPrice = useCashPriceInLastTWAP();
-  const previousTwap = useCashPriceInPreviousTWAP();
-  const bondsRedeemable = useBondsRedeemable();
+  const bondStat = useStats('PBOND');
+  const cashPrice = useTokenPriceInLastTWAP('POLAR');
+  const previousTwap = useTokenPreviousEpochTWAP('POLAR');
+  const bondsRedeemable = useBondsRedeemable('POLAR');
   const bondBalance = useTokenBalance(polarisFinance?.PBOND);
-  const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
-      const tx = await polarisFinance.buyBonds(amount);
+      const tx = await polarisFinance.buyBonds(amount, 'POLAR');
       addTransaction(tx, {
         summary: `Buy ${Number(amount).toFixed(2)} POLAR with ${amount} POLAR`,
       });
@@ -52,16 +50,13 @@ const Pit: React.FC = () => {
 
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
-      const tx = await polarisFinance.redeemBonds(amount);
+      const tx = await polarisFinance.redeemBonds(amount, 'POLAR');
       addTransaction(tx, { summary: `Redeem ${amount} PBOND` });
     },
     [polarisFinance, addTransaction],
   );
   const isBondRedeemable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
-  const isBondPurchasable = useMemo(
-    () => Number(getDisplayBalance(polarPreviousEpochTwap, 18, 4)) < 1.01,
-    [polarPreviousEpochTwap],
-  );
+  const isBondPurchasable = useMemo(() => Number(getDisplayBalance(previousTwap, 18, 4)) < 1.01, [previousTwap]);
 
   return (
     <Switch>
@@ -95,7 +90,7 @@ const Pit: React.FC = () => {
                 <ExchangeStat
                   tokenName="POLAR"
                   description="Previous Epoch TWAP Price"
-                  price={getDisplayBalance(polarPreviousEpochTwap, 18, 4)}
+                  price={getDisplayBalance(previousTwap, 18, 4)}
                 />
                 <Spacer size="md" />
                 <ExchangeStat

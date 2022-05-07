@@ -15,7 +15,7 @@ import Value from '../../../components/Value';
 import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import useWithdrawCheckLunarSunrise from '../../../hooks/masonry/useWithdrawCheckLunarSunrise';
+import useWithdrawCheck from '../../../hooks/masonry/useWithdrawCheck';
 
 import { getDisplayBalance } from '../../../utils/formatBalance';
 
@@ -23,20 +23,20 @@ import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
 import usePolarisFinance from '../../../hooks/usePolarisFinance';
 import ProgressCountdown from './ProgressCountdown';
-import useStakedBalanceOnMasonry from '../../../hooks/useStakedBalanceOnLunarSunrise';
+import useStakedBalanceOnSunrise from '../../../hooks/useStakedBalanceOnSunrise';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
-import useUnstakeTimerMasonry from '../../../hooks/masonry/useUnstakeTimerLunarSunrise';
+import useUnstakeTimerSunrise from '../../../hooks/masonry/useUnstakeTimerSunrise';
 import TokenSymbol from '../../../components/TokenSymbol';
-import useStakeToLunarSunrise from '../../../hooks/useStakeToLunarSunrise';
-import useWithdrawFromLunarSunrise from '../../../hooks/useWithdrawFromLunarSunrise';
+import useStakeToSunrise from '../../../hooks/useStakeToSunrise';
+import useWithdrawFromSunrise from '../../../hooks/useWithdrawFromSunrise';
 
 const Stake: React.FC = () => {
   const polarisFinance = usePolarisFinance();
   const [approveStatus, approve] = useApprove(polarisFinance.SPOLAR, polarisFinance.contracts.lunarSunrise.address);
 
   const tokenBalance = useTokenBalance(polarisFinance.SPOLAR);
-  const stakedBalance = useStakedBalanceOnMasonry();
-  const { from, to } = useUnstakeTimerMasonry();
+  const stakedBalance = useStakedBalanceOnSunrise('LUNAR');
+  const { from, to } = useUnstakeTimerSunrise('LUNAR');
 
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('SPOLAR', polarisFinance.SPOLAR);
   const tokenPriceInDollars = useMemo(
@@ -48,9 +48,9 @@ const Stake: React.FC = () => {
   );
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const { onStake } = useStakeToLunarSunrise();
-  const { onWithdraw } = useWithdrawFromLunarSunrise();
-  const canWithdrawFromMasonry = useWithdrawCheckLunarSunrise();
+  const { onStake } = useStakeToSunrise('LUNAR');
+  const { onWithdraw } = useWithdrawFromSunrise('LUNAR');
+  const canWithdrawFromMasonry = useWithdrawCheck('LUNAR');
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal

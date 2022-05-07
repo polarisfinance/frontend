@@ -11,21 +11,21 @@ import { Box, Button, Typography, Grid } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 
-import useRedeemOnLunarSunrise from '../../hooks/useRedeemOnLunarSunrise';
-import useStakedBalanceOnLunarSunrise from '../../hooks/useStakedBalanceOnLunarSunrise';
+import useRedeemOnSunrise from '../../hooks/useRedeemOnSunrise';
+import useStakedBalanceOnSunrise from '../../hooks/useStakedBalanceOnSunrise';
 import { getDisplayBalance } from '../../utils/formatBalance';
-import useCurrentEpoch from '../../hooks/useCurrentEpochLunar';
-import useFetchMasonryAPR from '../../hooks/useFetchLunarSunriseAPR';
+import useCurrentEpoch from '../../hooks/useCurrentEpoch';
+import useFetchSunriseAPR from '../../hooks/useFetchSunriseAPR';
 
-import useCashPriceInEstimatedTWAP from '../../hooks/useCashPriceInEstimatedTWAPLunar';
-import useTreasuryAllocationTimes from '../../hooks/useLunarTreasuryAllocationTimes';
-import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnLunarSunrise';
-import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheckLunarSunrise';
-import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheckLunarSunrise';
+import useTokenEstimatedTWAP from '../../hooks/useTokenEstimatedTWAP';
+import useTreasuryAllocationTimes from '../../hooks/useTreasuryAllocationTimes';
+import useTotalStakedOnSunrise from '../../hooks/useTotalStakedOnSunrise';
+import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheck';
+import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
-import usePolarPreviousEpochTwap from '../../hooks/useLunarPreviousEpochTwap';
+import useTokenPreviousEpochTWAP from '../../hooks/useTokenPreviousEpochTWAP';
 
 import Image from 'material-ui-image';
 import Fire from '../../assets/img/fire.gif';
@@ -52,17 +52,17 @@ const useStyles = makeStyles((theme) => ({
 const Masonry = () => {
   const classes = useStyles();
   const { account } = useWallet();
-  const { onRedeem } = useRedeemOnLunarSunrise();
-  const stakedBalance = useStakedBalanceOnLunarSunrise();
-  const currentEpoch = useCurrentEpoch();
-  const cashStat = useCashPriceInEstimatedTWAP();
-  const totalStaked = useTotalStakedOnMasonry();
-  const masonryAPR = useFetchMasonryAPR();
-  const canClaimReward = useClaimRewardCheck();
-  const canWithdraw = useWithdrawCheck();
-  const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
-  const { to } = useTreasuryAllocationTimes();
-  const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
+  const { onRedeem } = useRedeemOnSunrise('LUNAR');
+  const stakedBalance = useStakedBalanceOnSunrise('LUNAR');
+  const currentEpoch = useCurrentEpoch('LUNAR');
+  const cashStat = useTokenEstimatedTWAP('LUNAR');
+  const totalStaked = useTotalStakedOnSunrise('LUNAR');
+  const masonryAPR = useFetchSunriseAPR('LUNAR');
+  const canClaimReward = useClaimRewardCheck('LUNAR');
+  const canWithdraw = useWithdrawCheck('LUNAR');
+  const scalingFactor = useMemo(() => (cashStat ? Number(cashStat).toFixed(4) : null), [cashStat]);
+  const { to } = useTreasuryAllocationTimes('LUNAR');
+  const polarPreviousEpochTwap = useTokenPreviousEpochTWAP('LUNAR');
   return (
     <Page>
       <BackgroundImage />

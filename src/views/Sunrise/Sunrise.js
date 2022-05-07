@@ -10,21 +10,21 @@ import { Box, Button, Typography, Grid } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 
-import useRedeemOnMasonry from '../../hooks/useRedeemOnMasonry';
-import useStakedBalanceOnMasonry from '../../hooks/useStakedBalanceOnMasonry';
+import useRedeemOnSunrise from '../../hooks/useRedeemOnSunrise';
+import useStakedBalanceOnSunrise from '../../hooks/useStakedBalanceOnSunrise';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import useCurrentEpoch from '../../hooks/useCurrentEpoch';
-import useFetchMasonryAPR from '../../hooks/useFetchMasonryAPR';
+import useFetchSunriseAPR from '../../hooks/useFetchSunriseAPR';
 
-import useCashPriceInEstimatedTWAP from '../../hooks/useCashPriceInEstimatedTWAP';
+import useTokenEstimatedTWAP from '../../hooks/useTokenEstimatedTWAP';
 import useTreasuryAllocationTimes from '../../hooks/useTreasuryAllocationTimes';
-import useTotalStakedOnMasonry from '../../hooks/useTotalStakedOnMasonry';
+import useTotalStakedOnSunrise from '../../hooks/useTotalStakedOnSunrise';
 import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheck';
 import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
-import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
+import useTokenPreviousEpochTWAP from '../../hooks/useTokenPreviousEpochTWAP';
 
 import Image from 'material-ui-image';
 import Fire from '../../assets/img/fire.gif';
@@ -51,17 +51,17 @@ const useStyles = makeStyles((theme) => ({
 const Masonry = () => {
   const classes = useStyles();
   const { account } = useWallet();
-  const { onRedeem } = useRedeemOnMasonry();
-  const stakedBalance = useStakedBalanceOnMasonry();
-  const currentEpoch = useCurrentEpoch();
-  const cashStat = useCashPriceInEstimatedTWAP();
-  const totalStaked = useTotalStakedOnMasonry();
-  const masonryAPR = useFetchMasonryAPR();
-  const canClaimReward = useClaimRewardCheck();
-  const canWithdraw = useWithdrawCheck();
-  const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
-  const { to } = useTreasuryAllocationTimes();
-  const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
+  const { onRedeem } = useRedeemOnSunrise('POLAR');
+  const stakedBalance = useStakedBalanceOnSunrise('POLAR');
+  const currentEpoch = useCurrentEpoch('POLAR');
+  const cashStat = useTokenEstimatedTWAP('POLAR');
+  const totalStaked = useTotalStakedOnSunrise('POLAR');
+  const masonryAPR = useFetchSunriseAPR('POLAR');
+  const canClaimReward = useClaimRewardCheck('POLAR');
+  const canWithdraw = useWithdrawCheck('POLAR');
+  const scalingFactor = useMemo(() => (cashStat ? Number(cashStat).toFixed(4) : null), [cashStat]);
+  const { to } = useTreasuryAllocationTimes('POLAR');
+  const polarPreviousEpochTwap = useTokenPreviousEpochTWAP('POLAR');
   return (
     <Page>
       <BackgroundImage />

@@ -7,19 +7,19 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 import CardIcon from '../../../components/CardIcon';
-import useClaimRewardTimerMasonry from '../../../hooks/masonry/useClaimRewardTimerLunarSunrise';
-import useClaimRewardCheck from '../../../hooks/masonry/useClaimRewardCheckLunarSunrise';
+import useClaimRewardTimerSunrise from '../../../hooks/masonry/useClaimRewardTimerSunrise';
+import useClaimRewardCheck from '../../../hooks/masonry/useClaimRewardCheck';
 import ProgressCountdown from './ProgressCountdown';
-import useHarvestFromMasonry from '../../../hooks/useHarvestFromLunarSunrise';
-import useEarningsOnMasonry from '../../../hooks/useEarningsOnLunarSunrise';
-import useTombStats from '../../../hooks/useLunarStats';
+import useClaimRewardFromSunrise from '../../../hooks/useClaimRewardFromSunrise';
+import useEarningsOnSunrise from '../../../hooks/useEarningsOnSunrise';
+import useStats from '../../../hooks/useStats';
 import { getDisplayBalance } from '../../../utils/formatBalance';
 
 const Harvest: React.FC = () => {
-  const tombStats = useTombStats();
-  const { onReward } = useHarvestFromMasonry();
-  const earnings = useEarningsOnMasonry();
-  const canClaimReward = useClaimRewardCheck();
+  const tombStats = useStats('LUNAR');
+  const { onReward } = useClaimRewardFromSunrise('LUNAR');
+  const earnings = useEarningsOnSunrise('LUNAR');
+  const canClaimReward = useClaimRewardCheck('LUNAR');
 
   const tokenPriceInDollars = useMemo(
     () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
@@ -28,7 +28,7 @@ const Harvest: React.FC = () => {
 
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
 
-  const { from, to } = useClaimRewardTimerMasonry();
+  const { from, to } = useClaimRewardTimerSunrise('LUNAR');
 
   return (
     <Box>
