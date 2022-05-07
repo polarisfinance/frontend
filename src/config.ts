@@ -10,7 +10,7 @@ const configurations: { [env: string]: Configuration } = {
     ftmscanUrl: 'https://aurorascan.dev/',
     defaultProvider: 'https://mainnet.aurora.dev',
     defaultWssProvider: 'https://mainnet.aurora.dev',
-    deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
+    deployments: require('./polaris-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
       USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
@@ -49,7 +49,7 @@ const configurations: { [env: string]: Configuration } = {
     ftmscanUrl: 'https://aurorascan.dev/',
     defaultProvider: 'https://mainnet.aurora.dev',
     defaultWssProvider: 'wss://mainnet.aurora.dev',
-    deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
+    deployments: require('./polaris-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
       USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
@@ -92,7 +92,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   sectionInUI: way to distinguish in which of the 3 pool groups it should be listed
         - 0 = Single asset stake pools
         - 1 = LP asset staking rewarding POLAR
-        - 2 = LP asset staking rewarding TSHARE
+        - 2 = LP asset staking rewarding SPOLAR
   contract: the contract name which will be loaded from the deployment.environmnet.json
   depositTokenName : the name of the token to be deposited
   earnTokenName: the rewarded token

@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks';
 import useAllowance from './useAllowance';
 import ERC20 from '../polaris-finance/ERC20';
-import { FTM_TICKER, TOMB_TICKER, TSHARE_TICKER, ZAPPER_ROUTER_ADDR } from '../utils/constants';
+import { FTM_TICKER, POLAR_TICKER, SPOLAR_TICKER, ZAPPER_ROUTER_ADDR } from '../utils/constants';
 import usePolarisFinance from './usePolarisFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;
@@ -21,8 +21,8 @@ function useApproveZapper(zappingToken: string): [ApprovalState, () => Promise<v
   const polarisFinance = usePolarisFinance();
   let token: ERC20;
   if (zappingToken === FTM_TICKER) token = polarisFinance.FTM;
-  else if (zappingToken === TOMB_TICKER) token = polarisFinance.POLAR;
-  else if (zappingToken === TSHARE_TICKER) token = polarisFinance.TSHARE;
+  else if (zappingToken === POLAR_TICKER) token = polarisFinance.POLAR;
+  else if (zappingToken === SPOLAR_TICKER) token = polarisFinance.SPOLAR;
   const pendingApproval = useHasPendingApproval(token.address, ZAPPER_ROUTER_ADDR);
   const currentAllowance = useAllowance(token, ZAPPER_ROUTER_ADDR, pendingApproval);
 

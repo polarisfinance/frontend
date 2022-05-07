@@ -21,8 +21,8 @@ function useApproveTaxOffice(): [ApprovalState, () => Promise<void>] {
   const polarisFinance = usePolarisFinance();
   let token: ERC20 = polarisFinance.POLAR;
   // if (zappingToken === FTM_TICKER) token = polarisFinance.FTM;
-  // else if (zappingToken === TOMB_TICKER) token = polarisFinance.POLAR;
-  // else if (zappingToken === TSHARE_TICKER) token = polarisFinance.TSHARE;
+  // else if (zappingToken === POLAR_TICKER) token = polarisFinance.POLAR;
+  // else if (zappingToken === SPOLAR_TICKER) token = polarisFinance.SPOLAR;
   const pendingApproval = useHasPendingApproval(token.address, TAX_OFFICE_ADDR);
   const currentAllowance = useAllowance(token, TAX_OFFICE_ADDR, pendingApproval);
 

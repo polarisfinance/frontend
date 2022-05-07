@@ -12,14 +12,14 @@ import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import {
-  polar as tombTesting,
-  tShare as tShareTesting,
+  polar as polarTesting,
+  sPolar as sPolarTesting,
   lunar as lunarTesting,
   tripolar as tripolarTesting,
 } from '../../polaris-finance/deployments/deployments.testing.json';
 import {
-  polar as tombProd,
-  tShare as tShareProd,
+  polar as polarProd,
+  sPolar as sPolarProd,
   lunar as lunarProd,
   tripolar as tripolarProd,
 } from '../../polaris-finance/deployments/deployments.mainnet.json';
@@ -100,22 +100,22 @@ const Home = () => {
   const tripolarStats = useTripolarStats();
   const triBondStats = useTripolarBondStats();
   let polar;
-  let tShare;
+  let sPolar;
   let lunar;
   let tripolar;
   if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    polar = tombTesting;
-    tShare = tShareTesting;
+    polar = polarTesting;
+    sPolar = sPolarTesting;
     lunar = lunarTesting;
     tripolar = tripolarTesting;
   } else {
-    polar = tombProd;
-    tShare = tShareProd;
+    polar = polarProd;
+    sPolar = sPolarProd;
     lunar = lunarProd;
     tripolar = tripolarProd;
   }
   const buyTombAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + polar.address;
-  const buyTShareAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + tShare.address;
+  const buyTShareAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + sPolar.address;
   const buyLunarAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + lunar.address;
   const buyTripolarAddress = 'https://www.trisolaris.io/#/swap?outputCurrency=' + tripolar.address;
 

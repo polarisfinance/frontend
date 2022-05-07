@@ -37,7 +37,7 @@ const Pit: React.FC = () => {
   const cashPrice = useCashPriceInLastTWAP();
   const previousTwap = useCashPriceInPreviousTWAP();
   const bondsRedeemable = useBondsRedeemable();
-  const bondBalance = useTokenBalance(polarisFinance?.TBOND);
+  const bondBalance = useTokenBalance(polarisFinance?.PBOND);
   const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
 
   const handleBuyBonds = useCallback(
@@ -78,7 +78,7 @@ const Pit: React.FC = () => {
                   action="Purchase"
                   fromToken={polarisFinance.POLAR}
                   fromTokenName="POLAR"
-                  toToken={polarisFinance.TBOND}
+                  toToken={polarisFinance.PBOND}
                   toTokenName="PBOND"
                   priceDesc={!isBondPurchasable ? 'POLAR is over peg' : 'PBOND is available for purchase'}
                   onExchange={handleBuyBonds}
@@ -107,7 +107,7 @@ const Pit: React.FC = () => {
               <StyledCardWrapper>
                 <ExchangeCard
                   action="Redeem"
-                  fromToken={polarisFinance.TBOND}
+                  fromToken={polarisFinance.PBOND}
                   fromTokenName="PBOND"
                   toToken={polarisFinance.POLAR}
                   toTokenName="POLAR"

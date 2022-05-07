@@ -33,15 +33,15 @@ import useWithdrawFromLunarSunrise from '../../../hooks/useWithdrawFromTripolarS
 const Stake: React.FC = () => {
   const polarisFinance = usePolarisFinance();
   const [approveStatus, approve] = useApprove(
-    polarisFinance.TSHARE,
+    polarisFinance.SPOLAR,
     polarisFinance.contracts.tripolarSunriseOld.address,
   );
 
-  const tokenBalance = useTokenBalance(polarisFinance.TSHARE);
+  const tokenBalance = useTokenBalance(polarisFinance.SPOLAR);
   const stakedBalance = useStakedBalanceOnMasonry();
   const { from, to } = useUnstakeTimerMasonry();
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('SPOLAR', polarisFinance.TSHARE);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('SPOLAR', polarisFinance.SPOLAR);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars

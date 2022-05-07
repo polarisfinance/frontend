@@ -18,10 +18,10 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const tombBalance = useTokenBalance(polarisFinance.POLAR);
   const displayTombBalance = useMemo(() => getDisplayBalance(tombBalance), [tombBalance]);
 
-  const tshareBalance = useTokenBalance(polarisFinance.TSHARE);
+  const tshareBalance = useTokenBalance(polarisFinance.SPOLAR);
   const displayTshareBalance = useMemo(() => getDisplayBalance(tshareBalance), [tshareBalance]);
 
-  const tbondBalance = useTokenBalance(polarisFinance.TBOND);
+  const tbondBalance = useTokenBalance(polarisFinance.PBOND);
   const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
 
   const lunarBalance = useTokenBalance(polarisFinance.LUNAR);

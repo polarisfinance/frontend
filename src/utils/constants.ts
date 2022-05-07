@@ -1,6 +1,6 @@
-export const TOMB_TICKER = 'POLAR';
-export const TSHARE_TICKER = 'SPOLAR';
-export const TBOND_TICKER = 'PBOND';
+export const POLAR_TICKER = 'POLAR';
+export const SPOLAR_TICKER = 'SPOLAR';
+export const PBOND_TICKER = 'PBOND';
 export const FTM_TICKER = 'NEAR';
 export const AURORA_TICKER = 'AURORA';
 export const SPOOKY_ROUTER_ADDR = '0xF491e7B69E4244ad4002BC14e878a34207E38c29';

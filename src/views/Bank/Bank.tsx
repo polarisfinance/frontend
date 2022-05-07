@@ -110,7 +110,7 @@ const Bank: React.FC = () => {
 const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const polarisFinance = usePolarisFinance();
   const tombAddr = polarisFinance.POLAR.address;
-  const tshareAddr = polarisFinance.TSHARE.address;
+  const tshareAddr = polarisFinance.SPOLAR.address;
   const lunarAddr = polarisFinance.LUNAR.address;
   const tripolarAddr = polarisFinance.TRIPOLAR.address;
 
