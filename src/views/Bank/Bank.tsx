@@ -14,8 +14,8 @@ import Stake from './components/Stake';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 import useRedeem from '../../hooks/useRedeem';
-import { Bank as BankEntity } from '../../tomb-finance';
-import useTombFinance from '../../hooks/useTombFinance';
+import { Bank as BankEntity } from '../../polaris-finance';
+import usePolarisFinance from '../../hooks/usePolarisFinance';
 import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
@@ -108,11 +108,11 @@ const Bank: React.FC = () => {
 };
 
 const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
-  const tombFinance = useTombFinance();
-  const tombAddr = tombFinance.TOMB.address;
-  const tshareAddr = tombFinance.TSHARE.address;
-  const lunarAddr = tombFinance.LUNAR.address;
-  const tripolarAddr = tombFinance.TRIPOLAR.address;
+  const polarisFinance = usePolarisFinance();
+  const tombAddr = polarisFinance.POLAR.address;
+  const tshareAddr = polarisFinance.TSHARE.address;
+  const lunarAddr = polarisFinance.LUNAR.address;
+  const tripolarAddr = polarisFinance.TRIPOLAR.address;
 
   let pairName: string;
   let uniswapUrl: string;

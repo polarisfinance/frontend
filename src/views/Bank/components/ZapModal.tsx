@@ -12,7 +12,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 import Label from '../../../components/Label';
 import useLpStats from '../../../hooks/useLpStats';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import useTombFinance from '../../../hooks/useTombFinance';
+import usePolarisFinance from '../../../hooks/usePolarisFinance';
 import { useWallet } from 'use-wallet';
 import useApproveZapper, { ApprovalState } from '../../../hooks/useApproveZapper';
 import { TOMB_TICKER, TSHARE_TICKER, FTM_TICKER } from '../../../utils/constants';
@@ -25,11 +25,11 @@ interface ZapProps extends ModalProps {
 }
 
 const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', decimals = 18 }) => {
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   const { balance } = useWallet();
   const ftmBalance = (Number(balance) / 1e24).toFixed(4).toString();
-  const tombBalance = useTokenBalance(tombFinance.TOMB);
-  const tshareBalance = useTokenBalance(tombFinance.TSHARE);
+  const tombBalance = useTokenBalance(polarisFinance.POLAR);
+  const tshareBalance = useTokenBalance(polarisFinance.TSHARE);
   const [val, setVal] = useState('');
   const [zappingToken, setZappingToken] = useState(FTM_TICKER);
   const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
@@ -67,13 +67,13 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setVal(e.currentTarget.value);
-    const estimateZap = await tombFinance.estimateZapIn(zappingToken, tokenName, String(e.currentTarget.value));
+    const estimateZap = await polarisFinance.estimateZapIn(zappingToken, tokenName, String(e.currentTarget.value));
     setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
   };
 
   const handleSelectMax = async () => {
     setVal(zappingTokenBalance);
-    const estimateZap = await tombFinance.estimateZapIn(zappingToken, tokenName, String(zappingTokenBalance));
+    const estimateZap = await polarisFinance.estimateZapIn(zappingToken, tokenName, String(zappingTokenBalance));
     setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
   };
 
@@ -101,7 +101,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         <StyledMenuItem value={FTM_TICKER}>FTM</StyledMenuItem>
         <StyledMenuItem value={TSHARE_TICKER}>TSHARE</StyledMenuItem>
         {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
-        {/* <StyledMenuItem value={TOMB_TICKER}>TOMB</StyledMenuItem> */}
+        {/* <StyledMenuItem value={TOMB_TICKER}>POLAR</StyledMenuItem> */}
       </Select>
       <TokenInput
         onSelectMax={handleSelectMax}

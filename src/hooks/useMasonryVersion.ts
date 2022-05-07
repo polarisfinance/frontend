@@ -1,21 +1,21 @@
 import { useCallback, useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 import useStakedBalanceOnMasonry from './useStakedBalanceOnMasonry';
 
 const useMasonryVersion = () => {
   const [masonryVersion, setMasonryVersion] = useState('latest');
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   const stakedBalance = useStakedBalanceOnMasonry();
 
   const updateState = useCallback(async () => {
-    setMasonryVersion(await tombFinance.fetchMasonryVersionOfUser());
-  }, [tombFinance?.isUnlocked, stakedBalance]);
+    setMasonryVersion(await polarisFinance.fetchMasonryVersionOfUser());
+  }, [polarisFinance?.isUnlocked, stakedBalance]);
 
   useEffect(() => {
-    if (tombFinance?.isUnlocked) {
+    if (polarisFinance?.isUnlocked) {
       updateState().catch((err) => console.error(err.stack));
     }
-  }, [tombFinance?.isUnlocked, stakedBalance]);
+  }, [polarisFinance?.isUnlocked, stakedBalance]);
 
   return masonryVersion;
 };

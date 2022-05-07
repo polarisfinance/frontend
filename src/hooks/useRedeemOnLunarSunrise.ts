@@ -1,15 +1,15 @@
 import { useCallback } from 'react';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useRedeemOnLunarSunrise = (description?: string) => {
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleRedeem = useCallback(() => {
     const alertDesc = description || 'Redeem SPOLAR from SUNRISE';
-    handleTransactionReceipt(tombFinance.exitFromLunarSunrise(), alertDesc);
-  }, [tombFinance, description, handleTransactionReceipt]);
+    handleTransactionReceipt(polarisFinance.exitFromLunarSunrise(), alertDesc);
+  }, [polarisFinance, description, handleTransactionReceipt]);
   return { onRedeem: handleRedeem };
 };
 

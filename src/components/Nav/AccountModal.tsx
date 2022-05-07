@@ -6,34 +6,34 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import Label from '../Label';
 import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
-import useTombFinance from '../../hooks/useTombFinance';
+import usePolarisFinance from '../../hooks/usePolarisFinance';
 import TokenSymbol from '../TokenSymbol';
 import { Grid } from '@material-ui/core';
 import { useWallet } from 'use-wallet';
 import { Button } from '@material-ui/core';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
-  const tombBalance = useTokenBalance(tombFinance.TOMB);
+  const tombBalance = useTokenBalance(polarisFinance.POLAR);
   const displayTombBalance = useMemo(() => getDisplayBalance(tombBalance), [tombBalance]);
 
-  const tshareBalance = useTokenBalance(tombFinance.TSHARE);
+  const tshareBalance = useTokenBalance(polarisFinance.TSHARE);
   const displayTshareBalance = useMemo(() => getDisplayBalance(tshareBalance), [tshareBalance]);
 
-  const tbondBalance = useTokenBalance(tombFinance.TBOND);
+  const tbondBalance = useTokenBalance(polarisFinance.TBOND);
   const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
 
-  const lunarBalance = useTokenBalance(tombFinance.LUNAR);
+  const lunarBalance = useTokenBalance(polarisFinance.LUNAR);
   const displayLunarBalance = useMemo(() => getDisplayBalance(lunarBalance), [lunarBalance]);
 
-  const lbondBalance = useTokenBalance(tombFinance.LBOND);
+  const lbondBalance = useTokenBalance(polarisFinance.LBOND);
   const displayLbondBalance = useMemo(() => getDisplayBalance(lbondBalance), [lbondBalance]);
 
-  const tripolarBalance = useTokenBalance(tombFinance.TRIPOLAR);
+  const tripolarBalance = useTokenBalance(polarisFinance.TRIPOLAR);
   const displayTripolarBalance = useMemo(() => getDisplayBalance(tripolarBalance), [tripolarBalance]);
 
-  const tribondBalance = useTokenBalance(tombFinance.TRIBOND);
+  const tribondBalance = useTokenBalance(polarisFinance.TRIBOND);
   const displayTribondBalance = useMemo(() => getDisplayBalance(tribondBalance), [tribondBalance]);
 
   const { reset } = useWallet();

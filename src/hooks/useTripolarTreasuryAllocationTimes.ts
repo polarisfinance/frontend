@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
-import { AllocationTime } from '../tomb-finance/types';
+import usePolarisFinance from './usePolarisFinance';
+import { AllocationTime } from '../polaris-finance/types';
 import useRefresh from './useRefresh';
 
 const useTreasuryAllocationTimes = () => {
@@ -9,12 +9,12 @@ const useTreasuryAllocationTimes = () => {
     from: new Date(),
     to: new Date(),
   });
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   useEffect(() => {
-    if (tombFinance) {
-      tombFinance.getTripolarTreasuryNextAllocationTime().then(setTime);
+    if (polarisFinance) {
+      polarisFinance.getTripolarTreasuryNextAllocationTime().then(setTime);
     }
-  }, [tombFinance, slowRefresh]);
+  }, [polarisFinance, slowRefresh]);
   return time;
 };
 

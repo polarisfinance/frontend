@@ -1,16 +1,19 @@
 import { useCallback } from 'react';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useStakeToMasonry = () => {
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleStake = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(tombFinance.stakeShareToMasonry(amount), `Stake ${amount} SPOLAR to the POLAR Sunrise`);
+      handleTransactionReceipt(
+        polarisFinance.stakeShareToMasonry(amount),
+        `Stake ${amount} SPOLAR to the POLAR Sunrise`,
+      );
     },
-    [tombFinance, handleTransactionReceipt],
+    [polarisFinance, handleTransactionReceipt],
   );
   return { onStake: handleStake };
 };

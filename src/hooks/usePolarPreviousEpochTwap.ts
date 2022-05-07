@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 
 const usePolarPreviousEpochTwap = () => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
     async function fetchPolarPreviousEpochTwap() {
       try {
-        setBalance(await tombFinance.getPolarPreviousEpochTwap());
+        setBalance(await polarisFinance.getPolarPreviousEpochTwap());
       } catch (err) {
         console.error(err);
       }
     }
     fetchPolarPreviousEpochTwap();
-  }, [setBalance, tombFinance]);
+  }, [setBalance, polarisFinance]);
 
   return balance;
 };

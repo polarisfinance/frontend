@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 import useRefresh from './useRefresh';
 
 const useStakedBalanceOnLunarSunrise = () => {
   const { slowRefresh } = useRefresh();
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
-  const isUnlocked = tombFinance?.isUnlocked;
+  const polarisFinance = usePolarisFinance();
+  const isUnlocked = polarisFinance?.isUnlocked;
   useEffect(() => {
     async function fetchBalance() {
       try {
-        setBalance(await tombFinance.getStakedSharesOnLunarSunrise());
+        setBalance(await polarisFinance.getStakedSharesOnLunarSunrise());
       } catch (e) {
         console.error(e);
       }
@@ -19,7 +19,7 @@ const useStakedBalanceOnLunarSunrise = () => {
     if (isUnlocked) {
       fetchBalance();
     }
-  }, [slowRefresh, isUnlocked, tombFinance]);
+  }, [slowRefresh, isUnlocked, polarisFinance]);
   return balance;
 };
 

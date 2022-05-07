@@ -1,19 +1,19 @@
 import { useCallback } from 'react';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useWithdrawFromLunarSunrise = () => {
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleWithdraw = useCallback(
     (amount: string) => {
       handleTransactionReceipt(
-        tombFinance.withdrawShareFromTripolarSunrise(amount),
+        polarisFinance.withdrawShareFromTripolarSunrise(amount),
         `Withdraw ${amount} SPOLAR from the SUNRISE`,
       );
     },
-    [tombFinance, handleTransactionReceipt],
+    [polarisFinance, handleTransactionReceipt],
   );
   return { onWithdraw: handleWithdraw };
 };

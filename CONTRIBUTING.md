@@ -1,8 +1,8 @@
-# Contributing to [Tomb.Fiance](https://tomb.finance)
+# Contributing to [Polaris Finance](https://polarisfinance.io)
 
 🎉 First off all, thanks for taking the time to contribute! 🎉
 
-Following is a set of guidelines for contributing to the `Tomb.Finance` website. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+Following is a set of guidelines for contributing to the `Polaris Finance` website. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## Code of Conduct
 
@@ -53,4 +53,4 @@ Always write a clear log message for your commits. One-line messages are fine fo
 If you would like to read more about good quality commit titles, check this [article](https://chris.beams.io/posts/git-commit/)
 
 Thank you,
-OGBoogie
+eYdr1en

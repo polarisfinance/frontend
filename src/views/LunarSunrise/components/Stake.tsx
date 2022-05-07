@@ -21,7 +21,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
-import useTombFinance from '../../../hooks/useTombFinance';
+import usePolarisFinance from '../../../hooks/usePolarisFinance';
 import ProgressCountdown from './ProgressCountdown';
 import useStakedBalanceOnMasonry from '../../../hooks/useStakedBalanceOnLunarSunrise';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
@@ -31,14 +31,14 @@ import useStakeToLunarSunrise from '../../../hooks/useStakeToLunarSunrise';
 import useWithdrawFromLunarSunrise from '../../../hooks/useWithdrawFromLunarSunrise';
 
 const Stake: React.FC = () => {
-  const tombFinance = useTombFinance();
-  const [approveStatus, approve] = useApprove(tombFinance.TSHARE, tombFinance.contracts.lunarSunrise.address);
+  const polarisFinance = usePolarisFinance();
+  const [approveStatus, approve] = useApprove(polarisFinance.TSHARE, polarisFinance.contracts.lunarSunrise.address);
 
-  const tokenBalance = useTokenBalance(tombFinance.TSHARE);
+  const tokenBalance = useTokenBalance(polarisFinance.TSHARE);
   const stakedBalance = useStakedBalanceOnMasonry();
   const { from, to } = useUnstakeTimerMasonry();
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('SPOLAR', tombFinance.TSHARE);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('SPOLAR', polarisFinance.TSHARE);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars

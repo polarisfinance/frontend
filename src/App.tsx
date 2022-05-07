@@ -6,7 +6,7 @@ import { ThemeProvider as TP1 } from 'styled-components';
 import { UseWalletProvider } from 'use-wallet';
 import usePromptNetwork from './hooks/useNetworkPrompt';
 import BanksProvider from './contexts/Banks';
-import TombFinanceProvider from './contexts/TombFinanceProvider';
+import PolarisFinanceProvider from './contexts/PolarisFinanceProvider';
 import ModalsProvider from './contexts/Modals';
 import store from './state';
 import theme from './theme';
@@ -128,7 +128,7 @@ const Providers: React.FC = ({ children }) => {
           <Provider store={store}>
             <Updaters />
             <RefreshContextProvider>
-              <TombFinanceProvider>
+              <PolarisFinanceProvider>
                 <ModalsProvider>
                   <BanksProvider>
                     <>
@@ -137,7 +137,7 @@ const Providers: React.FC = ({ children }) => {
                     </>
                   </BanksProvider>
                 </ModalsProvider>
-              </TombFinanceProvider>
+              </PolarisFinanceProvider>
             </RefreshContextProvider>
           </Provider>
         </UseWalletProvider>

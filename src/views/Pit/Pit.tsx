@@ -9,7 +9,7 @@ import ExchangeCard from './components/ExchangeCard';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useBondStats from '../../hooks/useBondStats';
-import useTombFinance from '../../hooks/useTombFinance';
+import usePolarisFinance from '../../hooks/usePolarisFinance';
 import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
 import useCashPriceInPreviousTWAP from '../../hooks/useCashPriceInPreviousTWAP';
 import { useTransactionAdder } from '../../state/transactions/hooks';
@@ -17,7 +17,7 @@ import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsRedeemable from '../../hooks/useBondsRedeemable';
 import { getDisplayBalance } from '../../utils/formatBalance';
-import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../tomb-finance/constants';
+import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../polaris-finance/constants';
 import HomeImage from '../../assets/img/home.png';
 import usePolarPreviousEpochTwap from '../../hooks/usePolarPreviousEpochTwap';
 const BackgroundImage = createGlobalStyle`
@@ -31,31 +31,31 @@ const BackgroundImage = createGlobalStyle`
 const Pit: React.FC = () => {
   const { path } = useRouteMatch();
   const { account } = useWallet();
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
   const cashPrice = useCashPriceInLastTWAP();
   const previousTwap = useCashPriceInPreviousTWAP();
   const bondsRedeemable = useBondsRedeemable();
-  const bondBalance = useTokenBalance(tombFinance?.TBOND);
+  const bondBalance = useTokenBalance(polarisFinance?.TBOND);
   const polarPreviousEpochTwap = usePolarPreviousEpochTwap();
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
-      const tx = await tombFinance.buyBonds(amount);
+      const tx = await polarisFinance.buyBonds(amount);
       addTransaction(tx, {
         summary: `Buy ${Number(amount).toFixed(2)} POLAR with ${amount} POLAR`,
       });
     },
-    [tombFinance, addTransaction],
+    [polarisFinance, addTransaction],
   );
 
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
-      const tx = await tombFinance.redeemBonds(amount);
+      const tx = await polarisFinance.redeemBonds(amount);
       addTransaction(tx, { summary: `Redeem ${amount} PBOND` });
     },
-    [tombFinance, addTransaction],
+    [polarisFinance, addTransaction],
   );
   const isBondRedeemable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
   const isBondPurchasable = useMemo(
@@ -76,9 +76,9 @@ const Pit: React.FC = () => {
               <StyledCardWrapper>
                 <ExchangeCard
                   action="Purchase"
-                  fromToken={tombFinance.TOMB}
+                  fromToken={polarisFinance.POLAR}
                   fromTokenName="POLAR"
-                  toToken={tombFinance.TBOND}
+                  toToken={polarisFinance.TBOND}
                   toTokenName="PBOND"
                   priceDesc={!isBondPurchasable ? 'POLAR is over peg' : 'PBOND is available for purchase'}
                   onExchange={handleBuyBonds}
@@ -107,9 +107,9 @@ const Pit: React.FC = () => {
               <StyledCardWrapper>
                 <ExchangeCard
                   action="Redeem"
-                  fromToken={tombFinance.TBOND}
+                  fromToken={polarisFinance.TBOND}
                   fromTokenName="PBOND"
-                  toToken={tombFinance.TOMB}
+                  toToken={polarisFinance.POLAR}
                   toTokenName="POLAR"
                   priceDesc={`${getDisplayBalance(bondsRedeemable)} PBOND Redeemable`}
                   onExchange={handleRedeemBonds}

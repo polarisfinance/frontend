@@ -16,13 +16,13 @@ import {
   tShare as tShareTesting,
   lunar as lunarTesting,
   tripolar as tripolarTesting,
-} from '../../tomb-finance/deployments/deployments.testing.json';
+} from '../../polaris-finance/deployments/deployments.testing.json';
 import {
   polar as tombProd,
   tShare as tShareProd,
   lunar as lunarProd,
   tripolar as tripolarProd,
-} from '../../tomb-finance/deployments/deployments.mainnet.json';
+} from '../../polaris-finance/deployments/deployments.mainnet.json';
 import ValueLocked from '../../assets/img/value_locked.svg';
 
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
@@ -30,7 +30,7 @@ import MetamaskFox from '../../assets/img/metamask-fox.svg';
 import { Box, Button, Card, CardContent, Grid } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
-import useTombFinance from '../../hooks/useTombFinance';
+import usePolarisFinance from '../../hooks/usePolarisFinance';
 
 import useLunarStats from '../../hooks/useLunarStats';
 import useLunarBondStats from '../../hooks/useLunarBondStats';
@@ -92,7 +92,7 @@ const Home = () => {
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   const lunarStats = useLunarStats();
   const lBondStats = useLunarBondStats();
@@ -289,7 +289,7 @@ const Home = () => {
                   <Grid item xs={4} sm={12}>
                     <Button
                       onClick={() => {
-                        tombFinance.watchAssetInMetamask('SPOLAR');
+                        polarisFinance.watchAssetInMetamask('SPOLAR');
                       }}
                       color="secondary"
                       variant="contained"
@@ -342,7 +342,7 @@ const Home = () => {
             <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tShareTotalSupply}</span>
           </Grid>
         </Grid>
-        {/* TOMB */}
+        {/* POLAR */}
         <Grid item xs={12} sm={12}>
           <Card>
             <CardContent
@@ -380,7 +380,7 @@ const Home = () => {
                   <Grid item xs={4} sm={12}>
                     <Button
                       onClick={() => {
-                        tombFinance.watchAssetInMetamask('POLAR');
+                        polarisFinance.watchAssetInMetamask('POLAR');
                       }}
                       color="secondary"
                       variant="contained"
@@ -471,7 +471,7 @@ const Home = () => {
                   <Grid item xs={4} sm={12}>
                     <Button
                       onClick={() => {
-                        tombFinance.watchAssetInMetamask('LUNAR');
+                        polarisFinance.watchAssetInMetamask('LUNAR');
                       }}
                       color="secondary"
                       variant="contained"
@@ -566,7 +566,7 @@ const Home = () => {
                   <Grid item xs={4} sm={12}>
                     <Button
                       onClick={() => {
-                        tombFinance.watchAssetInMetamask('TRIPOLAR');
+                        polarisFinance.watchAssetInMetamask('TRIPOLAR');
                       }}
                       color="secondary"
                       variant="contained"
@@ -656,7 +656,7 @@ const Home = () => {
                   <Grid item xs={4} sm={12}>
                     <Button
                       onClick={() => {
-                        tombFinance.watchAssetInMetamask('PBOND');
+                        polarisFinance.watchAssetInMetamask('PBOND');
                       }}
                       color="secondary"
                       variant="contained"
@@ -731,7 +731,7 @@ const Home = () => {
                   <Grid item xs={4} sm={12}>
                     <Button
                       onClick={() => {
-                        tombFinance.watchAssetInMetamask('LBOND');
+                        polarisFinance.watchAssetInMetamask('LBOND');
                       }}
                       color="secondary"
                       variant="contained"
@@ -806,7 +806,7 @@ const Home = () => {
                   <Grid item xs={4} sm={12}>
                     <Button
                       onClick={() => {
-                        tombFinance.watchAssetInMetamask('TRIBOND');
+                        polarisFinance.watchAssetInMetamask('TRIBOND');
                       }}
                       color="secondary"
                       variant="contained"

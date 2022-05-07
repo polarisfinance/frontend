@@ -6,14 +6,14 @@ import { Button, Card } from '@material-ui/core';
 // import Button from '../../../components/Button';
 // import Card from '../../../components/Card';
 import CardContent from '../../../components/CardContent';
-import useTombFinance from '../../../hooks/useTombFinance';
+import usePolarisFinance from '../../../hooks/usePolarisFinance';
 import Label from '../../../components/Label';
 import TokenSymbol from '../../../components/TokenSymbol';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import useModal from '../../../hooks/useModal';
 import ExchangeModal from './ExchangeModal';
-import ERC20 from '../../../tomb-finance/ERC20';
+import ERC20 from '../../../polaris-finance/ERC20';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useCatchError from '../../../hooks/useCatchError';
@@ -44,7 +44,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
   const catchError = useCatchError();
   const {
     contracts: { tripolarTreasury },
-  } = useTombFinance();
+  } = usePolarisFinance();
   const [approveStatus, approve] = useApprove(fromToken, tripolarTreasury.address);
 
   const balance = useTokenBalance(fromToken);

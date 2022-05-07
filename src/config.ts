@@ -1,7 +1,7 @@
 // import { ChainId } from '@pancakeswap-libs/sdk';
 import { ChainId } from '@trisolaris/sdk';
-import { Configuration } from './tomb-finance/config';
-import { BankInfo } from './tomb-finance';
+import { Configuration } from './polaris-finance/config';
+import { BankInfo } from './polaris-finance';
 
 const configurations: { [env: string]: Configuration } = {
   development: {
@@ -91,7 +91,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   poolId: the poolId assigned in the contract
   sectionInUI: way to distinguish in which of the 3 pool groups it should be listed
         - 0 = Single asset stake pools
-        - 1 = LP asset staking rewarding TOMB
+        - 1 = LP asset staking rewarding POLAR
         - 2 = LP asset staking rewarding TSHARE
   contract: the contract name which will be loaded from the deployment.environmnet.json
   depositTokenName : the name of the token to be deposited

@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
-import { TokenStat } from '../tomb-finance/types';
+import usePolarisFinance from './usePolarisFinance';
+import { TokenStat } from '../polaris-finance/types';
 import useRefresh from './useRefresh';
 
 const useTripolarStats = () => {
   const [stat, setStat] = useState<TokenStat>();
   const { fastRefresh } = useRefresh();
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
     async function fetchTripolarPrice() {
       try {
-        setStat(await tombFinance.getTripolarStat());
+        setStat(await polarisFinance.getTripolarStat());
       } catch (err) {
         console.error(err);
       }
     }
     fetchTripolarPrice();
-  }, [setStat, tombFinance, fastRefresh]);
+  }, [setStat, polarisFinance, fastRefresh]);
 
   return stat;
 };

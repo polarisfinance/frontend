@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from '../useTombFinance';
-import { AllocationTime } from '../../tomb-finance/types';
+import usePolarisFinance from '../usePolarisFinance';
+import { AllocationTime } from '../../polaris-finance/types';
 
 const useClaimRewardTimerMasonry = () => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
   });
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
-    if (tombFinance) {
-      tombFinance.getUserClaimRewardTimeTripolarOld().then(setTime);
+    if (polarisFinance) {
+      polarisFinance.getUserClaimRewardTimeTripolarOld().then(setTime);
     }
-  }, [tombFinance]);
+  }, [polarisFinance]);
   return time;
 };
 

@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 
 const useTreasuryAmount = () => {
   const [amount, setAmount] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
-    if (tombFinance) {
-      const { Treasury } = tombFinance.contracts;
-      tombFinance.TOMB.balanceOf(Treasury.address).then(setAmount);
+    if (polarisFinance) {
+      const { Treasury } = polarisFinance.contracts;
+      polarisFinance.POLAR.balanceOf(Treasury.address).then(setAmount);
     }
-  }, [tombFinance]);
+  }, [polarisFinance]);
   return amount;
 };
 
