@@ -10,8 +10,15 @@ const useClaimRewardTimerSunrise = (token: string) => {
   const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
+    async function fetchUserClaimRewardTime() {
+      try {
+        setTime(await polarisFinance.getUserClaimRewardTime(token));
+      } catch (e) {
+        console.error(e);
+      }
+    }
     if (polarisFinance) {
-      polarisFinance.getUserClaimRewardTime(token).then(setTime);
+      fetchUserClaimRewardTime();
     }
   }, [polarisFinance, token]);
   return time;

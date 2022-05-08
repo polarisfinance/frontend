@@ -1102,24 +1102,24 @@ export class PolarisFinance {
     if (token === 'POLAR') {
       treasury = this.contracts.Treasury;
       sunrise = this.contracts.Masonry;
-    }
-    if (token === 'LUNAR') {
+    } else if (token === 'LUNAR') {
       treasury = this.contracts.lunarTreasury;
       sunrise = this.contracts.lunarSunrise;
-    }
-    if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR') {
       treasury = this.contracts.tripolarTreasury;
       sunrise = this.contracts.tripolarSunrise;
-    }
-    if (token === 'OLDTRIPOLAR') {
+    } else if (token === 'OLDTRIPOLAR') {
       treasury = this.contracts.tripolarTreasuryOld;
       sunrise = this.contracts.tripolarSunriseOld;
     }
-    const [nextEpochTimestamp, currentEpoch, mason, period, rewardLockupEpochs] = await Promise.all([
+    const [nextEpochTimestamp, currentEpoch, period] = await Promise.all([
       sunrise.nextEpochPoint(),
       sunrise.epoch(),
-      sunrise.masons(this.myAccount),
       treasury.PERIOD(),
+    ]);
+
+    const [mason, rewardLockupEpochs] = await Promise.all([
+      sunrise.masons(this.myAccount),
       sunrise.rewardLockupEpochs(),
     ]);
 
@@ -1154,29 +1154,28 @@ export class PolarisFinance {
     if (token === 'POLAR') {
       treasury = this.contracts.Treasury;
       sunrise = this.contracts.Masonry;
-    }
-    if (token === 'LUNAR') {
+    } else if (token === 'LUNAR') {
       treasury = this.contracts.lunarTreasury;
       sunrise = this.contracts.lunarSunrise;
-    }
-    if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR') {
       treasury = this.contracts.tripolarTreasury;
       sunrise = this.contracts.tripolarSunrise;
-    }
-    if (token === 'OLDTRIPOLAR') {
+    } else if (token === 'OLDTRIPOLAR') {
       treasury = this.contracts.tripolarTreasuryOld;
       sunrise = this.contracts.tripolarSunriseOld;
     }
 
-    const [nextEpochTimestamp, currentEpoch, mason, period, withdrawLockupEpochs, stakedAmount] = await Promise.all([
+    const [nextEpochTimestamp, currentEpoch, period, withdrawLockupEpochs] = await Promise.all([
       sunrise.nextEpochPoint(),
       sunrise.epoch(),
-      sunrise.masons(this.myAccount),
       treasury.PERIOD(),
       sunrise.withdrawLockupEpochs(),
-      this.getStakedSpolarOnSunrise('POLAR'),
     ]);
 
+    const [mason, stakedAmount] = await Promise.all([
+      sunrise.masons(this.myAccount),
+      this.getStakedSpolarOnSunrise(token),
+    ]);
     const startTimeEpoch = mason.epochTimerStart;
     const PeriodInHours = period / 60 / 60;
     const fromDate = new Date(Date.now());

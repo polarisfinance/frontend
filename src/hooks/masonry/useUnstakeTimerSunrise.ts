@@ -10,8 +10,16 @@ const useUnstakeTimerMasonry = (token: string) => {
   const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
+    async function fetchUserUnstakeTime() {
+      try {
+        setTime(await polarisFinance.getUserUnstakeTime(token));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     if (polarisFinance) {
-      polarisFinance.getUserUnstakeTime(token).then(setTime);
+      fetchUserUnstakeTime();
     }
   }, [polarisFinance, token]);
   return time;
