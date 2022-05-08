@@ -56,7 +56,7 @@ const Stake = ({ token, bond, tokenAddress, lpAddress }) => {
   const tokenStats = useStats(token);
   const tokenPriceInNear = useMemo(() => (tokenStats ? Number(tokenStats.tokenInFtm).toFixed(4) : null), [tokenStats]);
   const tokenPriceInDollars = useMemo(
-    () => (tokenStats ? Number(Number(tokenStats.priceInDollars).toFixed(2)) : null),
+    () => (tokenStats ? String(Number(tokenStats.priceInDollars).toFixed(2)) : null),
     [tokenStats],
   );
   const tokenCirculatingSupply = useMemo(
@@ -97,7 +97,7 @@ const Stake = ({ token, bond, tokenAddress, lpAddress }) => {
                 <Grid item>
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      ${numberWithSpaces(Number((tokenCirculatingSupply * tokenPriceInDollars).toFixed(2)))}
+                      ${numberWithSpaces((tokenCirculatingSupply * Number(tokenPriceInDollars)).toFixed(2))}
                     </span>
                   </Box>
                 </Grid>
