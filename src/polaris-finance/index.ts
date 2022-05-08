@@ -1,2 +1,2 @@
 export { PolarisFinance as default } from './PolarisFinance';
-export type { Bank, BankInfo, ContractName } from './types';
+export type { Bank, BankInfo, Sunrise, SunriseInfo, ContractName } from './types';

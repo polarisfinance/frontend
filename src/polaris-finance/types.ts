@@ -20,6 +20,23 @@ export interface Bank extends BankInfo {
   earnToken: ERC20;
 }
 
+export interface SunriseInfo {
+  name: string;
+  contract: ContractName;
+  earnTokenName: ContractName;
+  sort: number;
+  boosted: boolean;
+  coming: boolean;
+  retired: boolean;
+  bond: string;
+  tokenAddress: string;
+  lpAddress: string;
+}
+
+export interface Sunrise extends SunriseInfo {
+  address: string;
+}
+
 export type PoolStats = {
   dailyAPR: string;
   yearlyAPR: string;

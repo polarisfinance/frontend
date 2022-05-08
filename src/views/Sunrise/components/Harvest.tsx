@@ -15,11 +15,11 @@ import useEarningsOnSunrise from '../../../hooks/useEarningsOnSunrise';
 import useStats from '../../../hooks/useStats';
 import { getDisplayBalance } from '../../../utils/formatBalance';
 
-const Harvest: React.FC = () => {
-  const tombStats = useStats('POLAR');
-  const { onReward } = useClaimRewardFromSunrise('POLAR');
-  const earnings = useEarningsOnSunrise('POLAR');
-  const canClaimReward = useClaimRewardCheck('POLAR');
+const Harvest = ({ sunrise }) => {
+  const tombStats = useStats(sunrise);
+  const { onReward } = useClaimRewardFromSunrise(sunrise);
+  const earnings = useEarningsOnSunrise(sunrise);
+  const canClaimReward = useClaimRewardCheck(sunrise);
 
   const tokenPriceInDollars = useMemo(
     () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
@@ -28,7 +28,7 @@ const Harvest: React.FC = () => {
 
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
 
-  const { from, to } = useClaimRewardTimerSunrise('POLAR');
+  const { from, to } = useClaimRewardTimerSunrise(sunrise);
 
   return (
     <Box>
@@ -37,11 +37,11 @@ const Harvest: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <CardIcon>
-                <TokenSymbol symbol="POLAR" />
+                <TokenSymbol symbol={sunrise} />
               </CardIcon>
               <Value value={getDisplayBalance(earnings)} />
               <Label text={`≈ $${earnedInDollars}`} />
-              <Label text="POLAR Earned" />
+              <Label text={`${sunrise} Earned`} />
             </StyledCardHeader>
             <StyledCardActions>
               <Button

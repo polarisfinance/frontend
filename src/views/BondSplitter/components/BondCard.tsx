@@ -11,7 +11,7 @@ import Value from '../../../components/Value';
 import TokenSymbol from '../../../components/TokenSymbol';
 import { Link } from 'react-router-dom';
 
-const Stake: React.FC = () => {
+const Stake = ({ sunrise }) => {
   return (
     <Box>
       <Card>
@@ -19,22 +19,37 @@ const Stake: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <CardIcon>
-                <TokenSymbol symbol="TRIPOLAR" />
+                <TokenSymbol symbol={sunrise.bond} />
               </CardIcon>
-              <Value value={'TRIPOLAR Sunrise'} />
-              <Label text="Stake your $SPOLAR to earn $TRIPOLAR" />
+              <Value value={`${sunrise.earnTokenName} BOND`} />
+              <Label text={`BOND room for ${sunrise.earnTokenName}`} />
             </StyledCardHeader>
-            <StyledCardActions>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginTop: '20px' }}
-                component={Link}
-                to={'/tripolar_sunrise'}
-              >
-                View and Stake
-              </Button>
-            </StyledCardActions>
+            {sunrise.coming ? (
+              <StyledCardActions>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '20px' }}
+                  component={Link}
+                  to={'/polar_sunrise'}
+                  disabled={true}
+                >
+                  Coming Soon
+                </Button>
+              </StyledCardActions>
+            ) : (
+              <StyledCardActions>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '20px' }}
+                  component={Link}
+                  to={`/bond/${sunrise.name}`}
+                >
+                  View and Bond
+                </Button>
+              </StyledCardActions>
+            )}
           </StyledCardContentInner>
         </CardContent>
       </Card>

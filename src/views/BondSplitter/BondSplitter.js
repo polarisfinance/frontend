@@ -1,10 +1,10 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 
-import OldTripolar from './components/OldTripolar';
-import SunriseCard from './components/SunriseCard';
+import BondCard from './components/BondCard';
 
 import { makeStyles } from '@material-ui/core/styles';
+
 import { Typography, Grid } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
@@ -14,7 +14,7 @@ import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 
 import useSunrises from '../../hooks/useSunrises';
-import Sunrise from '../Sunrise';
+import Bond from '../Bond';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 const BackgroundImage = createGlobalStyle`
@@ -28,6 +28,9 @@ const BackgroundImage = createGlobalStyle`
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
+    [theme.breakpoints.up('md')]: {
+      height: '90px',
+    },
   },
   text: {
     fontSize: '20px',
@@ -43,23 +46,21 @@ const Masonry = () => {
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage />
+          <BackgroundImage style={{ height: '100%', width: '100%', flex: 1 }} />
           {!!account ? (
             <>
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-                Sunrise
+                Bond
               </Typography>
+
               <Grid container className={classes.text}>
                 {sunrises.map((sunrise) => (
                   <React.Fragment key={sunrise.earnTokenName}>
                     <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-                      <SunriseCard sunrise={sunrise} />
+                      <BondCard sunrise={sunrise} />
                     </Grid>
                   </React.Fragment>
                 ))}
-                <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-                  <OldTripolar />
-                </Grid>
               </Grid>
             </>
           ) : (
@@ -68,7 +69,7 @@ const Masonry = () => {
         </Route>
         <Route path={`${path}/:sunriseId`}>
           <BackgroundImage />
-          <Sunrise />
+          <Bond />
         </Route>
       </Page>
     </Switch>

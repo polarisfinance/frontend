@@ -253,12 +253,12 @@ export class PolarisFinance {
     let expectedPrice: BigNumber;
     if (token === 'POLAR') {
       expectedPrice = await this.contracts.SeigniorageOracle.twap(this.POLAR.address, ethers.utils.parseEther('1'));
-    }
-    if (token === 'LUNAR') {
+    } else if (token === 'LUNAR') {
       expectedPrice = await this.contracts.LunarOracle.twap(this.LUNAR.address, ethers.utils.parseEther('1'));
-    }
-    if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR') {
       expectedPrice = await this.contracts.TripolarOracle.twap(this.TRIPOLAR.address, ethers.utils.parseEther('1'));
+    } else {
+      return 'nothing';
     }
     return token === 'POLAR' ? getDisplayBalance(expectedPrice.div(1e6)) : getDisplayBalance(expectedPrice);
   }
@@ -490,6 +490,7 @@ export class PolarisFinance {
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.epoch();
     }
+    return;
   }
 
   /**
@@ -894,12 +895,12 @@ export class PolarisFinance {
       tokenPrice: TokenStat;
     if (token === 'POLAR') {
       sunrise = this.contracts.Masonry;
-    }
-    if (token === 'LUNAR') {
+    } else if (token === 'LUNAR') {
       sunrise = this.contracts.lunarSunrise;
-    }
-    if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR') {
       sunrise = this.contracts.tripolarSunrise;
+    } else {
+      return 0;
     }
     tokenPricePromise = this.getStat(token);
     latestSnapshotIndex = await sunrise.latestSnapshotIndex();
@@ -949,15 +950,14 @@ export class PolarisFinance {
     let canWithdraw: boolean, stakedAmount: BigNumber, sunrise: Contract;
     if (token === 'POLAR') {
       sunrise = this.contracts.Masonry;
-    }
-    if (token === 'LUNAR') {
+    } else if (token === 'LUNAR') {
       sunrise = this.contracts.lunarSunrise;
-    }
-    if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR') {
       sunrise = this.contracts.tripolarSunrise;
-    }
-    if (token === 'OLDTRIPOLAR') {
+    } else if (token === 'OLDTRIPOLAR') {
       sunrise = this.contracts.tripolarSunriseOld;
+    } else {
+      return false;
     }
     [canWithdraw, stakedAmount] = await Promise.all([
       sunrise.canWithdraw(this.myAccount),
@@ -1008,6 +1008,7 @@ export class PolarisFinance {
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.balanceOf(this.myAccount);
     }
+    return;
   }
 
   async getEarningsOnSunrise(token: string): Promise<BigNumber> {
@@ -1068,20 +1069,20 @@ export class PolarisFinance {
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.exit();
     }
+    return;
   }
 
   async getTreasuryNextAllocationTime(token: string): Promise<AllocationTime> {
     let treasury: Contract;
     if (token === 'POLAR') {
       treasury = this.contracts.Treasury;
-    }
-    if (token === 'LUNAR') {
+    } else if (token === 'LUNAR') {
       treasury = this.contracts.lunarTreasury;
-    }
-    if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR') {
       treasury = this.contracts.tripolarTreasury;
+    } else {
+      return { from: new Date(), to: new Date() };
     }
-
     const nextEpochTimestamp: BigNumber = await treasury.nextEpochPoint();
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
     const prevAllocation = new Date(Date.now());

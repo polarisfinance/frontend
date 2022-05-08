@@ -1,7 +1,7 @@
 // import { ChainId } from '@pancakeswap-libs/sdk';
 import { ChainId } from '@trisolaris/sdk';
 import { Configuration } from './polaris-finance/config';
-import { BankInfo } from './polaris-finance';
+import { BankInfo, SunriseInfo } from './polaris-finance';
 
 const configurations: { [env: string]: Configuration } = {
   development: {
@@ -375,6 +375,57 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     finished: false,
     sort: 5,
     closedForStaking: true,
+  },
+};
+
+export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
+  PolarSunrise: {
+    name: 'polar',
+    contract: 'Masonry',
+    earnTokenName: 'POLAR',
+    sort: 0,
+    boosted: true,
+    coming: false,
+    retired: false,
+    bond: 'PBOND',
+    tokenAddress: '0xf0f3b9Eee32b1F490A4b8720cf6F005d4aE9eA86',
+    lpAddress: '0x3fa4d0145a0b6Ad0584B1ad5f61cB490A04d8242',
+  },
+  LunarSunrise: {
+    name: 'lunar',
+    contract: 'lunarSunrise',
+    earnTokenName: 'LUNAR',
+    sort: 1,
+    boosted: true,
+    coming: false,
+    retired: false,
+    bond: 'LBOND',
+    tokenAddress: '0x25e801Eb75859Ba4052C4ac4233ceC0264eaDF8c',
+    lpAddress: '0x3e50da46cB79d1f9F08445984f207278796CE2d2',
+  },
+  TripolarSunrise: {
+    name: 'tripolar',
+    contract: 'tripolarSunrise',
+    earnTokenName: 'TRIPOLAR',
+    sort: 2,
+    boosted: false,
+    coming: false,
+    retired: false,
+    bond: 'TRIBOND',
+    tokenAddress: '0x60527a2751A827ec0Adf861EfcAcbf111587d748',
+    lpAddress: '0x85f155FDCf2a951fd95734eCEB99F875b84a2E27',
+  },
+  AurisSunrise: {
+    name: 'tripolar',
+    contract: 'tripolarSunrise',
+    earnTokenName: 'AURIS',
+    sort: 3,
+    boosted: false,
+    coming: true,
+    retired: false,
+    bond: 'ABOND',
+    tokenAddress: '',
+    lpAddress: '',
   },
 };
 

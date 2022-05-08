@@ -3,9 +3,6 @@ import styled from 'styled-components';
 
 import { Box, Button, Card, CardContent, Typography } from '@material-ui/core';
 
-// import Button from '../../../components/Button';
-// import Card from '../../../components/Card';
-// import CardContent from '../../../components/CardContent';
 import CardIcon from '../../../components/CardIcon';
 import { AddIcon, RemoveIcon } from '../../../components/icons';
 import IconButton from '../../../components/IconButton';
@@ -30,15 +27,15 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import useStakeToSunrise from '../../../hooks/useStakeToSunrise';
 import useWithdrawFromSunrise from '../../../hooks/useWithdrawFromSunrise';
 
-const Stake: React.FC = () => {
+const Stake = ({ sunrise }) => {
   const polarisFinance = usePolarisFinance();
   const [approveStatus, approve] = useApprove(polarisFinance.SPOLAR, polarisFinance.contracts.Masonry.address);
 
   const tokenBalance = useTokenBalance(polarisFinance.SPOLAR);
-  const stakedBalance = useStakedBalanceOnSunrise('POLAR');
-  const { from, to } = useUnstakeTimerSunrise('POLAR');
+  const stakedBalance = useStakedBalanceOnSunrise(sunrise);
+  const { from, to } = useUnstakeTimerSunrise(sunrise);
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('SPOLAR', polarisFinance.SPOLAR);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(sunrise, polarisFinance.SPOLAR);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars
@@ -46,11 +43,10 @@ const Stake: React.FC = () => {
         : null,
     [stakedTokenPriceInDollars, stakedBalance],
   );
-  // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const { onStake } = useStakeToSunrise('POLAR');
-  const { onWithdraw } = useWithdrawFromSunrise('POLAR');
-  const canWithdrawFromMasonry = useWithdrawCheck('POLAR');
+  const { onStake } = useStakeToSunrise(sunrise);
+  const { onWithdraw } = useWithdrawFromSunrise(sunrise);
+  const canWithdrawFromMasonry = useWithdrawCheck(sunrise);
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal

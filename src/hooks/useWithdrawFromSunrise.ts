@@ -10,7 +10,7 @@ const useWithdrawFromSunrise = (token: string) => {
     (amount: string) => {
       handleTransactionReceipt(
         polarisFinance.withdrawSpolarFromSunrise(amount, token),
-        `Withdraw ${amount} SPOLAR from the ${token}SUNRISE`,
+        `Withdraw ${amount} SPOLAR from the ${token} SUNRISE`,
       );
     },
     [polarisFinance, handleTransactionReceipt, token],
