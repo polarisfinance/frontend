@@ -21,7 +21,7 @@ import { useParams } from 'react-router-dom';
 import useSunrise from '../../hooks/useSunrise';
 
 const Pit: React.FC = () => {
-  const { sunriseId } = useParams();
+  const { sunriseId } = useParams<{ sunriseId: string }>();
   const sunrise = useSunrise(sunriseId);
 
   const { account } = useWallet();

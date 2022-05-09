@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Sunrise: React.FC = () => {
   const classes = useStyles();
-  const { sunriseId } = useParams();
+  const { sunriseId } = useParams<{ sunriseId: string }>();
   const sunrise = useSunrise(sunriseId);
   const { account } = useWallet();
   const { onRedeem } = useRedeemOnSunrise(sunrise?.earnTokenName);
