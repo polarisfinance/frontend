@@ -4,45 +4,6 @@ import { Configuration } from './polaris-finance/config';
 import { BankInfo, SunriseInfo } from './polaris-finance';
 
 const configurations: { [env: string]: Configuration } = {
-  development: {
-    chainId: ChainId.AURORA,
-    networkName: 'Aurora Mainnet',
-    ftmscanUrl: 'https://aurorascan.dev/',
-    defaultProvider: 'https://mainnet.aurora.dev',
-    defaultWssProvider: 'wss://mainnet.aurora.dev',
-    deployments: require('./polaris-finance/deployments/deployments.mainnet.json'),
-    externalTokens: {
-      NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
-      USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
-      AURORA: ['0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79', 18],
-      UST: ['0x5ce9F0B6AFb36135b5ddBF11705cEB65E634A9dC', 18],
-      LUNA: ['0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096', 18],
-      'POLAR-NEAR-LP': ['0x3fa4d0145a0b6Ad0584B1ad5f61cB490A04d8242', 18],
-      'SPOLAR-NEAR-LP': ['0xADf9D0C77c70FCb1fDB868F54211288fCE9937DF', 18],
-      'NEAR-USDC-LP': ['0x20F8AeFB5697B77E0BB835A8518BE70775cdA1b0', 18],
-      POLAR: ['0xf0f3b9Eee32b1F490A4b8720cf6F005d4aE9eA86', 18],
-      PBOND: ['0x3a4773e600086A753862621A26a2E3274610da43', 18],
-      'LUNAR-LUNA-LP': ['0x3e50da46cB79d1f9F08445984f207278796CE2d2', 18],
-      LUNAR: ['0x25e801Eb75859Ba4052C4ac4233ceC0264eaDF8c', 18],
-      LBOND: ['0x3a101bA3f4a39C921A171473592D4EBDA6bD0B57', 18],
-      'LUNA-NEAR-LP': ['0xdf8cbf89ad9b7dafdd3e37acec539eecc8c47914', 18],
-      SPOLAR: ['0x9D6fc90b25976E40adaD5A3EdD08af9ed7a21729', 18],
-      STNEAR: ['0x07F9F7f963C5cD2BBFFd30CcfB964Be114332E30', 24],
-      'POLAR-STNEAR-LP': ['0x75890912E9bb373dD0aA57a3fe9eC748Bf923915', 18],
-      xTRI: ['0x802119e4e253D5C19aA06A5d567C5a41596D6803', 18],
-
-      TRIPOLAR: ['0x60527a2751A827ec0Adf861EfcAcbf111587d748', 18],
-      TRIBOND: ['0x8200B4F47eDb608e36561495099a8caF3F806198', 18],
-      'TRIPOLAR-xTRI-LP': ['0x85f155FDCf2a951fd95734eCEB99F875b84a2E27', 18],
-      'STNEAR-xTRI-LP': ['0x5913f644a10d98c79f2e0b609988640187256373', 18],
-      'STNEAR-NEAR-LP': ['0x47924ae4968832984f4091eec537dff5c38948a4', 18],
-      'POLAR-LUNAR-LP': ['0x254320caDE0B3f44CA1c0C12D7aCeAd797D933e6', 18],
-    },
-    baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
-    bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
-    masonryLaunchesAt: new Date('2020-12-11T00:00:00Z'),
-    refreshInterval: 10000,
-  },
   production: {
     chainId: ChainId.AURORA,
     networkName: 'Aurora Mainnet',
@@ -415,11 +376,23 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     tokenAddress: '0x60527a2751A827ec0Adf861EfcAcbf111587d748',
     lpAddress: '0x85f155FDCf2a951fd95734eCEB99F875b84a2E27',
   },
+  EthernalSunrise: {
+    name: 'tripolar',
+    contract: 'tripolarSunrise',
+    earnTokenName: 'ETHERNAL',
+    sort: 3,
+    boosted: false,
+    coming: true,
+    retired: false,
+    bond: 'EBOND',
+    tokenAddress: '',
+    lpAddress: '',
+  },
   AurisSunrise: {
     name: 'tripolar',
     contract: 'tripolarSunrise',
     earnTokenName: 'AURIS',
-    sort: 3,
+    sort: 4,
     boosted: false,
     coming: true,
     retired: false,
@@ -429,4 +402,4 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
   },
 };
 
-export default configurations[process.env.NODE_ENV || 'development'];
+export default configurations['production'];
