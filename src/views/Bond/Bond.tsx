@@ -75,6 +75,7 @@ const Pit: React.FC = () => {
                 }
                 onExchange={handleBuyBonds}
                 disabled={!bondStat || isBondRedeemable}
+                treasury={sunrise.treasury}
               />
             </StyledCardWrapper>
             <StyledStatsWrapper>
@@ -109,6 +110,7 @@ const Pit: React.FC = () => {
                 disabledDescription={
                   !isBondRedeemable ? `Enabled when ${sunrise.earnTokenName} > ${BOND_REDEEM_PRICE}NEAR` : null
                 }
+                treasury={sunrise.treasury}
               />
             </StyledCardWrapper>
           </StyledBond>

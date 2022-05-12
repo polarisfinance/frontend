@@ -351,6 +351,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     bond: 'PBOND',
     tokenAddress: '0xf0f3b9Eee32b1F490A4b8720cf6F005d4aE9eA86',
     lpAddress: '0x3fa4d0145a0b6Ad0584B1ad5f61cB490A04d8242',
+    treasury: 'Treasury',
   },
   LunarSunrise: {
     name: 'lunar',
@@ -363,6 +364,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     bond: 'LBOND',
     tokenAddress: '0x25e801Eb75859Ba4052C4ac4233ceC0264eaDF8c',
     lpAddress: '0x3e50da46cB79d1f9F08445984f207278796CE2d2',
+    treasury: 'lunarTreasury',
   },
   TripolarSunrise: {
     name: 'tripolar',
@@ -375,6 +377,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     bond: 'TRIBOND',
     tokenAddress: '0x60527a2751A827ec0Adf861EfcAcbf111587d748',
     lpAddress: '0x85f155FDCf2a951fd95734eCEB99F875b84a2E27',
+    treasury: 'tripolarTreasury',
   },
   EthernalSunrise: {
     name: 'tripolar',
@@ -387,6 +390,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     bond: 'EBOND',
     tokenAddress: '',
     lpAddress: '',
+    treasury: 'tripolarTreasury',
   },
   AurisSunrise: {
     name: 'tripolar',
@@ -399,6 +403,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     bond: 'ABOND',
     tokenAddress: '',
     lpAddress: '',
+    treasury: 'tripolarTreasury',
   },
 };
 

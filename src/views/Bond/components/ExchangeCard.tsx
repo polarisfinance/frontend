@@ -28,6 +28,7 @@ interface ExchangeCardProps {
   onExchange: (amount: string) => void;
   disabled?: boolean;
   disabledDescription?: string;
+  treasury: string;
 }
 
 const ExchangeCard: React.FC<ExchangeCardProps> = ({
@@ -40,12 +41,11 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
   onExchange,
   disabled = false,
   disabledDescription,
+  treasury,
 }) => {
   const catchError = useCatchError();
-  const {
-    contracts: { Treasury },
-  } = usePolarisFinance();
-  const [approveStatus, approve] = useApprove(fromToken, Treasury.address);
+  const polarisFinance = usePolarisFinance();
+  const [approveStatus, approve] = useApprove(fromToken, polarisFinance.contracts[treasury].address);
 
   const balance = useTokenBalance(fromToken);
   const [onPresent, onDismiss] = useModal(

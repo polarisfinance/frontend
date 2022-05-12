@@ -27,9 +27,9 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import useStakeToSunrise from '../../../hooks/useStakeToSunrise';
 import useWithdrawFromSunrise from '../../../hooks/useWithdrawFromSunrise';
 
-const Stake = ({ sunrise }) => {
+const Stake = ({ sunrise, contract }) => {
   const polarisFinance = usePolarisFinance();
-  const [approveStatus, approve] = useApprove(polarisFinance.SPOLAR, polarisFinance.contracts.Masonry.address);
+  const [approveStatus, approve] = useApprove(polarisFinance.SPOLAR, polarisFinance.contracts[contract].address);
 
   const tokenBalance = useTokenBalance(polarisFinance.SPOLAR);
   const stakedBalance = useStakedBalanceOnSunrise(sunrise);
