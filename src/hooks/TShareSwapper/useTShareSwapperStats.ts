@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from '../useTombFinance';
-import { TShareSwapperStat } from '../../tomb-finance/types';
+import usePolarisFinance from '../usePolarisFinance';
+import { TShareSwapperStat } from '../../polaris-finance/types';
 import useRefresh from '../useRefresh';
 
 const useTShareSwapperStats = (account: string) => {
   const [stat, setStat] = useState<TShareSwapperStat>();
-  const { fastRefresh/*, slowRefresh*/ } = useRefresh();
-  const tombFinance = useTombFinance();
+  const { fastRefresh /*, slowRefresh*/ } = useRefresh();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
     async function fetchTShareSwapperStat() {
-      try{
-        if(tombFinance.myAccount) {
-          setStat(await tombFinance.getTShareSwapperStat(account));
+      try {
+        if (polarisFinance.myAccount) {
+          setStat(await polarisFinance.getTShareSwapperStat(account));
         }
-      }
-      catch(err){
+      } catch (err) {
         console.error(err);
       }
     }
     fetchTShareSwapperStat();
-  }, [setStat, tombFinance, fastRefresh, account]);
+  }, [setStat, polarisFinance, fastRefresh, account]);
 
   return stat;
 };

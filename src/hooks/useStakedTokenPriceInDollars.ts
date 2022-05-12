@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 import config from '../config';
-import ERC20 from '../tomb-finance/ERC20';
+import ERC20 from '../polaris-finance/ERC20';
 
 const useStakedTokenPriceInDollars = (stakedTokenName: string, stakedToken: ERC20) => {
   const [stakedTokenPriceInDollars, setStakedTokenPriceInDollars] = useState('0');
-  const tombFinance = useTombFinance();
-  const isUnlocked = tombFinance?.isUnlocked;
+  const polarisFinance = usePolarisFinance();
+  const isUnlocked = polarisFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
-    const balance = await tombFinance.getDepositTokenPriceInDollars(stakedTokenName, stakedToken);
+    const balance = await polarisFinance.getDepositTokenPriceInDollars(stakedTokenName, stakedToken);
     setStakedTokenPriceInDollars(balance);
-  }, [stakedToken, stakedTokenName, tombFinance]);
+  }, [stakedToken, stakedTokenName, polarisFinance]);
 
   useEffect(() => {
     if (isUnlocked) {
@@ -21,7 +21,7 @@ const useStakedTokenPriceInDollars = (stakedTokenName: string, stakedToken: ERC2
       const refreshStakedTokenPriceInDollars = setInterval(fetchBalance, config.refreshInterval);
       return () => clearInterval(refreshStakedTokenPriceInDollars);
     }
-  }, [isUnlocked, setStakedTokenPriceInDollars, tombFinance, fetchBalance]);
+  }, [isUnlocked, setStakedTokenPriceInDollars, polarisFinance, fetchBalance]);
 
   return stakedTokenPriceInDollars;
 };

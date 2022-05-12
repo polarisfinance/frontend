@@ -1,43 +1,16 @@
-import React, { useMemo } from 'react';
-import styled from 'styled-components';
-import useTokenBalance from '../../hooks/useTokenBalance';
-import { getDisplayBalance } from '../../utils/formatBalance';
+import React from 'react';
 
-import Label from '../Label';
 import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
-import useTombFinance from '../../hooks/useTombFinance';
-import TokenSymbol from '../TokenSymbol';
+
 import { Grid } from '@material-ui/core';
 import { useWallet } from 'use-wallet';
 import { Button } from '@material-ui/core';
+import AccountModalCard from './AccountModalCard';
 
-const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const tombFinance = useTombFinance();
-
-  const tombBalance = useTokenBalance(tombFinance.TOMB);
-  const displayTombBalance = useMemo(() => getDisplayBalance(tombBalance), [tombBalance]);
-
-  const tshareBalance = useTokenBalance(tombFinance.TSHARE);
-  const displayTshareBalance = useMemo(() => getDisplayBalance(tshareBalance), [tshareBalance]);
-
-  const tbondBalance = useTokenBalance(tombFinance.TBOND);
-  const displayTbondBalance = useMemo(() => getDisplayBalance(tbondBalance), [tbondBalance]);
-
-  const lunarBalance = useTokenBalance(tombFinance.LUNAR);
-  const displayLunarBalance = useMemo(() => getDisplayBalance(lunarBalance), [lunarBalance]);
-
-  const lbondBalance = useTokenBalance(tombFinance.LBOND);
-  const displayLbondBalance = useMemo(() => getDisplayBalance(lbondBalance), [lbondBalance]);
-
-  const tripolarBalance = useTokenBalance(tombFinance.TRIPOLAR);
-  const displayTripolarBalance = useMemo(() => getDisplayBalance(tripolarBalance), [tripolarBalance]);
-
-  const tribondBalance = useTokenBalance(tombFinance.TRIBOND);
-  const displayTribondBalance = useMemo(() => getDisplayBalance(tribondBalance), [tribondBalance]);
-
+const AccountModal: React.FC<ModalProps> = ({ onDismiss, sunrises }) => {
   const { reset } = useWallet();
-
+  const activeSunrises = sunrises.filter((sunrise) => !sunrise.coming).filter((sunrise) => !sunrise.retired);
   return (
     <Modal>
       <ModalTitle text="My Wallet" />
@@ -51,82 +24,22 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
       >
         Disconnect
       </Button>
+
       <Grid container justify="center">
-        <StyledBalanceWrapper>
-          <TokenSymbol symbol="POLAR" />
-          <StyledBalance>
-            <StyledValue>{displayTombBalance}</StyledValue>
-            <Label text="POLAR Available" />
-          </StyledBalance>
-        </StyledBalanceWrapper>
-
-        <StyledBalanceWrapper>
-          <TokenSymbol symbol="SPOLAR" />
-          <StyledBalance>
-            <StyledValue>{displayTshareBalance}</StyledValue>
-            <Label text="SPOLAR Available" />
-          </StyledBalance>
-        </StyledBalanceWrapper>
-
-        <StyledBalanceWrapper>
-          <TokenSymbol symbol="PBOND" />
-          <StyledBalance>
-            <StyledValue>{displayTbondBalance}</StyledValue>
-            <Label text="PBOND Available" />
-          </StyledBalance>
-        </StyledBalanceWrapper>
-
-        <StyledBalanceWrapper>
-          <TokenSymbol symbol="LUNAR" />
-          <StyledBalance>
-            <StyledValue>{displayLunarBalance}</StyledValue>
-            <Label text="LUNAR Available" />
-          </StyledBalance>
-        </StyledBalanceWrapper>
-        <StyledBalanceWrapper>
-          <TokenSymbol symbol="LBOND" />
-          <StyledBalance>
-            <StyledValue>{displayLbondBalance}</StyledValue>
-            <Label text="LBOND Available" />
-          </StyledBalance>
-        </StyledBalanceWrapper>
-
-        <StyledBalanceWrapper>
-          <TokenSymbol symbol="TRIPOLAR" />
-          <StyledBalance>
-            <StyledValue>{displayTripolarBalance}</StyledValue>
-            <Label text="TRIPOLAR Available" />
-          </StyledBalance>
-        </StyledBalanceWrapper>
-        <StyledBalanceWrapper>
-          <TokenSymbol symbol="TRIBOND" />
-          <StyledBalance>
-            <StyledValue>{displayTribondBalance}</StyledValue>
-            <Label text="TRIBOND Available" />
-          </StyledBalance>
-        </StyledBalanceWrapper>
+        <AccountModalCard token="SPOLAR" />
+        {activeSunrises.map((sunrise) => (
+          <React.Fragment key={sunrise.earnTokenName}>
+            <AccountModalCard token={sunrise.earnTokenName} />
+          </React.Fragment>
+        ))}
+        {activeSunrises.map((sunrise) => (
+          <React.Fragment key={sunrise.bond}>
+            <AccountModalCard token={sunrise.bond} />
+          </React.Fragment>
+        ))}
       </Grid>
     </Modal>
   );
 };
-
-const StyledValue = styled.div`
-  //color: rgba(71,32,123,0.9);
-  font-size: 30px;
-  font-weight: 700;
-`;
-
-const StyledBalance = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledBalanceWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin: 16px;
-`;
 
 export default AccountModal;

@@ -1,22 +1,22 @@
 import { useCallback } from 'react';
-import useTombFinance from './useTombFinance';
-import { Bank } from '../tomb-finance';
+import usePolarisFinance from './usePolarisFinance';
+import { Bank } from '../polaris-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 import { parseUnits } from 'ethers/lib/utils';
 
 const useStake = (bank: Bank) => {
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleStake = useCallback(
     (amount: string) => {
       const amountBn = parseUnits(amount, bank.depositToken.decimal);
       handleTransactionReceipt(
-        tombFinance.stake(bank.contract, bank.poolId, amountBn),
+        polarisFinance.stake(bank.contract, bank.poolId, amountBn),
         `Stake ${amount} ${bank.depositTokenName} to ${bank.contract}`,
       );
     },
-    [bank, tombFinance, handleTransactionReceipt],
+    [bank, polarisFinance, handleTransactionReceipt],
   );
   return { onStake: handleStake };
 };

@@ -14,11 +14,8 @@ import useHarvest from '../../../hooks/useHarvest';
 
 import { getDisplayBalance } from '../../../utils/formatBalance';
 import TokenSymbol from '../../../components/TokenSymbol';
-import { Bank } from '../../../tomb-finance';
-import useTombStats from '../../../hooks/useTombStats';
-import useShareStats from '../../../hooks/usetShareStats';
-import useLunarStats from '../../../hooks/useLunarStats';
-import useTripolarStats from '../../../hooks/useTripolarStats';
+import { Bank } from '../../../polaris-finance';
+import useStats from '../../../hooks/useStats';
 interface HarvestProps {
   bank: Bank;
 }
@@ -26,10 +23,10 @@ interface HarvestProps {
 const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const earnings = useEarnings(bank.contract, bank.earnTokenName, bank.poolId);
   const { onReward } = useHarvest(bank);
-  const tombStats = useTombStats();
-  const tShareStats = useShareStats();
-  const lunarStats = useLunarStats();
-  const tripolarStats = useTripolarStats();
+  const tombStats = useStats('POLAR');
+  const tShareStats = useStats('SPOLAR');
+  const lunarStats = useStats('LUNAR');
+  const tripolarStats = useStats('TRIPOLAR');
   let tokenName;
   if (bank.earnTokenName === 'SPOLAR') {
     tokenName = 'SPOLAR';

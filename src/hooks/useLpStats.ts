@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
-import { LPStat } from '../tomb-finance/types';
+import usePolarisFinance from './usePolarisFinance';
+import { LPStat } from '../polaris-finance/types';
 import useRefresh from './useRefresh';
 
 const useLpStats = (lpTicker: string) => {
   const [stat, setStat] = useState<LPStat>();
   const { slowRefresh } = useRefresh();
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
     async function fetchLpPrice() {
-      try{
-        setStat(await tombFinance.getLPStat(lpTicker));
-      }
-      catch(err){
+      try {
+        setStat(await polarisFinance.getLPStat(lpTicker));
+      } catch (err) {
         console.error(err);
       }
     }
     fetchLpPrice();
-  }, [setStat, tombFinance, slowRefresh, lpTicker]);
+  }, [setStat, polarisFinance, slowRefresh, lpTicker]);
 
   return stat;
 };

@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 
-const useBondsRedeemable = () => {
+const useBondsRedeemable = (token: string) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
     async function fetchBondsRedeemable() {
-        try {
-            setBalance(await tombFinance.getBondsRedeemable());
-        }
-        catch(err) {
-            console.error(err);
-        }
+      try {
+        setBalance(await polarisFinance.getBondsRedeemable(token));
+      } catch (err) {
+        console.error(err);
       }
+    }
     fetchBondsRedeemable();
-  }, [setBalance, tombFinance]);
+  }, [setBalance, polarisFinance, token]);
 
   return balance;
 };

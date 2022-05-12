@@ -26,6 +26,8 @@ import lunaLogo from '../../assets/img/luna_logo.svg';
 import usdcLogo from '../../assets/img/USDC.png';
 import xtriLogo from '../../assets/img/xtri_logo.svg';
 import polarLunarLogo from '../../assets/img/polar-lunar.svg';
+import ethernalLogo from '../../assets/img/ethernal-token.svg';
+import ebondLogo from '../../assets/img/ebond-token.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -52,6 +54,8 @@ const logosBySymbol: { [title: string]: string } = {
   TRIPOLAROLD: tripolarOldLogo,
   'POLAR-STNEAR-LP': polarStnearLpLogo,
   'POLAR-LUNAR-LP': polarLunarLogo,
+  ETHERNAL: ethernalLogo,
+  EBOND: ebondLogo,
 };
 
 type LogoProps = {

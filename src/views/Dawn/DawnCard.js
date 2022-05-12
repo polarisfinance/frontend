@@ -11,31 +11,16 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 
 import useEarnings from '../../hooks/useEarnings';
 import useHarvest from '../../hooks/useHarvest';
-import useTombStats from '../../hooks/useTombStats';
-import useShareStats from '../../hooks/usetShareStats';
-import useLunarStats from '../../hooks/useLunarStats';
-import useTripolarStats from '../../hooks/useTripolarStats';
+import useStats from '../../hooks/useStats';
 
 const CemeteryCard = ({ bank }) => {
   const statsOnPool = useStatsForPool(bank);
 
   const earnings = useEarnings(bank.contract, bank.earnTokenName, bank.poolId);
   const { onReward } = useHarvest(bank);
-  const tombStats = useTombStats();
-  const tShareStats = useShareStats();
-  const lunarStats = useLunarStats();
-  const tripolarStats = useTripolarStats();
 
-  var tokenStats;
-  if (bank.earnTokenName === 'SPOLAR') {
-    tokenStats = tShareStats;
-  } else if (bank.earnTokenName === 'POLAR') {
-    tokenStats = tombStats;
-  } else if (bank.earnTokenName === 'LUNAR') {
-    tokenStats = lunarStats;
-  } else if (bank.earnTokenName === 'TRIPOLAR') {
-    tokenStats = tripolarStats;
-  }
+  const tokenStats = useStats(bank.earnTokenName);
+
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],

@@ -6,7 +6,8 @@ import { ThemeProvider as TP1 } from 'styled-components';
 import { UseWalletProvider } from 'use-wallet';
 import usePromptNetwork from './hooks/useNetworkPrompt';
 import BanksProvider from './contexts/Banks';
-import TombFinanceProvider from './contexts/TombFinanceProvider';
+import SunrisesProvider from './contexts/Sunrises';
+import PolarisFinanceProvider from './contexts/PolarisFinanceProvider';
 import ModalsProvider from './contexts/Modals';
 import store from './state';
 import theme from './theme';
@@ -20,15 +21,9 @@ import { RefreshContextProvider } from './contexts/RefreshContext';
 const Home = lazy(() => import('./views/Home'));
 const Dawn = lazy(() => import('./views/Dawn'));
 const SunriseSplitter = lazy(() => import('./views/SunriseSplitter'));
-const PolarSunrise = lazy(() => import('./views/Sunrise'));
-const LunarSunrise = lazy(() => import('./views/LunarSunrise'));
-const Pit = lazy(() => import('./views/Pit'));
-const LunarBond = lazy(() => import('./views/LunarBond'));
-const BondSplitter = lazy(() => import('./views/Bond_splitter'));
+const BondSplitter = lazy(() => import('./views/BondSplitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
-const TripolarSunrise = lazy(() => import('./views/TripolarSunrise'));
-const TripolarBond = lazy(() => import('./views/TripolarBond'));
 const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
 const TripolarSunriseOld = lazy(() => import('./views/TripolarSunriseOld'));
 
@@ -62,29 +57,11 @@ const App: React.FC = () => {
             <Route path="/sunrise">
               <SunriseSplitter />
             </Route>
-            <Route path="/polar_sunrise">
-              <PolarSunrise />
-            </Route>
-            <Route path="/lunar_sunrise">
-              <LunarSunrise />
-            </Route>
-            <Route path="/tripolar_sunrise">
-              <TripolarSunrise />
-            </Route>
             <Route path="/tripolar_sunrise_old">
               <TripolarSunriseOld />
             </Route>
             <Route path="/bond">
               <BondSplitter />
-            </Route>
-            <Route path="/polar_bond">
-              <Pit />
-            </Route>
-            <Route path="/lunar_bond">
-              <LunarBond />
-            </Route>
-            <Route path="/tripolar_bond">
-              <TripolarBond />
             </Route>
             <Route path="/strategy">
               <Strategy />
@@ -128,16 +105,18 @@ const Providers: React.FC = ({ children }) => {
           <Provider store={store}>
             <Updaters />
             <RefreshContextProvider>
-              <TombFinanceProvider>
+              <PolarisFinanceProvider>
                 <ModalsProvider>
                   <BanksProvider>
-                    <>
-                      <Popups />
-                      {children}
-                    </>
+                    <SunrisesProvider>
+                      <>
+                        <Popups />
+                        {children}
+                      </>
+                    </SunrisesProvider>
                   </BanksProvider>
                 </ModalsProvider>
-              </TombFinanceProvider>
+              </PolarisFinanceProvider>
             </RefreshContextProvider>
           </Provider>
         </UseWalletProvider>

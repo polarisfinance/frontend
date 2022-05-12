@@ -1,11 +1,8 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 
-import Lunar from './components/Lunar';
-import Polar from './components/Polar';
-import Auris from './components/Auris';
-import Tripolar from './components/Tripolar';
 import OldTripolar from './components/OldTripolar';
+import SunriseCard from './components/SunriseCard';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
@@ -15,6 +12,10 @@ import Page from '../../components/Page';
 
 import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
+
+import useSunrises from '../../hooks/useSunrises';
+import Sunrise from '../Sunrise';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 const BackgroundImage = createGlobalStyle`
   body, html {
@@ -36,41 +37,41 @@ const useStyles = makeStyles((theme) => ({
 const Masonry = () => {
   const classes = useStyles();
   const { account } = useWallet();
-
+  const [sunrises] = useSunrises();
+  const { path } = useRouteMatch();
   return (
-    <Page>
-      <BackgroundImage />
-      {!!account ? (
-        <>
-          <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            Sunrise
-          </Typography>
-          <Grid container className={classes.text}>
-            <Grid container item xs={12} justify="center" className={classes.text}></Grid>
-            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-              <Polar />
-            </Grid>
-
-            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-              <Lunar />
-            </Grid>
-            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-              <Tripolar />
-            </Grid>
-          </Grid>
-          <Grid container className={classes.text}>
-            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-              <Auris />
-            </Grid>
-            <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-              <OldTripolar />
-            </Grid>
-          </Grid>
-        </>
-      ) : (
-        <UnlockWallet />
-      )}
-    </Page>
+    <Switch>
+      <Page>
+        <Route exact path={path}>
+          <BackgroundImage />
+          {!!account ? (
+            <>
+              <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
+                Sunrise
+              </Typography>
+              <Grid container className={classes.text}>
+                {sunrises.map((sunrise) => (
+                  <React.Fragment key={sunrise.earnTokenName}>
+                    <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
+                      <SunriseCard sunrise={sunrise} />
+                    </Grid>
+                  </React.Fragment>
+                ))}
+                <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
+                  <OldTripolar />
+                </Grid>
+              </Grid>
+            </>
+          ) : (
+            <UnlockWallet />
+          )}
+        </Route>
+        <Route path={`${path}/:sunriseId`}>
+          <BackgroundImage />
+          <Sunrise />
+        </Route>
+      </Page>
+    </Switch>
   );
 };
 
