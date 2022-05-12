@@ -117,6 +117,7 @@ const Home = () => {
           token={'SPOLAR'}
           tokenAddress={'0x9D6fc90b25976E40adaD5A3EdD08af9ed7a21729'}
           lpAddress={'0xADf9D0C77c70FCb1fDB868F54211288fCE9937DF'}
+          lpToken={'NEAR'}
         />
         {activeSunrises.map((sunrise) => (
           <React.Fragment key={sunrise.earnTokenName}>
@@ -124,12 +125,13 @@ const Home = () => {
               token={sunrise.earnTokenName}
               tokenAddress={sunrise.tokenAddress}
               lpAddress={sunrise.lpAddress}
+              lpToken={sunrise.lpToken}
             />
           </React.Fragment>
         ))}
         {activeSunrises.map((sunrise) => (
           <React.Fragment key={sunrise.bond}>
-            <TokenCard token={sunrise.bond} bond={sunrise.name} />
+            <TokenCard token={sunrise.bond} bond={sunrise.name} lpToken={sunrise.lpToken} />
           </React.Fragment>
         ))}
       </Grid>

@@ -32,6 +32,7 @@ export interface SunriseInfo {
   tokenAddress: string;
   lpAddress: string;
   treasury: string;
+  lpToken: string;
 }
 
 export interface Sunrise extends SunriseInfo {

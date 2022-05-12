@@ -50,7 +50,7 @@ function numberWithSpaces(x) {
   return parts.join('.');
 }
 
-const Stake = ({ token, bond, tokenAddress, lpAddress }) => {
+const Stake = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
   const classes = useStyles();
   const polarisFinance = usePolarisFinance();
   const tokenStats = useStats(token);
@@ -83,7 +83,9 @@ const Stake = ({ token, bond, tokenAddress, lpAddress }) => {
                 <Grid item>Current Price</Grid>
                 <Grid item>
                   <Box>
-                    <span style={{ fontSize: '30px' }}>{tokenPriceInNear ? tokenPriceInNear : '-.----'} NEAR</span>
+                    <span style={{ fontSize: '30px' }}>
+                      {tokenPriceInNear ? tokenPriceInNear : '-.----'} {lpToken}
+                    </span>
                   </Box>
                 </Grid>
                 <Grid item>
