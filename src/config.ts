@@ -301,8 +301,8 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'POLAR-LUNAR-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 1,
-    closedForStaking: false,
+    sort: 7,
+    closedForStaking: true,
   },
   SpolarNearLpSpolarRewardPool: {
     name: 'Earn SPOLAR by SPOLAR-NEAR LP',

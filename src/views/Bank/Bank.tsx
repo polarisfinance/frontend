@@ -44,6 +44,15 @@ const Bank: React.FC = () => {
         title={bank?.name}
       />
       {bank.depositTokenName.endsWith('LUNA') && <TaxFeeAlert />}
+      {bank.depositTokenName.startsWith('POLAR-LUNAR') && (
+        <Alert
+          style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
+          variant="filled"
+          severity="warning"
+        >
+          <b>This pool has been retired. Please unstake and collect your rewards.</b>
+        </Alert>
+      )}
       <Grid container>
         <Grid item xs={12} md={4}>
           {<Stake bank={bank} />}
