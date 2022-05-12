@@ -1028,16 +1028,16 @@ export class PolarisFinance {
 
   async withdrawSpolarFromSunrise(amount: string, token: string): Promise<TransactionResponse> {
     if (token === 'POLAR') {
-      return await this.contracts.Masonry.withdraw(this.myAccount);
+      return await this.contracts.Masonry.withdraw(decimalToBalance(amount));
     }
     if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.withdraw(this.myAccount);
+      return await this.contracts.lunarSunrise.withdraw(decimalToBalance(amount));
     }
     if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.withdraw(this.myAccount);
+      return await this.contracts.tripolarSunrise.withdraw(decimalToBalance(amount));
     }
     if (token === 'OLDTRIPOLAR') {
-      return await this.contracts.tripolarSunriseOld.withdraw(this.myAccount);
+      return await this.contracts.tripolarSunriseOld.withdraw(decimalToBalance(amount));
     }
   }
 
