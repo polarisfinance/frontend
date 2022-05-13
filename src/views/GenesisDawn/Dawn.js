@@ -38,11 +38,11 @@ const Cemetery = () => {
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
                 ETHERNAL Genesis
               </Typography>
-              {/*<Grid item xs={12} sm={12} style={{ margin: '12px' }}>
+              <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
                 <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
-                  <b>Genesis pools has ended. Please withdraw your assets.</b>
+                  <b>14.05.2022 14:00 UTC - 15.05.2022 14:00 UTC</b>
                 </Alert>
-              </Grid>*/}
+              </Grid>
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 6).length === 0}>
                   <Grid container spacing={3}>

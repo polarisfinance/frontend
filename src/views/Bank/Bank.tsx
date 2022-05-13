@@ -43,7 +43,7 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank.depositTokenName.endsWith('LUNA') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('ETH') && <TaxFeeAlert />}
       {bank.depositTokenName.startsWith('POLAR-LUNAR') && (
         <Alert
           style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
@@ -97,6 +97,18 @@ const Bank: React.FC = () => {
               <Box style={{ marginTop: '10px' }}>
                 <StyledLink href={'https://metapool.app/dapp/mainnet/metapool-aurora/'} target="_blank">
                   Get STNEAR ↗
+                </StyledLink>
+              </Box>
+            )}
+            {bank.depositTokenName.startsWith('ETH') && (
+              <Box style={{ marginTop: '10px' }}>
+                <StyledLink
+                  href={
+                    'https://wannaswap.finance/exchange/swap/swap?inputCurrency=ETH&outputCurrency=0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB'
+                  }
+                  target="_blank"
+                >
+                  Get WETH ↗
                 </StyledLink>
               </Box>
             )}
