@@ -33,7 +33,7 @@ const CemeteryCard = ({ bank }) => {
                 VIEW & STAKE
               </Button>
 
-              {bank.depositTokenName.startsWith('ETH') && (
+              {bank.depositTokenName.startsWith('WETH') && (
                 <Box style={{ position: 'absolute', top: '20px', right: '20px' }}>
                   <StyledLink
                     href={

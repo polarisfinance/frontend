@@ -43,7 +43,7 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank.depositTokenName.endsWith('ETH') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('WETH') && <TaxFeeAlert />}
       {bank.depositTokenName.startsWith('POLAR-LUNAR') && (
         <Alert
           style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
@@ -100,7 +100,7 @@ const Bank: React.FC = () => {
                 </StyledLink>
               </Box>
             )}
-            {bank.depositTokenName.startsWith('ETH') && (
+            {bank.depositTokenName.startsWith('WETH') && (
               <Box style={{ marginTop: '10px' }}>
                 <StyledLink
                   href={

@@ -455,7 +455,7 @@ export class PolarisFinance {
     }
     if (earnTokenName === 'ETHERNAL') {
       const rewardPerSecond = await poolContract.ethernalPerSecond();
-      if (depositTokenName === 'ETH') {
+      if (depositTokenName === 'WETH') {
         return rewardPerSecond.mul(50000).div(100000);
       } else if (depositTokenName === 'SPOLAR') {
         return rewardPerSecond.mul(20000).div(100000).div(18);
@@ -464,9 +464,9 @@ export class PolarisFinance {
       } else if (depositTokenName === 'POLAR-NEAR-LP') {
         return rewardPerSecond.mul(10000).div(100000).div(18);
       } else if (depositTokenName === 'POLAR-STNEAR-LP') {
-        return rewardPerSecond.mul(8000).div(100000).div(18);
+        return rewardPerSecond.mul(5000).div(100000).div(18);
       } else if (depositTokenName === 'TRIPOLAR-XTRI-LP') {
-        return rewardPerSecond.mul(2000).div(100000).div(18);
+        return rewardPerSecond.mul(5000).div(100000).div(18);
       }
     }
     const [rewardPerSecond, SpolarNear, PolarNear, LunarAtluna, PolarStNear, Tripolar, PolarLunar] = await Promise.all([
@@ -524,7 +524,7 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
       } else if (tokenName === 'POLAR-LUNAR-LP') {
         tokenPrice = await this.getLPTokenPricePolarLunar(token, this.POLAR, this.LUNAR);
-      } else if (tokenName === 'ETHERNAL-ETH-LP') {
+      } else if (tokenName === 'ETHERNAL-WETH-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.ETHERNAL);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getStat('PBOND');
@@ -899,9 +899,9 @@ export class PolarisFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
     const { chainId } = this.config;
-    const { ETH } = this.config.externalTokens;
+    const { WETH } = this.config.externalTokens;
 
-    const wftm = new Token(chainId, ETH[0], ETH[1]);
+    const wftm = new Token(chainId, WETH[0], WETH[1]);
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
 
     try {
@@ -999,7 +999,7 @@ export class PolarisFinance {
   async getEthPrice(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { ETH, NEAR, USDC } = this.externalTokens;
+    const { WETH, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
       let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
@@ -1008,9 +1008,9 @@ export class PolarisFinance {
       let usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
       const near_price = usdc_amount / near_amount;
 
-      const luna_near_lp_pair = this.externalTokens['ETH-NEAR-LP'];
-      var luna_amount_BN = await ETH.balanceOf(luna_near_lp_pair.address);
-      var luna_amount = Number(getFullDisplayBalance(luna_amount_BN, ETH.decimal));
+      const luna_near_lp_pair = this.externalTokens['WETH-NEAR-LP'];
+      var luna_amount_BN = await WETH.balanceOf(luna_near_lp_pair.address);
+      var luna_amount = Number(getFullDisplayBalance(luna_amount_BN, WETH.decimal));
       near_amount_BN = await NEAR.balanceOf(luna_near_lp_pair.address);
       near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
       const luna_price = near_amount / luna_amount;

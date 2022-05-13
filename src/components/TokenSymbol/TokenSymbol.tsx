@@ -56,7 +56,7 @@ const logosBySymbol: { [title: string]: string } = {
   'POLAR-LUNAR-LP': polarLunarLogo,
   ETHERNAL: ethernalLogo,
   EBOND: ebondLogo,
-  ETH: etherumLogo,
+  WETH: etherumLogo,
 };
 
 type LogoProps = {
