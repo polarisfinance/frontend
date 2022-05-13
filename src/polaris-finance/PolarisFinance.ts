@@ -42,6 +42,9 @@ export class PolarisFinance {
   TRIPOLAR: ERC20;
   TRIBOND: ERC20;
 
+  ETHERNAL: ERC20;
+  EBOND: ERC20;
+
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
     const provider = getDefaultProvider();
@@ -65,6 +68,9 @@ export class PolarisFinance {
 
     this.TRIPOLAR = new ERC20(deployments.tripolar.address, provider, 'TRIPOLAR');
     this.TRIBOND = new ERC20(deployments.triBond.address, provider, 'TRIBOND');
+
+    this.ETHERNAL = new ERC20(deployments.ethernal.address, provider, 'ETHERNAL');
+    this.EBOND = new ERC20(deployments.eBond.address, provider, 'EBOND');
     // Uniswap V2 Pair
     this.POLARWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
 
@@ -91,6 +97,8 @@ export class PolarisFinance {
       this.LBOND,
       this.TRIPOLAR,
       this.TRIBOND,
+      this.ETHERNAL,
+      this.EBOND,
       ...Object.values(this.externalTokens),
     ];
     for (const token of tokens) {
@@ -200,6 +208,31 @@ export class PolarisFinance {
       circulatingSupply = supply;
     }
 
+    if (token === 'ETHERNAL') {
+      const { EthernalEthRewardPool } = this.contracts;
+      [supply, rewardPoolSupply, priceInToken, priceOfOneToken] = await Promise.all([
+        this.ETHERNAL.totalSupply(),
+        this.ETHERNAL.balanceOf(EthernalEthRewardPool.address),
+        this.getTokenPriceEthernal(this.ETHERNAL),
+        this.getEthPrice(),
+      ]);
+      circulatingSupply = supply.sub(rewardPoolSupply);
+      priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(2);
+    }
+
+    if (token === 'EBOND') {
+      const { ethernalTreasury } = this.contracts;
+      let stat: TokenStat, ratio: number;
+      [supply, stat, ratio] = await Promise.all([
+        this.EBOND.totalSupply(),
+        this.getStat('ETHERNAL'),
+        ethernalTreasury.getBondPremiumRate(),
+      ]);
+      const modifier = ratio / 1e18 > 1 ? ratio / 1e18 : 1;
+      priceInToken = (Number(stat.tokenInFtm) * modifier).toFixed(2);
+      priceInDollars = (Number(stat.priceInDollars) * modifier).toFixed(2);
+      circulatingSupply = supply;
+    }
     if (token === 'SPOLAR') {
       const { PolarNearLpSpolarRewardPool } = this.contracts;
       [supply, rewardPoolSupply, priceInToken, priceOfOneToken] = await Promise.all([
@@ -257,6 +290,8 @@ export class PolarisFinance {
       expectedPrice = await this.contracts.LunarOracle.twap(this.LUNAR.address, ethers.utils.parseEther('1'));
     } else if (token === 'TRIPOLAR') {
       expectedPrice = await this.contracts.TripolarOracle.twap(this.TRIPOLAR.address, ethers.utils.parseEther('1'));
+    } else if (token === 'ETHERNAL') {
+      expectedPrice = await this.contracts.EthernalOracle.twap(this.ETHERNAL.address, ethers.utils.parseEther('1'));
     } else {
       return 'nothing';
     }
@@ -273,6 +308,9 @@ export class PolarisFinance {
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.getTripolarUpdatedPrice();
     }
+    if (token === 'ETHERNAL') {
+      return this.contracts.ethernalTreasury.getEthernalUpdatedPrice();
+    }
   }
 
   async getTokenPreviousEpochTWAP(token: string): Promise<BigNumber> {
@@ -284,6 +322,9 @@ export class PolarisFinance {
     }
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.previousEpochTripolarPrice();
+    }
+    if (token === 'ETHERNAL') {
+      return this.contracts.ethernalTreasury.previousEpochEthernalPrice();
     }
   }
 
@@ -297,6 +338,9 @@ export class PolarisFinance {
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.getBurnableTripolarLeft();
     }
+    if (token === 'ETHERNAL') {
+      return this.contracts.ethernalTreasury.getBurnableEthernalLeft();
+    }
   }
 
   async getBondsRedeemable(token: string): Promise<BigNumber> {
@@ -308,6 +352,9 @@ export class PolarisFinance {
     }
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.getRedeemableBonds();
+    }
+    if (token === 'ETHERNAL') {
+      return this.contracts.ethernalTreasury.getRedeemableBonds();
     }
   }
 
@@ -406,6 +453,22 @@ export class PolarisFinance {
         return rewardPerSecond.mul(5000).div(50000);
       }
     }
+    if (earnTokenName === 'ETHERNAL') {
+      const rewardPerSecond = await poolContract.ethernalPerSecond();
+      if (depositTokenName === 'ETH') {
+        return rewardPerSecond.mul(50000).div(100000);
+      } else if (depositTokenName === 'SPOLAR') {
+        return rewardPerSecond.mul(20000).div(100000).div(18);
+      } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
+        return rewardPerSecond.mul(10000).div(100000).div(18);
+      } else if (depositTokenName === 'POLAR-NEAR-LP') {
+        return rewardPerSecond.mul(10000).div(100000).div(18);
+      } else if (depositTokenName === 'POLAR-STNEAR-LP') {
+        return rewardPerSecond.mul(8000).div(100000).div(18);
+      } else if (depositTokenName === 'TRIPOLAR-XTRI-LP') {
+        return rewardPerSecond.mul(2000).div(100000).div(18);
+      }
+    }
     const [rewardPerSecond, SpolarNear, PolarNear, LunarAtluna, PolarStNear, Tripolar, PolarLunar] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
@@ -461,6 +524,8 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
       } else if (tokenName === 'POLAR-LUNAR-LP') {
         tokenPrice = await this.getLPTokenPricePolarLunar(token, this.POLAR, this.LUNAR);
+      } else if (tokenName === 'ETHERNAL-ETH-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.ETHERNAL);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getStat('PBOND');
         tokenPrice = getBondPrice.priceInDollars;
@@ -490,6 +555,9 @@ export class PolarisFinance {
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.epoch();
     }
+    if (token === 'ETHERNAL') {
+      return this.contracts.ethernalTreasury.epoch();
+    }
     return;
   }
 
@@ -517,6 +585,12 @@ export class PolarisFinance {
         await this.contracts.tripolarTreasury.getTripolarPrice(),
       );
     }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalTreasury.buyBonds(
+        decimalToBalance(amount),
+        await this.contracts.ethernalTreasury.getEthernalPrice(),
+      );
+    }
   }
 
   /**
@@ -541,6 +615,12 @@ export class PolarisFinance {
       return await this.contracts.tripolarTreasury.redeemBonds(
         decimalToBalance(amount),
         await this.contracts.tripolarTreasury.getTripolarPrice(),
+      );
+    }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalTreasury.redeemBonds(
+        decimalToBalance(amount),
+        await this.contracts.ethernalTreasury.getEthernalPrice(),
       );
     }
   }
@@ -570,6 +650,7 @@ export class PolarisFinance {
       masonrytShareBalanceOf,
       lunarSunriseSpolarBalanceOf,
       tripolarSunriseBalance,
+      ethernalSunriseBalance,
       priceInFTM,
       priceOfOneFTM,
     ] = await Promise.all([
@@ -578,6 +659,7 @@ export class PolarisFinance {
       this.SPOLAR.balanceOf(this.contracts.Masonry.address),
       this.SPOLAR.balanceOf(this.contracts.lunarSunrise.address),
       this.SPOLAR.balanceOf(this.contracts.tripolarSunrise.address),
+      this.SPOLAR.balanceOf(this.contracts.ethernalSunrise.address),
       this.getTokenPriceFromPancakeswap(this.SPOLAR),
       this.getWFTMPriceFromPancakeswap(),
     ]);
@@ -600,7 +682,9 @@ export class PolarisFinance {
       Number(getDisplayBalance(lunarSunriseSpolarBalanceOf, this.SPOLAR.decimal)) * Number(SPOLARPrice);
     const tripolarSunriseTVL =
       Number(getDisplayBalance(tripolarSunriseBalance, this.SPOLAR.decimal)) * Number(SPOLARPrice);
-    return totalValue + masonryTVL + lunarSunriseTVL + tripolarSunriseTVL;
+    const ethernalSunriseTVL =
+      Number(getDisplayBalance(ethernalSunriseBalance, this.SPOLAR.decimal)) * Number(SPOLARPrice);
+    return totalValue + masonryTVL + lunarSunriseTVL + tripolarSunriseTVL + ethernalSunriseTVL;
   }
 
   /**
@@ -664,6 +748,9 @@ export class PolarisFinance {
       }
       if (earnTokenName === 'TRIPOLAR') {
         return await pool.pendingTripolar(poolId, account);
+      }
+      if (earnTokenName === 'ETHERNAL') {
+        return await pool.pendingEthernal(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
       }
@@ -808,6 +895,35 @@ export class PolarisFinance {
     }
   }
 
+  async getTokenPriceEthernal(tokenContract: ERC20): Promise<string> {
+    const ready = await this.provider.ready;
+    if (!ready) return;
+    const { chainId } = this.config;
+    const { ETH } = this.config.externalTokens;
+
+    const wftm = new Token(chainId, ETH[0], ETH[1]);
+    const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+
+    try {
+      if (tokenContract.symbol === 'EBOND') {
+        const { ethernalTreasury } = this.contracts;
+        const [tripolarStat, bondTripolarRatioBN] = await Promise.all([
+          this.getStat('EBOND'),
+          ethernalTreasury.getBondPremiumRate(),
+        ]);
+        const modifier = bondTripolarRatioBN / 1e18 > 1 ? bondTripolarRatioBN / 1e18 : 1;
+        const priceOfTriBondInDollars = ((Number(tripolarStat.priceInDollars) * modifier) / 10).toFixed(2);
+        return priceOfTriBondInDollars;
+      } else {
+        const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
+        const priceInBUSD = new Route([wftmToToken], token);
+        return priceInBUSD.midPrice.toFixed(4);
+      }
+    } catch (err) {
+      console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
+    }
+  }
+
   async getWFTMPriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
@@ -880,6 +996,29 @@ export class PolarisFinance {
       console.error(`Failed to fetch token price of xTRI: ${err}`);
     }
   }
+  async getEthPrice(): Promise<string> {
+    const ready = await this.provider.ready;
+    if (!ready) return;
+    const { ETH, NEAR, USDC } = this.externalTokens;
+    try {
+      const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
+      let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
+      let near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      let usdc_amount_BN = await USDC.balanceOf(near_usdc_lp_pair.address);
+      let usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
+      const near_price = usdc_amount / near_amount;
+
+      const luna_near_lp_pair = this.externalTokens['ETH-NEAR-LP'];
+      var luna_amount_BN = await ETH.balanceOf(luna_near_lp_pair.address);
+      var luna_amount = Number(getFullDisplayBalance(luna_amount_BN, ETH.decimal));
+      near_amount_BN = await NEAR.balanceOf(luna_near_lp_pair.address);
+      near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      const luna_price = near_amount / luna_amount;
+      return (near_price * luna_price).toString();
+    } catch (err) {
+      console.error(`Failed to fetch token price of LUNA: ${err}`);
+    }
+  }
   //===================================================================
   //===================================================================
   //===================== MASONRY METHODS =============================
@@ -899,6 +1038,8 @@ export class PolarisFinance {
       sunrise = this.contracts.lunarSunrise;
     } else if (token === 'TRIPOLAR') {
       sunrise = this.contracts.tripolarSunrise;
+    } else if (token === 'ETHERNAL') {
+      sunrise = this.contracts.ethernalSunrise;
     } else {
       return 0;
     }
@@ -939,6 +1080,9 @@ export class PolarisFinance {
     if (token === 'OLDTRIPOLAR') {
       return this.contracts.tripolarSunriseOld.canClaimReward(this.myAccount);
     }
+    if (token === 'ETHERNAL') {
+      return this.contracts.ethernalSunrise.canClaimReward(this.myAccount);
+    }
   }
 
   /**
@@ -956,6 +1100,8 @@ export class PolarisFinance {
       sunrise = this.contracts.tripolarSunrise;
     } else if (token === 'OLDTRIPOLAR') {
       sunrise = this.contracts.tripolarSunriseOld;
+    } else if (token === 'ETHERNAL') {
+      sunrise = this.contracts.ethernalSunrise;
     } else {
       return false;
     }
@@ -981,6 +1127,9 @@ export class PolarisFinance {
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.totalSupply();
     }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalSunrise.totalSupply();
+    }
   }
 
   async stakeSpolarToSunrise(amount: string, token: string): Promise<TransactionResponse> {
@@ -992,6 +1141,9 @@ export class PolarisFinance {
     }
     if (token === 'TRIPOLAR') {
       return await this.contracts.tripolarSunrise.stake(decimalToBalance(amount));
+    }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalSunrise.stake(decimalToBalance(amount));
     }
   }
 
@@ -1007,6 +1159,9 @@ export class PolarisFinance {
     }
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.balanceOf(this.myAccount);
+    }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalSunrise.balanceOf(this.myAccount);
     }
     return;
   }
@@ -1024,6 +1179,9 @@ export class PolarisFinance {
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.earned(this.myAccount);
     }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalSunrise.earned(this.myAccount);
+    }
   }
 
   async withdrawSpolarFromSunrise(amount: string, token: string): Promise<TransactionResponse> {
@@ -1038,6 +1196,9 @@ export class PolarisFinance {
     }
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.withdraw(decimalToBalance(amount));
+    }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalSunrise.withdraw(decimalToBalance(amount));
     }
   }
 
@@ -1054,6 +1215,9 @@ export class PolarisFinance {
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.claimReward();
     }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalSunrise.claimReward();
+    }
   }
 
   async exitFromSunrise(token: string): Promise<TransactionResponse> {
@@ -1069,6 +1233,9 @@ export class PolarisFinance {
     if (token === 'OLDTRIPOLAR') {
       return await this.contracts.tripolarSunriseOld.exit();
     }
+    if (token === 'ETHERNAL') {
+      return await this.contracts.ethernalSunrise.exit();
+    }
     return;
   }
 
@@ -1080,6 +1247,8 @@ export class PolarisFinance {
       treasury = this.contracts.lunarTreasury;
     } else if (token === 'TRIPOLAR') {
       treasury = this.contracts.tripolarTreasury;
+    } else if (token === 'ETHERNAL') {
+      treasury = this.contracts.ethernalTreasury;
     } else {
       return { from: new Date(), to: new Date() };
     }
@@ -1111,6 +1280,9 @@ export class PolarisFinance {
     } else if (token === 'OLDTRIPOLAR') {
       treasury = this.contracts.tripolarTreasuryOld;
       sunrise = this.contracts.tripolarSunriseOld;
+    } else if (token === 'ETHERNAL') {
+      treasury = this.contracts.ethernalTreasury;
+      sunrise = this.contracts.ethernalSunrise;
     }
     const [nextEpochTimestamp, currentEpoch, period] = await Promise.all([
       sunrise.nextEpochPoint(),
@@ -1163,6 +1335,9 @@ export class PolarisFinance {
     } else if (token === 'OLDTRIPOLAR') {
       treasury = this.contracts.tripolarTreasuryOld;
       sunrise = this.contracts.tripolarSunriseOld;
+    } else if (token === 'ETHERNAL') {
+      treasury = this.contracts.ethernalTreasury;
+      sunrise = this.contracts.ethernalSunrise;
     }
 
     const [nextEpochTimestamp, currentEpoch, period, withdrawLockupEpochs] = await Promise.all([
@@ -1221,6 +1396,12 @@ export class PolarisFinance {
       } else if (assetName === 'TRIBOND') {
         asset = this.TRIBOND;
         assetUrl = 'https://polarisfinance.io/logos/tribond-token.svg';
+      } else if (assetName === 'ETHERNAL') {
+        asset = this.TRIBOND;
+        assetUrl = 'https://polarisfinance.io/logos/ethernal-token.svg';
+      } else if (assetName === 'EBOND') {
+        asset = this.TRIBOND;
+        assetUrl = 'https://polarisfinance.io/logos/ebond-token.svg';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',

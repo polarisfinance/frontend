@@ -36,18 +36,18 @@ const Cemetery = () => {
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-                TRIPOLAR Genesis
+                ETHERNAL Genesis
               </Typography>
-              <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
+              {/*<Grid item xs={12} sm={12} style={{ margin: '12px' }}>
                 <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
                   <b>Genesis pools has ended. Please withdraw your assets.</b>
                 </Alert>
-              </Grid>
+              </Grid>*/}
               <Box mt={5}>
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 3).length === 0}>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 6).length === 0}>
                   <Grid container spacing={3}>
                     {activeBanks
-                      .filter((bank) => bank.sectionInUI === 3)
+                      .filter((bank) => bank.sectionInUI === 6)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
                           <CemeteryCard bank={bank} />
