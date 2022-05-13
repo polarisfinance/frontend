@@ -462,7 +462,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     coming: false,
     retired: false,
     bond: 'EBOND',
-    tokenAddress: '0x1Fb32B3F51ff91Aa0aE78531D1d884220cd87622',
+    tokenAddress: '0x5DbE9348FE9571106174ffdA6122aba5622b954C',
     lpAddress: '0xb678873C286eDE3d2f14358494d074880FE3897C',
     treasury: 'ethernalTreasury',
     lpToken: 'WETH',
