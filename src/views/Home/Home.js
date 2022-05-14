@@ -89,7 +89,7 @@ const Home = () => {
                 assets 1:1 to native coins via seigniorage. Provide liquidity in{' '}
                 <StyledNormalLink href="/dawn">DAWN</StyledNormalLink> Farms to get SPOLAR - governance token that
                 controls inflation and expansion of all pegged assets. Stake your SPOLAR in{' '}
-                <StyledNormalLink href="/sunrise">SUNRISE</StyledNormalLink> to earn more POLAR, LUNAR and TRIPOLAR.
+                <StyledNormalLink href="/sunrise">SUNRISE</StyledNormalLink> to earn more POLAR, ETHERNAL and TRIPOLAR.
               </p>
             </Box>
           </Grid>
