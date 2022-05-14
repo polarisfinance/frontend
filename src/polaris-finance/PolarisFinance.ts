@@ -465,7 +465,7 @@ export class PolarisFinance {
         return rewardPerSecond.mul(10000).div(100000).div(18);
       } else if (depositTokenName === 'POLAR-STNEAR-LP') {
         return rewardPerSecond.mul(5000).div(100000).div(18);
-      } else if (depositTokenName === 'TRIPOLAR-XTRI-LP') {
+      } else if (depositTokenName === 'TRIPOLAR-xTRI-LP') {
         return rewardPerSecond.mul(5000).div(100000).div(18);
       }
     }
