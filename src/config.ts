@@ -405,7 +405,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'ETHERNAL-ETH-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 0,
+    sort: 4,
     closedForStaking: false,
   },
   PbondSpolarRewardPool: {
