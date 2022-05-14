@@ -57,6 +57,7 @@ const logosBySymbol: { [title: string]: string } = {
   ETHERNAL: ethernalLogo,
   EBOND: ebondLogo,
   WETH: etherumLogo,
+  'ETHERNAL-ETH-LP': ethernalLogo,
 };
 
 type LogoProps = {
