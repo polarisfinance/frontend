@@ -1397,10 +1397,10 @@ export class PolarisFinance {
         asset = this.TRIBOND;
         assetUrl = 'https://polarisfinance.io/logos/tribond-token.svg';
       } else if (assetName === 'ETHERNAL') {
-        asset = this.TRIBOND;
+        asset = this.ETHERNAL;
         assetUrl = 'https://polarisfinance.io/logos/ethernal-token.svg';
       } else if (assetName === 'EBOND') {
-        asset = this.TRIBOND;
+        asset = this.EBOND;
         assetUrl = 'https://polarisfinance.io/logos/ebond-token.svg';
       }
       await ethereum.request({
