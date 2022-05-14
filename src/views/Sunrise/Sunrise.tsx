@@ -32,6 +32,7 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
 import ProgressCountdown from './components/ProgressCountdown';
+import { Alert } from '@material-ui/lab';
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
@@ -60,6 +61,12 @@ const Sunrise: React.FC = () => {
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat).toFixed(4) : null), [cashStat]);
   const { to } = useTreasuryAllocationTimes(sunrise?.earnTokenName);
   const polarPreviousEpochTwap = useTokenPreviousEpochTWAP(sunrise?.earnTokenName);
+  let earnTokenName: string;
+  if (sunrise.earnTokenName.startsWith('OLD')) {
+    earnTokenName = sunrise.earnTokenName.slice(3);
+  } else {
+    earnTokenName = sunrise.earnTokenName;
+  }
   return account && sunrise ? (
     <>
       {' '}
@@ -75,7 +82,7 @@ const Sunrise: React.FC = () => {
             disableSpinner={true}
           />
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            {sunrise?.earnTokenName} Sunrise
+            {earnTokenName} Sunrise
           </Typography>
           <Image
             color="none"
@@ -89,19 +96,30 @@ const Sunrise: React.FC = () => {
         </Grid>
       ) : (
         <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-          {sunrise?.earnTokenName} Sunrise
+          {earnTokenName} Sunrise
         </Typography>
       )}
       <Grid container className={classes.text}>
-        <Grid container item xs={12} justify="center" className={classes.text}>
-          <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
-            <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}>
-              Staked SPOLARs can only be withdrawn after 3 epochs since deposit.
-            </Typography>
-          </Box>
-        </Grid>
+        {sunrise.retired ? (
+          <Grid container item xs={12} justify="center" className={classes.text}>
+            <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
+              <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
+                <b>{sunrise.retireMsg}</b>
+              </Alert>
+            </Box>
+          </Grid>
+        ) : (
+          <Grid container item xs={12} justify="center" className={classes.text}>
+            <Box mt={3} style={{ width: '100%', marginBottom: '12px', marginTop: '0' }}>
+              <Typography style={{ backgroundColor: 'none', fontSize: '30px', textAlign: 'center' }}>
+                Staked SPOLARs can only be withdrawn after 3 epochs since deposit.
+              </Typography>
+            </Box>
+          </Grid>
+        )}
+
         <Grid item xs={12} md={4}>
-          <Stake sunrise={sunrise?.earnTokenName} contract={sunrise?.contract} />
+          <Stake sunrise={sunrise.earnTokenName} contract={sunrise?.contract} retired={sunrise?.retired} />
         </Grid>
         <Grid container item xs={12} md={4} alignItems="center" direction="row">
           <Grid container item xs={12}>
@@ -125,7 +143,7 @@ const Sunrise: React.FC = () => {
           <Grid container item xs={12}>
             <Grid item xs={7} container justify="flex-end">
               <Typography className={classes.text}>
-                {sunrise?.earnTokenName} Price<small>(TWAP)</small>:
+                {earnTokenName} Price<small>(TWAP)</small>:
               </Typography>
             </Grid>
             <Grid item xs={5} container justify="center">
@@ -160,7 +178,7 @@ const Sunrise: React.FC = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Harvest sunrise={sunrise?.earnTokenName} />
+          <Harvest sunrise={sunrise.earnTokenName} />
         </Grid>
       </Grid>
       <Box mt={5}>

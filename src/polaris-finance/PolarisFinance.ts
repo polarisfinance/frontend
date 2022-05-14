@@ -288,7 +288,7 @@ export class PolarisFinance {
       expectedPrice = await this.contracts.SeigniorageOracle.twap(this.POLAR.address, ethers.utils.parseEther('1'));
     } else if (token === 'LUNAR') {
       expectedPrice = await this.contracts.LunarOracle.twap(this.LUNAR.address, ethers.utils.parseEther('1'));
-    } else if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR' || token === 'OLDTRIPOLAR') {
       expectedPrice = await this.contracts.TripolarOracle.twap(this.TRIPOLAR.address, ethers.utils.parseEther('1'));
     } else if (token === 'ETHERNAL') {
       expectedPrice = await this.contracts.EthernalOracle.twap(this.ETHERNAL.address, ethers.utils.parseEther('1'));
@@ -322,6 +322,9 @@ export class PolarisFinance {
     }
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.previousEpochTripolarPrice();
+    }
+    if (token === 'OLDTRIPOLAR') {
+      return this.contracts.tripolarTreasuryOld.previousEpochTripolarPrice();
     }
     if (token === 'ETHERNAL') {
       return this.contracts.ethernalTreasury.previousEpochEthernalPrice();
@@ -469,15 +472,17 @@ export class PolarisFinance {
         return rewardPerSecond.mul(5000).div(100000).div(18);
       }
     }
-    const [rewardPerSecond, SpolarNear, PolarNear, LunarAtluna, PolarStNear, Tripolar, PolarLunar] = await Promise.all([
-      poolContract.spolarPerSecond(),
-      poolContract.poolInfo(1),
-      poolContract.poolInfo(0),
-      poolContract.poolInfo(4),
-      poolContract.poolInfo(5),
-      poolContract.poolInfo(6),
-      poolContract.poolInfo(7),
-    ]);
+    const [rewardPerSecond, SpolarNear, PolarNear, LunarAtluna, PolarStNear, Tripolar, PolarLunar, EthernalWeth] =
+      await Promise.all([
+        poolContract.spolarPerSecond(),
+        poolContract.poolInfo(1),
+        poolContract.poolInfo(0),
+        poolContract.poolInfo(4),
+        poolContract.poolInfo(5),
+        poolContract.poolInfo(6),
+        poolContract.poolInfo(7),
+        poolContract.poolInfo(8),
+      ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('SPOLAR')) {
@@ -492,6 +497,8 @@ export class PolarisFinance {
       return rewardPerSecond.mul(Tripolar.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR-LUNAR')) {
       return rewardPerSecond.mul(PolarLunar.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('ETHERNAL')) {
+      return rewardPerSecond.mul(EthernalWeth.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
@@ -524,7 +531,7 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
       } else if (tokenName === 'POLAR-LUNAR-LP') {
         tokenPrice = await this.getLPTokenPricePolarLunar(token, this.POLAR, this.LUNAR);
-      } else if (tokenName === 'ETHERNAL-WETH-LP') {
+      } else if (tokenName === 'ETHERNAL-ETH-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.ETHERNAL);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getStat('PBOND');
@@ -554,6 +561,9 @@ export class PolarisFinance {
     }
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.epoch();
+    }
+    if (token === 'OLDTRIPOLAR') {
+      return this.contracts.tripolarTreasuryOld.epoch();
     }
     if (token === 'ETHERNAL') {
       return this.contracts.ethernalTreasury.epoch();
@@ -1247,6 +1257,8 @@ export class PolarisFinance {
       treasury = this.contracts.lunarTreasury;
     } else if (token === 'TRIPOLAR') {
       treasury = this.contracts.tripolarTreasury;
+    } else if (token === 'OLDTRIPOLAR') {
+      treasury = this.contracts.tripolarTreasuryOld;
     } else if (token === 'ETHERNAL') {
       treasury = this.contracts.ethernalTreasury;
     } else {

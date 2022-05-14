@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const [sunrises] = useSunrises();
-  const activeSunrises = sunrises.filter((sunrise) => !sunrise.coming);
+  const activeSunrises = sunrises.filter((sunrise) => !sunrise.coming).filter((sunrise) => !sunrise.retired);
   const classes = useStyles();
   const TVL = useTotalValueLocked();
   const StyledLink = styled.a`

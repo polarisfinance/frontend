@@ -27,7 +27,7 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import useStakeToSunrise from '../../../hooks/useStakeToSunrise';
 import useWithdrawFromSunrise from '../../../hooks/useWithdrawFromSunrise';
 
-const Stake = ({ sunrise, contract }) => {
+const Stake = ({ sunrise, contract, retired }) => {
   const polarisFinance = usePolarisFinance();
   const [approveStatus, approve] = useApprove(polarisFinance.SPOLAR, polarisFinance.contracts[contract].address);
 
@@ -86,7 +86,7 @@ const Stake = ({ sunrise, contract }) => {
             <StyledCardActions>
               {approveStatus !== ApprovalState.APPROVED ? (
                 <Button
-                  disabled={approveStatus !== ApprovalState.NOT_APPROVED}
+                  disabled={approveStatus !== ApprovalState.NOT_APPROVED || retired === true}
                   variant="contained"
                   color="primary"
                   style={{ marginTop: '20px' }}
@@ -100,7 +100,7 @@ const Stake = ({ sunrise, contract }) => {
                     <RemoveIcon />
                   </IconButton>
                   <StyledActionSpacer />
-                  <IconButton onClick={onPresentDeposit}>
+                  <IconButton onClick={onPresentDeposit} disabled={retired === true}>
                     <AddIcon />
                   </IconButton>
                 </>

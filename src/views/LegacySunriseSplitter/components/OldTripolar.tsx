@@ -19,7 +19,7 @@ const Stake: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <CardIcon>
-                <TokenSymbol symbol="TRIPOLAROLD" />
+                <TokenSymbol symbol="OLDTRIPOLAR" />
               </CardIcon>
               <Value value={'RETIRED Sunrise'} />
               <Label text="Please withdraw your SPOLAR" />

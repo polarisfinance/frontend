@@ -134,7 +134,7 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const tshareAddr = polarisFinance.SPOLAR.address;
   const lunarAddr = polarisFinance.LUNAR.address;
   const tripolarAddr = polarisFinance.TRIPOLAR.address;
-
+  const ethernalAddr = polarisFinance.ETHERNAL.address;
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName === 'POLAR-NEAR-LP') {
@@ -152,6 +152,9 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   } else if (bank.depositTokenName === 'POLAR-LUNAR-LP') {
     pairName = 'POLAR-LUNAR-LP';
     uniswapUrl = 'https://www.trisolaris.io/#/add/' + tombAddr + '/' + lunarAddr;
+  } else if (bank.depositTokenName === 'ETHERNAL-ETH-LP') {
+    pairName = 'ETHERNAL-ETH-LP';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/ETH/' + ethernalAddr;
   } else {
     pairName = 'TRIPOLAR-xTRI pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x802119e4e253D5C19aA06A5d567C5a41596D6803/' + tripolarAddr;

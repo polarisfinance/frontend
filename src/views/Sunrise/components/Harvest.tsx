@@ -29,7 +29,12 @@ const Harvest = ({ sunrise }) => {
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
 
   const { from, to } = useClaimRewardTimerSunrise(sunrise);
-
+  let earnTokenName;
+  if (sunrise.startsWith('OLD')) {
+    earnTokenName = sunrise.slice(3);
+  } else {
+    earnTokenName = sunrise;
+  }
   return (
     <Box>
       <Card>
@@ -41,7 +46,7 @@ const Harvest = ({ sunrise }) => {
               </CardIcon>
               <Value value={getDisplayBalance(earnings)} />
               <Label text={`≈ $${earnedInDollars}`} />
-              <Label text={`${sunrise} Earned`} />
+              <Label text={`${earnTokenName} Earned`} />
             </StyledCardHeader>
             <StyledCardActions>
               <Button
