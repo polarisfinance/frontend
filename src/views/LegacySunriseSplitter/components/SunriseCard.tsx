@@ -14,6 +14,12 @@ import Image from 'material-ui-image';
 import Fire from '../../../assets/img/fire.gif';
 
 const Stake = ({ sunrise }) => {
+  let earnTokenName;
+  if (sunrise.earnTokenName.startsWith('OLD')) {
+    earnTokenName = sunrise.earnTokenName.slice(3);
+  } else {
+    earnTokenName = sunrise.earnTokenName;
+  }
   return (
     <Box>
       <Card>
@@ -51,11 +57,11 @@ const Stake = ({ sunrise }) => {
                   </CardIcon>
                 )}
               </Grid>
-              <Value value={`${sunrise.earnTokenName} Sunrise`} />
+              <Value value={`${earnTokenName} Sunrise`} />
               {sunrise.retired ? (
                 <Label text={`Please withdraw your SPOLAR`} />
               ) : (
-                <Label text={`Stake your $SPOLAR to earn $${sunrise.earnTokenName}`} />
+                <Label text={`Stake your $SPOLAR to earn $${earnTokenName}`} />
               )}
             </StyledCardHeader>
             <StyledCardActions>

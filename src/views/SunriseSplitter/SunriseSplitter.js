@@ -1,11 +1,10 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 
-import OldTripolar from './components/OldTripolar';
 import SunriseCard from './components/SunriseCard';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid, Button } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
@@ -39,6 +38,7 @@ const Masonry = () => {
   const { account } = useWallet();
   const [sunrises] = useSunrises();
   const { path } = useRouteMatch();
+  const activeSunrises = sunrises.filter((sunrise) => !sunrise.retired);
   return (
     <Switch>
       <Page>
@@ -50,15 +50,30 @@ const Masonry = () => {
                 Sunrise
               </Typography>
               <Grid container className={classes.text}>
-                {sunrises.map((sunrise) => (
+                {activeSunrises.map((sunrise) => (
                   <React.Fragment key={sunrise.earnTokenName}>
                     <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
                       <SunriseCard sunrise={sunrise} />
                     </Grid>
                   </React.Fragment>
                 ))}
-                <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-                  <OldTripolar />
+              </Grid>
+              <Grid container direction="row" alignItems="flex-end">
+                <Grid item align="center" xs={12}>
+                  <Button
+                    color="primary"
+                    href="/legacy_sunrise"
+                    variant="contained"
+                    style={{
+                      marginTop: '30px',
+                      /* 
+                          backgroundColor: 'rgb(0,0,0,0)',
+                          boxShadow: 'none',
+                          */
+                    }}
+                  >
+                    Legacy Sunrise
+                  </Button>
                 </Grid>
               </Grid>
             </>

@@ -51,7 +51,7 @@ const logosBySymbol: { [title: string]: string } = {
   TRIBOND: tribondLogo,
   xTRI: xtriLogo,
   'TRIPOLAR-xTRI-LP': tripolarXtriLpLogo,
-  TRIPOLAROLD: tripolarOldLogo,
+  OLDTRIPOLAR: tripolarLogo,
   'POLAR-STNEAR-LP': polarStnearLpLogo,
   'POLAR-LUNAR-LP': polarLunarLogo,
   ETHERNAL: ethernalLogo,

@@ -288,7 +288,7 @@ export class PolarisFinance {
       expectedPrice = await this.contracts.SeigniorageOracle.twap(this.POLAR.address, ethers.utils.parseEther('1'));
     } else if (token === 'LUNAR') {
       expectedPrice = await this.contracts.LunarOracle.twap(this.LUNAR.address, ethers.utils.parseEther('1'));
-    } else if (token === 'TRIPOLAR') {
+    } else if (token === 'TRIPOLAR' || token === 'OLDTRIPOLAR') {
       expectedPrice = await this.contracts.TripolarOracle.twap(this.TRIPOLAR.address, ethers.utils.parseEther('1'));
     } else if (token === 'ETHERNAL') {
       expectedPrice = await this.contracts.EthernalOracle.twap(this.ETHERNAL.address, ethers.utils.parseEther('1'));
@@ -322,6 +322,9 @@ export class PolarisFinance {
     }
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.previousEpochTripolarPrice();
+    }
+    if (token === 'OLDTRIPOLAR') {
+      return this.contracts.tripolarTreasuryOld.previousEpochTripolarPrice();
     }
     if (token === 'ETHERNAL') {
       return this.contracts.ethernalTreasury.previousEpochEthernalPrice();
@@ -554,6 +557,9 @@ export class PolarisFinance {
     }
     if (token === 'TRIPOLAR') {
       return this.contracts.tripolarTreasury.epoch();
+    }
+    if (token === 'OLDTRIPOLAR') {
+      return this.contracts.tripolarTreasuryOld.epoch();
     }
     if (token === 'ETHERNAL') {
       return this.contracts.ethernalTreasury.epoch();
@@ -1247,6 +1253,8 @@ export class PolarisFinance {
       treasury = this.contracts.lunarTreasury;
     } else if (token === 'TRIPOLAR') {
       treasury = this.contracts.tripolarTreasury;
+    } else if (token === 'OLDTRIPOLAR') {
+      treasury = this.contracts.tripolarTreasuryOld;
     } else if (token === 'ETHERNAL') {
       treasury = this.contracts.ethernalTreasury;
     } else {

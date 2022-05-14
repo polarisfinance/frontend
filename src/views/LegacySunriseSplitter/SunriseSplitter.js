@@ -1,10 +1,10 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 
-import BondCard from './components/BondCard';
+import OldTripolar from './components/OldTripolar';
+import SunriseCard from './components/SunriseCard';
 
 import { makeStyles } from '@material-ui/core/styles';
-
 import { Typography, Grid } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
@@ -14,8 +14,9 @@ import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 
 import useSunrises from '../../hooks/useSunrises';
-import Bond from '../Bond';
+import Sunrise from '../Sunrise';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Alert } from '@material-ui/lab';
 
 const BackgroundImage = createGlobalStyle`
   body, html {
@@ -28,9 +29,6 @@ const BackgroundImage = createGlobalStyle`
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
-    [theme.breakpoints.up('md')]: {
-      height: '90px',
-    },
   },
   text: {
     fontSize: '20px',
@@ -42,23 +40,29 @@ const Masonry = () => {
   const { account } = useWallet();
   const [sunrises] = useSunrises();
   const { path } = useRouteMatch();
-  const aciteSunrises = sunrises.filter((sunrise) => !sunrise.retired);
+  const activeSunrises = sunrises.filter((sunrise) => sunrise.retired);
   return (
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage style={{ height: '100%', width: '100%', flex: 1 }} />
+          <BackgroundImage />
           {!!account ? (
             <>
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-                Bond
+                Legacy Sunrise
               </Typography>
-
+              <Alert
+                style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
+                variant="filled"
+                severity="warning"
+              >
+                <b>All below sunrises have been retired. Please unstake and collect your rewards.</b>
+              </Alert>
               <Grid container className={classes.text}>
-                {aciteSunrises.map((sunrise) => (
+                {activeSunrises.map((sunrise) => (
                   <React.Fragment key={sunrise.earnTokenName}>
                     <Grid item xs={12} md={4} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
-                      <BondCard sunrise={sunrise} />
+                      <SunriseCard sunrise={sunrise} />
                     </Grid>
                   </React.Fragment>
                 ))}
@@ -70,7 +74,7 @@ const Masonry = () => {
         </Route>
         <Route path={`${path}/:sunriseId`}>
           <BackgroundImage />
-          <Bond />
+          <Sunrise />
         </Route>
       </Page>
     </Switch>

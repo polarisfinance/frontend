@@ -21,11 +21,11 @@ import { RefreshContextProvider } from './contexts/RefreshContext';
 const Home = lazy(() => import('./views/Home'));
 const Dawn = lazy(() => import('./views/Dawn'));
 const SunriseSplitter = lazy(() => import('./views/SunriseSplitter'));
+const LegacySunriseSplitter = lazy(() => import('./views/LegacySunriseSplitter'));
 const BondSplitter = lazy(() => import('./views/BondSplitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
 const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
-const TripolarSunriseOld = lazy(() => import('./views/TripolarSunriseOld'));
 const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
 
 const NoMatch = () => (
@@ -58,9 +58,10 @@ const App: React.FC = () => {
             <Route path="/sunrise">
               <SunriseSplitter />
             </Route>
-            <Route path="/tripolar_sunrise_old">
-              <TripolarSunriseOld />
+            <Route path="/legacy_sunrise">
+              <LegacySunriseSplitter />
             </Route>
+
             <Route path="/bond">
               <BondSplitter />
             </Route>

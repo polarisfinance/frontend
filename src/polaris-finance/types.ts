@@ -33,6 +33,7 @@ export interface SunriseInfo {
   lpAddress: string;
   treasury: string;
   lpToken: string;
+  retireMsg?: string;
 }
 
 export interface Sunrise extends SunriseInfo {
