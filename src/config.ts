@@ -263,7 +263,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ETHERNAL',
     finished: false,
     sort: 0,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalSpolarRewardPool: {
     name: 'Earn ETHERNAL by SPOLAR',
@@ -274,7 +274,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ETHERNAL',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalSpolarNearRewardPool: {
     name: 'Earn ETHERNAL by SPOLAR/NEAR LP',
@@ -285,7 +285,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ETHERNAL',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalPolarNearRewardPool: {
     name: 'Earn ETHERNAL by POLAR/NEAR LP',
@@ -296,7 +296,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ETHERNAL',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalPolarStnearRewardPool: {
     name: 'Earn ETHERNAL by POLAR/STNEAR LP',
@@ -307,7 +307,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ETHERNAL',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalTripolarXtriRewardPool: {
     name: 'Earn ETHERNAL by TRIPOLAR/xTRI LP',
@@ -318,7 +318,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ETHERNAL',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarXtriSpolarRewardPool: {
     name: 'Earn SPOLAR by TRIPOLAR/xTRI LP',
