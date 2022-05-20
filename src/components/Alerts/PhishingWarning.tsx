@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Alert } from '@material-ui/lab';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -16,15 +15,19 @@ const useStyles = makeStyles({
     }
 });
 
-
 const PhishingWarning = () => {
     const [displayWarning, setDisplayWarning] = useState(true);
     const classes = useStyles();
+    
+    const handleClose = () => {
+        setDisplayWarning(false);
+        localStorage.setItem('closedPhishingWarning', '1');
+    }
 
     return (
         <div>
-            { displayWarning && 
-            <Alert onClose={() => {setDisplayWarning(false)}} className={classes.bar} variant="filled" severity="warning">
+            { displayWarning && !localStorage.getItem('closedPhishingWarning') && 
+            <Alert onClose={handleClose} className={classes.bar} variant="filled" severity="warning">
                 <b>
                     Always make sure the URL is polarisfinance.io - bookmark it to be safe.
                 </b>
