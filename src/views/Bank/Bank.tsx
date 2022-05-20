@@ -14,8 +14,8 @@ import Stake from './components/Stake';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 import useRedeem from '../../hooks/useRedeem';
-import { Bank as BankEntity } from '../../tomb-finance';
-import useTombFinance from '../../hooks/useTombFinance';
+import { Bank as BankEntity } from '../../polaris-finance';
+import usePolarisFinance from '../../hooks/usePolarisFinance';
 import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const Bank: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
   const classes = useStyles();
-  const { bankId } = useParams();
+  const { bankId } = useParams<{ bankId: string }>();
   const bank = useBank(bankId);
 
   const { account } = useWallet();
@@ -43,7 +43,16 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank.depositTokenName.endsWith('LUNA') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('WETH') && <TaxFeeAlert />}
+      {bank.depositTokenName.startsWith('POLAR-LUNAR') && (
+        <Alert
+          style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
+          variant="filled"
+          severity="warning"
+        >
+          <b>This pool has been retired. Please unstake and collect your rewards.</b>
+        </Alert>
+      )}
       <Grid container>
         <Grid item xs={12} md={4}>
           {<Stake bank={bank} />}
@@ -91,6 +100,18 @@ const Bank: React.FC = () => {
                 </StyledLink>
               </Box>
             )}
+            {bank.depositTokenName.startsWith('WETH') && (
+              <Box style={{ marginTop: '10px' }}>
+                <StyledLink
+                  href={
+                    'https://wannaswap.finance/exchange/swap/swap?inputCurrency=ETH&outputCurrency=0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB'
+                  }
+                  target="_blank"
+                >
+                  Get WETH ↗
+                </StyledLink>
+              </Box>
+            )}
             <div style={{ marginTop: '20px' }}>
               <Button onClick={onRedeem} color="primary" variant="contained">
                 Claim & Withdraw
@@ -108,12 +129,12 @@ const Bank: React.FC = () => {
 };
 
 const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
-  const tombFinance = useTombFinance();
-  const tombAddr = tombFinance.TOMB.address;
-  const tshareAddr = tombFinance.TSHARE.address;
-  const lunarAddr = tombFinance.LUNAR.address;
-  const tripolarAddr = tombFinance.TRIPOLAR.address;
-
+  const polarisFinance = usePolarisFinance();
+  const tombAddr = polarisFinance.POLAR.address;
+  const tshareAddr = polarisFinance.SPOLAR.address;
+  const lunarAddr = polarisFinance.LUNAR.address;
+  const tripolarAddr = polarisFinance.TRIPOLAR.address;
+  const ethernalAddr = polarisFinance.ETHERNAL.address;
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName === 'POLAR-NEAR-LP') {
@@ -128,6 +149,12 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   } else if (bank.depositTokenName === 'LUNAR-LUNA-LP') {
     pairName = 'LUNAR-LUNA pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096/' + lunarAddr;
+  } else if (bank.depositTokenName === 'POLAR-LUNAR-LP') {
+    pairName = 'POLAR-LUNAR-LP';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/' + tombAddr + '/' + lunarAddr;
+  } else if (bank.depositTokenName === 'ETHERNAL-ETH-LP') {
+    pairName = 'ETHERNAL-ETH-LP';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/ETH/' + ethernalAddr;
   } else {
     pairName = 'TRIPOLAR-xTRI pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x802119e4e253D5C19aA06A5d567C5a41596D6803/' + tripolarAddr;

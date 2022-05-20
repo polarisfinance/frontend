@@ -4,6 +4,7 @@ import { useWallet } from 'use-wallet';
 import useModal from '../../hooks/useModal';
 import WalletProviderModal from '../WalletProviderModal';
 import AccountModal from './AccountModal';
+import useSunrises from '../../hooks/useSunrises';
 
 interface AccountButtonProps {
   text?: string;
@@ -11,7 +12,8 @@ interface AccountButtonProps {
 
 const AccountButton: React.FC<AccountButtonProps> = ({ text }) => {
   const { account } = useWallet();
-  const [onPresentAccountModal] = useModal(<AccountModal />);
+  const [sunrises] = useSunrises();
+  const [onPresentAccountModal] = useModal(<AccountModal sunrises={sunrises} />);
 
   const [isWalletProviderOpen, setWalletProviderOpen] = useState(false);
 

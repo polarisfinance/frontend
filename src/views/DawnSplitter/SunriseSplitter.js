@@ -4,7 +4,7 @@ import { useWallet } from 'use-wallet';
 import GenesisDawn from './components/GenesisDawn';
 import ActiveDawn from './components/ActiveDawn';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
@@ -43,21 +43,11 @@ const Masonry = () => {
           </Typography>
           <Grid container className={classes.text}>
             <Grid container item xs={12} justify="center" className={classes.text}></Grid>
-            <Grid
-              item
-              xs={12}
-              md={6}
-              style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
-            >
+            <Grid item xs={12} md={6} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
               <ActiveDawn />
             </Grid>
 
-            <Grid
-              item
-              xs={12}
-              md={6}
-              style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}
-            >
+            <Grid item xs={12} md={6} style={{ paddingRight: '10px', paddingLeft: '10px', paddingTop: '20px' }}>
               <GenesisDawn />
             </Grid>
           </Grid>

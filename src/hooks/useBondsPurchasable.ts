@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import usePolarisFinance from './usePolarisFinance';
 
-const useBondsPurchasable = () => {
+const useBondsPurchasable = (token: string) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const polarisFinance = usePolarisFinance();
 
   useEffect(() => {
     async function fetchBondsPurchasable() {
-        try {
-            setBalance(await tombFinance.getBondsPurchasable());
-        }
-        catch(err) {
-            console.error(err);
-        }
+      try {
+        setBalance(await polarisFinance.getBondsPurchasable(token));
+      } catch (err) {
+        console.error(err);
       }
+    }
     fetchBondsPurchasable();
-  }, [setBalance, tombFinance]);
+  }, [setBalance, polarisFinance, token]);
 
   return balance;
 };

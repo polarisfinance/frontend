@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import ERC20 from '../tomb-finance/ERC20';
-import useTombFinance from './useTombFinance';
+import ERC20 from '../polaris-finance/ERC20';
+import usePolarisFinance from './usePolarisFinance';
 import config from '../config';
 
 const useTokenBalance = (token: ERC20) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
-  const isUnlocked = tombFinance?.isUnlocked;
+  const polarisFinance = usePolarisFinance();
+  const isUnlocked = polarisFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
-    setBalance(await token.balanceOf(tombFinance.myAccount));
-  }, [token, tombFinance.myAccount]);
+    setBalance(await token.balanceOf(polarisFinance.myAccount));
+  }, [token, polarisFinance.myAccount]);
 
   useEffect(() => {
     if (isUnlocked) {
@@ -19,7 +19,7 @@ const useTokenBalance = (token: ERC20) => {
       let refreshInterval = setInterval(fetchBalance, config.refreshInterval);
       return () => clearInterval(refreshInterval);
     }
-  }, [isUnlocked, token, fetchBalance, tombFinance]);
+  }, [isUnlocked, token, fetchBalance, polarisFinance]);
 
   return balance;
 };

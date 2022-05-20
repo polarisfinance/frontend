@@ -14,11 +14,8 @@ import useHarvest from '../../../hooks/useHarvest';
 
 import { getDisplayBalance } from '../../../utils/formatBalance';
 import TokenSymbol from '../../../components/TokenSymbol';
-import { Bank } from '../../../tomb-finance';
-import useTombStats from '../../../hooks/useTombStats';
-import useShareStats from '../../../hooks/usetShareStats';
-import useLunarStats from '../../../hooks/useLunarStats';
-import useTripolarStats from '../../../hooks/useTripolarStats';
+import { Bank } from '../../../polaris-finance';
+import useStats from '../../../hooks/useStats';
 interface HarvestProps {
   bank: Bank;
 }
@@ -26,30 +23,9 @@ interface HarvestProps {
 const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const earnings = useEarnings(bank.contract, bank.earnTokenName, bank.poolId);
   const { onReward } = useHarvest(bank);
-  const tombStats = useTombStats();
-  const tShareStats = useShareStats();
-  const lunarStats = useLunarStats();
-  const tripolarStats = useTripolarStats();
-  let tokenName;
-  if (bank.earnTokenName === 'SPOLAR') {
-    tokenName = 'SPOLAR';
-  } else if (bank.earnTokenName === 'POLAR') {
-    tokenName = 'POLAR';
-  } else if (bank.earnTokenName === 'LUNAR') {
-    tokenName = 'LUNAR';
-  } else if (bank.earnTokenName === 'TRIPOLAR') {
-    tokenName = 'TRIPOLAR';
-  }
-  var tokenStats: { priceInDollars: any; tokenInFtm?: string; totalSupply?: string; circulatingSupply?: string };
-  if (bank.earnTokenName === 'SPOLAR') {
-    tokenStats = tShareStats;
-  } else if (bank.earnTokenName === 'POLAR') {
-    tokenStats = tombStats;
-  } else if (bank.earnTokenName === 'LUNAR') {
-    tokenStats = lunarStats;
-  } else if (bank.earnTokenName === 'TRIPOLAR') {
-    tokenStats = tripolarStats;
-  }
+  const tokenStats = useStats(bank.earnTokenName);
+  const tokenName = bank.earnTokenName;
+
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],

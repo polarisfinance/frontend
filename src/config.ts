@@ -1,51 +1,16 @@
 // import { ChainId } from '@pancakeswap-libs/sdk';
 import { ChainId } from '@trisolaris/sdk';
-import { Configuration } from './tomb-finance/config';
-import { BankInfo } from './tomb-finance';
+import { Configuration } from './polaris-finance/config';
+import { BankInfo, SunriseInfo } from './polaris-finance';
 
 const configurations: { [env: string]: Configuration } = {
-  development: {
-    chainId: ChainId.AURORA,
-    networkName: 'Aurora Mainnet',
-    ftmscanUrl: 'https://aurorascan.dev/',
-    defaultProvider: 'https://mainnet.aurora.dev/',
-    deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
-    externalTokens: {
-      NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
-      USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
-      AURORA: ['0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79', 18],
-      UST: ['0x5ce9F0B6AFb36135b5ddBF11705cEB65E634A9dC', 18],
-      LUNA: ['0xC4bdd27c33ec7daa6fcfd8532ddB524Bf4038096', 18],
-      'POLAR-NEAR-LP': ['0x3fa4d0145a0b6Ad0584B1ad5f61cB490A04d8242', 18],
-      'SPOLAR-NEAR-LP': ['0xADf9D0C77c70FCb1fDB868F54211288fCE9937DF', 18],
-      'NEAR-USDC-LP': ['0x20F8AeFB5697B77E0BB835A8518BE70775cdA1b0', 18],
-      POLAR: ['0xf0f3b9Eee32b1F490A4b8720cf6F005d4aE9eA86', 18],
-      PBOND: ['0x3a4773e600086A753862621A26a2E3274610da43', 18],
-      'LUNAR-LUNA-LP': ['0x3e50da46cB79d1f9F08445984f207278796CE2d2', 18],
-      LUNAR: ['0x25e801Eb75859Ba4052C4ac4233ceC0264eaDF8c', 18],
-      LBOND: ['0x3a101bA3f4a39C921A171473592D4EBDA6bD0B57', 18],
-      'LUNA-NEAR-LP': ['0xdf8cbf89ad9b7dafdd3e37acec539eecc8c47914', 18],
-      SPOLAR: ['0x9D6fc90b25976E40adaD5A3EdD08af9ed7a21729', 18],
-      xTRI: ['0x802119e4e253D5C19aA06A5d567C5a41596D6803', 18],
-      STNEAR: ['0x07F9F7f963C5cD2BBFFd30CcfB964Be114332E30', 24],
-
-      TRIPOLAR: ['0x60527a2751A827ec0Adf861EfcAcbf111587d748', 18],
-      TRIBOND: ['0x8200B4F47eDb608e36561495099a8caF3F806198', 18],
-      'TRIPOLAR-xTRI-LP': ['0x85f155FDCf2a951fd95734eCEB99F875b84a2E27', 18],
-      'STNEAR-xTRI-LP': ['0x5913f644a10d98c79f2e0b609988640187256373', 18],
-      'STNEAR-NEAR-LP': ['0x47924ae4968832984f4091eec537dff5c38948a4', 18],
-    },
-    baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
-    bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
-    masonryLaunchesAt: new Date('2020-12-11T00:00:00Z'),
-    refreshInterval: 10000,
-  },
   production: {
     chainId: ChainId.AURORA,
     networkName: 'Aurora Mainnet',
     ftmscanUrl: 'https://aurorascan.dev/',
-    defaultProvider: 'https://mainnet.aurora.dev/',
-    deployments: require('./tomb-finance/deployments/deployments.mainnet.json'),
+    defaultProvider: 'https://mainnet.aurora.dev',
+    defaultWssProvider: 'wss://mrerpc.polarisfinance.io/',
+    deployments: require('./polaris-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
       USDC: ['0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', 6], // This is actually usdc on mainnet not fusdt
@@ -62,14 +27,21 @@ const configurations: { [env: string]: Configuration } = {
       LBOND: ['0x3a101bA3f4a39C921A171473592D4EBDA6bD0B57', 18],
       'LUNA-NEAR-LP': ['0xdf8cbf89ad9b7dafdd3e37acec539eecc8c47914', 18],
       SPOLAR: ['0x9D6fc90b25976E40adaD5A3EdD08af9ed7a21729', 18],
-      xTRI: ['0x802119e4e253D5C19aA06A5d567C5a41596D6803', 18],
       STNEAR: ['0x07F9F7f963C5cD2BBFFd30CcfB964Be114332E30', 24],
+      'POLAR-STNEAR-LP': ['0x75890912E9bb373dD0aA57a3fe9eC748Bf923915', 18],
+      xTRI: ['0x802119e4e253D5C19aA06A5d567C5a41596D6803', 18],
 
       TRIPOLAR: ['0x60527a2751A827ec0Adf861EfcAcbf111587d748', 18],
       TRIBOND: ['0x8200B4F47eDb608e36561495099a8caF3F806198', 18],
       'TRIPOLAR-xTRI-LP': ['0x85f155FDCf2a951fd95734eCEB99F875b84a2E27', 18],
       'STNEAR-xTRI-LP': ['0x5913f644a10d98c79f2e0b609988640187256373', 18],
       'STNEAR-NEAR-LP': ['0x47924ae4968832984f4091eec537dff5c38948a4', 18],
+      'POLAR-LUNAR-LP': ['0x254320caDE0B3f44CA1c0C12D7aCeAd797D933e6', 18],
+      WETH: ['0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB', 18],
+      'WETH-NEAR-LP': ['0x63da4DB6Ef4e7C62168aB03982399F9588fCd198', 18],
+      ETHERNAL: ['0x17cbd9C274e90C537790C51b4015a65cD015497e', 18],
+      EBOND: ['0x266437E6c7500A947012F19A3dE96a3881a0449E', 18],
+      'ETHERNAL-ETH-LP': ['0x81D77f8e86f65b9C0F393afe0FC743D888c2d4d7', 18],
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
@@ -85,14 +57,16 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   poolId: the poolId assigned in the contract
   sectionInUI: way to distinguish in which of the 3 pool groups it should be listed
         - 0 = Single asset stake pools
-        - 1 = LP asset staking rewarding TOMB
-        - 2 = LP asset staking rewarding TSHARE
+        - 1 = LP asset staking rewarding POLAR
+        - 2 = LP asset staking rewarding SPOLAR
   contract: the contract name which will be loaded from the deployment.environmnet.json
   depositTokenName : the name of the token to be deposited
   earnTokenName: the rewarded token
   finished: will disable the pool on the UI if set to true
   sort: the order of the pool
   */
+
+  // legacy
   PolarAuroraRewardPool: {
     name: 'Earn POLAR by AURORA',
     poolId: 2,
@@ -280,6 +254,72 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 4,
     closedForStaking: true,
   },
+  EthernalEthRewardPool: {
+    name: 'Earn ETHERNAL by WETH',
+    poolId: 0,
+    sectionInUI: 6,
+    contract: 'EthernalEthRewardPool',
+    depositTokenName: 'WETH',
+    earnTokenName: 'ETHERNAL',
+    finished: false,
+    sort: 0,
+    closedForStaking: true,
+  },
+  EthernalSpolarRewardPool: {
+    name: 'Earn ETHERNAL by SPOLAR',
+    poolId: 1,
+    sectionInUI: 6,
+    contract: 'EthernalSpolarRewardPool',
+    depositTokenName: 'SPOLAR',
+    earnTokenName: 'ETHERNAL',
+    finished: false,
+    sort: 1,
+    closedForStaking: true,
+  },
+  EthernalSpolarNearRewardPool: {
+    name: 'Earn ETHERNAL by SPOLAR/NEAR LP',
+    poolId: 2,
+    sectionInUI: 6,
+    contract: 'EthernalSpolarNearRewardPool',
+    depositTokenName: 'SPOLAR-NEAR-LP',
+    earnTokenName: 'ETHERNAL',
+    finished: false,
+    sort: 2,
+    closedForStaking: true,
+  },
+  EthernalPolarNearRewardPool: {
+    name: 'Earn ETHERNAL by POLAR/NEAR LP',
+    poolId: 3,
+    sectionInUI: 6,
+    contract: 'EthernalPolarNearRewardPool',
+    depositTokenName: 'POLAR-NEAR-LP',
+    earnTokenName: 'ETHERNAL',
+    finished: false,
+    sort: 3,
+    closedForStaking: true,
+  },
+  EthernalPolarStnearRewardPool: {
+    name: 'Earn ETHERNAL by POLAR/STNEAR LP',
+    poolId: 4,
+    sectionInUI: 6,
+    contract: 'EthernalPolarStnearRewardPool',
+    depositTokenName: 'POLAR-STNEAR-LP',
+    earnTokenName: 'ETHERNAL',
+    finished: false,
+    sort: 4,
+    closedForStaking: true,
+  },
+  EthernalTripolarXtriRewardPool: {
+    name: 'Earn ETHERNAL by TRIPOLAR/xTRI LP',
+    poolId: 5,
+    sectionInUI: 6,
+    contract: 'EthernalTripolarXtriRewardPool',
+    depositTokenName: 'TRIPOLAR-xTRI-LP',
+    earnTokenName: 'ETHERNAL',
+    finished: false,
+    sort: 5,
+    closedForStaking: true,
+  },
   TripolarXtriSpolarRewardPool: {
     name: 'Earn SPOLAR by TRIPOLAR/xTRI LP',
     poolId: 6,
@@ -288,18 +328,18 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'TRIPOLAR-xTRI-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 0,
+    sort: 4,
     closedForStaking: false,
   },
   LunarLunaSpolarRewardPool: {
     name: 'Earn SPOLAR by LUNAR/LUNA LP',
     poolId: 4,
-    sectionInUI: 2,
+    sectionInUI: 5,
     contract: 'LunarLunaLPSpolarRewardPool',
     depositTokenName: 'LUNAR-LUNA-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 0,
+    sort: 1,
     closedForStaking: false,
   },
   PolarNearLpSpolarRewardPool: {
@@ -313,6 +353,28 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 1,
     closedForStaking: false,
   },
+  PolarStNearLpSpolarRewardPool: {
+    name: 'Earn SPOLAR by POLAR-STNEAR LP',
+    poolId: 5,
+    sectionInUI: 2,
+    contract: 'PolarStNearLpSpolarRewardPool',
+    depositTokenName: 'POLAR-STNEAR-LP',
+    earnTokenName: 'SPOLAR',
+    finished: false,
+    sort: 2,
+    closedForStaking: false,
+  },
+  PolarLunarLpSpolarRewardPool: {
+    name: 'Earn SPOLAR by POLAR-LUNAR LP',
+    poolId: 7,
+    sectionInUI: 5,
+    contract: 'PolarLunarLpSpolarRewardPool',
+    depositTokenName: 'POLAR-LUNAR-LP',
+    earnTokenName: 'SPOLAR',
+    finished: false,
+    sort: 2,
+    closedForStaking: true,
+  },
   SpolarNearLpSpolarRewardPool: {
     name: 'Earn SPOLAR by SPOLAR-NEAR LP',
     poolId: 1,
@@ -321,7 +383,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'SPOLAR-NEAR-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 3,
+    sort: 0,
     closedForStaking: false,
   },
   PolarSpolarRewardPool: {
@@ -334,6 +396,17 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     finished: false,
     sort: 4,
     closedForStaking: true,
+  },
+  EthernalEthLpSpolarRewardPool: {
+    name: 'Earn SPOLAR by ETHERNAL-ETH LP',
+    poolId: 8,
+    sectionInUI: 2,
+    contract: 'EthernalEthLPSpolarRewardPool',
+    depositTokenName: 'ETHERNAL-ETH-LP',
+    earnTokenName: 'SPOLAR',
+    finished: false,
+    sort: 4,
+    closedForStaking: false,
   },
   PbondSpolarRewardPool: {
     name: 'Earn SPOLAR by PBOND',
@@ -348,4 +421,93 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   },
 };
 
-export default configurations[process.env.NODE_ENV || 'development'];
+export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
+  PolarSunrise: {
+    name: 'polar',
+    contract: 'Masonry',
+    earnTokenName: 'POLAR',
+    sort: 0,
+    boosted: true,
+    coming: false,
+    retired: false,
+    bond: 'PBOND',
+    tokenAddress: '0xf0f3b9Eee32b1F490A4b8720cf6F005d4aE9eA86',
+    lpAddress: '0x3fa4d0145a0b6Ad0584B1ad5f61cB490A04d8242',
+    treasury: 'Treasury',
+    lpToken: 'NEAR',
+  },
+  LunarSunrise: {
+    name: 'lunar',
+    contract: 'lunarSunrise',
+    earnTokenName: 'LUNAR',
+    sort: 4,
+    boosted: false,
+    coming: false,
+    retired: true,
+    bond: 'LBOND',
+    tokenAddress: '0x25e801Eb75859Ba4052C4ac4233ceC0264eaDF8c',
+    lpAddress: '0x3e50da46cB79d1f9F08445984f207278796CE2d2',
+    treasury: 'lunarTreasury',
+    lpToken: 'LUNA',
+    retireMsg: 'Please withdraw your SPOLAR and migrate them to other active Sunrises.',
+  },
+  TripolarSunrise: {
+    name: 'tripolar',
+    contract: 'tripolarSunrise',
+    earnTokenName: 'TRIPOLAR',
+    sort: 2,
+    boosted: false,
+    coming: false,
+    retired: false,
+    bond: 'TRIBOND',
+    tokenAddress: '0x60527a2751A827ec0Adf861EfcAcbf111587d748',
+    lpAddress: '0x85f155FDCf2a951fd95734eCEB99F875b84a2E27',
+    treasury: 'tripolarTreasury',
+    lpToken: 'xTRI',
+  },
+  OldTripolarSunrise: {
+    name: 'tripolarOld',
+    contract: 'tripolarSunriseOld',
+    earnTokenName: 'OLDTRIPOLAR',
+    sort: 2,
+    boosted: false,
+    coming: false,
+    retired: true,
+    bond: 'TRIBOND',
+    tokenAddress: '0x60527a2751A827ec0Adf861EfcAcbf111587d748',
+    lpAddress: '0x85f155FDCf2a951fd95734eCEB99F875b84a2E27',
+    treasury: 'tripolarTreasuryOld',
+    lpToken: 'xTRI',
+    retireMsg: 'Please withdraw your SPOLAR and migrate them to the NEW TRIPOLAR Sunrise.',
+  },
+  EthernalSunrise: {
+    name: 'ethernal',
+    contract: 'ethernalSunrise',
+    earnTokenName: 'ETHERNAL',
+    sort: 1,
+    boosted: false,
+    coming: false,
+    retired: false,
+    bond: 'EBOND',
+    tokenAddress: '0x17cbd9C274e90C537790C51b4015a65cD015497e',
+    lpAddress: '0x81D77f8e86f65b9C0F393afe0FC743D888c2d4d7',
+    treasury: 'ethernalTreasury',
+    lpToken: 'WETH',
+  },
+  AurisSunrise: {
+    name: 'tripolar',
+    contract: 'tripolarSunrise',
+    earnTokenName: 'AURIS',
+    sort: 3,
+    boosted: false,
+    coming: true,
+    retired: false,
+    bond: 'ABOND',
+    tokenAddress: '',
+    lpAddress: '',
+    treasury: 'tripolarTreasury',
+    lpToken: 'AURORA',
+  },
+};
+
+export default configurations['production'];

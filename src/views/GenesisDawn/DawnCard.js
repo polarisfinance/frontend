@@ -11,7 +11,7 @@ const CemeteryCard = ({ bank }) => {
       <Card>
         <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
           <Grid container alignItems="center">
-            <Grid container item sm={4} alignItems="center">
+            <Grid container item xs={12} md={4} alignItems="center">
               <Box mr={5} ml={5} mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol={bank.depositTokenName} />
@@ -22,20 +22,26 @@ const CemeteryCard = ({ bank }) => {
               </Typography>
             </Grid>
 
-            <Grid item sm={4}>
+            <Grid container item xs={12} md={6} alignItems="center">
               <Typography color="textSecondary">
                 {/* {bank.name} */}
                 Deposit {bank.depositTokenName} Earn {` ${bank.earnTokenName}`}
               </Typography>
             </Grid>
-            <Grid item sm={4}>
+            <Grid container item xs={12} md={2}>
               <Button color="primary" size="small" variant="contained" component={Link} to={`/dawn/${bank.contract}`}>
                 VIEW & STAKE
               </Button>
-              {bank.depositTokenName.startsWith('POLAR-STNEAR') && (
-                <Box style={{ marginTop: '10px' }}>
-                  <StyledLink href={'https://metapool.app/dapp/mainnet/metapool-aurora/'} target="_blank">
-                    Get STNEAR ↗
+
+              {bank.depositTokenName.startsWith('WETH') && (
+                <Box style={{ position: 'absolute', top: '20px', right: '20px' }}>
+                  <StyledLink
+                    href={
+                      'https://wannaswap.finance/exchange/swap/swap?inputCurrency=ETH&outputCurrency=0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB'
+                    }
+                    target="_blank"
+                  >
+                    Get WETH ↗
                   </StyledLink>
                 </Box>
               )}
