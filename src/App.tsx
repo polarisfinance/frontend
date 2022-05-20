@@ -17,6 +17,7 @@ import Updaters from './state/Updaters';
 import Loader from './components/Loader';
 import Popups from './components/Popups';
 import { RefreshContextProvider } from './contexts/RefreshContext';
+import { PhishingWarning } from './components/Alerts';
 
 const Home = lazy(() => import('./views/Home'));
 const Dawn = lazy(() => import('./views/Dawn'));
@@ -93,6 +94,7 @@ const Providers: React.FC = ({ children }) => {
   return (
     <TP1 theme={theme}>
       <TP theme={newTheme}>
+        <PhishingWarning/>
         <UseWalletProvider
           chainId={config.chainId}
           connectors={{
