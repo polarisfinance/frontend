@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 
-import { Button, Select, MenuItem, InputLabel, withStyles, makeStyles } from '@material-ui/core';
+import { Button, MenuItem, withStyles, makeStyles, TextField } from '@material-ui/core';
 // import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal';
 import ModalActions from '../../../components/ModalActions';
@@ -27,18 +27,6 @@ interface ZapProps extends ModalProps {
 const useStyles = makeStyles({
   root: {},
   container: {},
-  selectToken: {
-    display: 'flex',
-    textAlign: 'center',
-    fontSize: '20px',
-  },
-  inputToken: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 'large',
-    marginRight: '1em',
-    verticalAlign: 'middle',
-  },
   zapEstimates: {
     marginTop: '0.5em',
     textAlign: 'center',
@@ -48,6 +36,7 @@ const useStyles = makeStyles({
   button: {
     textAlign: 'center',
     margin: '-2em',
+    marginBottom: '0.5em',
   },
 });
 
@@ -111,25 +100,16 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         Beta feature. Use at your own risk!
       </Alert>
       <ModalTitle text={`Zap in ${tokenName}`} />
-
-      <StyledActionSpacer />
-      <div className={classes.selectToken}>
-        <InputLabel className={classes.selectToken} style={{ paddingTop: '20px' }} id="label">
-          Select asset to zap with
-        </InputLabel>
-        <Select
-          onChange={handleChangeAsset}
-          style={{ color: 'white', width: '60%' }}
-          labelId="label"
-          id="select"
-          value={zappingToken}
-        >
-          <StyledMenuItem value={FTM_TICKER}>FTM</StyledMenuItem>
-          <StyledMenuItem value={SPOLAR_TICKER}>SPOLAR</StyledMenuItem>
-          {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
-          {/* <StyledMenuItem value={POLAR_TICKER}>POLAR</StyledMenuItem> */}
-        </Select>
-      </div>
+      <TextField
+        select
+        label="Select asset to zap with"
+        value={zappingToken}
+        onChange={handleChangeAsset}
+        variant="outlined"
+      >
+        <StyledMenuItem value={FTM_TICKER}>FTM</StyledMenuItem>
+        <StyledMenuItem value={SPOLAR_TICKER}>SPOLAR</StyledMenuItem>
+      </TextField>
       <TokenInput
         onSelectMax={handleSelectMax}
         onChange={handleChange}
@@ -162,16 +142,14 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
           </Button>
         </ModalActions>
       </div>
-
-      <StyledActionSpacer />
     </Modal>
   );
 };
 
-const StyledActionSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
-`;
+// const StyledActionSpacer = styled.div`
+//   height: ${(props) => props.theme.spacing[4]}px;
+//   width: ${(props) => props.theme.spacing[4]}px;
+// `;
 
 const StyledDescriptionText = styled.div`
   align-items: center;
