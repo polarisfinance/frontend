@@ -50,16 +50,16 @@ const Sunrise: React.FC = () => {
   const { sunriseId } = useParams<{ sunriseId: string }>();
   const sunrise = useSunrise(sunriseId);
   const { account } = useWallet();
-  const { onRedeem } = useRedeemOnSunrise(sunrise?.earnTokenName);
-  const stakedBalance = useStakedBalanceOnSunrise(sunrise?.earnTokenName);
+  const { onRedeem } = useRedeemOnSunrise(sunrise);
+  const stakedBalance = useStakedBalanceOnSunrise(sunrise);
   const currentEpoch = useCurrentEpoch(sunrise);
-  const cashStat = useTokenEstimatedTWAP(sunrise?.earnTokenName);
-  const totalStaked = useTotalStakedOnSunrise(sunrise?.earnTokenName);
-  const masonryAPR = useFetchSunriseAPR(sunrise?.earnTokenName);
+  const cashStat = useTokenEstimatedTWAP(sunrise);
+  const totalStaked = useTotalStakedOnSunrise(sunrise);
+  const masonryAPR = useFetchSunriseAPR(sunrise);
   const canClaimReward = useClaimRewardCheck(sunrise);
-  const canWithdraw = useWithdrawCheck(sunrise?.earnTokenName);
+  const canWithdraw = useWithdrawCheck(sunrise);
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat).toFixed(4) : null), [cashStat]);
-  const { to } = useTreasuryAllocationTimes(sunrise?.earnTokenName);
+  const { to } = useTreasuryAllocationTimes(sunrise);
   const polarPreviousEpochTwap = useTokenPreviousEpochTWAP(sunrise);
   let earnTokenName: string;
   if (sunrise.earnTokenName.startsWith('OLD')) {
@@ -119,7 +119,7 @@ const Sunrise: React.FC = () => {
         )}
 
         <Grid item xs={12} md={4}>
-          <Stake sunrise={sunrise.earnTokenName} contract={sunrise?.contract} retired={sunrise?.retired} />
+          <Stake sunrise={sunrise} contract={sunrise?.contract} retired={sunrise?.retired} />
         </Grid>
         <Grid container item xs={12} md={4} alignItems="center" direction="row">
           <Grid container item xs={12}>
@@ -178,7 +178,7 @@ const Sunrise: React.FC = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Harvest sunrise={sunrise.earnTokenName} />
+          <Harvest sunrise={sunrise} />
         </Grid>
       </Grid>
       <Box mt={5}>

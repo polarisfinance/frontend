@@ -35,7 +35,7 @@ const Stake = ({ sunrise, contract, retired }) => {
   const stakedBalance = useStakedBalanceOnSunrise(sunrise);
   const { from, to } = useUnstakeTimerSunrise(sunrise);
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(sunrise, polarisFinance.SPOLAR);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(sunrise?.earnTokenName, polarisFinance.SPOLAR);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars

@@ -3,7 +3,7 @@ import { BigNumber } from 'ethers';
 import usePolarisFinance from './usePolarisFinance';
 import useRefresh from './useRefresh';
 
-const useEarningsOnSunrise = (token: string) => {
+const useEarningsOnSunrise = (sunrise) => {
   const { slowRefresh } = useRefresh();
   const [balance, setBalance] = useState(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
@@ -12,7 +12,7 @@ const useEarningsOnSunrise = (token: string) => {
   useEffect(() => {
     async function fetchBalance() {
       try {
-        setBalance(await polarisFinance.getEarningsOnSunrise(token));
+        setBalance(await polarisFinance.getEarningsOnSunrise(sunrise));
       } catch (e) {
         console.error(e);
       }
@@ -20,7 +20,7 @@ const useEarningsOnSunrise = (token: string) => {
     if (isUnlocked) {
       fetchBalance();
     }
-  }, [isUnlocked, polarisFinance, slowRefresh, token]);
+  }, [isUnlocked, polarisFinance, slowRefresh, sunrise?.earnTokenName]);
 
   return balance;
 };

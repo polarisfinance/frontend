@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import usePolarisFinance from './../usePolarisFinance';
 import useRefresh from '../useRefresh';
 
-const useWithdrawCheck = (token: string) => {
+const useWithdrawCheck = (sunrise) => {
   const [canWithdraw, setCanWithdraw] = useState(false);
   const polarisFinance = usePolarisFinance();
   const { slowRefresh } = useRefresh();
@@ -11,7 +11,7 @@ const useWithdrawCheck = (token: string) => {
   useEffect(() => {
     async function canUserWithdraw() {
       try {
-        setCanWithdraw(await polarisFinance.canUserUnstakeFromSunrise(token));
+        setCanWithdraw(await polarisFinance.canUserUnstakeFromSunrise(sunrise));
       } catch (err) {
         console.error(err);
       }
@@ -19,7 +19,7 @@ const useWithdrawCheck = (token: string) => {
     if (isUnlocked) {
       canUserWithdraw();
     }
-  }, [isUnlocked, polarisFinance, slowRefresh, token]);
+  }, [isUnlocked, polarisFinance, slowRefresh, sunrise?.earnTokenName]);
 
   return canWithdraw;
 };

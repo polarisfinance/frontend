@@ -28,7 +28,7 @@ const Pit: React.FC = () => {
   const polarisFinance = usePolarisFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useStats(sunrise.bond);
-  const cashPrice = useTokenPriceInLastTWAP(sunrise.earnTokenName);
+  const cashPrice = useTokenPriceInLastTWAP(sunrise);
   const previousTwap = useTokenPreviousEpochTWAP(sunrise);
   const bondsRedeemable = useBondsRedeemable(sunrise);
 

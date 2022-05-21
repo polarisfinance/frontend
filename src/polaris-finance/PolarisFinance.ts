@@ -282,35 +282,15 @@ export class PolarisFinance {
     };
   }
 
-  async getTokenEstimatedTWAP(token: string): Promise<string> {
+  async getTokenEstimatedTWAP(sunrise): Promise<string> {
     let expectedPrice: BigNumber;
-    if (token === 'POLAR') {
-      expectedPrice = await this.contracts.SeigniorageOracle.twap(this.POLAR.address, ethers.utils.parseEther('1'));
-    } else if (token === 'LUNAR') {
-      expectedPrice = await this.contracts.LunarOracle.twap(this.LUNAR.address, ethers.utils.parseEther('1'));
-    } else if (token === 'TRIPOLAR' || token === 'OLDTRIPOLAR') {
-      expectedPrice = await this.contracts.TripolarOracle.twap(this.TRIPOLAR.address, ethers.utils.parseEther('1'));
-    } else if (token === 'ETHERNAL') {
-      expectedPrice = await this.contracts.EthernalOracle.twap(this.ETHERNAL.address, ethers.utils.parseEther('1'));
-    } else {
-      return 'nothing';
-    }
+    const token = sunrise.earnTokenName
+    expectedPrice = await this.contracts.SeigniorageOracle.twap(sunrise.tokenAddress, ethers.utils.parseEther('1'));
     return token === 'POLAR' ? getDisplayBalance(expectedPrice.div(1e6)) : getDisplayBalance(expectedPrice);
   }
 
-  async getTokenPriceInLastTWAP(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return this.contracts.Treasury.getpolarUpdatedPrice();
-    }
-    if (token === 'LUNAR') {
-      return this.contracts.lunarTreasury.getlunarUpdatedPrice();
-    }
-    if (token === 'TRIPOLAR') {
-      return this.contracts.tripolarTreasury.getTripolarUpdatedPrice();
-    }
-    if (token === 'ETHERNAL') {
-      return this.contracts.ethernalTreasury.getEthernalUpdatedPrice();
-    }
+  async getTokenPriceInLastTWAP(sunrise): Promise<BigNumber> {
+    return this.contracts[sunrise.treasury][sunrise.getTokenPriceInLastTWAP]();
   }
 
   async getTokenPreviousEpochTWAP(sunrise): Promise<BigNumber> {
@@ -943,24 +923,14 @@ export class PolarisFinance {
   //===================================================================
   //===================================================================
 
-  async getSunriseAPR(token: string) {
+  async getSunriseAPR(sunrise) {
     let latestSnapshotIndex: BigNumber,
       lastHistory: BigNumber,
       SPOLARPrice: TokenStat,
-      sunrise: Contract,
       tokenPricePromise: Promise<TokenStat>,
       tokenPrice: TokenStat;
-    if (token === 'POLAR') {
-      sunrise = this.contracts.Masonry;
-    } else if (token === 'LUNAR') {
-      sunrise = this.contracts.lunarSunrise;
-    } else if (token === 'TRIPOLAR') {
-      sunrise = this.contracts.tripolarSunrise;
-    } else if (token === 'ETHERNAL') {
-      sunrise = this.contracts.ethernalSunrise;
-    } else {
-      return 0;
-    }
+    const token = sunrise?.earnTokenName;
+    sunrise = this.contracts[sunrise.contract]
     tokenPricePromise = this.getStat(token);
     latestSnapshotIndex = await sunrise.latestSnapshotIndex();
     [lastHistory, SPOLARPrice, tokenPrice] = await Promise.all([
@@ -985,22 +955,8 @@ export class PolarisFinance {
    * @returns true if user can withdraw reward, false if they can't
    */
 
-  async canUserClaimRewardFromSunrise(token: string): Promise<boolean> {
-    if (token === 'POLAR') {
-      return this.contracts.Masonry.canClaimReward(this.myAccount);
-    }
-    if (token === 'LUNAR') {
-      return this.contracts.lunarSunrise.canClaimReward(this.myAccount);
-    }
-    if (token === 'TRIPOLAR') {
-      return this.contracts.tripolarSunrise.canClaimReward(this.myAccount);
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return this.contracts.tripolarSunriseOld.canClaimReward(this.myAccount);
-    }
-    if (token === 'ETHERNAL') {
-      return this.contracts.ethernalSunrise.canClaimReward(this.myAccount);
-    }
+  async canUserClaimRewardFromSunrise(sunrise: Contract): Promise<boolean> {
+    return this.contracts[sunrise.contract].canClaimReward(this.myAccount);
   }
 
   /**
@@ -1008,170 +964,49 @@ export class PolarisFinance {
    * @returns true if user can withdraw reward, false if they can't
    */
 
-  async canUserUnstakeFromSunrise(token: string): Promise<boolean> {
-    let canWithdraw: boolean, stakedAmount: BigNumber, sunrise: Contract;
-    if (token === 'POLAR') {
-      sunrise = this.contracts.Masonry;
-    } else if (token === 'LUNAR') {
-      sunrise = this.contracts.lunarSunrise;
-    } else if (token === 'TRIPOLAR') {
-      sunrise = this.contracts.tripolarSunrise;
-    } else if (token === 'OLDTRIPOLAR') {
-      sunrise = this.contracts.tripolarSunriseOld;
-    } else if (token === 'ETHERNAL') {
-      sunrise = this.contracts.ethernalSunrise;
-    } else {
-      return false;
-    }
+  async canUserUnstakeFromSunrise(sunrise: Contract): Promise<boolean> {
+    let canWithdraw: boolean, stakedAmount: BigNumber;
+    const contract = this.contracts[sunrise.contract];
     [canWithdraw, stakedAmount] = await Promise.all([
-      sunrise.canWithdraw(this.myAccount),
-      this.getStakedSpolarOnSunrise(token),
+      contract.canWithdraw(this.myAccount),
+      this.getStakedSpolarOnSunrise(sunrise),
     ]);
     const notStaked = Number(getDisplayBalance(stakedAmount, this.SPOLAR.decimal)) === 0;
     const result = notStaked ? true : canWithdraw;
     return result;
   }
 
-  async getTotalStakedInSunrise(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return await this.contracts.Masonry.totalSupply();
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.totalSupply();
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.totalSupply();
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return await this.contracts.tripolarSunriseOld.totalSupply();
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalSunrise.totalSupply();
-    }
+  async getTotalStakedInSunrise(sunrise): Promise<BigNumber> {
+    return await this.contracts[sunrise.contract].totalSupply();
   }
 
-  async stakeSpolarToSunrise(amount: string, token: string): Promise<TransactionResponse> {
-    if (token === 'POLAR') {
-      return await this.contracts.Masonry.stake(decimalToBalance(amount));
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.stake(decimalToBalance(amount));
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.stake(decimalToBalance(amount));
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalSunrise.stake(decimalToBalance(amount));
-    }
+  async stakeSpolarToSunrise(amount: string, sunrise): Promise<TransactionResponse> {
+    return await this.contracts[sunrise.contract].stake(decimalToBalance(amount));
   }
 
-  async getStakedSpolarOnSunrise(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return await this.contracts.Masonry.balanceOf(this.myAccount);
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.balanceOf(this.myAccount);
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.balanceOf(this.myAccount);
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return await this.contracts.tripolarSunriseOld.balanceOf(this.myAccount);
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalSunrise.balanceOf(this.myAccount);
-    }
-    return;
+  async getStakedSpolarOnSunrise(sunrise): Promise<BigNumber> {
+    return await this.contracts[sunrise.contract].balanceOf(this.myAccount);
   }
 
-  async getEarningsOnSunrise(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return await this.contracts.Masonry.earned(this.myAccount);
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.earned(this.myAccount);
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.earned(this.myAccount);
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return await this.contracts.tripolarSunriseOld.earned(this.myAccount);
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalSunrise.earned(this.myAccount);
-    }
+  async getEarningsOnSunrise(sunrise): Promise<BigNumber> {
+    return await this.contracts[sunrise.contract].earned(this.myAccount);
   }
 
-  async withdrawSpolarFromSunrise(amount: string, token: string): Promise<TransactionResponse> {
-    if (token === 'POLAR') {
-      return await this.contracts.Masonry.withdraw(decimalToBalance(amount));
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.withdraw(decimalToBalance(amount));
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.withdraw(decimalToBalance(amount));
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return await this.contracts.tripolarSunriseOld.withdraw(decimalToBalance(amount));
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalSunrise.withdraw(decimalToBalance(amount));
-    }
+  async withdrawSpolarFromSunrise(amount: string, sunrise): Promise<TransactionResponse> {
+    return await this.contracts[sunrise.contract].withdraw(decimalToBalance(amount));
   }
 
-  async claimRewardFromSunrise(token: string): Promise<TransactionResponse> {
-    if (token === 'POLAR') {
-      return await this.contracts.Masonry.claimReward();
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.claimReward();
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.claimReward();
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return await this.contracts.tripolarSunriseOld.claimReward();
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalSunrise.claimReward();
-    }
+  async claimRewardFromSunrise(sunrise): Promise<TransactionResponse> {
+    return await this.contracts[sunrise.contract].claimReward();
   }
 
-  async exitFromSunrise(token: string): Promise<TransactionResponse> {
-    if (token === 'POLAR') {
-      return await this.contracts.Masonry.exit();
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarSunrise.exit();
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarSunrise.exit();
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return await this.contracts.tripolarSunriseOld.exit();
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalSunrise.exit();
-    }
-    return;
+  async exitFromSunrise(sunrise): Promise<TransactionResponse> {
+    return await this.contracts[sunrise.contract].exit();
   }
 
-  async getTreasuryNextAllocationTime(token: string): Promise<AllocationTime> {
+  async getTreasuryNextAllocationTime(sunrise): Promise<AllocationTime> {
     let treasury: Contract;
-    if (token === 'POLAR') {
-      treasury = this.contracts.Treasury;
-    } else if (token === 'LUNAR') {
-      treasury = this.contracts.lunarTreasury;
-    } else if (token === 'TRIPOLAR') {
-      treasury = this.contracts.tripolarTreasury;
-    } else if (token === 'OLDTRIPOLAR') {
-      treasury = this.contracts.tripolarTreasuryOld;
-    } else if (token === 'ETHERNAL') {
-      treasury = this.contracts.ethernalTreasury;
-    } else {
-      return { from: new Date(), to: new Date() };
-    }
+    treasury = this.contracts[sunrise.treasury];
     const nextEpochTimestamp: BigNumber = await treasury.nextEpochPoint();
     const nextAllocation = new Date(nextEpochTimestamp.mul(1000).toNumber());
     const prevAllocation = new Date(Date.now());
@@ -1186,24 +1021,10 @@ export class PolarisFinance {
    * @returns Promise<AllocationTime>
    */
 
-  async getUserClaimRewardTime(token: string): Promise<AllocationTime> {
-    let sunrise: Contract, treasury: Contract;
-    if (token === 'POLAR') {
-      treasury = this.contracts.Treasury;
-      sunrise = this.contracts.Masonry;
-    } else if (token === 'LUNAR') {
-      treasury = this.contracts.lunarTreasury;
-      sunrise = this.contracts.lunarSunrise;
-    } else if (token === 'TRIPOLAR') {
-      treasury = this.contracts.tripolarTreasury;
-      sunrise = this.contracts.tripolarSunrise;
-    } else if (token === 'OLDTRIPOLAR') {
-      treasury = this.contracts.tripolarTreasuryOld;
-      sunrise = this.contracts.tripolarSunriseOld;
-    } else if (token === 'ETHERNAL') {
-      treasury = this.contracts.ethernalTreasury;
-      sunrise = this.contracts.ethernalSunrise;
-    }
+  async getUserClaimRewardTime(sunrise): Promise<AllocationTime> {
+    let treasury: Contract;
+    treasury = this.contracts[sunrise.treasury];
+    sunrise = this.contracts[sunrise.contract];
     const [nextEpochTimestamp, currentEpoch, period] = await Promise.all([
       sunrise.nextEpochPoint(),
       sunrise.epoch(),
@@ -1241,35 +1062,22 @@ export class PolarisFinance {
    * from the masonry
    * @returns Promise<AllocationTime>
    */
-  async getUserUnstakeTime(token: string): Promise<AllocationTime> {
-    let sunrise: Contract, treasury: Contract;
-    if (token === 'POLAR') {
-      treasury = this.contracts.Treasury;
-      sunrise = this.contracts.Masonry;
-    } else if (token === 'LUNAR') {
-      treasury = this.contracts.lunarTreasury;
-      sunrise = this.contracts.lunarSunrise;
-    } else if (token === 'TRIPOLAR') {
-      treasury = this.contracts.tripolarTreasury;
-      sunrise = this.contracts.tripolarSunrise;
-    } else if (token === 'OLDTRIPOLAR') {
-      treasury = this.contracts.tripolarTreasuryOld;
-      sunrise = this.contracts.tripolarSunriseOld;
-    } else if (token === 'ETHERNAL') {
-      treasury = this.contracts.ethernalTreasury;
-      sunrise = this.contracts.ethernalSunrise;
-    }
+  async getUserUnstakeTime(sunrise): Promise<AllocationTime> {
+    let treasury: Contract;
+    const token = sunrise.earnTokenName
+    treasury = this.contracts[sunrise.treasury];
+    const contract = this.contracts[sunrise.contract];
 
     const [nextEpochTimestamp, currentEpoch, period, withdrawLockupEpochs] = await Promise.all([
-      sunrise.nextEpochPoint(),
-      sunrise.epoch(),
+      contract.nextEpochPoint(),
+      contract.epoch(),
       treasury.PERIOD(),
-      sunrise.withdrawLockupEpochs(),
+      contract.withdrawLockupEpochs(),
     ]);
 
     const [mason, stakedAmount] = await Promise.all([
-      sunrise.masons(this.myAccount),
-      this.getStakedSpolarOnSunrise(token),
+      contract.masons(this.myAccount),
+      this.getStakedSpolarOnSunrise(sunrise),
     ]);
     const startTimeEpoch = mason.epochTimerStart;
     const PeriodInHours = period / 60 / 60;

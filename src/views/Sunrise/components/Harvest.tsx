@@ -16,7 +16,7 @@ import useStats from '../../../hooks/useStats';
 import { getDisplayBalance } from '../../../utils/formatBalance';
 
 const Harvest = ({ sunrise }) => {
-  const tombStats = useStats(sunrise);
+  const tombStats = useStats(sunrise.earnTokenName);
   const { onReward } = useClaimRewardFromSunrise(sunrise);
   const earnings = useEarningsOnSunrise(sunrise);
   const canClaimReward = useClaimRewardCheck(sunrise);
@@ -30,10 +30,10 @@ const Harvest = ({ sunrise }) => {
 
   const { from, to } = useClaimRewardTimerSunrise(sunrise);
   let earnTokenName;
-  if (sunrise.startsWith('OLD')) {
-    earnTokenName = sunrise.slice(3);
+  if (sunrise.earnTokenName.startsWith('OLD')) {
+    earnTokenName = sunrise.earnTokenName.slice(3);
   } else {
-    earnTokenName = sunrise;
+    earnTokenName = sunrise.earnTokenName;
   }
   return (
     <Box>
@@ -42,7 +42,7 @@ const Harvest = ({ sunrise }) => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <CardIcon>
-                <TokenSymbol symbol={sunrise} />
+                <TokenSymbol symbol={sunrise.earnTokenName} />
               </CardIcon>
               <Value value={getDisplayBalance(earnings)} />
               <Label text={`≈ $${earnedInDollars}`} />

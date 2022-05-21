@@ -3,7 +3,7 @@ import { BigNumber } from 'ethers';
 import usePolarisFinance from './usePolarisFinance';
 import useRefresh from './useRefresh';
 
-const useTotalStakedOnMasonry = (token: string) => {
+const useTotalStakedOnMasonry = (sunrise) => {
   const [totalStaked, setTotalStaked] = useState(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
   const { slowRefresh } = useRefresh();
@@ -12,7 +12,7 @@ const useTotalStakedOnMasonry = (token: string) => {
   useEffect(() => {
     async function fetchTotalStaked() {
       try {
-        setTotalStaked(await polarisFinance.getTotalStakedInSunrise(token));
+        setTotalStaked(await polarisFinance.getTotalStakedInSunrise(sunrise));
       } catch (err) {
         console.error(err);
       }
@@ -20,7 +20,7 @@ const useTotalStakedOnMasonry = (token: string) => {
     if (isUnlocked) {
       fetchTotalStaked();
     }
-  }, [isUnlocked, slowRefresh, polarisFinance, token]);
+  }, [isUnlocked, slowRefresh, polarisFinance, sunrise?.earnTokenName]);
 
   return totalStaked;
 };
