@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 import usePolarisFinance from './usePolarisFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
+import { Sunrise } from '../polaris-finance';
 
-const useRedeemOnMasonry = (sunrise, description?: string) => {
+const useRedeemOnMasonry = (sunrise:Sunrise, description?: string) => {
   const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 

@@ -2,8 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import usePolarisFinance from './usePolarisFinance';
 import config from '../config';
 import { BigNumber } from 'ethers';
+import { Sunrise } from '../polaris-finance';
 
-const useCashPriceInLastTWAP = (sunrise) => {
+const useCashPriceInLastTWAP = (sunrise:Sunrise) => {
   const [price, setPrice] = useState<BigNumber>(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
 

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import usePolarisFinance from '../usePolarisFinance';
 import { AllocationTime } from '../../polaris-finance/types';
+import { Sunrise } from '../../polaris-finance';
 
-const useUnstakeTimerMasonry = (sunrise) => {
+const useUnstakeTimerMasonry = (sunrise:Sunrise) => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),

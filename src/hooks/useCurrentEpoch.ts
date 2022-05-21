@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import usePolarisFinance from './usePolarisFinance';
 import { BigNumber } from 'ethers';
 import useRefresh from './useRefresh';
+import { Sunrise } from '../polaris-finance';
 
-const useCurrentEpoch = (sunrise) => {
+const useCurrentEpoch = (sunrise:Sunrise) => {
   const [currentEpoch, setCurrentEpoch] = useState<BigNumber>(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
   const { slowRefresh } = useRefresh();

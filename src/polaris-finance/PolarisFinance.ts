@@ -1,7 +1,7 @@
 // import { Fetcher, Route, Token } from '@uniswap/sdk';
 import { Fetcher, Route, Token } from '@trisolaris/sdk';
 import { Configuration } from './config';
-import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat } from './types';
+import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat, Sunrise } from './types';
 import { BigNumber, Contract, ethers, EventFilter } from 'ethers';
 import { decimalToBalance } from './ether-utils';
 import { TransactionResponse } from '@ethersproject/providers';
@@ -282,26 +282,26 @@ export class PolarisFinance {
     };
   }
 
-  async getTokenEstimatedTWAP(sunrise): Promise<string> {
+  async getTokenEstimatedTWAP(sunrise:Sunrise): Promise<string> {
     let expectedPrice: BigNumber;
     const token = sunrise.earnTokenName
     expectedPrice = await this.contracts.SeigniorageOracle.twap(sunrise.tokenAddress, ethers.utils.parseEther('1'));
     return token === 'POLAR' ? getDisplayBalance(expectedPrice.div(1e6)) : getDisplayBalance(expectedPrice);
   }
 
-  async getTokenPriceInLastTWAP(sunrise): Promise<BigNumber> {
+  async getTokenPriceInLastTWAP(sunrise:Sunrise): Promise<BigNumber> {
     return this.contracts[sunrise.treasury][sunrise.getTokenPriceInLastTWAP]();
   }
 
-  async getTokenPreviousEpochTWAP(sunrise): Promise<BigNumber> {
+  async getTokenPreviousEpochTWAP(sunrise:Sunrise): Promise<BigNumber> {
     return this.contracts[sunrise.treasury][sunrise.getTokenPreviousEpochTWAP]();
   }
 
-  async getBondsPurchasable(sunrise): Promise<BigNumber> {
+  async getBondsPurchasable(sunrise:Sunrise): Promise<BigNumber> {
     return this.contracts[sunrise.treasury][sunrise.getBondsPurchasable]();
   }
 
-  async getBondsRedeemable(sunrise): Promise<BigNumber> {
+  async getBondsRedeemable(sunrise:Sunrise): Promise<BigNumber> {
     return this.contracts[sunrise.treasury].getRedeemableBonds();
   }
 
@@ -496,7 +496,7 @@ export class PolarisFinance {
   //=========================== END ===================================
   //===================================================================
 
-  async getCurrentEpoch(sunrise): Promise<BigNumber> {
+  async getCurrentEpoch(sunrise:Sunrise): Promise<BigNumber> {
     return this.contracts[sunrise.treasury].epoch();
   }
 
@@ -517,7 +517,7 @@ export class PolarisFinance {
    */
 
   async redeemBonds(amount: string, sunrise): Promise<TransactionResponse> {
-    return await this.contracts[sunrise].redeemBonds(
+    return await this.contracts[sunrise.treasury].redeemBonds(
       decimalToBalance(amount),
       await this.contracts[sunrise.treasury][sunrise.getPrice](),
     );
@@ -923,18 +923,18 @@ export class PolarisFinance {
   //===================================================================
   //===================================================================
 
-  async getSunriseAPR(sunrise) {
+  async getSunriseAPR(sunrise:Sunrise) {
     let latestSnapshotIndex: BigNumber,
       lastHistory: BigNumber,
       SPOLARPrice: TokenStat,
       tokenPricePromise: Promise<TokenStat>,
       tokenPrice: TokenStat;
     const token = sunrise?.earnTokenName;
-    sunrise = this.contracts[sunrise.contract]
+    const contract = this.contracts[sunrise.contract]
     tokenPricePromise = this.getStat(token);
-    latestSnapshotIndex = await sunrise.latestSnapshotIndex();
+    latestSnapshotIndex = await contract.latestSnapshotIndex();
     [lastHistory, SPOLARPrice, tokenPrice] = await Promise.all([
-      sunrise.masonryHistory(latestSnapshotIndex),
+      contract.masonryHistory(latestSnapshotIndex),
       this.getStat('SPOLAR'),
       tokenPricePromise,
     ]);
@@ -943,7 +943,7 @@ export class PolarisFinance {
 
     //Mgod formula
     const amountOfRewardsPerDay = epochRewardsPerShare * Number(tokenPrice.priceInDollars) * 4;
-    const masonrytShareBalanceOf = await this.SPOLAR.balanceOf(sunrise.address);
+    const masonrytShareBalanceOf = await this.SPOLAR.balanceOf(contract.address);
     const masonryTVL =
       Number(getDisplayBalance(masonrytShareBalanceOf, this.SPOLAR.decimal)) * Number(SPOLARPrice.priceInDollars);
     const realAPR = ((amountOfRewardsPerDay * 100) / masonryTVL) * 365;
@@ -955,7 +955,7 @@ export class PolarisFinance {
    * @returns true if user can withdraw reward, false if they can't
    */
 
-  async canUserClaimRewardFromSunrise(sunrise: Contract): Promise<boolean> {
+  async canUserClaimRewardFromSunrise(sunrise: Sunrise): Promise<boolean> {
     return this.contracts[sunrise.contract].canClaimReward(this.myAccount);
   }
 
@@ -964,7 +964,7 @@ export class PolarisFinance {
    * @returns true if user can withdraw reward, false if they can't
    */
 
-  async canUserUnstakeFromSunrise(sunrise: Contract): Promise<boolean> {
+  async canUserUnstakeFromSunrise(sunrise: Sunrise): Promise<boolean> {
     let canWithdraw: boolean, stakedAmount: BigNumber;
     const contract = this.contracts[sunrise.contract];
     [canWithdraw, stakedAmount] = await Promise.all([
@@ -976,35 +976,35 @@ export class PolarisFinance {
     return result;
   }
 
-  async getTotalStakedInSunrise(sunrise): Promise<BigNumber> {
+  async getTotalStakedInSunrise(sunrise:Sunrise): Promise<BigNumber> {
     return await this.contracts[sunrise.contract].totalSupply();
   }
 
-  async stakeSpolarToSunrise(amount: string, sunrise): Promise<TransactionResponse> {
+  async stakeSpolarToSunrise(amount: string, sunrise:Sunrise): Promise<TransactionResponse> {
     return await this.contracts[sunrise.contract].stake(decimalToBalance(amount));
   }
 
-  async getStakedSpolarOnSunrise(sunrise): Promise<BigNumber> {
+  async getStakedSpolarOnSunrise(sunrise:Sunrise): Promise<BigNumber> {
     return await this.contracts[sunrise.contract].balanceOf(this.myAccount);
   }
 
-  async getEarningsOnSunrise(sunrise): Promise<BigNumber> {
+  async getEarningsOnSunrise(sunrise:Sunrise): Promise<BigNumber> {
     return await this.contracts[sunrise.contract].earned(this.myAccount);
   }
 
-  async withdrawSpolarFromSunrise(amount: string, sunrise): Promise<TransactionResponse> {
+  async withdrawSpolarFromSunrise(amount: string, sunrise:Sunrise): Promise<TransactionResponse> {
     return await this.contracts[sunrise.contract].withdraw(decimalToBalance(amount));
   }
 
-  async claimRewardFromSunrise(sunrise): Promise<TransactionResponse> {
+  async claimRewardFromSunrise(sunrise:Sunrise): Promise<TransactionResponse> {
     return await this.contracts[sunrise.contract].claimReward();
   }
 
-  async exitFromSunrise(sunrise): Promise<TransactionResponse> {
+  async exitFromSunrise(sunrise:Sunrise): Promise<TransactionResponse> {
     return await this.contracts[sunrise.contract].exit();
   }
 
-  async getTreasuryNextAllocationTime(sunrise): Promise<AllocationTime> {
+  async getTreasuryNextAllocationTime(sunrise:Sunrise): Promise<AllocationTime> {
     let treasury: Contract;
     treasury = this.contracts[sunrise.treasury];
     const nextEpochTimestamp: BigNumber = await treasury.nextEpochPoint();
@@ -1021,19 +1021,19 @@ export class PolarisFinance {
    * @returns Promise<AllocationTime>
    */
 
-  async getUserClaimRewardTime(sunrise): Promise<AllocationTime> {
+  async getUserClaimRewardTime(sunrise:Sunrise): Promise<AllocationTime> {
     let treasury: Contract;
     treasury = this.contracts[sunrise.treasury];
-    sunrise = this.contracts[sunrise.contract];
+    const contract = this.contracts[sunrise.contract];
     const [nextEpochTimestamp, currentEpoch, period] = await Promise.all([
-      sunrise.nextEpochPoint(),
-      sunrise.epoch(),
+      contract.nextEpochPoint(),
+      contract.epoch(),
       treasury.PERIOD(),
     ]);
 
     const [mason, rewardLockupEpochs] = await Promise.all([
-      sunrise.masons(this.myAccount),
-      sunrise.rewardLockupEpochs(),
+      contract.masons(this.myAccount),
+      contract.rewardLockupEpochs(),
     ]);
 
     const startTimeEpoch = mason.epochTimerStart;
@@ -1062,7 +1062,7 @@ export class PolarisFinance {
    * from the masonry
    * @returns Promise<AllocationTime>
    */
-  async getUserUnstakeTime(sunrise): Promise<AllocationTime> {
+  async getUserUnstakeTime(sunrise:Sunrise): Promise<AllocationTime> {
     let treasury: Contract;
     treasury = this.contracts[sunrise.treasury];
     const contract = this.contracts[sunrise.contract];
