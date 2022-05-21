@@ -20,7 +20,7 @@ const useTotalStakedOnMasonry = (sunrise) => {
     if (isUnlocked) {
       fetchTotalStaked();
     }
-  }, [isUnlocked, slowRefresh, polarisFinance, sunrise?.earnTokenName]);
+  }, [isUnlocked, slowRefresh, polarisFinance, sunrise]);
 
   return totalStaked;
 };

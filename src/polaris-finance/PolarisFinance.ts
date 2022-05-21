@@ -9,7 +9,7 @@ import ERC20 from './ERC20';
 import { getFullDisplayBalance, getDisplayBalance } from '../utils/formatBalance';
 import { getDefaultProvider } from '../utils/provider';
 import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
-import config, { bankDefinitions, sunriseDefinitions } from '../config';
+import config, { bankDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
 import { FTM_TICKER, SPOOKY_ROUTER_ADDR, POLAR_TICKER } from '../utils/constants';
@@ -1064,7 +1064,6 @@ export class PolarisFinance {
    */
   async getUserUnstakeTime(sunrise): Promise<AllocationTime> {
     let treasury: Contract;
-    const token = sunrise.earnTokenName
     treasury = this.contracts[sunrise.treasury];
     const contract = this.contracts[sunrise.contract];
 

@@ -41,7 +41,7 @@ const Pit: React.FC = () => {
         summary: `Buy ${sunrise.bond} with ${Number(amount).toFixed(2)} ${sunrise.earnTokenName}`,
       });
     },
-    [polarisFinance, addTransaction, sunrise.bond, sunrise.earnTokenName],
+    [polarisFinance, addTransaction, sunrise],
   );
 
   const handleRedeemBonds = useCallback(
@@ -49,7 +49,7 @@ const Pit: React.FC = () => {
       const tx = await polarisFinance.redeemBonds(amount, sunrise);
       addTransaction(tx, { summary: `Redeem ${amount} ${sunrise.bond}` });
     },
-    [polarisFinance, addTransaction, sunrise.bond, sunrise.earnTokenName],
+    [polarisFinance, addTransaction, sunrise],
   );
   const isBondRedeemable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
   const isBondPurchasable = useMemo(() => Number(getDisplayBalance(previousTwap, 18, 4)) < 1.01, [previousTwap]);

@@ -20,7 +20,7 @@ const useEarningsOnSunrise = (sunrise) => {
     if (isUnlocked) {
       fetchBalance();
     }
-  }, [isUnlocked, polarisFinance, slowRefresh, sunrise?.earnTokenName]);
+  }, [isUnlocked, polarisFinance, slowRefresh, sunrise]);
 
   return balance;
 };

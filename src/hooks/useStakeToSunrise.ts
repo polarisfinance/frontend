@@ -13,7 +13,7 @@ const useStakeToMasonry = (sunrise) => {
         `Stake ${amount} SPOLAR to the ${sunrise?.earnTokenName} Sunrise`,
       );
     },
-    [polarisFinance, handleTransactionReceipt, sunrise?.earnTokenName],
+    [polarisFinance, handleTransactionReceipt, sunrise],
   );
   return { onStake: handleStake };
 };

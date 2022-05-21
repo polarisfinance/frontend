@@ -16,7 +16,7 @@ const useCashPriceInEstimatedTWAP = (sunrise) => {
       }
     }
     fetchCashPrice();
-  }, [setStat, polarisFinance, slowRefresh, sunrise?.earnTokenName]);
+  }, [setStat, polarisFinance, slowRefresh, sunrise]);
 
   return stat;
 };

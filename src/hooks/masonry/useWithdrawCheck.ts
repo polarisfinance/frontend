@@ -19,7 +19,7 @@ const useWithdrawCheck = (sunrise) => {
     if (isUnlocked) {
       canUserWithdraw();
     }
-  }, [isUnlocked, polarisFinance, slowRefresh, sunrise?.earnTokenName]);
+  }, [isUnlocked, polarisFinance, slowRefresh, sunrise]);
 
   return canWithdraw;
 };

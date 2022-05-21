@@ -19,7 +19,7 @@ const useStakedBalanceOnMasonry = (sunrise) => {
     if (isUnlocked) {
       fetchBalance();
     }
-  }, [slowRefresh, isUnlocked, polarisFinance, sunrise?.earnTokenName]);
+  }, [slowRefresh, isUnlocked, polarisFinance, sunrise]);
   return balance;
 };
 

@@ -17,7 +17,7 @@ const useCurrentEpoch = (sunrise) => {
       }
     }
     fetchCurrentEpoch();
-  }, [setCurrentEpoch, polarisFinance, slowRefresh, sunrise?.earnTokenName]);
+  }, [setCurrentEpoch, polarisFinance, slowRefresh, sunrise]);
 
   return currentEpoch;
 };

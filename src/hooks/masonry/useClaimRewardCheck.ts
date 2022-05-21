@@ -19,7 +19,7 @@ const useClaimRewardCheck = (sunrise) => {
     if (isUnlocked) {
       canUserClaimReward();
     }
-  }, [isUnlocked, slowRefresh, polarisFinance, sunrise?.earnTokenName]);
+  }, [isUnlocked, slowRefresh, polarisFinance, sunrise]);
 
   return canClaimReward;
 };

@@ -16,7 +16,7 @@ const useFetchMasonryAPR = (sunrise) => {
       }
     }
     fetchMasonryAPR();
-  }, [setApr, polarisFinance, slowRefresh, sunrise?.earnTokenName]);
+  }, [setApr, polarisFinance, slowRefresh, sunrise]);
 
   return apr;
 };

@@ -14,7 +14,7 @@ const useTreasuryAllocationTimes = (sunrise) => {
     if (polarisFinance) {
       polarisFinance.getTreasuryNextAllocationTime(sunrise).then(setTime);
     }
-  }, [polarisFinance, slowRefresh, sunrise?.earnTokenName]);
+  }, [polarisFinance, slowRefresh, sunrise]);
   return time;
 };
 

@@ -21,7 +21,7 @@ const useUnstakeTimerMasonry = (sunrise) => {
     if (polarisFinance) {
       fetchUserUnstakeTime();
     }
-  }, [polarisFinance, sunrise?.earnTokenName]);
+  }, [polarisFinance, sunrise]);
   return time;
 };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useWallet } from 'use-wallet';
 
-import OldTripolar from './components/OldTripolar';
 import SunriseCard from './components/SunriseCard';
 
 import { makeStyles } from '@material-ui/core/styles';

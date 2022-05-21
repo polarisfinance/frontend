@@ -20,7 +20,7 @@ const useClaimRewardTimerSunrise = (sunrise) => {
     if (polarisFinance) {
       fetchUserClaimRewardTime();
     }
-  }, [polarisFinance, sunrise?.earnTokenName]);
+  }, [polarisFinance, sunrise]);
   return time;
 };
 

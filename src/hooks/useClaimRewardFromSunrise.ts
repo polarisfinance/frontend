@@ -8,7 +8,7 @@ const useClaimRewardFromSunrise = (sunrise) => {
 
   const handleReward = useCallback(() => {
     handleTransactionReceipt(polarisFinance.claimRewardFromSunrise(sunrise), `Claim ${sunrise?.earnTokenName} from Sunrise`);
-  }, [polarisFinance, handleTransactionReceipt, sunrise?.earnTokenName]);
+  }, [polarisFinance, handleTransactionReceipt, sunrise]);
 
   return { onReward: handleReward };
 };

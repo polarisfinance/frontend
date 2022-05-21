@@ -9,7 +9,7 @@ const useTokenPreviousEpochTWAP = (sunrise) => {
 
   const fetchCashPrice = useCallback(async () => {
     setPrice(await polarisFinance.getTokenPreviousEpochTWAP(sunrise));
-  }, [polarisFinance, sunrise?.earnTokenName]);
+  }, [polarisFinance, sunrise]);
 
   useEffect(() => {
     fetchCashPrice().catch((err) => console.error(`Failed to fetch POLAR price: ${err.stack}`));

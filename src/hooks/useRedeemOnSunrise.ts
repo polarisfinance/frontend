@@ -9,7 +9,7 @@ const useRedeemOnMasonry = (sunrise, description?: string) => {
   const handleRedeem = useCallback(() => {
     const alertDesc = description || 'Redeem SPOLAR from SUNRISE';
     handleTransactionReceipt(polarisFinance.exitFromSunrise(sunrise), alertDesc);
-  }, [polarisFinance, description, handleTransactionReceipt, sunrise?.earnTokenName]);
+  }, [polarisFinance, description, handleTransactionReceipt, sunrise]);
   return { onRedeem: handleRedeem };
 };
 

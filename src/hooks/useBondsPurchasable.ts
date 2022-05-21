@@ -15,7 +15,7 @@ const useBondsPurchasable = (sunrise) => {
       }
     }
     fetchBondsPurchasable();
-  }, [setBalance, polarisFinance, sunrise?.earnTokenName]);
+  }, [setBalance, polarisFinance, sunrise]);
 
   return balance;
 };

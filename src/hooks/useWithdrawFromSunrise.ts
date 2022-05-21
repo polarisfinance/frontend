@@ -10,10 +10,10 @@ const useWithdrawFromSunrise = (sunrise) => {
     (amount: string) => {
       handleTransactionReceipt(
         polarisFinance.withdrawSpolarFromSunrise(amount, sunrise),
-        `Withdraw ${amount} SPOLAR from the ${sunrise?.earnTokenName} SUNRISE`,
+        `Withdraw ${amount} SPOLAR from the ${sunrise} SUNRISE`,
       );
     },
-    [polarisFinance, handleTransactionReceipt, sunrise?.earnTokenName],
+    [polarisFinance, handleTransactionReceipt, sunrise],
   );
   return { onWithdraw: handleWithdraw };
 };

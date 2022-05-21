@@ -15,7 +15,7 @@ const useBondsRedeemable = (sunrise) => {
       }
     }
     fetchBondsRedeemable();
-  }, [setBalance, polarisFinance, sunrise?.earnTokenName]);
+  }, [setBalance, polarisFinance, sunrise]);
 
   return balance;
 };
