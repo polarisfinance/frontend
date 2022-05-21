@@ -34,6 +34,10 @@ export interface SunriseInfo {
   treasury: string;
   lpToken: string;
   retireMsg?: string;
+  getTokenPreviousEpochTWAP: string;
+  getTokenPriceInLastTWAP: string;
+  getBondsPurchasable: string;
+  getPrice: string;
 }
 
 export interface Sunrise extends SunriseInfo {

@@ -52,15 +52,15 @@ const Sunrise: React.FC = () => {
   const { account } = useWallet();
   const { onRedeem } = useRedeemOnSunrise(sunrise?.earnTokenName);
   const stakedBalance = useStakedBalanceOnSunrise(sunrise?.earnTokenName);
-  const currentEpoch = useCurrentEpoch(sunrise?.earnTokenName);
+  const currentEpoch = useCurrentEpoch(sunrise);
   const cashStat = useTokenEstimatedTWAP(sunrise?.earnTokenName);
   const totalStaked = useTotalStakedOnSunrise(sunrise?.earnTokenName);
   const masonryAPR = useFetchSunriseAPR(sunrise?.earnTokenName);
-  const canClaimReward = useClaimRewardCheck(sunrise?.earnTokenName);
+  const canClaimReward = useClaimRewardCheck(sunrise);
   const canWithdraw = useWithdrawCheck(sunrise?.earnTokenName);
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat).toFixed(4) : null), [cashStat]);
   const { to } = useTreasuryAllocationTimes(sunrise?.earnTokenName);
-  const polarPreviousEpochTwap = useTokenPreviousEpochTWAP(sunrise?.earnTokenName);
+  const polarPreviousEpochTwap = useTokenPreviousEpochTWAP(sunrise);
   let earnTokenName: string;
   if (sunrise.earnTokenName.startsWith('OLD')) {
     earnTokenName = sunrise.earnTokenName.slice(3);

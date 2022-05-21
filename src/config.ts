@@ -435,6 +435,10 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     lpAddress: '0x3fa4d0145a0b6Ad0584B1ad5f61cB490A04d8242',
     treasury: 'Treasury',
     lpToken: 'NEAR',
+    getTokenPreviousEpochTWAP: 'previousEpochpolarPrice',
+    getTokenPriceInLastTWAP: 'getpolarUpdatedPrice',
+    getBondsPurchasable: 'getBurnablepolarLeft',
+    getPrice: 'getpolarPrice',
   },
   LunarSunrise: {
     name: 'lunar',
@@ -450,6 +454,10 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     treasury: 'lunarTreasury',
     lpToken: 'LUNA',
     retireMsg: 'Please withdraw your SPOLAR and migrate them to other active Sunrises.',
+    getTokenPreviousEpochTWAP: 'previousEpochlunarPrice',
+    getTokenPriceInLastTWAP: 'getlunarUpdatedPrice',
+    getBondsPurchasable: 'getBurnablelunarLeft',
+    getPrice: 'getlunarPrice',
   },
   TripolarSunrise: {
     name: 'tripolar',
@@ -464,6 +472,10 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     lpAddress: '0x85f155FDCf2a951fd95734eCEB99F875b84a2E27',
     treasury: 'tripolarTreasury',
     lpToken: 'xTRI',
+    getTokenPreviousEpochTWAP: 'previousEpochTripolarPrice',
+    getTokenPriceInLastTWAP: 'getTripolarUpdatedPrice',
+    getBondsPurchasable: 'getBurnableTripolarLeft',
+    getPrice: 'getTripolarPrice',
   },
   OldTripolarSunrise: {
     name: 'tripolarOld',
@@ -479,6 +491,10 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     treasury: 'tripolarTreasuryOld',
     lpToken: 'xTRI',
     retireMsg: 'Please withdraw your SPOLAR and migrate them to the NEW TRIPOLAR Sunrise.',
+    getTokenPreviousEpochTWAP: 'previousEpochTripolarPrice',
+    getTokenPriceInLastTWAP: 'getTripolarUpdatedPrice',
+    getBondsPurchasable: 'getBurnableTripolarLeft',
+    getPrice: 'getTripolarPrice',
   },
   EthernalSunrise: {
     name: 'ethernal',
@@ -493,6 +509,10 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     lpAddress: '0x81D77f8e86f65b9C0F393afe0FC743D888c2d4d7',
     treasury: 'ethernalTreasury',
     lpToken: 'WETH',
+    getTokenPreviousEpochTWAP: 'previousEpochEthernalPrice',
+    getTokenPriceInLastTWAP: 'getEthernalUpdatedPrice',
+    getBondsPurchasable: 'getBurnableEthernalLeft',
+    getPrice: 'getEthernalPrice',
   },
   AurisSunrise: {
     name: 'tripolar',
@@ -507,6 +527,10 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     lpAddress: '',
     treasury: 'tripolarTreasury',
     lpToken: 'AURORA',
+    getTokenPreviousEpochTWAP: 'previousEpochTripolarPrice',
+    getTokenPriceInLastTWAP: 'getTripolarUpdatedPrice',
+    getBondsPurchasable: 'getBurnableTripolarLeft',
+    getPrice: 'getTripolarPrice',
   },
 };
 

@@ -29,14 +29,14 @@ const Pit: React.FC = () => {
   const addTransaction = useTransactionAdder();
   const bondStat = useStats(sunrise.bond);
   const cashPrice = useTokenPriceInLastTWAP(sunrise.earnTokenName);
-  const previousTwap = useTokenPreviousEpochTWAP(sunrise.earnTokenName);
-  const bondsRedeemable = useBondsRedeemable(sunrise.earnTokenName);
+  const previousTwap = useTokenPreviousEpochTWAP(sunrise);
+  const bondsRedeemable = useBondsRedeemable(sunrise);
 
   const bondBalance = useTokenBalance(polarisFinance[sunrise.bond]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
-      const tx = await polarisFinance.buyBonds(amount, sunrise.earnTokenName);
+      const tx = await polarisFinance.buyBonds(amount, sunrise);
       addTransaction(tx, {
         summary: `Buy ${sunrise.bond} with ${Number(amount).toFixed(2)} ${sunrise.earnTokenName}`,
       });
@@ -46,7 +46,7 @@ const Pit: React.FC = () => {
 
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
-      const tx = await polarisFinance.redeemBonds(amount, sunrise.earnTokenName);
+      const tx = await polarisFinance.redeemBonds(amount, sunrise);
       addTransaction(tx, { summary: `Redeem ${amount} ${sunrise.bond}` });
     },
     [polarisFinance, addTransaction, sunrise.bond, sunrise.earnTokenName],

@@ -9,7 +9,7 @@ import ERC20 from './ERC20';
 import { getFullDisplayBalance, getDisplayBalance } from '../utils/formatBalance';
 import { getDefaultProvider } from '../utils/provider';
 import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
-import config, { bankDefinitions } from '../config';
+import config, { bankDefinitions, sunriseDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
 import { FTM_TICKER, SPOOKY_ROUTER_ADDR, POLAR_TICKER } from '../utils/constants';
@@ -313,52 +313,16 @@ export class PolarisFinance {
     }
   }
 
-  async getTokenPreviousEpochTWAP(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return this.contracts.Treasury.previousEpochpolarPrice();
-    }
-    if (token === 'LUNAR') {
-      return this.contracts.lunarTreasury.previousEpochlunarPrice();
-    }
-    if (token === 'TRIPOLAR') {
-      return this.contracts.tripolarTreasury.previousEpochTripolarPrice();
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return this.contracts.tripolarTreasuryOld.previousEpochTripolarPrice();
-    }
-    if (token === 'ETHERNAL') {
-      return this.contracts.ethernalTreasury.previousEpochEthernalPrice();
-    }
+  async getTokenPreviousEpochTWAP(sunrise): Promise<BigNumber> {
+    return this.contracts[sunrise.treasury][sunrise.getTokenPreviousEpochTWAP]();
   }
 
-  async getBondsPurchasable(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return this.contracts.Treasury.getBurnablepolarLeft();
-    }
-    if (token === 'LUNAR') {
-      return this.contracts.lunarTreasury.getBurnablelunarLeft();
-    }
-    if (token === 'TRIPOLAR') {
-      return this.contracts.tripolarTreasury.getBurnableTripolarLeft();
-    }
-    if (token === 'ETHERNAL') {
-      return this.contracts.ethernalTreasury.getBurnableEthernalLeft();
-    }
+  async getBondsPurchasable(sunrise): Promise<BigNumber> {
+    return this.contracts[sunrise.treasury][sunrise.getBondsPurchasable]();
   }
 
-  async getBondsRedeemable(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return this.contracts.Treasury.getRedeemableBonds();
-    }
-    if (token === 'LUNAR') {
-      return this.contracts.lunarTreasury.getRedeemableBonds();
-    }
-    if (token === 'TRIPOLAR') {
-      return this.contracts.tripolarTreasury.getRedeemableBonds();
-    }
-    if (token === 'ETHERNAL') {
-      return this.contracts.ethernalTreasury.getRedeemableBonds();
-    }
+  async getBondsRedeemable(sunrise): Promise<BigNumber> {
+    return this.contracts[sunrise.treasury].getRedeemableBonds();
   }
 
   /**
@@ -552,55 +516,19 @@ export class PolarisFinance {
   //=========================== END ===================================
   //===================================================================
 
-  async getCurrentEpoch(token: string): Promise<BigNumber> {
-    if (token === 'POLAR') {
-      return this.contracts.Treasury.epoch();
-    }
-    if (token === 'LUNAR') {
-      return this.contracts.lunarTreasury.epoch();
-    }
-    if (token === 'TRIPOLAR') {
-      return this.contracts.tripolarTreasury.epoch();
-    }
-    if (token === 'OLDTRIPOLAR') {
-      return this.contracts.tripolarTreasuryOld.epoch();
-    }
-    if (token === 'ETHERNAL') {
-      return this.contracts.ethernalTreasury.epoch();
-    }
-    return;
+  async getCurrentEpoch(sunrise): Promise<BigNumber> {
+    return this.contracts[sunrise.treasury].epoch();
   }
 
   /**
    * Buy bonds with cash.
    * @param amount amount of cash to purchase bonds with.
    */
-
-  async buyBonds(amount: string | number, token: string): Promise<TransactionResponse> {
-    if (token === 'POLAR') {
-      return await this.contracts.Treasury.buyBonds(
-        decimalToBalance(amount),
-        await this.contracts.Treasury.getpolarPrice(),
-      );
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarTreasury.buyBonds(
-        decimalToBalance(amount),
-        await this.contracts.lunarTreasury.getlunarPrice(),
-      );
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarTreasury.buyBonds(
-        decimalToBalance(amount),
-        await this.contracts.tripolarTreasury.getTripolarPrice(),
-      );
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalTreasury.buyBonds(
-        decimalToBalance(amount),
-        await this.contracts.ethernalTreasury.getEthernalPrice(),
-      );
-    }
+  async buyBonds(amount: string | number, sunrise): Promise<TransactionResponse> {
+    return await this.contracts[sunrise.treasury].buyBonds(
+      decimalToBalance(amount),
+      await this.contracts[sunrise.treasury][sunrise.getPrice](),
+    );
   }
 
   /**
@@ -608,31 +536,11 @@ export class PolarisFinance {
    * @param amount amount of bonds to redeem.
    */
 
-  async redeemBonds(amount: string, token: string): Promise<TransactionResponse> {
-    if (token === 'POLAR') {
-      return await this.contracts.Treasury.redeemBonds(
-        decimalToBalance(amount),
-        await this.contracts.Treasury.getpolarPrice(),
-      );
-    }
-    if (token === 'LUNAR') {
-      return await this.contracts.lunarTreasury.redeemBonds(
-        decimalToBalance(amount),
-        await this.contracts.lunarTreasury.getlunarPrice(),
-      );
-    }
-    if (token === 'TRIPOLAR') {
-      return await this.contracts.tripolarTreasury.redeemBonds(
-        decimalToBalance(amount),
-        await this.contracts.tripolarTreasury.getTripolarPrice(),
-      );
-    }
-    if (token === 'ETHERNAL') {
-      return await this.contracts.ethernalTreasury.redeemBonds(
-        decimalToBalance(amount),
-        await this.contracts.ethernalTreasury.getEthernalPrice(),
-      );
-    }
+  async redeemBonds(amount: string, sunrise): Promise<TransactionResponse> {
+    return await this.contracts[sunrise].redeemBonds(
+      decimalToBalance(amount),
+      await this.contracts[sunrise.treasury][sunrise.getPrice](),
+    );
   }
 
   async getTotalValueLocked(): Promise<Number> {
