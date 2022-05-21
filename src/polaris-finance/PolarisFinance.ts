@@ -722,7 +722,7 @@ export class PolarisFinance {
   async getTokenEstimatedTWAP(sunrise: Sunrise): Promise<string> {
     let expectedPrice: BigNumber;
     const token = sunrise.earnTokenName;
-    expectedPrice = await this.contracts.SeigniorageOracle.twap(sunrise.tokenAddress, ethers.utils.parseEther('1'));
+    expectedPrice = await this.contracts[sunrise.oracle].twap(sunrise.tokenAddress, ethers.utils.parseEther('1'));
     return token === 'POLAR' ? getDisplayBalance(expectedPrice.div(1e6)) : getDisplayBalance(expectedPrice);
   }
 

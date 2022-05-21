@@ -38,6 +38,7 @@ export interface SunriseInfo {
   getTokenPriceInLastTWAP: string;
   getBondsPurchasable: string;
   getPrice: string;
+  oracle: string;
 }
 
 export interface Sunrise extends SunriseInfo {

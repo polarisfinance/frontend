@@ -439,6 +439,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     getTokenPriceInLastTWAP: 'getpolarUpdatedPrice',
     getBondsPurchasable: 'getBurnablepolarLeft',
     getPrice: 'getpolarPrice',
+    oracle: 'SeigniorageOracle',
   },
   LunarSunrise: {
     name: 'lunar',
@@ -458,6 +459,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     getTokenPriceInLastTWAP: 'getlunarUpdatedPrice',
     getBondsPurchasable: 'getBurnablelunarLeft',
     getPrice: 'getlunarPrice',
+    oracle: 'LunarOracle',
   },
   TripolarSunrise: {
     name: 'tripolar',
@@ -476,6 +478,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     getTokenPriceInLastTWAP: 'getTripolarUpdatedPrice',
     getBondsPurchasable: 'getBurnableTripolarLeft',
     getPrice: 'getTripolarPrice',
+    oracle: 'TripolarOracle',
   },
   OldTripolarSunrise: {
     name: 'tripolarOld',
@@ -495,6 +498,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     getTokenPriceInLastTWAP: 'getTripolarUpdatedPrice',
     getBondsPurchasable: 'getBurnableTripolarLeft',
     getPrice: 'getTripolarPrice',
+    oracle: 'TripolarOracle',
   },
   EthernalSunrise: {
     name: 'ethernal',
@@ -513,6 +517,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     getTokenPriceInLastTWAP: 'getEthernalUpdatedPrice',
     getBondsPurchasable: 'getBurnableEthernalLeft',
     getPrice: 'getEthernalPrice',
+    oracle: 'EthernalOracle',
   },
   AurisSunrise: {
     name: 'tripolar',
@@ -531,6 +536,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     getTokenPriceInLastTWAP: 'getTripolarUpdatedPrice',
     getBondsPurchasable: 'getBurnableTripolarLeft',
     getPrice: 'getTripolarPrice',
+    oracle: 'TripolarOracle',
   },
 };
 
