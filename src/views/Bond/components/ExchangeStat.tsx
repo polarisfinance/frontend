@@ -6,14 +6,15 @@ import { Card } from '@material-ui/core';
 interface ExchangeStatProps {
   tokenName: string;
   description: string;
+  lpToken: string;
   price: string;
 }
 
-const ExchangeStat: React.FC<ExchangeStatProps> = ({ tokenName, description, price }) => {
+const ExchangeStat: React.FC<ExchangeStatProps> = ({ tokenName, lpToken, description, price }) => {
   return (
     <Card style={{ backgroundColor: 'rgba(0,0,0,0)' }}>
       <StyledCardContentInner>
-        <StyledCardTitle>{`${tokenName} = ${price} NEAR`}</StyledCardTitle>
+        <StyledCardTitle>{`${tokenName} = ${price} ${lpToken}`}</StyledCardTitle>
         <StyledDesc>{description}</StyledDesc>
       </StyledCardContentInner>
     </Card>

@@ -81,18 +81,21 @@ const Pit: React.FC = () => {
             <StyledStatsWrapper>
               <ExchangeStat
                 tokenName={sunrise.earnTokenName}
+                lpToken={sunrise.lpToken}
                 description="Last-Hour TWAP Price"
                 price={getDisplayBalance(cashPrice, 18, 4)}
               />
               <Spacer size="md" />
               <ExchangeStat
                 tokenName={sunrise.earnTokenName}
+                lpToken={sunrise.lpToken}
                 description="Previous Epoch TWAP Price"
                 price={getDisplayBalance(previousTwap, 18, 4)}
               />
               <Spacer size="md" />
               <ExchangeStat
                 tokenName={sunrise.bond}
+                lpToken={sunrise.lpToken}
                 description={`Current Price: (${sunrise.earnTokenName})^2`}
                 price={Number(bondStat?.tokenInFtm).toFixed(2) || '-'}
               />
