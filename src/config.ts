@@ -8,7 +8,7 @@ const configurations: { [env: string]: Configuration } = {
     chainId: ChainId.AURORA,
     networkName: 'Aurora Mainnet',
     ftmscanUrl: 'https://aurorascan.dev/',
-    defaultProvider: 'https://mainnet.aurora.dev',
+    defaultProvider: 'https://mainnet.aurora.dev/',
     defaultWssProvider: 'wss://mrarpc.polarisfinance.io/',
     deployments: require('./polaris-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
