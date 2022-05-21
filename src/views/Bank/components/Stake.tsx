@@ -5,6 +5,7 @@ import { Button, Card, CardContent } from '@material-ui/core';
 import CardIcon from '../../../components/CardIcon';
 import { AddIcon, RemoveIcon } from '../../../components/icons';
 import IconButton from '../../../components/IconButton';
+import FlashOnRoundedIcon from '@material-ui/icons/FlashOnRounded';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 
@@ -118,7 +119,13 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                   <RemoveIcon />
                 </IconButton>
                 <StyledActionSpacer />
-
+                <IconButton
+                  onClick={() => {
+                    onDissmissZap();
+                  }}
+                >
+                  <FlashOnRoundedIcon style={{ color: 'white' }} />
+                </IconButton>
                 <StyledActionSpacer />
                 <IconButton
                   disabled={bank.closedForStaking}
