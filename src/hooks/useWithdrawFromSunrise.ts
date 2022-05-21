@@ -1,19 +1,20 @@
 import { useCallback } from 'react';
 import usePolarisFinance from './usePolarisFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
+import { Sunrise } from '../polaris-finance';
 
-const useWithdrawFromSunrise = (token: string) => {
+const useWithdrawFromSunrise = (sunrise:Sunrise) => {
   const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleWithdraw = useCallback(
     (amount: string) => {
       handleTransactionReceipt(
-        polarisFinance.withdrawSpolarFromSunrise(amount, token),
-        `Withdraw ${amount} SPOLAR from the ${token} SUNRISE`,
+        polarisFinance.withdrawSpolarFromSunrise(amount, sunrise),
+        `Withdraw ${amount} SPOLAR from the ${sunrise} SUNRISE`,
       );
     },
-    [polarisFinance, handleTransactionReceipt, token],
+    [polarisFinance, handleTransactionReceipt, sunrise],
   );
   return { onWithdraw: handleWithdraw };
 };

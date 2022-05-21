@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Sunrise } from '../../polaris-finance';
 import useRefresh from '../useRefresh';
 import usePolarisFinance from './../usePolarisFinance';
 
-const useClaimRewardCheck = (token: string) => {
+const useClaimRewardCheck = (sunrise:Sunrise) => {
   const { slowRefresh } = useRefresh();
   const [canClaimReward, setCanClaimReward] = useState(false);
   const polarisFinance = usePolarisFinance();
@@ -11,7 +12,7 @@ const useClaimRewardCheck = (token: string) => {
   useEffect(() => {
     async function canUserClaimReward() {
       try {
-        setCanClaimReward(await polarisFinance.canUserClaimRewardFromSunrise(token));
+        setCanClaimReward(await polarisFinance.canUserClaimRewardFromSunrise(sunrise));
       } catch (err) {
         console.error(err);
       }
@@ -19,7 +20,7 @@ const useClaimRewardCheck = (token: string) => {
     if (isUnlocked) {
       canUserClaimReward();
     }
-  }, [isUnlocked, slowRefresh, polarisFinance, token]);
+  }, [isUnlocked, slowRefresh, polarisFinance, sunrise]);
 
   return canClaimReward;
 };

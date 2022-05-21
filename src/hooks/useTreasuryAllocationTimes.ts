@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import usePolarisFinance from './usePolarisFinance';
 import { AllocationTime } from '../polaris-finance/types';
 import useRefresh from './useRefresh';
+import { Sunrise } from '../polaris-finance';
 
-const useTreasuryAllocationTimes = (token: string) => {
+const useTreasuryAllocationTimes = (sunrise:Sunrise) => {
   const { slowRefresh } = useRefresh();
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
@@ -12,9 +13,9 @@ const useTreasuryAllocationTimes = (token: string) => {
   const polarisFinance = usePolarisFinance();
   useEffect(() => {
     if (polarisFinance) {
-      polarisFinance.getTreasuryNextAllocationTime(token).then(setTime);
+      polarisFinance.getTreasuryNextAllocationTime(sunrise).then(setTime);
     }
-  }, [polarisFinance, slowRefresh, token]);
+  }, [polarisFinance, slowRefresh, sunrise]);
   return time;
 };
 

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import usePolarisFinance from '../usePolarisFinance';
 import { AllocationTime } from '../../polaris-finance/types';
+import { Sunrise } from '../../polaris-finance';
 
-const useUnstakeTimerMasonry = (token: string) => {
+const useUnstakeTimerMasonry = (sunrise:Sunrise) => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
@@ -12,7 +13,7 @@ const useUnstakeTimerMasonry = (token: string) => {
   useEffect(() => {
     async function fetchUserUnstakeTime() {
       try {
-        setTime(await polarisFinance.getUserUnstakeTime(token));
+        setTime(await polarisFinance.getUserUnstakeTime(sunrise));
       } catch (e) {
         console.error(e);
       }
@@ -21,7 +22,7 @@ const useUnstakeTimerMasonry = (token: string) => {
     if (polarisFinance) {
       fetchUserUnstakeTime();
     }
-  }, [polarisFinance, token]);
+  }, [polarisFinance, sunrise]);
   return time;
 };
 
