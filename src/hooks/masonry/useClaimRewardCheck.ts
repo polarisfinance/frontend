@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Sunrise } from '../../polaris-finance';
 import useRefresh from '../useRefresh';
 import usePolarisFinance from './../usePolarisFinance';
 
-const useClaimRewardCheck = (sunrise) => {
+const useClaimRewardCheck = (sunrise:Sunrise) => {
   const { slowRefresh } = useRefresh();
   const [canClaimReward, setCanClaimReward] = useState(false);
   const polarisFinance = usePolarisFinance();

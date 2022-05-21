@@ -1022,9 +1022,9 @@ export class PolarisFinance {
    */
 
   async getUserClaimRewardTime(sunrise:Sunrise): Promise<AllocationTime> {
-    let treasury: Contract;
+    let treasury: Contract, contract: Contract;
     treasury = this.contracts[sunrise.treasury];
-    const contract = this.contracts[sunrise.contract];
+    contract = this.contracts[sunrise.contract];
     const [nextEpochTimestamp, currentEpoch, period] = await Promise.all([
       contract.nextEpochPoint(),
       contract.epoch(),
@@ -1063,9 +1063,9 @@ export class PolarisFinance {
    * @returns Promise<AllocationTime>
    */
   async getUserUnstakeTime(sunrise:Sunrise): Promise<AllocationTime> {
-    let treasury: Contract;
+    let treasury: Contract, contract: Contract;
     treasury = this.contracts[sunrise.treasury];
-    const contract = this.contracts[sunrise.contract];
+    contract = this.contracts[sunrise.contract];
 
     const [nextEpochTimestamp, currentEpoch, period, withdrawLockupEpochs] = await Promise.all([
       contract.nextEpochPoint(),
