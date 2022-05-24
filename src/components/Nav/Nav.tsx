@@ -119,7 +119,7 @@ const Nav = () => {
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>
-              <Link color="textPrimary" to="/dawn_splitter" className={classes.link}>
+              <Link color="textPrimary" to="/dawn" className={classes.link}>
                 Dawn
               </Link>
               <Link color="textPrimary" to="/sunrise" className={classes.link}>
@@ -150,10 +150,10 @@ const Nav = () => {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
+                href="https://vote.polarisfinance.io/#/"
                 className={classes.link}
               >
-                KYC
+                GOV
               </a>
             </Box>
             <AccountButton text="Connect" />
@@ -192,7 +192,7 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Dawn" to="/dawn_splitter" />
+                <ListItemLink primary="Dawn" to="/dawn" />
                 <ListItemLink primary="Sunrise" to="/sunrise" />
                 <ListItemLink primary="Bond" to="/bond" />
                 <ListItemLink primary="Strategy" to="/strategy" />
@@ -205,12 +205,8 @@ const Nav = () => {
                 <ListItem button component="a" href="https://www.vaporwave.farm/#/aurora">
                   <ListItemText>AC</ListItemText>
                 </ListItem>
-                <ListItem
-                  button
-                  component="a"
-                  href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
-                >
-                  <ListItemText>KYC</ListItemText>
+                <ListItem button component="a" href="https://vote.polarisfinance.io/#/">
+                  <ListItemText>GOV</ListItemText>
                 </ListItem>
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />
