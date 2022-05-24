@@ -24,8 +24,10 @@ body {
 .MuiTypography-body1,
 .MuiPaper-root,
 .MuiPaper-root h2,
-p,h2,span{
-  color: #FFFFFF !important;
+p,
+h2,
+span {
+  color: #ffffff !important;
 }
 
 body {
@@ -54,7 +56,7 @@ footer .a:hover {
 }
 
 .MuiToolbar-regular {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .MuiButton-containedPrimary,
@@ -83,14 +85,14 @@ code {
   color: #757ce8 !important;
 }
 
-.MuiPaper-elevation1   {
+.MuiPaper-elevation1 {
   box-shadow: none !important;
 }
 
 .MuiPaper-elevation1,
 .MuiAlert-root,
 .MuiButton-root {
-  border-radius: 10px !important
+  border-radius: 10px !important;
 }
 
 a.active {

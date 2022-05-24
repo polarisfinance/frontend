@@ -119,7 +119,7 @@ const Sunrise: React.FC = () => {
         )}
 
         <Grid item xs={12} md={4}>
-          <Stake sunrise={sunrise} contract={sunrise?.contract} retired={sunrise?.retired} />
+          <Stake sunrise={sunrise} contract={sunrise.contract} retired={sunrise.retired} />
         </Grid>
         <Grid container item xs={12} md={4} alignItems="center" direction="row">
           <Grid container item xs={12}>

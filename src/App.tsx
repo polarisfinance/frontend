@@ -94,7 +94,7 @@ const Providers: React.FC = ({ children }) => {
   return (
     <TP1 theme={theme}>
       <TP theme={newTheme}>
-        <PhishingWarning/>
+        <PhishingWarning />
         <UseWalletProvider
           chainId={config.chainId}
           connectors={{

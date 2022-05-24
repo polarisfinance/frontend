@@ -3,7 +3,7 @@ import { BigNumber } from 'ethers';
 import usePolarisFinance from './usePolarisFinance';
 import { Sunrise } from '../polaris-finance';
 
-const useBondsRedeemable = (sunrise:Sunrise) => {
+const useBondsRedeemable = (sunrise: Sunrise) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
 

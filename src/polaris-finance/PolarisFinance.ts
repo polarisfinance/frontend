@@ -972,7 +972,7 @@ export class PolarisFinance {
       SPOLARPrice: TokenStat,
       tokenPricePromise: Promise<TokenStat>,
       tokenPrice: TokenStat;
-    const token = sunrise?.earnTokenName;
+    const token = sunrise.earnTokenName;
     const contract = this.contracts[sunrise.contract];
     tokenPricePromise = this.getStat(token);
     latestSnapshotIndex = await contract.latestSnapshotIndex();

@@ -3,7 +3,7 @@ import usePolarisFinance from './../usePolarisFinance';
 import useRefresh from '../useRefresh';
 import { Sunrise } from '../../polaris-finance';
 
-const useWithdrawCheck = (sunrise:Sunrise) => {
+const useWithdrawCheck = (sunrise: Sunrise) => {
   const [canWithdraw, setCanWithdraw] = useState(false);
   const polarisFinance = usePolarisFinance();
   const { slowRefresh } = useRefresh();

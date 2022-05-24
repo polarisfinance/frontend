@@ -1,1 +1,1 @@
-export {default as PhishingWarning} from './PhishingWarning';
+export { default as PhishingWarning } from './PhishingWarning';
