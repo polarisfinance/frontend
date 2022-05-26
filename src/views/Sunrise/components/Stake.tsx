@@ -29,7 +29,10 @@ import useWithdrawFromSunrise from '../../../hooks/useWithdrawFromSunrise';
 
 const Stake = ({ sunrise, contract, retired }) => {
   const polarisFinance = usePolarisFinance();
-  const [approveStatus, approve] = useApprove(polarisFinance.SPOLAR, polarisFinance.contracts[contract].address);
+  const [approveStatus, approve] = useApprove(
+    polarisFinance.SPOLAR_METAMASK,
+    polarisFinance.contracts[contract].address,
+  );
 
   const tokenBalance = useTokenBalance(polarisFinance.SPOLAR);
   const stakedBalance = useStakedBalanceOnSunrise(sunrise);

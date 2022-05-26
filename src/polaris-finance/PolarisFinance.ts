@@ -31,19 +31,28 @@ export class PolarisFinance {
   externalTokens: { [name: string]: ERC20 };
 
   POLARWFTM_LP: Contract;
+  POLAR_METAMASK: ERC20;
   POLAR: ERC20;
   SPOLAR: ERC20;
+  SPOLAR_METAMASK: ERC20;
   PBOND: ERC20;
+  PBOND_METAMASK: ERC20;
   FTM: ERC20;
 
   LUNAR: ERC20;
+  LUNAR_METAMASK: ERC20;
   LBOND: ERC20;
+  LBOND_METAMASK: ERC20;
 
   TRIPOLAR: ERC20;
+  TRIPOLAR_METAMASK: ERC20;
   TRIBOND: ERC20;
+  TRIBOND_METAMASK: ERC20;
 
   ETHERNAL: ERC20;
+  ETHERNAL_METAMASK: ERC20;
   EBOND: ERC20;
+  EBOND_METAMASK: ERC20;
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -89,16 +98,27 @@ export class PolarisFinance {
     for (const [name, contract] of Object.entries(this.contracts)) {
       this.contracts[name + 'metamask'] = contract.connect(this.signer);
     }
+
+    this.POLAR_METAMASK = new ERC20(this.contracts['polarmetamask'].address, newProvider, 'POLAR_METAMASK');
+    this.SPOLAR_METAMASK = new ERC20(this.contracts['sPolarmetamask'].address, newProvider, 'SPOLAR_METAMASK');
+    this.PBOND_METAMASK = new ERC20(this.contracts['pBondmetamask'].address, newProvider, 'PBOND_METAMASK');
+    this.LUNAR_METAMASK = new ERC20(this.contracts['lunarmetamask'].address, newProvider, 'LUNAR_METAMASK');
+    this.LBOND_METAMASK = new ERC20(this.contracts['lBondmetamask'].address, newProvider, 'LBOND_METAMASK');
+    this.TRIPOLAR_METAMASK = new ERC20(this.contracts['tripolarmetamask'].address, newProvider, 'TRIPOLAR_METAMASK');
+    this.TRIBOND_METAMASK = new ERC20(this.contracts['triBondmetamask'].address, newProvider, 'TRIBOND_METAMASK');
+    this.ETHERNAL_METAMASK = new ERC20(this.contracts['ethernalmetamask'].address, newProvider, 'ETHERNAL_METAMASK');
+    this.EBOND_METAMASK = new ERC20(this.contracts['eBondmetamask'].address, newProvider, 'EBOND_METAMASK');
+
     const tokens = [
-      this.POLAR,
-      this.SPOLAR,
-      this.PBOND,
-      this.LUNAR,
-      this.LBOND,
-      this.TRIPOLAR,
-      this.TRIBOND,
-      this.ETHERNAL,
-      this.EBOND,
+      this.POLAR_METAMASK,
+      this.SPOLAR_METAMASK,
+      this.PBOND_METAMASK,
+      this.LUNAR_METAMASK,
+      this.LBOND_METAMASK,
+      this.TRIPOLAR_METAMASK,
+      this.TRIBOND_METAMASK,
+      this.ETHERNAL_METAMASK,
+      this.EBOND_METAMASK,
       ...Object.values(this.externalTokens),
     ];
     for (const token of tokens) {
@@ -972,7 +992,7 @@ export class PolarisFinance {
       SPOLARPrice: TokenStat,
       tokenPricePromise: Promise<TokenStat>,
       tokenPrice: TokenStat;
-    const token = sunrise?.earnTokenName;
+    const token = sunrise.earnTokenName;
     const contract = this.contracts[sunrise.contract];
     tokenPricePromise = this.getStat(token);
     latestSnapshotIndex = await contract.latestSnapshotIndex();
