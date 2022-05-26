@@ -87,7 +87,7 @@ export class PolarisFinance {
     this.signer = newProvider.getSigner(0);
     this.myAccount = account;
     for (const [name, contract] of Object.entries(this.contracts)) {
-      this.contracts[name] = contract.connect(this.signer);
+      this.contracts[name + 'metamask'] = contract.connect(this.signer);
     }
     const tokens = [
       this.POLAR,
@@ -793,7 +793,7 @@ export class PolarisFinance {
    * @param amount amount of cash to purchase bonds with.
    */
   async buyBonds(amount: string | number, sunrise): Promise<TransactionResponse> {
-    return await this.contracts[sunrise.treasury].buyBonds(
+    return await this.contracts[sunrise.treasury + 'metamask'].buyBonds(
       decimalToBalance(amount),
       await this.contracts[sunrise.treasury][sunrise.getPrice](),
     );
@@ -805,7 +805,7 @@ export class PolarisFinance {
    */
 
   async redeemBonds(amount: string, sunrise): Promise<TransactionResponse> {
-    return await this.contracts[sunrise.treasury].redeemBonds(
+    return await this.contracts[sunrise.treasury + 'metamask'].redeemBonds(
       decimalToBalance(amount),
       await this.contracts[sunrise.treasury][sunrise.getPrice](),
     );
@@ -927,7 +927,7 @@ export class PolarisFinance {
    * @returns {string} Transaction hash
    */
   async stake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
-    const pool = this.contracts[poolName];
+    const pool = this.contracts[poolName + 'metamask'];
     return await pool.deposit(poolId, amount);
   }
 
@@ -938,7 +938,7 @@ export class PolarisFinance {
    * @returns {string} Transaction hash
    */
   async unstake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
-    const pool = this.contracts[poolName];
+    const pool = this.contracts[poolName + 'metamask'];
     return await pool.withdraw(poolId, amount);
   }
 
@@ -946,7 +946,7 @@ export class PolarisFinance {
    * Transfers earned token reward from given pool to my account.
    */
   async harvest(poolName: ContractName, poolId: Number): Promise<TransactionResponse> {
-    const pool = this.contracts[poolName];
+    const pool = this.contracts[poolName + 'metamask'];
     //By passing 0 as the amount, we are asking the contract to only redeem the reward and not the currently staked token
     return await pool.withdraw(poolId, 0);
   }
@@ -955,7 +955,7 @@ export class PolarisFinance {
    * Harvests and withdraws deposited tokens from the pool.
    */
   async exit(poolName: ContractName, poolId: Number, account = this.myAccount): Promise<TransactionResponse> {
-    const pool = this.contracts[poolName];
+    const pool = this.contracts[poolName + 'metamask'];
     let userInfo = await pool.userInfo(poolId, account);
     return await pool.withdraw(poolId, userInfo.amount);
   }
@@ -972,7 +972,7 @@ export class PolarisFinance {
       SPOLARPrice: TokenStat,
       tokenPricePromise: Promise<TokenStat>,
       tokenPrice: TokenStat;
-    const token = sunrise.earnTokenName;
+    const token = sunrise?.earnTokenName;
     const contract = this.contracts[sunrise.contract];
     tokenPricePromise = this.getStat(token);
     latestSnapshotIndex = await contract.latestSnapshotIndex();
@@ -1024,7 +1024,7 @@ export class PolarisFinance {
   }
 
   async stakeSpolarToSunrise(amount: string, sunrise: Sunrise): Promise<TransactionResponse> {
-    return await this.contracts[sunrise.contract].stake(decimalToBalance(amount));
+    return await this.contracts[sunrise.contract + 'metamask'].stake(decimalToBalance(amount));
   }
 
   async getStakedSpolarOnSunrise(sunrise: Sunrise): Promise<BigNumber> {
@@ -1036,15 +1036,15 @@ export class PolarisFinance {
   }
 
   async withdrawSpolarFromSunrise(amount: string, sunrise: Sunrise): Promise<TransactionResponse> {
-    return await this.contracts[sunrise.contract].withdraw(decimalToBalance(amount));
+    return await this.contracts[sunrise.contract + 'metamask'].withdraw(decimalToBalance(amount));
   }
 
   async claimRewardFromSunrise(sunrise: Sunrise): Promise<TransactionResponse> {
-    return await this.contracts[sunrise.contract].claimReward();
+    return await this.contracts[sunrise.contract + 'metamask'].claimReward();
   }
 
   async exitFromSunrise(sunrise: Sunrise): Promise<TransactionResponse> {
-    return await this.contracts[sunrise.contract].exit();
+    return await this.contracts[sunrise.contract + 'metamask'].exit();
   }
 
   async getTreasuryNextAllocationTime(sunrise: Sunrise): Promise<AllocationTime> {
