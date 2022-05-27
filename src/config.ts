@@ -427,7 +427,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     contract: 'Masonry',
     earnTokenName: 'POLAR',
     sort: 0,
-    boosted: true,
+    boosted: false,
     coming: false,
     retired: false,
     bond: 'PBOND',
