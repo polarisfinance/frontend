@@ -80,6 +80,7 @@ export class PolarisFinance {
 
     this.ETHERNAL = new ERC20(deployments.ethernal.address, provider, 'ETHERNAL');
     this.EBOND = new ERC20(deployments.eBond.address, provider, 'EBOND');
+
     // Uniswap V2 Pair
     this.POLARWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
 
@@ -124,6 +125,7 @@ export class PolarisFinance {
     for (const token of tokens) {
       token.connect(this.signer);
     }
+
     this.POLARWFTM_LP = this.POLARWFTM_LP.connect(this.signer);
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
   }
