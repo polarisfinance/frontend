@@ -28,6 +28,7 @@ const newTheme = createMuiTheme({
       disabledBackground: '#CDCDCD',
       active: '#000',
       hover: '#000',
+      disabled: '#FFF',
     },
   },
   typography: {
