@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
     outline: 'none',
+    color: '#FFF',
   },
 }));
 
@@ -40,14 +41,14 @@ const WalletProviderModal = ({ open, handleClose }) => {
         <h2>Connect Wallet</h2>
         <List component="nav" aria-label="main mailbox folders">
           <WalletCard
-            icon={<img src={metamaskLogo} alt="Metamask logo" style={{ height: 32 }} />}
+            icon={<img src={metamaskLogo} alt="Metamask logo" style={{ height: 32, width: 32 }} />}
             onConnect={() => {
               connect('injected');
             }}
             title="Metamask"
           />
           <WalletCard
-            icon={<img src={walletConnectLogo} alt="Wallet Connect logo" style={{ height: 24 }} />}
+            icon={<img src={walletConnectLogo} alt="Wallet Connect logo" style={{ height: 24, width: 32 }} />}
             onConnect={() => {
               connect('walletconnect');
             }}

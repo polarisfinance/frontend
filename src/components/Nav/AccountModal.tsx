@@ -20,7 +20,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss, sunrises }) => {
           onDismiss();
         }}
         variant="contained"
-        style={{ position: 'absolute', top: '18px', right: '18px', backgroundColor: '#b43387' }}
+        style={{ position: 'absolute', top: '18px', right: '18px', backgroundColor: '#b43387', color: '#FFF' }}
       >
         Disconnect
       </Button>
