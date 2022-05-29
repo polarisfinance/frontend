@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize: '22px',
+    color: '#fff',
   },
 }));
 

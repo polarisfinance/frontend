@@ -9,14 +9,14 @@ const newTheme = createMuiTheme({
     },
     background: {
       default: '#121212',
-      paper: 'rgba(71,32,123,0.7)',
+      paper: 'rgba(71,32,123,0.9)',
       paper2: 'rgba(71,32,123,0.9)',
     },
     primary: {
       light: '#757ce8',
       main: '#70D44B',
       dark: '#2c2560',
-      contrastText: '#000',
+      contrastText: '#fff',
     },
     secondary: {
       light: '#ff7961',

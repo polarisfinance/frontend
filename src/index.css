@@ -19,17 +19,6 @@ body {
   height: 100%;
 }
 
-.makeStyles-paper-11,
-.makeStyles-paper-11 h2,
-.MuiTypography-body1,
-.MuiPaper-root,
-.MuiPaper-root h2,
-p,
-h2,
-span {
-  color: #ffffff !important;
-}
-
 body {
   position: absolute;
   content: '';
@@ -57,15 +46,6 @@ footer .a:hover {
 
 .MuiToolbar-regular {
   color: #ffffff;
-}
-
-.MuiButton-containedPrimary,
-.MuiButton-containedPrimary:hover,
-.MuiButton-containedSecondary,
-.MuiButton-containedSecondary:hover,
-.MuiListItem-button:hover,
-.MuiButtonBase-root:hover {
-  color: #fff !important;
 }
 
 code {
