@@ -29,6 +29,7 @@ export class PolarisFinance {
   config: Configuration;
   contracts: { [name: string]: Contract };
   externalTokens: { [name: string]: ERC20 };
+  externalTokensMetamask: { [name: string]: ERC20 };
 
   POLARWFTM_LP: Contract;
   POLAR_METAMASK: ERC20;
@@ -109,7 +110,11 @@ export class PolarisFinance {
     this.TRIBOND_METAMASK = new ERC20(this.contracts['triBondmetamask'].address, newProvider, 'TRIBOND_METAMASK');
     this.ETHERNAL_METAMASK = new ERC20(this.contracts['ethernalmetamask'].address, newProvider, 'ETHERNAL_METAMASK');
     this.EBOND_METAMASK = new ERC20(this.contracts['eBondmetamask'].address, newProvider, 'EBOND_METAMASK');
-
+    const { externalTokens } = this.config;
+    this.externalTokensMetamask = {};
+    for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
+      this.externalTokens[symbol + 'metamask'] = new ERC20(address, newProvider, symbol, decimal);
+    }
     const tokens = [
       this.POLAR_METAMASK,
       this.SPOLAR_METAMASK,
@@ -120,8 +125,9 @@ export class PolarisFinance {
       this.TRIBOND_METAMASK,
       this.ETHERNAL_METAMASK,
       this.EBOND_METAMASK,
-      ...Object.values(this.externalTokens),
+      ...Object.values(this.externalTokensMetamask),
     ];
+
     for (const token of tokens) {
       token.connect(this.signer);
     }
@@ -184,8 +190,6 @@ export class PolarisFinance {
   }
 
   async getTokenPriceFromPancakeswap(tokenContract: ERC20): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { chainId } = this.config;
     const { NEAR } = this.config.externalTokens;
 
@@ -210,8 +214,6 @@ export class PolarisFinance {
   }
 
   async getTokenPriceLunar(tokenContract: ERC20): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { chainId } = this.config;
     const { LUNA } = this.config.externalTokens;
 
@@ -239,8 +241,6 @@ export class PolarisFinance {
   }
 
   async getTokenPriceTripolar(tokenContract: ERC20): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { chainId } = this.config;
     const { xTRI } = this.config.externalTokens;
 
@@ -268,8 +268,6 @@ export class PolarisFinance {
   }
 
   async getTokenPriceEthernal(tokenContract: ERC20): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { chainId } = this.config;
     const { WETH } = this.config.externalTokens;
 
@@ -297,8 +295,6 @@ export class PolarisFinance {
   }
 
   async getWFTMPriceFromPancakeswap(): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
@@ -315,8 +311,6 @@ export class PolarisFinance {
   }
 
   async getLUNAPrice(): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { LUNA, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
@@ -339,8 +333,6 @@ export class PolarisFinance {
   }
 
   async getXtriPrice(): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { xTRI, STNEAR, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
@@ -369,8 +361,6 @@ export class PolarisFinance {
     }
   }
   async getEthPrice(): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
     const { WETH, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
