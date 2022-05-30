@@ -68,6 +68,10 @@ export class PolarisFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
     }
+    this.externalTokensMetamask = {};
+    for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
+      this.externalTokensMetamask[symbol] = new ERC20(address, provider, symbol, decimal);
+    }
     this.POLAR = new ERC20(deployments.polar.address, provider, 'POLAR');
     this.SPOLAR = new ERC20(deployments.sPolar.address, provider, 'SPOLAR');
     this.PBOND = new ERC20(deployments.pBond.address, provider, 'PBOND');
@@ -110,11 +114,7 @@ export class PolarisFinance {
     this.TRIBOND_METAMASK = new ERC20(this.contracts['triBondmetamask'].address, newProvider, 'TRIBOND_METAMASK');
     this.ETHERNAL_METAMASK = new ERC20(this.contracts['ethernalmetamask'].address, newProvider, 'ETHERNAL_METAMASK');
     this.EBOND_METAMASK = new ERC20(this.contracts['eBondmetamask'].address, newProvider, 'EBOND_METAMASK');
-    const { externalTokens } = this.config;
-    this.externalTokensMetamask = {};
-    for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
-      this.externalTokens[symbol + 'metamask'] = new ERC20(address, newProvider, symbol, decimal);
-    }
+
     const tokens = [
       this.POLAR_METAMASK,
       this.SPOLAR_METAMASK,
