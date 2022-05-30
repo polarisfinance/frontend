@@ -29,7 +29,7 @@ const Banks: React.FC = ({ children }) => {
       banks.push({
         ...bankInfo,
         address: config.deployments[bankInfo.contract].address,
-        depositToken: polarisFinance.externalTokens[bankInfo.depositTokenName],
+        depositToken: polarisFinance.externalTokensMetamask[bankInfo.depositTokenName],
         earnToken: bankInfo.earnTokenName === 'POLAR' ? polarisFinance.POLAR : polarisFinance.SPOLAR,
       });
     }
