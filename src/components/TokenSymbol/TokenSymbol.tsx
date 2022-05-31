@@ -60,7 +60,7 @@ const logosBySymbol: { [title: string]: string } = {
   EBOND: ebondLogo,
   WETH: etherumLogo,
   'ETHERNAL-ETH-LP': ethernalEthLpLogo,
-  '?': btcPegLogo,
+  ORBITAL: btcPegLogo,
   BTCBOND: btcBondLogo,
 };
 

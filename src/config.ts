@@ -520,9 +520,9 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     oracle: 'EthernalOracle',
   },
   BtcSunrise: {
-    name: 'btc',
+    name: 'tripolar',
     contract: 'tripolarSunrise',
-    earnTokenName: '?',
+    earnTokenName: 'ORBITAL',
     sort: 3,
     boosted: false,
     coming: true,
