@@ -89,15 +89,15 @@ export class PolarisFinance {
     // Uniswap V2 Pair
     this.POLARWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
 
-    this.POLAR_METAMASK = new ERC20(deployments.polar.address, provider, 'POLAR_METAMASK');
-    this.SPOLAR_METAMASK = new ERC20(deployments.sPolar.address, provider, 'SPOLAR_METAMASK');
-    this.PBOND_METAMASK = new ERC20(deployments.pBond.address, provider, 'PBOND_METAMASK');
-    this.LUNAR_METAMASK = new ERC20(deployments.lunar.address, provider, 'LUNAR_METAMASK');
-    this.LBOND_METAMASK = new ERC20(deployments.lBond.address, provider, 'LBOND_METAMASK');
-    this.TRIPOLAR_METAMASK = new ERC20(deployments.tripolar.address, provider, 'TRIPOLAR_METAMASK');
-    this.TRIBOND_METAMASK = new ERC20(deployments.triBond.address, provider, 'TRIBOND_METAMASK');
-    this.ETHERNAL_METAMASK = new ERC20(deployments.ethernal.address, provider, 'ETHERNAL_METAMASK');
-    this.EBOND_METAMASK = new ERC20(deployments.eBond.address, provider, 'EBOND_METAMASK');
+    this.POLAR_METAMASK = this.POLAR;
+    this.SPOLAR_METAMASK = this.SPOLAR;
+    this.PBOND_METAMASK = this.PBOND;
+    this.LUNAR_METAMASK = this.LUNAR;
+    this.LBOND_METAMASK = this.LBOND;
+    this.TRIPOLAR_METAMASK = this.TRIPOLAR;
+    this.TRIBOND_METAMASK = this.TRIBOND;
+    this.ETHERNAL_METAMASK = this.ETHERNAL;
+    this.EBOND_METAMASK = this.EBOND;
 
     this.config = cfg;
     this.provider = provider;
