@@ -33,8 +33,10 @@ const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
   POLAR: polarLogo,
+  POLAR_METAMASK: polarLogo,
   SPOLAR: spolarLogo,
   PBOND: pbondLogo,
+  PBOND_METAMASK: pbondLogo,
   AURORA: auroraLogo,
   NEAR: nearLogo,
   LUNA: lunaLogo,
