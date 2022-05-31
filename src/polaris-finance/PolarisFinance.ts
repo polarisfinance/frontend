@@ -89,6 +89,16 @@ export class PolarisFinance {
     // Uniswap V2 Pair
     this.POLARWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
 
+    this.POLAR_METAMASK = new ERC20(deployments.polar.address, provider, 'POLAR_METAMASK');
+    this.SPOLAR_METAMASK = new ERC20(deployments.sPolar.address, provider, 'SPOLAR_METAMASK');
+    this.PBOND_METAMASK = new ERC20(deployments.pBond.address, provider, 'PBOND_METAMASK');
+    this.LUNAR_METAMASK = new ERC20(deployments.lunar.address, provider, 'LUNAR_METAMASK');
+    this.LBOND_METAMASK = new ERC20(deployments.lBond.address, provider, 'LBOND_METAMASK');
+    this.TRIPOLAR_METAMASK = new ERC20(deployments.tripolar.address, provider, 'TRIPOLAR_METAMASK');
+    this.TRIBOND_METAMASK = new ERC20(deployments.triBond.address, provider, 'TRIBOND_METAMASK');
+    this.ETHERNAL_METAMASK = new ERC20(deployments.ethernal.address, provider, 'ETHERNAL_METAMASK');
+    this.EBOND_METAMASK = new ERC20(deployments.eBond.address, provider, 'EBOND_METAMASK');
+
     this.config = cfg;
     this.provider = provider;
   }
@@ -104,16 +114,6 @@ export class PolarisFinance {
     for (const [name, contract] of Object.entries(this.contracts)) {
       this.contracts[name + 'metamask'] = contract.connect(this.signer);
     }
-
-    this.POLAR_METAMASK = new ERC20(this.contracts['polarmetamask'].address, newProvider, 'POLAR_METAMASK');
-    this.SPOLAR_METAMASK = new ERC20(this.contracts['sPolarmetamask'].address, newProvider, 'SPOLAR_METAMASK');
-    this.PBOND_METAMASK = new ERC20(this.contracts['pBondmetamask'].address, newProvider, 'PBOND_METAMASK');
-    this.LUNAR_METAMASK = new ERC20(this.contracts['lunarmetamask'].address, newProvider, 'LUNAR_METAMASK');
-    this.LBOND_METAMASK = new ERC20(this.contracts['lBondmetamask'].address, newProvider, 'LBOND_METAMASK');
-    this.TRIPOLAR_METAMASK = new ERC20(this.contracts['tripolarmetamask'].address, newProvider, 'TRIPOLAR_METAMASK');
-    this.TRIBOND_METAMASK = new ERC20(this.contracts['triBondmetamask'].address, newProvider, 'TRIBOND_METAMASK');
-    this.ETHERNAL_METAMASK = new ERC20(this.contracts['ethernalmetamask'].address, newProvider, 'ETHERNAL_METAMASK');
-    this.EBOND_METAMASK = new ERC20(this.contracts['eBondmetamask'].address, newProvider, 'EBOND_METAMASK');
 
     const tokens = [
       this.POLAR_METAMASK,
