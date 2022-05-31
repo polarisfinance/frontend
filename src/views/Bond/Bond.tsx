@@ -64,7 +64,7 @@ const Pit: React.FC = () => {
             <StyledCardWrapper>
               <ExchangeCard
                 action="Purchase"
-                fromToken={polarisFinance[sunrise.earnTokenName]}
+                fromToken={polarisFinance[sunrise.earnTokenName + '_METAMASK']}
                 fromTokenName={sunrise.earnTokenName}
                 toToken={polarisFinance[sunrise.bond]}
                 toTokenName={sunrise.bond}
@@ -103,7 +103,7 @@ const Pit: React.FC = () => {
             <StyledCardWrapper>
               <ExchangeCard
                 action="Redeem"
-                fromToken={polarisFinance[sunrise.bond]}
+                fromToken={polarisFinance[sunrise.bond + '_METAMASK']}
                 fromTokenName={sunrise.bond}
                 toToken={polarisFinance[sunrise.earnTokenName]}
                 toTokenName={sunrise.earnTokenName}
