@@ -29,7 +29,8 @@ export default function TransactionPopup({
         <StyledPopupDesc>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</StyledPopupDesc>
         {chainId && (
           <StyledLink target="_blank" href={`${config.ftmscanUrl}/tx/${hash}`}>
-            &nbsp;View on Aurora Explorer
+            <br />
+            View on Aurora Scan
           </StyledLink>
         )}
       </div>

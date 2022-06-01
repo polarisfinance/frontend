@@ -31,6 +31,33 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { usePopupState, bindHover, bindMenu } from 'material-ui-popup-state/hooks';
+import HoverMenu from 'material-ui-popup-state/HoverMenu';
+
+const StyledButton = withStyles({
+  root: {
+    textTransform: 'uppercase',
+    color: '#FFFFFF',
+    fontFamily: '"Rajdhani",regular',
+    fontSize: '25px',
+    display: 'inline-block',
+    padding: 0,
+    minHeight: 0,
+    minWidth: 0,
+    height: 'auto',
+    widht: 'auto',
+    marginRight: 16,
+    marginLeft: 16,
+    '&:hover': {
+      textDecoration: 'none',
+      color: '#70D44B',
+      backgroundColor: 'rgb(0,0,0,0)',
+    },
+  },
+})(Button);
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -103,6 +130,10 @@ const Nav = () => {
     setOpen(false);
   };
 
+  const popupState = usePopupState({
+    variant: 'popover',
+    popupId: 'ac-menu',
+  });
   return (
     <AppBar position="static" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -116,45 +147,26 @@ const Nav = () => {
               </Link>
             </Typography>
             <Box className={classes.box} m="auto">
-              <Link color="textPrimary" to="/" className={classes.link}>
-                Home
-              </Link>
-              <Link color="textPrimary" to="/dawn" className={classes.link}>
-                Dawn
-              </Link>
-              <Link color="textPrimary" to="/sunrise" className={classes.link}>
-                Sunrise
-              </Link>
-              <Link color="textPrimary" to="/bond" className={classes.link}>
-                Bond
-              </Link>
-              <Link color="textPrimary" to="/strategy" className={classes.link}>
-                Strategy
-              </Link>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://docs.polarisfinance.io"
-                className={classes.link}
-              >
-                Docs
-              </a>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.vaporwave.farm/#/aurora"
-                className={classes.link}
-              >
+              <StyledButton href="/">Home</StyledButton>
+              <StyledButton href="/dawn">Dawn</StyledButton>
+              <StyledButton href="/sunrise">Sunrise</StyledButton>
+              <StyledButton href="/bond">Bond</StyledButton>
+              <StyledButton href="/strategy">Strategy</StyledButton>
+              <StyledButton onClick={() => window.open('https://docs.polarisfinance.io')}>Docs</StyledButton>
+              <StyledButton {...bindHover(popupState)} variant="text">
                 AC
-              </a>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://vote.polarisfinance.io/#/"
-                className={classes.link}
+              </StyledButton>
+              <HoverMenu
+                {...bindMenu(popupState)}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                getContentAnchorEl={null}
+                disableScrollLock={true}
               >
-                GOV
-              </a>
+                <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
+                <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
+              </HoverMenu>
+              <StyledButton onClick={() => window.open('https://vote.polarisfinance.io')}>Gov</StyledButton>
             </Box>
             <AccountButton text="Connect" />
           </>
@@ -202,9 +214,19 @@ const Nav = () => {
                 <ListItem button component="a" href="https://docs.polarisfinance.io">
                   <ListItemText>Docs</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://www.vaporwave.farm/#/aurora">
+                <ListItem button {...bindHover(popupState)}>
                   <ListItemText>AC</ListItemText>
                 </ListItem>
+                <HoverMenu
+                  {...bindMenu(popupState)}
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                  transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                  getContentAnchorEl={null}
+                  disableScrollLock={true}
+                >
+                  <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
+                  <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
+                </HoverMenu>
                 <ListItem button component="a" href="https://vote.polarisfinance.io/#/">
                   <ListItemText>GOV</ListItemText>
                 </ListItem>

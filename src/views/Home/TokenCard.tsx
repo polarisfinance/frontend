@@ -183,10 +183,14 @@ const Stake = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
       </Grid>
       <Grid container justify="flex-end">
         <Grid item>
-          <span style={{ fontSize: '20px', marginRight: '20px' }}>Circulating Supply: {tokenCirculatingSupply}</span>
+          <span style={{ fontSize: '20px', marginRight: '20px', color: '#fff' }}>
+            Circulating Supply: {tokenCirculatingSupply}
+          </span>
         </Grid>
         <Grid item>
-          <span style={{ fontSize: '20px', paddingRight: '12px' }}>Total Supply: {tokenTotalSupply}</span>
+          <span style={{ fontSize: '20px', paddingRight: '12px', color: '#fff' }}>
+            Total Supply: {tokenTotalSupply}
+          </span>
         </Grid>
       </Grid>
     </>

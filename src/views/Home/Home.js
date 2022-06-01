@@ -83,8 +83,8 @@ const Home = () => {
           {/* Explanation text */}
           <Grid item xs={12} sm={6}>
             <Box color="primary" p={4}>
-              <h2 style={{ fontSize: '28px' }}>Welcome to Polaris Finance</h2>
-              <p style={{ fontSize: '20px' }}>
+              <h2 style={{ fontSize: '28px', color: '#fff' }}>Welcome to Polaris Finance</h2>
+              <p style={{ fontSize: '20px', color: '#fff' }}>
                 The very first algorithmic stablecoins ecosystem on Aurora / NEAR. We are bringing multiple pegged
                 assets 1:1 to native coins via seigniorage. Provide liquidity in{' '}
                 <StyledNormalLink href="/dawn">DAWN</StyledNormalLink> Farms to get SPOLAR - governance token that

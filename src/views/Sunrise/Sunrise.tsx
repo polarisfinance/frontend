@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize: '20px',
+    color: '#fff',
   },
 }));
 
