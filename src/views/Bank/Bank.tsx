@@ -44,7 +44,7 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank.depositTokenName.endsWith('WETH') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('WBTC') && <TaxFeeAlert />}
       {bank.depositTokenName.startsWith('POLAR-LUNAR') && (
         <Alert
           style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
