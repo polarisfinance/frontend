@@ -33,9 +33,9 @@ const configurations: { [env: string]: Configuration } = {
       WBTC: ['0xF4eB217Ba2454613b15dBdea6e5f22276410e89e', 8],
       'BTC-NEAR-LP': ['0xbc8A244e8fb683ec1Fd6f88F3cc6E565082174Eb', 18],
 
-      ORBITAL: ['0x84E0Fa7288D0F3F891DD8Fce14BD1eBf7C2f9e38', 18],
-      OBOND: ['0x731b66313221b884d05ff48f3d7C10118142029b', 18],
-      'ORBITAL-BTC-LP': ['0x583BaD6b294257AcC296650b715219631E32e75b', 18],
+      ORBITAL: ['0x0d848D88e4dCE01AD94DF3795E45d1C5ee43C3a8', 18],
+      OBOND: ['0x0Aa990A3EFb3C35f50d436C3A14a1FAE2C3B1071', 18],
+      'ORBITAL-BTC-LP': ['0x08F5a61E01592Ca61c9caD7D9125f1Aa2a6D53fC', 18],
 
       TRIPOLAR: ['0x60527a2751A827ec0Adf861EfcAcbf111587d748', 18],
       TRIBOND: ['0x8200B4F47eDb608e36561495099a8caF3F806198', 18],
@@ -612,8 +612,8 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     coming: false,
     retired: false,
     bond: 'OBOND',
-    tokenAddress: '0x84E0Fa7288D0F3F891DD8Fce14BD1eBf7C2f9e38',
-    lpAddress: '0x583BaD6b294257AcC296650b715219631E32e75b',
+    tokenAddress: '0x0d848D88e4dCE01AD94DF3795E45d1C5ee43C3a8',
+    lpAddress: '0x08F5a61E01592Ca61c9caD7D9125f1Aa2a6D53fC',
     treasury: 'orbitalTreasury',
     lpToken: 'WBTC',
     getTokenPreviousEpochTWAP: 'previousEpochOrbitalPrice',

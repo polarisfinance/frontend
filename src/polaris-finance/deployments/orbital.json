@@ -1,6 +1,6 @@
 {
   "OrbitalOracle": {
-    "address": "0x16Abef5Ef468aA713176D9a878566331141a25F8",
+    "address": "0x24670B82F3864aEF245B34213f4F858D7599cBe1",
     "abi": [
       {
         "inputs": [
@@ -406,7 +406,7 @@
     ]
   },
   "orbital": {
-    "address": "0x84E0Fa7288D0F3F891DD8Fce14BD1eBf7C2f9e38",
+    "address": "0x0d848D88e4dCE01AD94DF3795E45d1C5ee43C3a8",
     "abi": [
       {
         "inputs": [],
@@ -945,7 +945,7 @@
     ]
   },
   "oBond": {
-    "address": "0x731b66313221b884d05ff48f3d7C10118142029b",
+    "address": "0x0Aa990A3EFb3C35f50d436C3A14a1FAE2C3B1071",
     "abi": [
       {
         "inputs": [],
@@ -1391,7 +1391,7 @@
     ]
   },
   "orbitalTreasury": {
-    "address": "0x9A31fA73a0BDd5b0D0015c7221dC9043b821EA43",
+    "address": "0x878FF14724433343dc08aB702f447A984949A675",
     "abi": [
       {
         "inputs": [],
@@ -2621,7 +2621,7 @@
     ]
   },
   "orbitalSunrise": {
-    "address": "0xb894212082ca81ff7de7707D0f2FFbbcbC09577A",
+    "address": "0xa6B73Bc2C5DB9a840A58BA75b5d8e8D484000CeE",
     "abi": [
       {
         "anonymous": false,
@@ -3173,7 +3173,7 @@
     ]
   },
   "OrbitalBtcGenesisRewardPool": {
-    "address": "0xD4B2f0f459CAeaCcdFEbd6A8e7383dDb85eE3d9A",
+    "address": "0x16d68D392c902B10F720612D8E0580E9c76a5F75",
     "abi": [
       {
         "inputs": [
@@ -3683,7 +3683,7 @@
     ]
   },
   "OrbitalSpolarGenesisRewardPool": {
-    "address": "0xD4B2f0f459CAeaCcdFEbd6A8e7383dDb85eE3d9A",
+    "address": "0x16d68D392c902B10F720612D8E0580E9c76a5F75",
     "abi": [
       {
         "inputs": [
@@ -4193,7 +4193,7 @@
     ]
   },
   "OrbitalSpolarNearLPGenesisRewardPool": {
-    "address": "0xD4B2f0f459CAeaCcdFEbd6A8e7383dDb85eE3d9A",
+    "address": "0x16d68D392c902B10F720612D8E0580E9c76a5F75",
     "abi": [
       {
         "inputs": [
@@ -4703,7 +4703,7 @@
     ]
   },
   "OrbitalPolarNearLPGenesisRewardPool": {
-    "address": "0xD4B2f0f459CAeaCcdFEbd6A8e7383dDb85eE3d9A",
+    "address": "0x16d68D392c902B10F720612D8E0580E9c76a5F75",
     "abi": [
       {
         "inputs": [
@@ -5213,7 +5213,7 @@
     ]
   },
   "OrbitalPolarStnearLPGenesisRewardPool": {
-    "address": "0xD4B2f0f459CAeaCcdFEbd6A8e7383dDb85eE3d9A",
+    "address": "0x16d68D392c902B10F720612D8E0580E9c76a5F75",
     "abi": [
       {
         "inputs": [
@@ -5723,7 +5723,7 @@
     ]
   },
   "OrbitalTripolarXtriLPGenesisRewardPool": {
-    "address": "0xD4B2f0f459CAeaCcdFEbd6A8e7383dDb85eE3d9A",
+    "address": "0x16d68D392c902B10F720612D8E0580E9c76a5F75",
     "abi": [
       {
         "inputs": [
@@ -6233,7 +6233,7 @@
     ]
   },
   "OrbitalEthernalEthLPGenesisRewardPool": {
-    "address": "0xD4B2f0f459CAeaCcdFEbd6A8e7383dDb85eE3d9A",
+    "address": "0x16d68D392c902B10F720612D8E0580E9c76a5F75",
     "abi": [
       {
         "inputs": [
