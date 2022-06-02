@@ -370,23 +370,24 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 3,
     closedForStaking: false,
   },
-  OrbitalPolarStnearLPGenesisRewardPool: {
-    name: 'Earn ORBITAL by POLAR/STNEAR LP',
+
+  OrbitalEthernalEthLPGenesisRewardPool: {
+    name: 'Earn ORBITAL by ETHERNAL/ETH LP',
     poolId: 4,
     sectionInUI: 7,
-    contract: 'OrbitalPolarStnearLPGenesisRewardPool',
-    depositTokenName: 'POLAR-STNEAR-LP',
+    contract: 'OrbitalEthernalEthLPGenesisRewardPool',
+    depositTokenName: 'ETHERNAL-ETH-LP',
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 4,
     closedForStaking: false,
   },
-  OrbitalEthernalEthLPGenesisRewardPool: {
-    name: 'Earn ORBITAL by ETHERNAL/ETH LP',
+  OrbitalPolarStnearLPGenesisRewardPool: {
+    name: 'Earn ORBITAL by POLAR/STNEAR LP',
     poolId: 5,
     sectionInUI: 7,
-    contract: 'OrbitalEthernalEthLPGenesisRewardPool',
-    depositTokenName: 'ETHERNAL-ETH-LP',
+    contract: 'OrbitalPolarStnearLPGenesisRewardPool',
+    depositTokenName: 'POLAR-STNEAR-LP',
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 5,
