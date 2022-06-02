@@ -148,7 +148,7 @@ const Nav = () => {
             </Typography>
             <Box className={classes.box} m="auto">
               <StyledButton href="/">Home</StyledButton>
-              <StyledButton href="/dawn">Dawn</StyledButton>
+              <StyledButton href="/dawn_splitter">Dawn</StyledButton>
               <StyledButton href="/sunrise">Sunrise</StyledButton>
               <StyledButton href="/bond">Bond</StyledButton>
               <StyledButton href="/strategy">Strategy</StyledButton>
@@ -204,7 +204,7 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Dawn" to="/dawn" />
+                <ListItemLink primary="Dawn" to="/dawn_splitter" />
                 <ListItemLink primary="Sunrise" to="/sunrise" />
                 <ListItemLink primary="Bond" to="/bond" />
                 <ListItemLink primary="Strategy" to="/strategy" />

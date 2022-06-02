@@ -27,8 +27,8 @@ const BondSplitter = lazy(() => import('./views/BondSplitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
 
-/*const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
-const DawnSplitter = lazy(() => import('./views/DawnSplitter'));*/
+const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
+const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -73,14 +73,14 @@ const App: React.FC = () => {
             <Route path="/legacy_dawn">
               <LegacyDawn />
             </Route>
-            {/*
+
             <Route path="/dawn_splitter">
               <DawnSplitter />
             </Route>
 
             <Route path="/genesis_dawn">
               <GenesisDawn />
-  </Route>*/}
+            </Route>
             <Route path="*">
               <NoMatch />
             </Route>

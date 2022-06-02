@@ -29,8 +29,9 @@ import ethernalLogo from '../../assets/img/ethernal-token.svg';
 import ebondLogo from '../../assets/img/ebond-token.svg';
 import etherumLogo from '../../assets/img/ethereum-token.svg';
 import ethernalEthLpLogo from '../../assets/img/ethernal-eth.svg';
-import btcPegLogo from '../../assets/img/btc-token.svg';
-import btcBondLogo from '../../assets/img/btc-bond-token.svg';
+import btcPegLogo from '../../assets/img/orbital-token.svg';
+import btcBondLogo from '../../assets/img/obond-token.svg';
+import wbtcLogo from '../../assets/img/wbtc-logo.svg';
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
@@ -63,7 +64,8 @@ const logosBySymbol: { [title: string]: string } = {
   WETH: etherumLogo,
   'ETHERNAL-ETH-LP': ethernalEthLpLogo,
   ORBITAL: btcPegLogo,
-  BTCBOND: btcBondLogo,
+  OBOND: btcBondLogo,
+  WBTC: wbtcLogo,
 };
 
 type LogoProps = {

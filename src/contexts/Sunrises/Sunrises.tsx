@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Context from './context';
 import usePolarisFinance from '../../hooks/usePolarisFinance';
 import { Sunrise } from '../../polaris-finance';
-import config, { sunriseDefinitions } from '../../config';
+import { sunriseDefinitions } from '../../config';
 
 const Banks: React.FC = ({ children }) => {
   const [sunrises, setSunrises] = useState<Sunrise[]>([]);
@@ -15,12 +15,12 @@ const Banks: React.FC = ({ children }) => {
     for (const sunriseInfo of Object.values(sunriseDefinitions)) {
       sunrises.push({
         ...sunriseInfo,
-        address: config.deployments[sunriseInfo.contract].address,
+        address: polarisFinance.contracts[sunriseInfo.contract].address,
       });
     }
     sunrises.sort((a, b) => (a.sort > b.sort ? 1 : -1));
     setSunrises(sunrises);
-  }, [setSunrises]);
+  }, [setSunrises, polarisFinance]);
 
   useEffect(() => {
     if (polarisFinance) {

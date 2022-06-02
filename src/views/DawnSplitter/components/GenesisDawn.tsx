@@ -18,11 +18,11 @@ const Stake: React.FC = () => {
         <CardContent>
           <StyledCardContentInner>
             <CardIcon>
-              <TokenSymbol symbol="ETHERNAL" />
+              <TokenSymbol symbol="ORBITAL" />
             </CardIcon>
             <StyledCardHeader>
-              <Value value={'ETHERNAL GENESIS'} />
-              <Label text="Stake your assets to earn $ETHERNAL" />
+              <Value value={'ORBITAL GENESIS'} />
+              <Label text="Stake your assets to earn $ORBITAL" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button

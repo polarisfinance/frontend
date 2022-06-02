@@ -13,6 +13,7 @@ import config, { bankDefinitions, sunriseDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
 import { FTM_TICKER, SPOOKY_ROUTER_ADDR, POLAR_TICKER } from '../utils/constants';
+import { Deployments } from './deployments/index';
 /**
  * An API module of Polaris Finance contracts.
  * All contract-interacting domain logic should be defined in here.
@@ -22,6 +23,7 @@ function numberWithSpaces(x: Number) {
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   return parts.join('.');
 }
+
 export class PolarisFinance {
   myAccount: string;
   provider: ethers.providers.Web3Provider;
@@ -30,6 +32,8 @@ export class PolarisFinance {
   contracts: { [name: string]: Contract };
   externalTokens: { [name: string]: ERC20 };
   externalTokensMetamask: { [name: string]: ERC20 };
+
+  contract: Deployments;
 
   POLARWFTM_LP: Contract;
   POLAR_METAMASK: ERC20;
@@ -55,15 +59,43 @@ export class PolarisFinance {
   EBOND: ERC20;
   EBOND_METAMASK: ERC20;
 
+  ORBITAL: ERC20;
+  ORBITAL_METAMASK: ERC20;
+  OBOND: ERC20;
+  OBOND_METAMASK: ERC20;
+
   constructor(cfg: Configuration) {
-    const { deployments, externalTokens } = cfg;
+    const { externalTokens } = cfg;
     const provider = getDefaultProvider();
 
     // loads contracts from deployments
+    const context = require.context('./deployments', true, /.json$/);
+    this.contracts = {};
+    context.keys().forEach((key: any) => {
+      const fileName = key.replace('./', '');
+      const contract: Deployments = require(`./deployments/${fileName}`);
+      // old deployment just in case
+      if (fileName === 'deployments.mainnet.json') {
+        return;
+      }
+      for (const [name, deployment] of Object.entries(contract)) {
+        this.contracts[name] = new Contract(deployment.address, deployment.abi, provider);
+      }
+    });
+    /* //old type of contracts
     this.contracts = {};
     for (const [name, deployment] of Object.entries(deployments)) {
       this.contracts[name] = new Contract(deployment.address, deployment.abi, provider);
+    }*/
+    //test
+    /*var result = {};
+    var keys = Object.keys(this.all);
+    for (var key in this.contracts) {
+      if (!keys.includes(key)) {
+        result[key] = this.contracts[key];
+      }
     }
+    console.log(result);*/
     this.externalTokens = {};
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
@@ -72,19 +104,22 @@ export class PolarisFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokensMetamask[symbol] = new ERC20(address, provider, symbol, decimal);
     }
-    this.POLAR = new ERC20(deployments.polar.address, provider, 'POLAR');
-    this.SPOLAR = new ERC20(deployments.sPolar.address, provider, 'SPOLAR');
-    this.PBOND = new ERC20(deployments.pBond.address, provider, 'PBOND');
+    this.POLAR = new ERC20(this.contracts.polar.address, provider, 'POLAR');
+    this.SPOLAR = new ERC20(this.contracts.sPolar.address, provider, 'SPOLAR');
+    this.PBOND = new ERC20(this.contracts.pBond.address, provider, 'PBOND');
     this.FTM = this.externalTokens['NEAR'];
 
-    this.LUNAR = new ERC20(deployments.lunar.address, provider, 'LUNAR');
-    this.LBOND = new ERC20(deployments.lBond.address, provider, 'LBOND');
+    this.LUNAR = new ERC20(this.contracts.lunar.address, provider, 'LUNAR');
+    this.LBOND = new ERC20(this.contracts.lBond.address, provider, 'LBOND');
 
-    this.TRIPOLAR = new ERC20(deployments.tripolar.address, provider, 'TRIPOLAR');
-    this.TRIBOND = new ERC20(deployments.triBond.address, provider, 'TRIBOND');
+    this.TRIPOLAR = new ERC20(this.contracts.tripolar.address, provider, 'TRIPOLAR');
+    this.TRIBOND = new ERC20(this.contracts.triBond.address, provider, 'TRIBOND');
 
-    this.ETHERNAL = new ERC20(deployments.ethernal.address, provider, 'ETHERNAL');
-    this.EBOND = new ERC20(deployments.eBond.address, provider, 'EBOND');
+    this.ETHERNAL = new ERC20(this.contracts.ethernal.address, provider, 'ETHERNAL');
+    this.EBOND = new ERC20(this.contracts.eBond.address, provider, 'EBOND');
+
+    this.ORBITAL = new ERC20(this.contracts.orbital.address, provider, 'ORBITAL');
+    this.OBOND = new ERC20(this.contracts.oBond.address, provider, 'OBOND');
 
     // Uniswap V2 Pair
     this.POLARWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
@@ -98,6 +133,8 @@ export class PolarisFinance {
     this.TRIBOND_METAMASK = this.TRIBOND;
     this.ETHERNAL_METAMASK = this.ETHERNAL;
     this.EBOND_METAMASK = this.EBOND;
+    this.ORBITAL_METAMASK = this.ORBITAL;
+    this.OBOND_METAMASK = this.OBOND;
 
     this.config = cfg;
     this.provider = provider;
@@ -125,6 +162,8 @@ export class PolarisFinance {
       this.TRIBOND_METAMASK,
       this.ETHERNAL_METAMASK,
       this.EBOND_METAMASK,
+      this.ORBITAL_METAMASK,
+      this.OBOND_METAMASK,
       ...Object.values(this.externalTokensMetamask),
     ];
 
@@ -172,6 +211,12 @@ export class PolarisFinance {
       } else if (assetName === 'EBOND') {
         asset = this.EBOND;
         assetUrl = 'https://polarisfinance.io/logos/ebond-token.svg';
+      } else if (assetName === 'ORBITAL') {
+        asset = this.ETHERNAL;
+        assetUrl = 'https://polarisfinance.io/logos/orbital-token.svg';
+      } else if (assetName === 'OBOND') {
+        asset = this.EBOND;
+        assetUrl = 'https://polarisfinance.io/logos/obond-token.svg';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
@@ -294,6 +339,33 @@ export class PolarisFinance {
     }
   }
 
+  async getTokenPriceOrbital(tokenContract: ERC20): Promise<string> {
+    const { chainId } = this.config;
+    const { WBTC } = this.config.externalTokens;
+
+    const wftm = new Token(chainId, WBTC[0], WBTC[1]);
+    const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+
+    try {
+      if (tokenContract.symbol === 'OBOND') {
+        const { orbitalTreasury } = this.contracts;
+        const [tombStat, bondTombRatioBN] = await Promise.all([
+          this.getStat('ORBITAL'),
+          orbitalTreasury.getBondPremiumRate(),
+        ]);
+        const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
+        const priceOfTBondInDollars = ((Number(tombStat.priceInDollars) * modifier) / 10).toFixed(2);
+        return priceOfTBondInDollars;
+      } else {
+        const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
+        const priceInBUSD = new Route([wftmToToken], token);
+        return priceInBUSD.midPrice.toFixed(4);
+      }
+    } catch (err) {
+      console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
+    }
+  }
+
   async getWFTMPriceFromPancakeswap(): Promise<string> {
     const { NEAR, USDC } = this.externalTokens;
     try {
@@ -378,7 +450,29 @@ export class PolarisFinance {
       const luna_price = near_amount / luna_amount;
       return (near_price * luna_price).toString();
     } catch (err) {
-      console.error(`Failed to fetch token price of LUNA: ${err}`);
+      console.error(`Failed to fetch token price of ETH: ${err}`);
+    }
+  }
+
+  async getBtcPrice(): Promise<string> {
+    const { WBTC, NEAR, USDC } = this.externalTokens;
+    try {
+      const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
+      let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
+      let near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      let usdc_amount_BN = await USDC.balanceOf(near_usdc_lp_pair.address);
+      let usdc_amount = Number(getFullDisplayBalance(usdc_amount_BN, USDC.decimal));
+      const near_price = usdc_amount / near_amount;
+
+      const luna_near_lp_pair = this.externalTokens['BTC-NEAR-LP'];
+      var luna_amount_BN = await WBTC.balanceOf(luna_near_lp_pair.address);
+      var luna_amount = Number(getFullDisplayBalance(luna_amount_BN, WBTC.decimal));
+      near_amount_BN = await NEAR.balanceOf(luna_near_lp_pair.address);
+      near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      const luna_price = near_amount / luna_amount;
+      return (near_price * luna_price).toString();
+    } catch (err) {
+      console.error(`Failed to fetch token price of BTC: ${err}`);
     }
   }
 
@@ -401,6 +495,9 @@ export class PolarisFinance {
       }
       if (earnTokenName === 'ETHERNAL') {
         return await pool.pendingEthernal(poolId, account);
+      }
+      if (earnTokenName === 'ORBITAL') {
+        return await pool.pendingOrbital(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
       }
@@ -439,6 +536,8 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPricePolarLunar(token, this.POLAR, this.LUNAR);
       } else if (tokenName === 'ETHERNAL-ETH-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.ETHERNAL);
+      } else if (tokenName === 'ORBITAL-BTC-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.ORBITAL);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getStat('PBOND');
         tokenPrice = getBondPrice.priceInDollars;
@@ -524,6 +623,24 @@ export class PolarisFinance {
       } else if (depositTokenName === 'POLAR-STNEAR-LP') {
         return rewardPerSecond.mul(5000).div(100000).div(18);
       } else if (depositTokenName === 'TRIPOLAR-xTRI-LP') {
+        return rewardPerSecond.mul(5000).div(100000).div(18);
+      }
+    }
+    if (earnTokenName === 'ORBITAL') {
+      const rewardPerSecond = await poolContract.orbitalPerSecond();
+      if (depositTokenName === 'WBTC') {
+        return rewardPerSecond.mul(50000).div(100000);
+      } else if (depositTokenName === 'SPOLAR') {
+        return rewardPerSecond.mul(20000).div(100000).div(18);
+      } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
+        return rewardPerSecond.mul(10000).div(100000).div(18);
+      } else if (depositTokenName === 'POLAR-NEAR-LP') {
+        return rewardPerSecond.mul(10000).div(100000).div(18);
+      } else if (depositTokenName === 'POLAR-STNEAR-LP') {
+        return rewardPerSecond.mul(5000).div(100000).div(18);
+      } else if (depositTokenName === 'TRIPOLAR-xTRI-LP') {
+        return rewardPerSecond.mul(5000).div(100000).div(18);
+      } else if (depositTokenName.startsWith('ETHERNAL')) {
         return rewardPerSecond.mul(5000).div(100000).div(18);
       }
     }
@@ -674,6 +791,32 @@ export class PolarisFinance {
         this.EBOND.totalSupply(),
         this.getStat('ETHERNAL'),
         ethernalTreasury.getBondPremiumRate(),
+      ]);
+      const modifier = ratio / 1e18 > 1 ? ratio / 1e18 : 1;
+      priceInToken = (Number(stat.tokenInFtm) * modifier).toFixed(2);
+      priceInDollars = (Number(stat.priceInDollars) * modifier).toFixed(2);
+      circulatingSupply = supply;
+    }
+
+    if (token === 'ORBITAL') {
+      const { OrbitalBtcGenesisRewardPool } = this.contracts;
+      [supply, rewardPoolSupply, priceInToken, priceOfOneToken] = await Promise.all([
+        this.ORBITAL.totalSupply(),
+        this.ORBITAL.balanceOf(OrbitalBtcGenesisRewardPool.address),
+        this.getTokenPriceOrbital(this.ORBITAL),
+        this.getBtcPrice(),
+      ]);
+      circulatingSupply = supply.sub(rewardPoolSupply);
+      priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(2);
+    }
+
+    if (token === 'OBOND') {
+      const { orbitalTreasury } = this.contracts;
+      let stat: TokenStat, ratio: number;
+      [supply, stat, ratio] = await Promise.all([
+        this.OBOND.totalSupply(),
+        this.getStat('ORBITAL'),
+        orbitalTreasury.getBondPremiumRate(),
       ]);
       const modifier = ratio / 1e18 > 1 ? ratio / 1e18 : 1;
       priceInToken = (Number(stat.tokenInFtm) * modifier).toFixed(2);
