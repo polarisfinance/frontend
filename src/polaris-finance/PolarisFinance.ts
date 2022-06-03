@@ -212,10 +212,10 @@ export class PolarisFinance {
         asset = this.EBOND;
         assetUrl = 'https://polarisfinance.io/logos/ebond-token.svg';
       } else if (assetName === 'ORBITAL') {
-        asset = this.ETHERNAL;
+        asset = this.ORBITAL;
         assetUrl = 'https://polarisfinance.io/logos/orbital-token.svg';
       } else if (assetName === 'OBOND') {
-        asset = this.EBOND;
+        asset = this.OBOND;
         assetUrl = 'https://polarisfinance.io/logos/obond-token.svg';
       }
       await ethereum.request({
