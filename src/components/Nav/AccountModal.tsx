@@ -25,7 +25,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss, sunrises }) => {
         Disconnect
       </Button>
 
-      <Grid container justify="center">
+      <Grid style={{ maxHeight: '80vh', overflow: 'auto' }} container justify="center">
         <AccountModalCard token="SPOLAR" />
         {activeSunrises.map((sunrise) => (
           <React.Fragment key={sunrise.earnTokenName}>
