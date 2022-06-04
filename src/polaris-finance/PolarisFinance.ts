@@ -629,19 +629,19 @@ export class PolarisFinance {
     if (earnTokenName === 'ORBITAL') {
       const rewardPerSecond = await poolContract.orbitalPerSecond();
       if (depositTokenName === 'WBTC') {
-        return rewardPerSecond.mul(50000).div(100000);
+        return rewardPerSecond.mul(5000).div(10000);
       } else if (depositTokenName === 'SPOLAR') {
-        return rewardPerSecond.mul(20000).div(100000).div(18);
+        return rewardPerSecond.mul(2500).div(10000).div(18);
       } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
-        return rewardPerSecond.mul(10000).div(100000).div(18);
+        return rewardPerSecond.mul(920).div(10000).div(18);
       } else if (depositTokenName === 'POLAR-NEAR-LP') {
-        return rewardPerSecond.mul(10000).div(100000).div(18);
+        return rewardPerSecond.mul(740).div(10000).div(18);
       } else if (depositTokenName === 'POLAR-STNEAR-LP') {
-        return rewardPerSecond.mul(5000).div(100000).div(18);
+        return rewardPerSecond.mul(120).div(10000).div(18);
       } else if (depositTokenName === 'TRIPOLAR-xTRI-LP') {
-        return rewardPerSecond.mul(5000).div(100000).div(18);
+        return rewardPerSecond.mul(24).div(10000).div(18);
       } else if (depositTokenName.startsWith('ETHERNAL')) {
-        return rewardPerSecond.mul(5000).div(100000).div(18);
+        return rewardPerSecond.mul(696).div(10000).div(18);
       }
     }
     const [rewardPerSecond, SpolarNear, PolarNear, LunarAtluna, PolarStNear, Tripolar, PolarLunar, EthernalWeth] =
