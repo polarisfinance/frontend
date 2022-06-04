@@ -9,6 +9,9 @@ export const getDisplayBalance = (
   if (decimals === 0) {
     fractionDigits = 0;
   }
+  if (fractionDigits > decimals) {
+    fractionDigits = decimals;
+  }
   const number = getBalance(balance, decimals - fractionDigits);
   const ret = (number / 10 ** fractionDigits).toFixed(fractionDigits);
   if (ret.length > 12 && isTruncated) {

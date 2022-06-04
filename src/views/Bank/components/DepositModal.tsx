@@ -21,7 +21,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, decimals, onConfirm, o
   const [val, setVal] = useState('');
 
   const fullBalance = useMemo(() => {
-    return getDisplayBalance(max, decimals, 8, false);
+    return getDisplayBalance(max, decimals, 10, false);
   }, [max, decimals]);
 
   const handleChange = useCallback(
