@@ -162,9 +162,14 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   }
 
   return (
-    <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
-      {`Provide liquidity for ${pairName} now on Trisolaris`}
-    </StyledLink>
+    <>
+      {bank.depositTokenName.startsWith('ORBITAL') && (
+        <Typography style={{ color: 'white' }}> Note: The LPs are multiplied by 10000. </Typography>
+      )}
+      <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
+        {`Provide liquidity for ${pairName} now on Trisolaris`}
+      </StyledLink>
+    </>
   );
 };
 
