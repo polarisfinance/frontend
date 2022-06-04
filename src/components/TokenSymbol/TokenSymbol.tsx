@@ -32,6 +32,8 @@ import ethernalEthLpLogo from '../../assets/img/ethernal-eth.svg';
 import btcPegLogo from '../../assets/img/orbital-token.svg';
 import btcBondLogo from '../../assets/img/obond-token.svg';
 import wbtcLogo from '../../assets/img/wbtc-logo.svg';
+import orbitalBtc from '../../assets/img/orbital-btc.svg';
+
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
@@ -66,7 +68,7 @@ const logosBySymbol: { [title: string]: string } = {
   ORBITAL: btcPegLogo,
   OBOND: btcBondLogo,
   WBTC: wbtcLogo,
-  'ORBITAL-BTC-LP': wbtcLogo,
+  'ORBITAL-BTC-LP': orbitalBtc,
 };
 
 type LogoProps = {

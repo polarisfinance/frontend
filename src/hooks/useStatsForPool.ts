@@ -17,7 +17,7 @@ const useStatsForPool = (bank: Bank) => {
     fetchAPRsForPool().catch((err) => console.error(`Failed to fetch ${bank.earnTokenName} price: ${err.stack}`));
     const refreshInterval = setInterval(fetchAPRsForPool, config.refreshInterval);
     return () => clearInterval(refreshInterval);
-  }, [setPoolAPRs, polarisFinance, fetchAPRsForPool]);
+  }, [setPoolAPRs, polarisFinance, fetchAPRsForPool, bank]);
 
   return poolAPRs;
 };
