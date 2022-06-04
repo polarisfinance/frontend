@@ -41,7 +41,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     [stakedTokenPriceInDollars],
   );
   const earnedInDollars = (
-    Number(tokenPriceInDollars) * Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, 18))
+    Number(tokenPriceInDollars) * Number(getDisplayBalance(stakedBalance, bank.depositToken.decimal, 8))
   ).toFixed(2);
   const { onStake } = useStake(bank);
   const { onZap } = useZap(bank);
@@ -94,7 +94,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
               <TokenSymbol symbol={bank.depositToken.symbol} />
             </CardIcon>
             {bank.depositTokenName.startsWith('ORBITAL') ? (
-              <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal, 10)} />
+              <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal, 8)} />
             ) : (
               <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />
             )}

@@ -14,7 +14,7 @@ const useStatsForPool = (bank: Bank) => {
   }, [polarisFinance, bank]);
 
   useEffect(() => {
-    fetchAPRsForPool().catch((err) => console.error(`Failed to fetch PBOND price: ${err.stack}`));
+    fetchAPRsForPool().catch((err) => console.error(`Failed to fetch ${bank.earnTokenName} price: ${err.stack}`));
     const refreshInterval = setInterval(fetchAPRsForPool, config.refreshInterval);
     return () => clearInterval(refreshInterval);
   }, [setPoolAPRs, polarisFinance, fetchAPRsForPool]);
