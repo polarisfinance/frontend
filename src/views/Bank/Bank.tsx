@@ -136,6 +136,7 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const lunarAddr = polarisFinance.LUNAR.address;
   const tripolarAddr = polarisFinance.TRIPOLAR.address;
   const ethernalAddr = polarisFinance.ETHERNAL.address;
+  const orbitalAddr = polarisFinance.ORBITAL.address;
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName === 'POLAR-NEAR-LP') {
@@ -156,6 +157,9 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   } else if (bank.depositTokenName === 'ETHERNAL-ETH-LP') {
     pairName = 'ETHERNAL-ETH-LP';
     uniswapUrl = 'https://www.trisolaris.io/#/add/ETH/' + ethernalAddr;
+  } else if (bank.depositTokenName === 'ORBITAL-BTC-LP') {
+    pairName = 'ORBITAL-BTC-LP';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0xF4eB217Ba2454613b15dBdea6e5f22276410e89e/' + orbitalAddr;
   } else {
     pairName = 'TRIPOLAR-xTRI pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x802119e4e253D5C19aA06A5d567C5a41596D6803/' + tripolarAddr;
@@ -163,9 +167,9 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
 
   return (
     <>
-      {bank.depositTokenName.startsWith('ORBITAL') && (
+      {/*bank.depositTokenName.startsWith('ORBITAL') && (
         <Typography style={{ color: 'white' }}> Note: The LPs are multiplied by 10000. </Typography>
-      )}
+      )*/}
       <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
         {`Provide liquidity for ${pairName} now on Trisolaris`}
       </StyledLink>

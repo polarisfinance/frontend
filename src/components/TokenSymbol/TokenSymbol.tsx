@@ -66,6 +66,7 @@ const logosBySymbol: { [title: string]: string } = {
   ORBITAL: btcPegLogo,
   OBOND: btcBondLogo,
   WBTC: wbtcLogo,
+  'ORBITAL-BTC-LP': wbtcLogo,
 };
 
 type LogoProps = {

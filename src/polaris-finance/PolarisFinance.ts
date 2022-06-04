@@ -644,17 +644,27 @@ export class PolarisFinance {
         return rewardPerSecond.mul(6960).div(100000);
       }
     }
-    const [rewardPerSecond, SpolarNear, PolarNear, LunarAtluna, PolarStNear, Tripolar, PolarLunar, EthernalWeth] =
-      await Promise.all([
-        poolContract.spolarPerSecond(),
-        poolContract.poolInfo(1),
-        poolContract.poolInfo(0),
-        poolContract.poolInfo(4),
-        poolContract.poolInfo(5),
-        poolContract.poolInfo(6),
-        poolContract.poolInfo(7),
-        poolContract.poolInfo(8),
-      ]);
+    const [
+      rewardPerSecond,
+      SpolarNear,
+      PolarNear,
+      LunarAtluna,
+      PolarStNear,
+      Tripolar,
+      PolarLunar,
+      EthernalWeth,
+      OrbitalWbtc,
+    ] = await Promise.all([
+      poolContract.spolarPerSecond(),
+      poolContract.poolInfo(1),
+      poolContract.poolInfo(0),
+      poolContract.poolInfo(4),
+      poolContract.poolInfo(5),
+      poolContract.poolInfo(6),
+      poolContract.poolInfo(7),
+      poolContract.poolInfo(8),
+      poolContract.poolInfo(9),
+    ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('SPOLAR')) {
@@ -671,6 +681,8 @@ export class PolarisFinance {
       return rewardPerSecond.mul(PolarLunar.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('ETHERNAL')) {
       return rewardPerSecond.mul(EthernalWeth.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('ORBITAL')) {
+      return rewardPerSecond.mul(OrbitalWbtc.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
@@ -912,7 +924,7 @@ export class PolarisFinance {
     const poolContract = this.contracts[bank.contract];
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
     const stakeInPool = await depositToken.balanceOf(bank.address);
-    const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
+    const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal, 18));
 
     const stat = await this.getStat(bank.earnTokenName);
 

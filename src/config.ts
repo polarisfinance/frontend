@@ -502,6 +502,17 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 5,
     closedForStaking: true,
   },
+  OrbitalBtcLPSpolarRewardPool: {
+    name: 'Earn SPOLAR by ORBITAL/WBTC',
+    poolId: 9,
+    sectionInUI: 2,
+    contract: 'OrbitalBtcLPSpolarRewardPool',
+    depositTokenName: 'ORBITAL-BTC-LP',
+    earnTokenName: 'SPOLAR',
+    finished: false,
+    sort: 5,
+    closedForStaking: false,
+  },
 };
 
 export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {

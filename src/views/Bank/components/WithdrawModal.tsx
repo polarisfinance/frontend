@@ -7,7 +7,7 @@ import ModalActions from '../../../components/ModalActions';
 import ModalTitle from '../../../components/ModalTitle';
 import TokenInput from '../../../components/TokenInput';
 
-import { getFullDisplayBalance } from '../../../utils/formatBalance';
+import { getDisplayBalance } from '../../../utils/formatBalance';
 import { BigNumber } from 'ethers';
 
 interface WithdrawModalProps extends ModalProps {
@@ -21,7 +21,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
   const [val, setVal] = useState('');
 
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max, decimals, false);
+    return getDisplayBalance(max, decimals, 10, false);
   }, [max, decimals]);
 
   const handleChange = useCallback(
