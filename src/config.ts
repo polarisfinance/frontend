@@ -411,7 +411,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'TRIPOLAR-xTRI-LP',
     earnTokenName: 'SPOLAR',
     finished: false,
-    sort: 4,
+    sort: 6,
     closedForStaking: false,
   },
   LunarLunaSpolarRewardPool: {
