@@ -931,7 +931,6 @@ export class PolarisFinance {
       Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
     const dailyAPR = (totalRewardPricePerDay / totalStakingTokenInPool) * 100;
     const yearlyAPR = (totalRewardPricePerYear / totalStakingTokenInPool) * 100;
-    console.log(stat.priceInDollars);
     return {
       dailyAPR: dailyAPR.toFixed(2).toString(),
       yearlyAPR: yearlyAPR.toFixed(2).toString(),
