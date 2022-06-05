@@ -335,7 +335,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 0,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalSpolarGenesisRewardPool: {
     name: 'Earn ORBITAL by SPOLAR',
@@ -346,7 +346,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalSpolarNearLPGenesisRewardPool: {
     name: 'Earn ORBITAL by SPOLAR/NEAR LP',
@@ -357,7 +357,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalPolarNearLPGenesisRewardPool: {
     name: 'Earn ORBITAL by POLAR/NEAR LP',
@@ -368,7 +368,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalPolarStnearLPGenesisRewardPool: {
     name: 'Earn ORBITAL by POLAR/STNEAR LP',
@@ -379,7 +379,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalTripolarXtriLPGenesisRewardPool: {
     name: 'Earn ORBITAL by TRIPOLAR/xTRI LP',
@@ -390,7 +390,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 6,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalEthernalEthLPGenesisRewardPool: {
     name: 'Earn ORBITAL by ETHERNAL/ETH LP',
@@ -401,7 +401,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'ORBITAL',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarXtriSpolarRewardPool: {
     name: 'Earn SPOLAR by TRIPOLAR/xTRI LP',

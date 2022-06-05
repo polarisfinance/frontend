@@ -22,7 +22,7 @@ const Stake: React.FC = () => {
             </CardIcon>
             <StyledCardHeader>
               <Value value={'ORBITAL GENESIS'} />
-              <Label text="Stake your assets to earn $ORBITAL" />
+              <Label text="Please withdraw your assets" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button

@@ -40,8 +40,8 @@ const Cemetery = () => {
               </Typography>
               <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
                 <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
-                  {/*<b>All below pools have ended. Please unstake and collect your rewards.</b>*/}
-                  <b>4.06.2022 14:00 UTC - 5.06.2022 14:00 UTC</b>
+                  <b>All below pools have ended. Please unstake and collect your rewards.</b>
+                  {/*<b>4.06.2022 14:00 UTC - 5.06.2022 14:00 UTC</b>*/}
                 </Alert>
               </Grid>
               <Box mt={5}>
