@@ -40,7 +40,7 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
               <TokenSymbol symbol={bank.earnTokenName} />
             </CardIcon>
             {bank.earnTokenName.startsWith('ORBITAL') ? (
-              <Value value={getDisplayBalance(earnings, 18, 5)} />
+              <Value value={getDisplayBalance(earnings, 18, 6)} />
             ) : (
               <Value value={getDisplayBalance(earnings)} />
             )}
