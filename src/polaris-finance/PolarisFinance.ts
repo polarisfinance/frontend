@@ -287,9 +287,9 @@ export class PolarisFinance {
 
   async getTokenPriceTripolar(tokenContract: ERC20): Promise<string> {
     const { chainId } = this.config;
-    const { xTRI } = this.config.externalTokens;
+    const { TRI } = this.config.externalTokens;
 
-    const wftm = new Token(chainId, xTRI[0], xTRI[1]);
+    const wftm = new Token(chainId, TRI[0], TRI[1]);
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
 
     try {
@@ -404,8 +404,8 @@ export class PolarisFinance {
     }
   }
 
-  async getXtriPrice(): Promise<string> {
-    const { xTRI, STNEAR, NEAR, USDC } = this.externalTokens;
+  async getTriPrice(): Promise<string> {
+    const { TRI, STNEAR, NEAR, USDC } = this.externalTokens;
     try {
       const near_usdc_lp_pair = this.externalTokens['NEAR-USDC-LP'];
       let near_amount_BN = await NEAR.balanceOf(near_usdc_lp_pair.address);
@@ -421,13 +421,13 @@ export class PolarisFinance {
       near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
       const stnear_price = near_amount / stnear_amount;
 
-      const xtri_stnear_lp_pair = this.externalTokens['STNEAR-xTRI-LP'];
-      var xtri_amount_BN = await xTRI.balanceOf(xtri_stnear_lp_pair.address);
-      var xtri_amount = Number(getFullDisplayBalance(xtri_amount_BN, xTRI.decimal));
-      stnear_amount_BN = await STNEAR.balanceOf(xtri_stnear_lp_pair.address);
-      stnear_amount = Number(getFullDisplayBalance(stnear_amount_BN, STNEAR.decimal));
-      const xtri_price = stnear_amount / xtri_amount;
-      return (near_price * stnear_price * xtri_price).toString();
+      const tri_near_lp_pair = this.externalTokens['NEAR-TRI-LP'];
+      var tri_amount_BN = await TRI.balanceOf(tri_near_lp_pair.address);
+      var tri_amount = Number(getFullDisplayBalance(tri_amount_BN, TRI.decimal));
+      near_amount_BN = await NEAR.balanceOf(tri_near_lp_pair.address);
+      near_amount = Number(getFullDisplayBalance(near_amount_BN, NEAR.decimal));
+      const tri_price = near_amount / tri_amount;
+      return (near_price * stnear_price * tri_price).toString();
     } catch (err) {
       console.error(`Failed to fetch token price of xTRI: ${err}`);
     }
@@ -764,7 +764,7 @@ export class PolarisFinance {
         this.TRIPOLAR.totalSupply(),
         this.TRIPOLAR.balanceOf(TripolarXtriGenesisRewardPool.address),
         this.getTokenPriceTripolar(this.TRIPOLAR),
-        this.getXtriPrice(),
+        this.getTriPrice(),
       ]);
       circulatingSupply = supply.sub(rewardPoolSupply);
       priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(2);
