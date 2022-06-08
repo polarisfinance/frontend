@@ -530,7 +530,7 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.LUNAR);
       } else if (tokenName === 'POLAR-STNEAR-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.POLAR);
-      } else if (tokenName === 'TRIPOLAR-xTRI-LP') {
+      } else if (tokenName === 'TRIPOLAR-xTRI-LP' || tokenName === 'TRIPOLAR-TRI-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
       } else if (tokenName === 'POLAR-LUNAR-LP') {
         tokenPrice = await this.getLPTokenPricePolarLunar(token, this.POLAR, this.LUNAR);
@@ -654,6 +654,7 @@ export class PolarisFinance {
       PolarLunar,
       EthernalWeth,
       OrbitalWbtc,
+      TripolarTri,
     ] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
@@ -664,6 +665,7 @@ export class PolarisFinance {
       poolContract.poolInfo(7),
       poolContract.poolInfo(8),
       poolContract.poolInfo(9),
+      poolContract.poolInfo(10),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
@@ -675,7 +677,7 @@ export class PolarisFinance {
       return rewardPerSecond.mul(PolarStNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(0).div(41000);
-    } else if (depositTokenName.startsWith('TRIPOLAR')) {
+    } else if (depositTokenName.startsWith('TRIPOLAR-x')) {
       return rewardPerSecond.mul(Tripolar.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR-LUNAR')) {
       return rewardPerSecond.mul(PolarLunar.allocPoint).div(41000);
@@ -683,6 +685,8 @@ export class PolarisFinance {
       return rewardPerSecond.mul(EthernalWeth.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('ORBITAL')) {
       return rewardPerSecond.mul(OrbitalWbtc.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('TRIPOLAR-T')) {
+      return rewardPerSecond.mul(TripolarTri.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }

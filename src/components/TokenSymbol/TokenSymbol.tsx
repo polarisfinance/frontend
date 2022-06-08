@@ -33,6 +33,7 @@ import btcPegLogo from '../../assets/img/orbital-token.svg';
 import btcBondLogo from '../../assets/img/obond-token.svg';
 import wbtcLogo from '../../assets/img/wbtc-logo.svg';
 import orbitalBtc from '../../assets/img/orbital-btc.svg';
+import tripolarTri from '../../assets/img/tripolar-tri.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -69,6 +70,7 @@ const logosBySymbol: { [title: string]: string } = {
   OBOND: btcBondLogo,
   WBTC: wbtcLogo,
   'ORBITAL-BTC-LP': orbitalBtc,
+  'TRIPOLAR-TRI-LP': tripolarTri,
 };
 
 type LogoProps = {
