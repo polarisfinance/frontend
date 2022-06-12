@@ -67,7 +67,7 @@ const Footer = () => {
               target="_blank"
               className={classes.link}
             >
-              <img alt="medium" src={ObeliskImage} className={classes.img} />
+              <img alt="medium" src={ObeliskImage} className={classes.img} style={{ borderRadius: '100%' }} />
             </a>
             <a
               href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
