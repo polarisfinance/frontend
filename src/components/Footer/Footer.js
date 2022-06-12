@@ -7,6 +7,7 @@ import TelegramImage from '../../assets/img/telegram.svg';
 import DiscordImage from '../../assets/img/discord.svg';
 import MediumImage from '../../assets/img/medium.svg';
 import KycBadge from '../../assets/img/KYC-Badge.png';
+import ObeliskImage from '../../assets/img/obelisk.jpeg';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -60,6 +61,14 @@ const Footer = () => {
             </Grid>
           ) : null}
           <Grid item xs={12} sm={8} className={classes.middle}>
+            <a
+              href="https://obeliskauditing.com/audits/polaris-finance/"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
+              <img alt="medium" src={ObeliskImage} className={classes.img} />
+            </a>
             <a
               href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
               rel="noopener noreferrer"
