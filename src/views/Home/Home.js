@@ -76,7 +76,7 @@ const Home = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       {/* <LaunchCountdown deadline={new Date(1645106400*1000)} description='hello'></LaunchCountdown> */}
       <Grid container spacing={3}>
         <Grid container>
