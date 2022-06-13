@@ -20,8 +20,8 @@ import useSunrises from '../../hooks/useSunrises';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
+    // background-size: cover !important;
+    // background-position: center center !important;
   }
 `;
 
@@ -76,7 +76,7 @@ const Home = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       {/* <LaunchCountdown deadline={new Date(1645106400*1000)} description='hello'></LaunchCountdown> */}
       <Grid container spacing={3}>
         <Grid container>
