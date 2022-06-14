@@ -1,9 +1,7 @@
 import React from 'react';
 import Page from '../../components/Page';
-import HomeImage from '../../assets/img/home.png';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
-import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
@@ -16,14 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import TokenCard from './TokenCard';
 import useSunrises from '../../hooks/useSunrises';
-
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${HomeImage}) no-repeat !important;
-    // background-size: cover !important;
-    // background-position: center center !important;
-  }
-`;
 
 const useStyles = makeStyles((theme) => ({
   box: {

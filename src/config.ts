@@ -409,7 +409,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   TripolarXtriSpolarRewardPool: {
     name: 'Earn SPOLAR by TRIPOLAR/xTRI LP',
     poolId: 6,
-    sectionInUI: 2,
+    sectionInUI: 3,
     contract: 'TripolarXtriLPSpolarRewardPool',
     depositTokenName: 'TRIPOLAR-xTRI-LP',
     earnTokenName: 'SPOLAR',

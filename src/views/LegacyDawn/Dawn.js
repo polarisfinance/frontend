@@ -49,6 +49,46 @@ const Cemetery = () => {
                     <b>All below pools have ended. Please unstake and collect your rewards.</b>
                   </Alert>
                 </div>
+                <div>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    XTRI-TRIPOLAR Pool
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.depositTokenName === 'TRIPOLAR-xTRI-LP' && bank.poolId === 6)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 7).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    ORBITAL Genesis Pools
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 7)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 6).length === 0}>
                   <Typography
                     align="center"
