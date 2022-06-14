@@ -26,7 +26,13 @@ const CemeteryCard = ({ bank }) => {
     [tokenStats],
   );
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
-  const bankDepositName = bank.depositTokenName.slice(0, -3);
+  let bankDepositName;
+  if (bank.depositTokenName.endsWith('LP')) {
+    bankDepositName = bank.depositTokenName.slice(0, -3);
+  } else {
+    bankDepositName = bank.depositTokenName;
+  }
+
   return (
     <Grid item xs={12} md={12} lg={12}>
       <Card>

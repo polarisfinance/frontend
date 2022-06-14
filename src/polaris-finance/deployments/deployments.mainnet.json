@@ -9109,7 +9109,7 @@
       }
     ]
   },
-  "EthernalEthRewardPool": {
+  "EthernalEthGenesisRewardPool": {
     "address": "0xc3d490F6369e709f6FA79DA673Cc74F21764ecF7",
     "abi": [
       {
