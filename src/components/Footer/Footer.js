@@ -7,7 +7,7 @@ import TelegramImage from '../../assets/img/telegram.svg';
 import DiscordImage from '../../assets/img/discord.svg';
 import MediumImage from '../../assets/img/medium.svg';
 import KycBadge from '../../assets/img/KYC-Badge.png';
-import ObeliskImage from '../../assets/img/obelisk.jpeg';
+import ObeliskImage from '../../assets/img/obelisk_audit_logo.png';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -67,7 +67,7 @@ const Footer = () => {
               target="_blank"
               className={classes.link}
             >
-              <img alt="medium" src={ObeliskImage} className={classes.img} style={{ borderRadius: '100%' }} />
+              <img alt="medium" src={ObeliskImage} className={classes.img} style={{ paddingBottom: '5px' }} />
             </a>
             <a
               href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
