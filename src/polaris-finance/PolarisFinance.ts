@@ -547,6 +547,9 @@ export class PolarisFinance {
       } else if (tokenName === 'ORBITAL') {
         const price = await this.getStat('ORBITAL');
         tokenPrice = price.priceInDollars;
+      } else if (tokenName === 'SPOLAR') {
+        const price = await this.getStat('SPOLAR');
+        tokenPrice = price.priceInDollars;
       } else {
         [tokenPrice, priceOfOneFtmInDollars] = await Promise.all([
           this.getTokenPriceFromPancakeswap(token),
