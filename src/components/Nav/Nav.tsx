@@ -204,7 +204,7 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Dawn" to="/dawn_splitter" />
+                <ListItemLink primary="Dawn" to="/dawn" />
                 <ListItemLink primary="Sunrise" to="/sunrise" />
                 <ListItemLink primary="Bond" to="/bond" />
                 <ListItemLink primary="Strategy" to="/strategy" />

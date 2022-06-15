@@ -57,7 +57,7 @@ const Cemetery = () => {
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
-                    XTRI-TRIPOLAR Pool
+                    TRIPOLAR-xTRI Pool
                   </Typography>
                   <Grid container spacing={3}>
                     {activeBanks
