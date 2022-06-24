@@ -1,6 +1,6 @@
 {
   "UspOracle": {
-    "address": "0x9f50581CEBe1b32dbbbA39DeA1F8F504ec71235F",
+    "address": "0xC89FB9A6a1c7Ac856751ca94a7Ee7eaD60410AF6",
     "abi": [
       {
         "inputs": [
@@ -204,7 +204,7 @@
     ]
   },
   "usp": {
-    "address": "0x127C31CDbb8041f11AeF63d3602fc745fAd2E195",
+    "address": "0xa69d9Ba086D41425f35988613c156Db9a88a1A96",
     "abi": [
       { "inputs": [], "stateMutability": "nonpayable", "type": "constructor", "name": "constructor" },
       {
@@ -456,7 +456,7 @@
     ]
   },
   "uspBond": {
-    "address": "0x63f36eb62076Cf3C6FAD5d4d9b627eFefcBec5D1",
+    "address": "0xcE32b28c19C61B19823395730A0c7d91C671E54b",
     "abi": [
       { "inputs": [], "stateMutability": "nonpayable", "type": "constructor", "name": "constructor" },
       {
@@ -659,7 +659,7 @@
     ]
   },
   "uspTreasury": {
-    "address": "0xE22d95dA174dd0073C7ff8E9f6F10A5f479f4A9F",
+    "address": "0xd6163e12342F5BFf092Bd4ee8FE9B77ac7CC85b1",
     "abi": [
       { "inputs": [], "stateMutability": "nonpayable", "type": "constructor", "name": "constructor" },
       {
@@ -1282,7 +1282,7 @@
     ]
   },
   "uspSunrise": {
-    "address": "0x96BB0b11eF5b17F6593A0ECC66E82389D0562eD6",
+    "address": "0x37223e0066969027954a5499ea4445bB9F55b36F",
     "abi": [
       {
         "anonymous": false,
@@ -1772,7 +1772,7 @@
     ]
   },
   "UspUsdcGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -2011,7 +2011,7 @@
     ]
   },
   "UspUsdtGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -2250,7 +2250,7 @@
     ]
   },
   "UspUsnGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -2489,7 +2489,7 @@
     ]
   },
   "UspSpolarGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -2728,7 +2728,7 @@
     ]
   },
   "UspSpolarNearLPGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -2967,7 +2967,7 @@
     ]
   },
   "UspPolarNearLPGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -3206,7 +3206,7 @@
     ]
   },
   "UspPolarStnearLPGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -3445,7 +3445,7 @@
     ]
   },
   "UspTripolarTriLPGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -3684,7 +3684,7 @@
     ]
   },
   "UspEthernalEthLPGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
@@ -3923,7 +3923,7 @@
     ]
   },
   "UspOrbitalWbtcLPGenesisRewardPool": {
-    "address": "0xe8E08fA5Da84db08CBdd5c5f8059a1ffF20F66FD",
+    "address": "0xD097D1cf7C2A5Efa7990a21F6d95b091f7A9f769",
     "abi": [
       {
         "inputs": [
