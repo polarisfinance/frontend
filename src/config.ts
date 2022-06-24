@@ -794,7 +794,7 @@ export const sunriseDefinitions: { [contractName: string]: SunriseInfo } = {
     boosted: false,
     coming: false,
     retired: false,
-    notActive: false,
+    notActive: true,
     bond: 'USPBOND',
     tokenAddress: '0xa69d9Ba086D41425f35988613c156Db9a88a1A96',
     lpAddress: '0xa984B8062316AFE25c86576b0478E76E65FdF564',
