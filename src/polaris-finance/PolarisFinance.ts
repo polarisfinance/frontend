@@ -545,6 +545,7 @@ export class PolarisFinance {
         return await pool.pendingOrbital(poolId, account);
       }
       if (earnTokenName === 'USP') {
+        console.log(await pool.pendingUsp(poolId, account));
         return await pool.pendingUsp(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
