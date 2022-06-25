@@ -38,6 +38,7 @@ import uspLogo from '../../assets/img/usp-logo.svg';
 import uspBondLogo from '../../assets/img/uspbond-logo.svg';
 import usnLogo from '../../assets/img/usn-logo.svg';
 import usdtLogo from '../../assets/img/usdt-logo.svg';
+import uspUsdcLogo from '../../assets/img/usp-usdc.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -79,6 +80,7 @@ const logosBySymbol: { [title: string]: string } = {
   USPBOND: uspBondLogo,
   USN: usnLogo,
   USDT: usdtLogo,
+  'USP-USDC-LP': uspUsdcLogo,
 };
 
 type LogoProps = {

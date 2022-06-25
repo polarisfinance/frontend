@@ -581,6 +581,8 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.POLAR);
       } else if (tokenName === 'TRIPOLAR-xTRI-LP' || tokenName === 'TRIPOLAR-TRI-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
+      } else if (tokenName === 'USP-USDC-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.USP);
       } else if (tokenName === 'POLAR-LUNAR-LP') {
         tokenPrice = await this.getLPTokenPricePolarLunar(token, this.POLAR, this.LUNAR);
       } else if (tokenName === 'ETHERNAL-ETH-LP') {
@@ -742,6 +744,7 @@ export class PolarisFinance {
       TripolarTri,
       Ethernal,
       Orbital,
+      UspUsdc,
     ] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
@@ -756,6 +759,7 @@ export class PolarisFinance {
       poolContract.poolInfo(10),
       poolContract.poolInfo(11),
       poolContract.poolInfo(12),
+      poolContract.poolInfo(13),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
@@ -781,6 +785,8 @@ export class PolarisFinance {
       return rewardPerSecond.mul(Orbital.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('TRIPOLAR-T')) {
       return rewardPerSecond.mul(TripolarTri.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('USP-USDC')) {
+      return rewardPerSecond.mul(UspUsdc.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
