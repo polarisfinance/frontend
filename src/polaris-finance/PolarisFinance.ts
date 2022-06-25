@@ -599,6 +599,8 @@ export class PolarisFinance {
       } else if (tokenName === 'SPOLAR') {
         const price = await this.getStat('SPOLAR');
         tokenPrice = price.priceInDollars;
+      } else if (tokenName === 'USDC' || tokenName === 'USDT' || tokenName === 'USN') {
+        tokenPrice = '1';
       } else {
         [tokenPrice, priceOfOneFtmInDollars] = await Promise.all([
           this.getTokenPriceFromPancakeswap(token),
