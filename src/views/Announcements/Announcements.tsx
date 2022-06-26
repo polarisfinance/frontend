@@ -1,44 +1,16 @@
-import React from 'react';
-import { useWallet } from 'use-wallet';
+import React, { useState } from 'react';
+import Card from './Card';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
-import { Typography, Grid } from '@material-ui/core';
-
-import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
+import { Switch } from 'react-router-dom';
 
-import { createGlobalStyle } from 'styled-components';
-import HomeImage from '../../assets/img/home.png';
-
-import useSunrises from '../../hooks/useSunrises';
-import Bond from '../Bond';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-
-// import whichever Apollo hooks you're using
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
-const { parser, htmlOutput, toHTML } = require('discord-markdown');
 
-const BackgroundImage = createGlobalStyle`
-  body, html {
-    background: url(${HomeImage}) no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-`;
-
-const useStyles = makeStyles((theme) => ({
-  gridItem: {
-    height: '100%',
-    [theme.breakpoints.up('md')]: {
-      height: '90px',
-    },
-  },
-  text: {
-    fontSize: '20px',
-  },
-}));
+import Modal from '../../components/Modal';
+import ModalTitle from '../../components/ModalTitle';
 
 function Announcements(numberOfAnnouncements: number) {
   const ANNOUNCEMENTS = gql`
@@ -60,8 +32,11 @@ function Announcements(numberOfAnnouncements: number) {
   const announcements = data.announcements;
   return (
     <>
+      <h3> ANNOUNCEMENTS </h3>
       {announcements.map((announcement) => (
-        <div dangerouslySetInnerHTML={{ __html: toHTML(announcement.content) }} />
+        <>
+          <Card text={announcement.content} date={announcement.date} img={announcements.image} />
+        </>
       ))}
     </>
   );
