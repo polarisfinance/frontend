@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     textAlign: 'left',
     maxHeight: '100%',
     minWidth: '70%',
+    width: '100%',
     display: 'grid',
     alignItems: 'center',
   },
