@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   text: {
     textAlign: 'left',
     maxHeight: '100%',
-    minWidth: '50%',
+    minWidth: '70%',
     display: 'grid',
     alignItems: 'center',
   },
@@ -59,14 +59,32 @@ const useStyles = makeStyles({
   },
 });
 
+const formatDate = (date: Date) => {
+  return (
+    date.getDay().toString().padStart(2, '0') +
+    '.' +
+    date.getMonth().toString().padStart(2, '0') +
+    '.' +
+    date.getFullYear() +
+    ' ' +
+    date.getHours().toString().padStart(2, '0') +
+    ':' +
+    date.getMinutes().toString().padStart(2, '0')
+  );
+};
+
 const ModalBackground = ({ setShowModal }) => {
   const styles = useStyles();
 
   return <div className={styles.modalPlaceholder} onClick={() => setShowModal(false)}></div>;
 };
-const Modal = ({ text, img, date, setShowModal }) => {
+const Modal = ({ announcement, setShowModal }) => {
   const styles = useStyles();
+  const text = announcement.content;
+  const img = announcement.image;
+  const date = announcement.date;
   const displayedText = text.substring(15);
+  const d = new Date(date);
 
   return (
     <div className={styles.modal}>
@@ -78,19 +96,23 @@ const Modal = ({ text, img, date, setShowModal }) => {
       <br />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>Hey Polarians,</div>
-        <div>{date}</div>
+        <div>{formatDate(d)}</div>
       </div>
       <div dangerouslySetInnerHTML={{ __html: toHTML(displayedText) }} />
       <br />
-      <img src={img} className={styles.image} alt="Announcement" />
+      {img !== '' && <img src={img} className={styles.image} alt="Announcement" />}
     </div>
   );
 };
 
-const Card = ({ text, date, img }) => {
+const Card = ({ announcement }) => {
   const styles = useStyles();
   const [showModal, setShowModal] = useState(false);
+  const text = announcement.content;
+  const date = announcement.date;
+  const img = announcement.image;
   const displayedText = text.slice(15, 140);
+  const d = new Date(date);
 
   return (
     <>
@@ -98,19 +120,19 @@ const Card = ({ text, date, img }) => {
         <div className={styles.text}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div>Hey Polarians,</div>
-            <div>{date}</div>
+            <div>{formatDate(d)}</div>
           </div>
           <div dangerouslySetInnerHTML={{ __html: toHTML(displayedText) + '...' }} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
-          <img className={styles.image} src={img} alt="Announcement" />
+          {img !== '' && <img className={styles.image} src={img} alt="Announcement" />}
         </div>
       </div>
 
       {showModal && (
         <>
           <ModalBackground setShowModal={setShowModal} />
-          <Modal text={text} img={img} date={date} setShowModal={setShowModal} />
+          <Modal announcement={announcement} setShowModal={setShowModal} />
         </>
       )}
     </>
