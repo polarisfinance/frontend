@@ -421,7 +421,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 0,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspUsdtGenesisRewardPool: {
     name: 'Earn USP by USDT',
@@ -432,7 +432,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspUsnGenesisRewardPool: {
     name: 'Earn USP by USN',
@@ -443,7 +443,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspSpolarGenesisRewardPool: {
     name: 'Earn USP by SPOLAR',
@@ -454,7 +454,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspSpolarNearLPGenesisRewardPool: {
     name: 'Earn USP by SPOLAR/NEAR LP',
@@ -465,7 +465,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspPolarNearLPGenesisRewardPool: {
     name: 'Earn USP by POLAR/NEAR LP',
@@ -476,7 +476,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspPolarStnearLPGenesisRewardPool: {
     name: 'Earn USP by POLAR/STNEAR LP',
@@ -487,7 +487,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 6,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspEthernalEthLPGenesisRewardPool: {
     name: 'Earn USP by ETHERNAL/ETH LP',
@@ -498,7 +498,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 7,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspOrbitalWbtcLPGenesisRewardPool: {
     name: 'Earn USP by ORBITAL/BTC LP',
@@ -509,7 +509,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 8,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspTripolarTriLPGenesisRewardPool: {
     name: 'Earn USP by TRIPOLAR/TRI LP',
@@ -520,7 +520,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'USP',
     finished: false,
     sort: 9,
-    closedForStaking: false,
+    closedForStaking: true,
   },
 
   TripolarXtriSpolarRewardPool: {

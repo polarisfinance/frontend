@@ -22,7 +22,7 @@ const Stake: React.FC = () => {
             </CardIcon>
             <StyledCardHeader>
               <Value value={'USP GENESIS'} />
-              <Label text="Stake your assets to earn $USP" />
+              <Label text="Please withdraw your assets" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button
@@ -32,7 +32,7 @@ const Stake: React.FC = () => {
                 component={Link}
                 to={'/genesis_dawn'}
               >
-                Stake
+                Unstake
               </Button>
             </StyledCardActions>
           </StyledCardContentInner>
