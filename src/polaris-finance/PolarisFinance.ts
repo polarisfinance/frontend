@@ -1024,6 +1024,8 @@ export class PolarisFinance {
       ? getDisplayBalance(expectedPrice.div(1e6))
       : token === 'ORBITAL'
       ? getDisplayBalance(expectedPrice.mul(1e10))
+      : token === 'USP'
+      ? getDisplayBalance(expectedPrice.mul(1e12))
       : getDisplayBalance(expectedPrice);
   }
 
