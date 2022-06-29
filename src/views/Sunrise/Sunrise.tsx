@@ -100,6 +100,11 @@ const Sunrise: React.FC = () => {
           {earnTokenName} Sunrise
         </Typography>
       )}
+      <Grid container item justify="center">
+        <Alert variant="filled" severity="warning" style={{ backgroundColor: '#b43387' }}>
+          <b>Sunrise prints only when the TWAP is above 1.01</b>
+        </Alert>
+      </Grid>
       <Grid container className={classes.text}>
         {sunrise.retired ? (
           <Grid container item xs={12} justify="center" className={classes.text}>
