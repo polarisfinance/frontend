@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
+import Modal from '@material-ui/core/Modal';
 const { toHTML } = require('discord-markdown');
 
 const useStyles = makeStyles({
@@ -31,27 +32,15 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   modalPlaceholder: {
-    position: 'absolute',
     backgroundColor: 'rgb(163,134,192,0.85)',
-    top: '0px',
-    right: '0px',
-    bottom: '0px',
-    left: '0px',
+    overflow: 'scroll',
   },
   modal: {
     backgroundColor: '#441e76',
-    position: 'absolute',
-    left: 0,
-    right: 0,
+    width: '70%',
     margin: 'auto',
-    fontSize: 'medium',
-    width: '65%',
-    textAlign: 'left',
-    borderRadius: '10px',
-    padding: '1em',
-    maxHeight: '27em',
-    overflow: 'scroll',
-    transform: 'translateY(-22em)',
+    color: 'white',
+    marginTop: '3em',
   },
   button: {
     border: 'none',
@@ -78,38 +67,6 @@ const formatDate = (date: Date) => {
   );
 };
 
-const ModalBackground = ({ setShowModal }) => {
-  const styles = useStyles();
-
-  return <div className={styles.modalPlaceholder} onClick={() => setShowModal(false)}></div>;
-};
-const Modal = ({ announcement, setShowModal }) => {
-  const styles = useStyles();
-  const text = announcement.content;
-  const img = announcement.image;
-  const date = announcement.date;
-  const displayedText = text.substring(15);
-  const d = new Date(date);
-
-  return (
-    <div className={styles.modal}>
-      <div style={{ width: '100%', textAlign: 'right' }}>
-        <button className={styles.button} onClick={() => setShowModal(false)}>
-          X
-        </button>
-      </div>
-      <br />
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>Hey Polarians,</div>
-        <div>{formatDate(d)}</div>
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: toHTML(displayedText) }} />
-      <br />
-      {img !== '' && <img src={img} className={styles.image} alt="Announcement" />}
-    </div>
-  );
-};
-
 const Card = ({ announcement }) => {
   const styles = useStyles();
   const [showModal, setShowModal] = useState(false);
@@ -117,6 +74,7 @@ const Card = ({ announcement }) => {
   const date = announcement.date;
   const img = announcement.image;
   const displayedText = text.slice(15, 140);
+  const displayedFullText = text.slice(15);
   const d = new Date(date);
 
   return (
@@ -134,12 +92,25 @@ const Card = ({ announcement }) => {
         </div>
       </div>
 
-      {showModal && (
-        <>
-          <ModalBackground setShowModal={setShowModal} />
-          <Modal announcement={announcement} setShowModal={setShowModal} />
-        </>
-      )}
+      <Modal open={showModal} onClose={() => setShowModal(false)} className={styles.modalPlaceholder}>
+        <div className={styles.modal}>
+          <div style={{ width: '100%', padding: '1em', backgroundColor: '#441e76' }}>
+            <div style={{ width: '100%', textAlign: 'right' }}>
+              <button className={styles.button} onClick={() => setShowModal(false)}>
+                X
+              </button>
+            </div>
+            <br />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div>Hey Polarians,</div>
+              <div>{formatDate(d)}</div>
+            </div>
+            <div dangerouslySetInnerHTML={{ __html: toHTML(displayedFullText) }} />
+            <br />
+            {img !== '' && <img src={img} className={styles.image} alt="Announcement" />}
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
