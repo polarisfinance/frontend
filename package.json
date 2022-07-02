@@ -28,6 +28,7 @@
     "ethers": "^5.4.1",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
+    "levenary": "^1.1.1",
     "material-ui-image": "^3.3.2",
     "material-ui-popup-state": "^1.9.3",
     "moment": "^2.29.1",

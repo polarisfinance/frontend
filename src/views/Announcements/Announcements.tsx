@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import { makeStyles } from '@material-ui/core';
 
 import { Typography } from '@material-ui/core';
 
@@ -9,7 +10,18 @@ import { Switch } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
+const useStyles = makeStyles({
+  text: {
+    '& a': {
+      color: 'white',
+      '&:visited': {
+        color: 'grey',
+      },
+    },
+  },
+});
 function Announcements(numberOfAnnouncements: number) {
+  const styles = useStyles();
   const ANNOUNCEMENTS = gql`
   query Announcements {
     announcements(limit: ${numberOfAnnouncements}) {
@@ -32,7 +44,7 @@ function Announcements(numberOfAnnouncements: number) {
   return (
     <>
       {announcements.map((announcement, key) => (
-        <div key={key}>
+        <div key={key} className={styles.text}>
           <Card announcement={announcement} />
         </div>
       ))}
@@ -40,7 +52,7 @@ function Announcements(numberOfAnnouncements: number) {
   );
 }
 
-const Masonry = () => {
+const Announcement = () => {
   return (
     <Switch>
       <Page>
@@ -53,4 +65,4 @@ const Masonry = () => {
   );
 };
 
-export default Masonry;
+export default Announcement;
