@@ -105,30 +105,10 @@ const convertTimestamps = (text) => {
   return text;
 };
 
-const replace_roles = (text) => {
-  const groups = {
-    '<@&933089057939017819>': '@Core Team',
-    '<@&939596304919695391>': '@Booster',
-    '<@&939619283527405699>': '@Main Developer',
-    '<@&976210141277995098>': '@Assistant Developer',
-    '<@&939582738284027936>': '@Polarian',
-    '<@&939252153573310484>': '@Observer',
-    '<@&939583933148975126>': '@Security',
-    '<@&946177655043137551>': '@Consultant',
-  };
-  const pattern = /<@&[0-9]*>/g;
-  const matches = [...text.matchAll(pattern)];
-  matches.forEach((match) => {
-    text = text.replace(match[0], groups[match[0]]);
-  });
-  return text;
-};
-
 const Card = ({ announcement }) => {
   const styles = useStyles();
   const [showModal, setShowModal] = useState(false);
   var text = convertTimestamps(announcement.content);
-  text = replace_roles(text);
   const date = announcement.date;
   const img = announcement.image;
   const displayedText = text.slice(15, 140);
