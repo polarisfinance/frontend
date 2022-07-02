@@ -62,7 +62,7 @@ const Announcements = () => {
   );
 };
 
-const Masonry = () => {
+const Announcement = () => {
   return (
     <Switch>
       <Page>
@@ -75,4 +75,4 @@ const Masonry = () => {
   );
 };
 
-export default Masonry;
+export default Announcement;

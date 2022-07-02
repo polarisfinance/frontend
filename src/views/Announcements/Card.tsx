@@ -23,11 +23,16 @@ const useStyles = makeStyles({
     '&:hover': {
       opacity: '70%',
     },
+    cursor: 'pointer',
   },
   image: {
     maxWidth: '100%',
     maxHeight: '100%',
     verticalAlign: 'middle',
+    borderRadius: '10px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   text: {
     textAlign: 'left',
@@ -40,6 +45,7 @@ const useStyles = makeStyles({
   modalPlaceholder: {
     backgroundColor: 'rgb(163,134,192,0.85)',
     overflow: 'scroll',
+    cursor: 'pointer',
   },
   modal: {
     backgroundColor: '#441e76',
@@ -58,6 +64,7 @@ const useStyles = makeStyles({
         color: 'grey',
       },
     },
+    cursor: 'default',
   },
   button: {
     border: 'none',
@@ -67,6 +74,7 @@ const useStyles = makeStyles({
     '&:hover': {
       opacity: '70%',
     },
+    cursor: 'pointer',
   },
 });
 
@@ -117,7 +125,7 @@ const Card = ({ announcement }) => {
           </div>
           <div dangerouslySetInnerHTML={{ __html: toHTML(displayedText) + '...' }} />
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'right' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'right', marginLeft: 10 }}>
           {img !== '' && <img className={styles.image} src={img} alt="Announcement" />}
         </div>
       </div>
