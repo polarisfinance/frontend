@@ -40,19 +40,27 @@ const Announcements = () => {
 
   return (
     <>
-      {announcements.slice(page * numPage, (page + 1) * numPage).map((announcement, key) => (
+      {announcements.slice((page - 1) * numPage, page * numPage).map((announcement, key) => (
         <div key={key}>
           <Card announcement={announcement} />
         </div>
       ))}
-      <div style={{ display: 'flex', color: 'white', fontSize: 'small', verticalAlign: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          color: 'white',
+          fontSize: 'small',
+          verticalAlign: 'center',
+          textAlign: 'center',
+        }}
+      >
         <Pagination
           page={page}
           onChange={(e, v) => setPage(v)}
           count={Math.floor(data.announcements.length / numPage) + (data.announcements.length % numPage === 0 ? -1 : 0)}
         />
         <p>Display on page:</p>
-        <Select style={{ marginLeft: '1em' }} value={numPage} onChange={selectChange}>
+        <Select value={numPage} onChange={selectChange}>
           <MenuItem value={5}>5</MenuItem>
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={15}>15</MenuItem>
