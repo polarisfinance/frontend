@@ -66,7 +66,7 @@ const useStyles = makeStyles({
 
 const formatDate = (date: Date) => {
   return (
-    date.getDay().toString().padStart(2, '0') +
+    date.getDate().toString().padStart(2, '0') +
     '.' +
     date.getMonth().toString().padStart(2, '0') +
     '.' +
@@ -78,10 +78,23 @@ const formatDate = (date: Date) => {
   );
 };
 
+const convertTimestamps = (text) => {
+  const pattern = /<t:[0-9]*(:[t|T|d|D|f|F|R])?>/g;
+  const matches = [...text.matchAll(pattern)];
+  matches.forEach((match) => {
+    const timestamp = match[0].match(/\d/g).join('');
+    const date = new Date(timestamp * 1000);
+    const formattedDate = formatDate(date);
+    text = text.replace(match[0], formattedDate);
+  });
+
+  return text;
+};
+
 const Card = ({ announcement }) => {
   const styles = useStyles();
   const [showModal, setShowModal] = useState(false);
-  const text = announcement.content;
+  const text = convertTimestamps(announcement.content);
   const date = announcement.date;
   const img = announcement.image;
   const displayedText = text.slice(15, 140);
