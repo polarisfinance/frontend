@@ -14,6 +14,12 @@ const useStyles = makeStyles({
     maxHeight: '10em',
     justifyContent: 'space-between',
     overflow: 'hidden',
+    '& a': {
+      color: 'white',
+      '&:visited': {
+        color: 'grey',
+      },
+    },
     '&:hover': {
       opacity: '70%',
     },
