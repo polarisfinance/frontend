@@ -44,6 +44,8 @@ const useStyles = makeStyles({
     padding: '1em',
     outline: 'none',
     borderRadius: '10px',
+    overflowWrap: 'break-word',
+    wordWrap: 'break-word',
     '& a': {
       color: 'white',
       '&:visited': {
