@@ -37,10 +37,19 @@ const useStyles = makeStyles({
   },
   modal: {
     backgroundColor: '#441e76',
-    width: '70%',
+    width: '80%',
     margin: 'auto',
     color: 'white',
     marginTop: '3em',
+    padding: '1em',
+    outline: 'none',
+    borderRadius: '10px',
+    '& a': {
+      color: 'white',
+      '&:visited': {
+        color: 'grey',
+      },
+    },
   },
   button: {
     border: 'none',
@@ -94,21 +103,19 @@ const Card = ({ announcement }) => {
 
       <Modal open={showModal} onClose={() => setShowModal(false)} className={styles.modalPlaceholder}>
         <div className={styles.modal}>
-          <div style={{ width: '100%', padding: '1em', backgroundColor: '#441e76' }}>
-            <div style={{ width: '100%', textAlign: 'right' }}>
-              <button className={styles.button} onClick={() => setShowModal(false)}>
-                X
-              </button>
-            </div>
-            <br />
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>Hey Polarians,</div>
-              <div>{formatDate(d)}</div>
-            </div>
-            <div dangerouslySetInnerHTML={{ __html: toHTML(displayedFullText) }} />
-            <br />
-            {img !== '' && <img src={img} className={styles.image} alt="Announcement" />}
+          <div style={{ width: '100%', textAlign: 'right' }}>
+            <button className={styles.button} onClick={() => setShowModal(false)}>
+              X
+            </button>
           </div>
+          <br />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div>Hey Polarians,</div>
+            <div>{formatDate(d)}</div>
+          </div>
+          <div dangerouslySetInnerHTML={{ __html: toHTML(displayedFullText) }} />
+          <br />
+          {img !== '' && <img src={img} className={styles.image} alt="Announcement" />}
         </div>
       </Modal>
     </>
