@@ -35,7 +35,7 @@ export default function Updater(): null {
   const dispatch = useDispatch<AppDispatch>();
   const state = useSelector<AppState, AppState['transactions']>((state) => state.transactions);
 
-  const transactions = state[chainId];
+  const transactions = chainId ? state[chainId] ?? {} : {};
 
   // show popup on confirm
   const addPopup = useAddPopup();
