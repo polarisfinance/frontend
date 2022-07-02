@@ -167,6 +167,7 @@ const Nav = () => {
                 <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
               </HoverMenu>
               <StyledButton onClick={() => window.open('https://vote.polarisfinance.io')}>Gov</StyledButton>
+              <StyledButton href="/announcements">Announcements</StyledButton>
             </Box>
             <AccountButton text="Connect" />
           </>
