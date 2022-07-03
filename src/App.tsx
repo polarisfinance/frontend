@@ -73,7 +73,7 @@ const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
 // const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
 
 const NoMatch = () => (
-  <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+  <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'white' }}>
     URL Not Found. <a href="/">Go back home.</a>
   </h3>
 );
