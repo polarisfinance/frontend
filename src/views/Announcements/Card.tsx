@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     maxHeight: '10em',
     justifyContent: 'space-between',
     overflow: 'hidden',
+    top: '0',
     '& a': {
       color: 'white',
       '&:visited': {
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
     minWidth: '70%',
     width: '100%',
     display: 'grid',
-    alignItems: 'center',
+    alignItems: 'top',
   },
   modalPlaceholder: {
     backgroundColor: 'rgb(163,134,192,0.85)',
