@@ -93,7 +93,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
             <CardIcon>
               <TokenSymbol symbol={bank.depositToken.symbol} />
             </CardIcon>
-            {bank.depositTokenName.startsWith('ORBITAL') ? (
+            {bank.depositTokenName.startsWith('ORBITAL') || bank.depositTokenName.startsWith('USP') ? (
               <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal, 8)} />
             ) : (
               <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />

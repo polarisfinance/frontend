@@ -36,19 +36,19 @@ const Cemetery = () => {
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-                ORBITAL Genesis
+                USP Genesis
               </Typography>
               <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
                 <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
                   <b>All below pools have ended. Please unstake and collect your rewards.</b>
-                  {/*<b>4.06.2022 14:00 UTC - 5.06.2022 14:00 UTC</b>*/}
+                  {/* <b>25.06.2022 14:00 UTC - 26.06.2022 14:00 UTC</b> */}
                 </Alert>
               </Grid>
               <Box mt={5}>
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 7).length === 0}>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 8).length === 0}>
                   <Grid container spacing={3}>
                     {activeBanks
-                      .filter((bank) => bank.sectionInUI === 7)
+                      .filter((bank) => bank.sectionInUI === 8)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
                           <CemeteryCard bank={bank} />

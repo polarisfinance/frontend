@@ -101,7 +101,11 @@ const Sunrise: React.FC = () => {
         </Typography>
       )}
       <Grid container item justify="center">
-        <Alert variant="filled" severity="warning" style={{ backgroundColor: '#b43387' }}>
+        <Alert
+          variant="filled"
+          severity="warning"
+          style={{ backgroundColor: '#b43387', fontSize: 16, paddingTop: 0, paddingBottom: 0 }}
+        >
           <b>Sunrise prints only when the TWAP is above 1.01</b>
         </Alert>
       </Grid>

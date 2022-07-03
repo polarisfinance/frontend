@@ -34,6 +34,11 @@ import btcBondLogo from '../../assets/img/obond-token.svg';
 import wbtcLogo from '../../assets/img/wbtc-logo.svg';
 import orbitalBtc from '../../assets/img/orbital-btc.svg';
 import tripolarTri from '../../assets/img/tripolar-tri.svg';
+import uspLogo from '../../assets/img/usp-logo.svg';
+import uspBondLogo from '../../assets/img/uspbond-logo.svg';
+import usnLogo from '../../assets/img/usn-logo.svg';
+import usdtLogo from '../../assets/img/usdt-logo.svg';
+import uspUsdcLogo from '../../assets/img/usp-usdc.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -71,6 +76,11 @@ const logosBySymbol: { [title: string]: string } = {
   WBTC: wbtcLogo,
   'ORBITAL-BTC-LP': orbitalBtc,
   'TRIPOLAR-TRI-LP': tripolarTri,
+  USP: uspLogo,
+  USPBOND: uspBondLogo,
+  USN: usnLogo,
+  USDT: usdtLogo,
+  'USP-USDC-LP': uspUsdcLogo,
 };
 
 type LogoProps = {

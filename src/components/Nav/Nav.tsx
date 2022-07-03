@@ -159,7 +159,7 @@ const Nav = () => {
             </Typography>
             <Box className={classes.box} m="auto">
               <StyledButton href="/">Home</StyledButton>
-              <StyledButton href="/dawn">Dawn</StyledButton>
+              <StyledButton href="/dawn_splitter">Dawn</StyledButton>
               <StyledButton href="/sunrise">Sunrise</StyledButton>
               <StyledButton href="/bond">Bond</StyledButton>
               <StyledButton onClick={() => window.open('https://docs.polarisfinance.io')}>Docs</StyledButton>
