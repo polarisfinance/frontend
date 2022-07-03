@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Card from './Card';
 
-import { MenuItem, Select, Typography } from '@material-ui/core';
+import { MenuItem, Select, Typography, useMediaQuery, Grid } from '@material-ui/core';
 
 import Page from '../../components/Page';
 import { Switch } from 'react-router-dom';
@@ -22,6 +22,7 @@ const ANNOUNCEMENTS = gql`
 `;
 
 const Announcements = () => {
+  const matches = useMediaQuery('(min-width:530px)');
   const { loading, error, data } = useQuery(ANNOUNCEMENTS);
   const [numPage, setNumPage] = useState(10);
   const [page, setPage] = useState(1);
@@ -53,27 +54,66 @@ const Announcements = () => {
           justifyContent: 'center',
         }}
       >
-        <Pagination
-          page={page}
-          onChange={(e, v) => setPage(v)}
-          count={Math.floor(data.announcements.length / numPage) + (data.announcements.length % numPage === 0 ? -1 : 0)}
-          variant="outlined"
-          shape="rounded"
-          siblingCount={1}
-          boundaryCount={1}
-        />
-        <p>Display on page:</p>
-        <Select
-          value={numPage}
-          onChange={selectChange}
-          variant={'outlined'}
-          style={{ height: 32, width: 55, marginLeft: 5 }}
-        >
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-          <MenuItem value={15}>15</MenuItem>
-          <MenuItem value={10000}>All</MenuItem>
-        </Select>
+        {matches ? (
+          <>
+            <Pagination
+              page={page}
+              onChange={(e, v) => setPage(v)}
+              count={
+                Math.floor(data.announcements.length / numPage) + (data.announcements.length % numPage === 0 ? -1 : 0)
+              }
+              variant="outlined"
+              shape="rounded"
+              siblingCount={1}
+              boundaryCount={1}
+            />{' '}
+            <p>Display on page:</p>
+            <Select
+              value={numPage}
+              onChange={selectChange}
+              variant={'outlined'}
+              style={{ height: 32, width: 55, marginLeft: 5 }}
+            >
+              <MenuItem value={5}>5</MenuItem>
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={15}>15</MenuItem>
+              <MenuItem value={10000}>All</MenuItem>
+            </Select>
+          </>
+        ) : (
+          <>
+            <Grid container>
+              <Grid container item direction="row" justify="center">
+                <Pagination
+                  page={page}
+                  onChange={(e, v) => setPage(v)}
+                  count={
+                    Math.floor(data.announcements.length / numPage) +
+                    (data.announcements.length % numPage === 0 ? -1 : 0)
+                  }
+                  variant="outlined"
+                  shape="rounded"
+                  siblingCount={0}
+                  boundaryCount={1}
+                />
+              </Grid>
+              <Grid container item direction="row" justify="center" style={{ marginTop: 10 }}>
+                <p>Display on page:</p>
+                <Select
+                  value={numPage}
+                  onChange={selectChange}
+                  variant={'outlined'}
+                  style={{ height: 32, width: 55, marginLeft: 5 }}
+                >
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
+                  <MenuItem value={15}>15</MenuItem>
+                  <MenuItem value={10000}>All</MenuItem>
+                </Select>
+              </Grid>
+            </Grid>
+          </>
+        )}
       </div>
     </>
   );
@@ -83,8 +123,8 @@ const Announcement = () => {
   return (
     <Switch>
       <Page>
-        <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-          <> ANNOUNCEMENTS </>
+        <Typography color="textPrimary" align="center" variant="h4" gutterBottom>
+          ANNOUNCEMENTS
           {Announcements()}
         </Typography>
       </Page>
