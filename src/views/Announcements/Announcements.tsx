@@ -84,7 +84,7 @@ const Announcement = () => {
     <Switch>
       <Page>
         <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-          <h3> ANNOUNCEMENTS </h3>
+          <> ANNOUNCEMENTS </>
           {Announcements()}
         </Typography>
       </Page>
