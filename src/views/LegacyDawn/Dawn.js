@@ -57,6 +57,26 @@ const Cemetery = () => {
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
+                    USP Genesis Pools
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 8)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+                <div>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
                     TRIPOLAR-xTRI Pool
                   </Typography>
                   <Grid container spacing={3}>

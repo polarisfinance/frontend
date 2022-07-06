@@ -64,6 +64,11 @@ export class PolarisFinance {
   OBOND: ERC20;
   OBOND_METAMASK: ERC20;
 
+  USP: ERC20;
+  USP_METAMASK: ERC20;
+  USPBOND: ERC20;
+  USPBOND_METAMASK: ERC20;
+
   constructor(cfg: Configuration) {
     const { externalTokens } = cfg;
     const provider = getDefaultProvider();
@@ -121,6 +126,9 @@ export class PolarisFinance {
     this.ORBITAL = new ERC20(this.contracts.orbital.address, provider, 'ORBITAL');
     this.OBOND = new ERC20(this.contracts.oBond.address, provider, 'OBOND');
 
+    this.USP = new ERC20(this.contracts.usp.address, provider, 'USP');
+    this.USPBOND = new ERC20(this.contracts.uspBond.address, provider, 'USPBOND');
+
     // Uniswap V2 Pair
     this.POLARWFTM_LP = new Contract(externalTokens['POLAR-NEAR-LP'][0], IUniswapV2PairABI, provider);
 
@@ -135,6 +143,8 @@ export class PolarisFinance {
     this.EBOND_METAMASK = this.EBOND;
     this.ORBITAL_METAMASK = this.ORBITAL;
     this.OBOND_METAMASK = this.OBOND;
+    this.USP_METAMASK = this.USP;
+    this.USPBOND_METAMASK = this.USPBOND;
 
     this.config = cfg;
     this.provider = provider;
@@ -164,6 +174,8 @@ export class PolarisFinance {
       this.EBOND_METAMASK,
       this.ORBITAL_METAMASK,
       this.OBOND_METAMASK,
+      this.USP_METAMASK,
+      this.USPBOND_METAMASK,
       ...Object.values(this.externalTokensMetamask),
     ];
 
@@ -217,6 +229,12 @@ export class PolarisFinance {
       } else if (assetName === 'OBOND') {
         asset = this.OBOND;
         assetUrl = 'https://polarisfinance.io/logos/obond-token.svg';
+      } else if (assetName === 'USP') {
+        asset = this.USP;
+        assetUrl = 'https://polarisfinance.io/logos/usp-token.svg';
+      } else if (assetName === 'USPBOND') {
+        asset = this.USPBOND;
+        assetUrl = 'https://polarisfinance.io/logos/uspbond-token.svg';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
@@ -366,6 +384,33 @@ export class PolarisFinance {
     }
   }
 
+  async getTokenPriceUsp(tokenContract: ERC20): Promise<string> {
+    const { chainId } = this.config;
+    const { USDC } = this.config.externalTokens;
+
+    const wftm = new Token(chainId, USDC[0], USDC[1]);
+    const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+
+    try {
+      if (tokenContract.symbol === 'USPBOND') {
+        const { orbitalTreasury } = this.contracts;
+        const [tombStat, bondTombRatioBN] = await Promise.all([
+          this.getStat('USP'),
+          orbitalTreasury.getBondPremiumRate(),
+        ]);
+        const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
+        const priceOfTBondInDollars = ((Number(tombStat.priceInDollars) * modifier) / 10).toFixed(2);
+        return priceOfTBondInDollars;
+      } else {
+        const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
+        const priceInBUSD = new Route([wftmToToken], token);
+        return priceInBUSD.midPrice.toFixed(4);
+      }
+    } catch (err) {
+      console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
+    }
+  }
+
   async getWFTMPriceFromPancakeswap(): Promise<string> {
     const { NEAR, USDC } = this.externalTokens;
     try {
@@ -498,6 +543,10 @@ export class PolarisFinance {
       }
       if (earnTokenName === 'ORBITAL') {
         return await pool.pendingOrbital(poolId, account);
+      }
+      if (earnTokenName === 'USP') {
+        console.log(await pool.pendingUsp(poolId, account));
+        return await pool.pendingUsp(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
       }
@@ -532,6 +581,8 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.POLAR);
       } else if (tokenName === 'TRIPOLAR-xTRI-LP' || tokenName === 'TRIPOLAR-TRI-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TRIPOLAR);
+      } else if (tokenName === 'USP-USDC-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.USP);
       } else if (tokenName === 'POLAR-LUNAR-LP') {
         tokenPrice = await this.getLPTokenPricePolarLunar(token, this.POLAR, this.LUNAR);
       } else if (tokenName === 'ETHERNAL-ETH-LP') {
@@ -550,6 +601,8 @@ export class PolarisFinance {
       } else if (tokenName === 'SPOLAR') {
         const price = await this.getStat('SPOLAR');
         tokenPrice = price.priceInDollars;
+      } else if (tokenName === 'USDC' || tokenName === 'USDT' || tokenName === 'USN') {
+        tokenPrice = '1';
       } else {
         [tokenPrice, priceOfOneFtmInDollars] = await Promise.all([
           this.getTokenPriceFromPancakeswap(token),
@@ -653,6 +706,30 @@ export class PolarisFinance {
         return rewardPerSecond.mul(6960).div(100000);
       }
     }
+    if (earnTokenName === 'USP') {
+      const rewardPerSecond = await poolContract.uspPerSecond();
+      if (depositTokenName === 'USDC') {
+        return rewardPerSecond.mul(30000).div(100000);
+      } else if (depositTokenName === 'USDT') {
+        return rewardPerSecond.mul(10000).div(100000);
+      } else if (depositTokenName === 'USN') {
+        return rewardPerSecond.mul(10000).div(100000);
+      } else if (depositTokenName === 'SPOLAR') {
+        return rewardPerSecond.mul(25000).div(100000);
+      } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
+        return rewardPerSecond.mul(8000).div(100000);
+      } else if (depositTokenName === 'POLAR-NEAR-LP') {
+        return rewardPerSecond.mul(5500).div(100000);
+      } else if (depositTokenName === 'POLAR-STNEAR-LP') {
+        return rewardPerSecond.mul(600).div(100000);
+      } else if (depositTokenName === 'TRIPOLAR-TRI-LP') {
+        return rewardPerSecond.mul(200).div(100000);
+      } else if (depositTokenName.startsWith('ETHERNAL')) {
+        return rewardPerSecond.mul(7200).div(100000);
+      } else if (depositTokenName.startsWith('ORBITAL')) {
+        return rewardPerSecond.mul(3500).div(100000);
+      }
+    }
     const [
       rewardPerSecond,
       SpolarNear,
@@ -667,6 +744,7 @@ export class PolarisFinance {
       TripolarTri,
       Ethernal,
       Orbital,
+      UspUsdc,
     ] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
@@ -681,6 +759,7 @@ export class PolarisFinance {
       poolContract.poolInfo(10),
       poolContract.poolInfo(11),
       poolContract.poolInfo(12),
+      poolContract.poolInfo(13),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
@@ -706,6 +785,8 @@ export class PolarisFinance {
       return rewardPerSecond.mul(Orbital.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('TRIPOLAR-T')) {
       return rewardPerSecond.mul(TripolarTri.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('USP-USDC')) {
+      return rewardPerSecond.mul(UspUsdc.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
@@ -858,6 +939,32 @@ export class PolarisFinance {
       priceInDollars = (Number(stat.priceInDollars) * modifier).toFixed(2);
       circulatingSupply = supply;
     }
+
+    if (token === 'USP') {
+      const { UspSpolarGenesisRewardPool } = this.contracts;
+      [supply, rewardPoolSupply, priceInToken] = await Promise.all([
+        this.USP.totalSupply(),
+        this.USP.balanceOf(UspSpolarGenesisRewardPool.address),
+        this.getTokenPriceUsp(this.USP),
+      ]);
+      priceOfOneToken = '1';
+      circulatingSupply = supply.sub(rewardPoolSupply);
+      priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(2);
+    }
+    if (token === 'USPBOND') {
+      const { uspTreasury } = this.contracts;
+      let stat: TokenStat, ratio: number;
+      [supply, stat, ratio] = await Promise.all([
+        this.USPBOND.totalSupply(),
+        this.getStat('USP'),
+        uspTreasury.getBondPremiumRate(),
+      ]);
+      const modifier = ratio / 1e18 > 1 ? ratio / 1e18 : 1;
+      priceInToken = (Number(stat.tokenInFtm) * modifier).toFixed(2);
+      priceInDollars = (Number(stat.priceInDollars) * modifier).toFixed(2);
+      circulatingSupply = supply;
+    }
+
     if (token === 'SPOLAR') {
       const { PolarNearLpSpolarRewardPool } = this.contracts;
       [supply, rewardPoolSupply, priceInToken, priceOfOneToken] = await Promise.all([
@@ -917,6 +1024,8 @@ export class PolarisFinance {
       ? getDisplayBalance(expectedPrice.div(1e6))
       : token === 'ORBITAL'
       ? getDisplayBalance(expectedPrice.mul(1e10))
+      : token === 'USP'
+      ? getDisplayBalance(expectedPrice.mul(1e12))
       : getDisplayBalance(expectedPrice);
   }
 

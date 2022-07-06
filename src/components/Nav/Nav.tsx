@@ -186,9 +186,14 @@ const Nav = () => {
                 getContentAnchorEl={null}
                 disableScrollLock={true}
               >
-                <MenuItem onClick={() => window.open('https://vote.polarisfinance.io')}>Governance</MenuItem>
                 <MenuItem onClick={() => window.location.assign('/announcements')}>Announcements</MenuItem>
                 <MenuItem onClick={() => window.location.assign('/strategy')}>Strategy</MenuItem>
+                <MenuItem onClick={() => window.open('https://vote.polarisfinance.io')}>Governance</MenuItem>
+                <MenuItem
+                  onClick={() => window.open('https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/')}
+                >
+                  KYC
+                </MenuItem>
               </HoverMenu>
             </Box>
             <AccountButton text="Connect" />
@@ -229,7 +234,6 @@ const Nav = () => {
                   <ListItemLink primary="Dawn" to="/dawn" />
                   <ListItemLink primary="Sunrise" to="/sunrise" />
                   <ListItemLink primary="Bond" to="/bond" />
-                  <ListItemLink primary="Strategy" to="/strategy" />
                   {/* <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
                 <ListItemLink primary="Regulations" to="/regulations" /> */}
@@ -249,10 +253,20 @@ const Nav = () => {
                     <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
                     <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
                   </HoverMenu>
+                  <ListItemLink primary="Announcements" to="/announcements" />
+                  <ListItemLink primary="Strategy" to="/strategy" />
                   <ListItem button component="a" target="_blank" href="https://vote.polarisfinance.io/#/">
                     <ListItemText>Governance</ListItemText>
                   </ListItem>
-                  <ListItemLink primary="Announcements" to="/announcements" />
+                  <ListItem
+                    button
+                    component="a"
+                    target="_blank"
+                    href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
+                  >
+                    <ListItemText>KYC</ListItemText>
+                  </ListItem>
+
                   {!matchesNotMobile && (
                     <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <AccountButton text="Connect" />

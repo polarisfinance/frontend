@@ -12,7 +12,7 @@ import { Pagination } from '@material-ui/lab';
 
 const ANNOUNCEMENTS = gql`
   query Announcements {
-    announcements {
+    announcements(limit: 1000000) {
       id
       content
       image
@@ -60,7 +60,9 @@ const Announcements = () => {
               page={page}
               onChange={(e, v) => setPage(v)}
               count={
-                Math.floor(data.announcements.length / numPage) + (data.announcements.length % numPage === 0 ? -1 : 0)
+                Math.floor(data.announcements.length / numPage) +
+                (data.announcements.length % numPage === 0 ? -1 : 0) +
+                1
               }
               variant="outlined"
               shape="rounded"
