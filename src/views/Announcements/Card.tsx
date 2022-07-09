@@ -36,6 +36,7 @@ const useStyles = makeStyles({
     marginRight: 'auto',
   },
   text: {
+    position: 'relative',
     textAlign: 'left',
     maxHeight: '100%',
     minWidth: '70%',
@@ -49,6 +50,7 @@ const useStyles = makeStyles({
     cursor: 'pointer',
   },
   modal: {
+    position: 'relative',
     backgroundColor: '#441e76',
     width: '80%',
     margin: 'auto',
@@ -112,18 +114,14 @@ const Card = ({ announcement }) => {
   var text = convertTimestamps(announcement.content);
   const date = announcement.date;
   const img = announcement.image;
-  const displayedText = text.slice(15, 140);
-  const displayedFullText = text.slice(15);
+  const displayedText = text.slice(0, 120);
   const d = new Date(date);
 
   return (
     <>
       <div className={styles.placeholder} onClick={() => setShowModal(true)}>
         <div className={styles.text}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div>Hey Polarians,</div>
-            <div>{formatDate(d)}</div>
-          </div>
+          <div style={{ position: 'absolute', width: '100%', textAlign: 'right' }}>{formatDate(d)}</div>
           <div dangerouslySetInnerHTML={{ __html: toHTML(displayedText) + '...' }} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'right', marginLeft: 10 }}>
@@ -138,12 +136,9 @@ const Card = ({ announcement }) => {
               X
             </button>
           </div>
+          <div style={{ position: 'absolute', width: '92%', textAlign: 'right' }}>{formatDate(d)}</div>
           <br />
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div>Hey Polarians,</div>
-            <div>{formatDate(d)}</div>
-          </div>
-          <div dangerouslySetInnerHTML={{ __html: toHTML(displayedFullText) }} />
+          <div dangerouslySetInnerHTML={{ __html: toHTML(text) }} />
           <br />
           {img !== '' && <img src={img} className={styles.image} alt="Announcement" />}
         </div>
