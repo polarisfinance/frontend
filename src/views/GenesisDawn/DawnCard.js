@@ -11,7 +11,7 @@ const CemeteryCard = ({ bank }) => {
       <Card>
         <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
           <Grid container alignItems="center">
-            <Grid container item xs={12} md={4} alignItems="center">
+            <Grid container item xs={12} md={6} alignItems="center">
               <Box mr={5} ml={5} mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol={bank.depositTokenName} />
@@ -22,7 +22,7 @@ const CemeteryCard = ({ bank }) => {
               </Typography>
             </Grid>
 
-            <Grid container item xs={12} md={6} alignItems="center">
+            <Grid container item xs={12} md={4} alignItems="center">
               <Typography color="textSecondary">
                 {/* {bank.name} */}
                 Deposit {bank.depositTokenName} Earn {` ${bank.earnTokenName}`}

@@ -29,12 +29,25 @@ import ethernalLogo from '../../assets/img/ethernal-token.svg';
 import ebondLogo from '../../assets/img/ebond-token.svg';
 import etherumLogo from '../../assets/img/ethereum-token.svg';
 import ethernalEthLpLogo from '../../assets/img/ethernal-eth.svg';
+import btcPegLogo from '../../assets/img/orbital-token.svg';
+import btcBondLogo from '../../assets/img/obond-token.svg';
+import wbtcLogo from '../../assets/img/wbtc-logo.svg';
+import orbitalBtc from '../../assets/img/orbital-btc.svg';
+import tripolarTri from '../../assets/img/tripolar-tri.svg';
+import uspLogo from '../../assets/img/usp-logo.svg';
+import uspBondLogo from '../../assets/img/uspbond-logo.svg';
+import usnLogo from '../../assets/img/usn-logo.svg';
+import usdtLogo from '../../assets/img/usdt-logo.svg';
+import uspUsdcLogo from '../../assets/img/usp-usdc.svg';
+
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
   POLAR: polarLogo,
+  POLAR_METAMASK: polarLogo,
   SPOLAR: spolarLogo,
   PBOND: pbondLogo,
+  PBOND_METAMASK: pbondLogo,
   AURORA: auroraLogo,
   NEAR: nearLogo,
   LUNA: lunaLogo,
@@ -58,6 +71,16 @@ const logosBySymbol: { [title: string]: string } = {
   EBOND: ebondLogo,
   WETH: etherumLogo,
   'ETHERNAL-ETH-LP': ethernalEthLpLogo,
+  ORBITAL: btcPegLogo,
+  OBOND: btcBondLogo,
+  WBTC: wbtcLogo,
+  'ORBITAL-BTC-LP': orbitalBtc,
+  'TRIPOLAR-TRI-LP': tripolarTri,
+  USP: uspLogo,
+  USPBOND: uspBondLogo,
+  USN: usnLogo,
+  USDT: usdtLogo,
+  'USP-USDC-LP': uspUsdcLogo,
 };
 
 type LogoProps = {

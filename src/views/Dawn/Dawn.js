@@ -36,7 +36,6 @@ const Cemetery = () => {
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
                 Dawn
               </Typography>
-
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography

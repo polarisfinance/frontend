@@ -3,7 +3,7 @@ import usePolarisFinance from './usePolarisFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 import { Sunrise } from '../polaris-finance';
 
-const useWithdrawFromSunrise = (sunrise:Sunrise) => {
+const useWithdrawFromSunrise = (sunrise: Sunrise) => {
   const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
@@ -11,7 +11,7 @@ const useWithdrawFromSunrise = (sunrise:Sunrise) => {
     (amount: string) => {
       handleTransactionReceipt(
         polarisFinance.withdrawSpolarFromSunrise(amount, sunrise),
-        `Withdraw ${amount} SPOLAR from the ${sunrise} SUNRISE`,
+        `Withdraw ${amount} SPOLAR from the ${sunrise.earnTokenName} SUNRISE`,
       );
     },
     [polarisFinance, handleTransactionReceipt, sunrise],

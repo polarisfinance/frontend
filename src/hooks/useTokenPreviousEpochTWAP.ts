@@ -4,7 +4,7 @@ import config from '../config';
 import { BigNumber } from 'ethers';
 import { Sunrise } from '../polaris-finance';
 
-const useTokenPreviousEpochTWAP = (sunrise:Sunrise) => {
+const useTokenPreviousEpochTWAP = (sunrise: Sunrise) => {
   const [price, setPrice] = useState<BigNumber>(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
 

@@ -19,15 +19,6 @@ body {
   height: 100%;
 }
 
-.makeStyles-paper-11,
-.makeStyles-paper-11 h2,
-.MuiTypography-body1,
-.MuiPaper-root,
-.MuiPaper-root h2,
-p,h2,span{
-  color: #FFFFFF !important;
-}
-
 body {
   position: absolute;
   content: '';
@@ -35,6 +26,7 @@ body {
   left: 0;
   height: 100vh;
   width: 100%;
+  background-image: url('./assets/img/home.png');
   background-position: center center !important;
   background-attachment: fixed !important;
   background-size: cover !important;
@@ -54,16 +46,7 @@ footer .a:hover {
 }
 
 .MuiToolbar-regular {
-  color: #FFFFFF;
-}
-
-.MuiButton-containedPrimary,
-.MuiButton-containedPrimary:hover,
-.MuiButton-containedSecondary,
-.MuiButton-containedSecondary:hover,
-.MuiListItem-button:hover,
-.MuiButtonBase-root:hover {
-  color: #fff !important;
+  color: #ffffff;
 }
 
 code {
@@ -83,14 +66,14 @@ code {
   color: #757ce8 !important;
 }
 
-.MuiPaper-elevation1   {
+.MuiPaper-elevation1 {
   box-shadow: none !important;
 }
 
 .MuiPaper-elevation1,
 .MuiAlert-root,
 .MuiButton-root {
-  border-radius: 10px !important
+  border-radius: 10px !important;
 }
 
 a.active {

@@ -37,6 +37,19 @@ const Stake = ({ sunrise }) => {
                   Coming Soon
                 </Button>
               </StyledCardActions>
+            ) : sunrise.notActive ? (
+              <StyledCardActions>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '20px' }}
+                  component={Link}
+                  to={'/polar_sunrise'}
+                  disabled={true}
+                >
+                  View and Bond
+                </Button>
+              </StyledCardActions>
             ) : (
               <StyledCardActions>
                 <Button

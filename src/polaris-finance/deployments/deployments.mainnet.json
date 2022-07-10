@@ -631,7 +631,7 @@
     ]
   },
   "TripolarOracle": {
-    "address": "0xad054C533ea23486eEc6060975eb8B4Ad35fc4E2",
+    "address": "0x51488c4bceea96ee530bc6093bd0c00f9461fbb5",
     "abi": [
       {
         "inputs": [
@@ -9109,7 +9109,7 @@
       }
     ]
   },
-  "EthernalEthRewardPool": {
+  "EthernalEthGenesisRewardPool": {
     "address": "0xc3d490F6369e709f6FA79DA673Cc74F21764ecF7",
     "abi": [
       {

@@ -4,8 +4,7 @@ import usePolarisFinance from './usePolarisFinance';
 import useRefresh from './useRefresh';
 import { Sunrise } from '../polaris-finance';
 
-
-const useTotalStakedOnMasonry = (sunrise:Sunrise) => {
+const useTotalStakedOnMasonry = (sunrise: Sunrise) => {
   const [totalStaked, setTotalStaked] = useState(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
   const { slowRefresh } = useRefresh();

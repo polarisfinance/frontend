@@ -31,6 +31,33 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { usePopupState, bindHover, bindMenu } from 'material-ui-popup-state/hooks';
+import HoverMenu from 'material-ui-popup-state/HoverMenu';
+
+const StyledButton = withStyles({
+  root: {
+    textTransform: 'uppercase',
+    color: '#FFFFFF',
+    fontFamily: '"Rajdhani",regular',
+    fontSize: '25px',
+    display: 'inline-block',
+    padding: 0,
+    minHeight: 0,
+    minWidth: 0,
+    height: 'auto',
+    widht: 'auto',
+    marginRight: 16,
+    marginLeft: 16,
+    '&:hover': {
+      textDecoration: 'none',
+      color: '#70D44B',
+      backgroundColor: 'rgb(0,0,0,0)',
+    },
+  },
+})(Button);
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -45,7 +72,13 @@ const useStyles = makeStyles((theme) => ({
     'background-color': 'rgba(0, 0, 0, 0)',
     // borderBottom: `1px solid ${theme.palette.divider}`,
     padding: '10px',
-    marginBottom: '3rem',
+
+    [theme.breakpoints.up(1010)]: {
+      marginBottom: '3rem',
+    },
+    [theme.breakpoints.down(1010)]: {
+      marginBottom: '1rem',
+    },
   },
   drawer: {
     width: 240,
@@ -90,7 +123,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Nav = () => {
-  const matches = useMediaQuery('(min-width:900px)');
+  const matches = useMediaQuery('(min-width:1010px)');
+  const matchesNotMobile = useMediaQuery('(min-width:380px)');
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -103,6 +137,14 @@ const Nav = () => {
     setOpen(false);
   };
 
+  const popupState = usePopupState({
+    variant: 'popover',
+    popupId: 'ac-menu',
+  });
+  const morepopupState = usePopupState({
+    variant: 'popover',
+    popupId: 'more-menu',
+  });
   return (
     <AppBar position="static" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -116,45 +158,43 @@ const Nav = () => {
               </Link>
             </Typography>
             <Box className={classes.box} m="auto">
-              <Link color="textPrimary" to="/" className={classes.link}>
-                Home
-              </Link>
-              <Link color="textPrimary" to="/dawn_splitter" className={classes.link}>
-                Dawn
-              </Link>
-              <Link color="textPrimary" to="/sunrise" className={classes.link}>
-                Sunrise
-              </Link>
-              <Link color="textPrimary" to="/bond" className={classes.link}>
-                Bond
-              </Link>
-              <Link color="textPrimary" to="/strategy" className={classes.link}>
-                Strategy
-              </Link>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://docs.polarisfinance.io"
-                className={classes.link}
-              >
-                Docs
-              </a>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.vaporwave.farm/#/aurora"
-                className={classes.link}
-              >
+              <StyledButton href="/">Home</StyledButton>
+              <StyledButton href="/dawn">Dawn</StyledButton>
+              <StyledButton href="/sunrise">Sunrise</StyledButton>
+              <StyledButton href="/bond">Bond</StyledButton>
+              <StyledButton onClick={() => window.open('https://docs.polarisfinance.io')}>Docs</StyledButton>
+              <StyledButton {...bindHover(popupState)} variant="text">
                 AC
-              </a>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
-                className={classes.link}
+              </StyledButton>
+              <HoverMenu
+                {...bindMenu(popupState)}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                getContentAnchorEl={null}
+                disableScrollLock={true}
               >
-                KYC
-              </a>
+                <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
+                <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
+              </HoverMenu>
+              <StyledButton {...bindHover(morepopupState)} variant="text">
+                More
+              </StyledButton>
+              <HoverMenu
+                {...bindMenu(morepopupState)}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                getContentAnchorEl={null}
+                disableScrollLock={true}
+              >
+                <MenuItem onClick={() => window.location.assign('/announcements')}>Announcements</MenuItem>
+                <MenuItem onClick={() => window.location.assign('/strategy')}>Strategy</MenuItem>
+                <MenuItem onClick={() => window.open('https://vote.polarisfinance.io')}>Governance</MenuItem>
+                <MenuItem
+                  onClick={() => window.open('https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/')}
+                >
+                  KYC
+                </MenuItem>
+              </HoverMenu>
             </Box>
             <AccountButton text="Connect" />
           </>
@@ -169,54 +209,73 @@ const Nav = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Polaris Finance
-            </Typography>
-
-            <Drawer
-              className={classes.drawer}
-              onEscapeKeyDown={handleDrawerClose}
-              onBackdropClick={handleDrawerClose}
-              variant="temporary"
-              anchor="left"
-              open={open}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-            >
-              <div>
-                <IconButton onClick={handleDrawerClose}>
-                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                </IconButton>
-              </div>
-              <Divider />
-              <List>
-                <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="Dawn" to="/dawn_splitter" />
-                <ListItemLink primary="Sunrise" to="/sunrise" />
-                <ListItemLink primary="Bond" to="/bond" />
-                <ListItemLink primary="Strategy" to="/strategy" />
-                {/* <ListItemLink primary="SBS" to="/sbs" />
+            {/*Polaris Finance*/}
+            <img src={NameLogo} alt="name_logo" height={30} />
+            <Box className={classes.box} m="auto">
+              <Drawer
+                className={classes.drawer}
+                onEscapeKeyDown={handleDrawerClose}
+                onBackdropClick={handleDrawerClose}
+                variant="temporary"
+                anchor="left"
+                open={open}
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+              >
+                <div>
+                  <IconButton onClick={handleDrawerClose}>
+                    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                  </IconButton>
+                </div>
+                <Divider />
+                <List>
+                  <ListItemLink primary="Home" to="/" />
+                  <ListItemLink primary="Dawn" to="/dawn" />
+                  <ListItemLink primary="Sunrise" to="/sunrise" />
+                  <ListItemLink primary="Bond" to="/bond" />
+                  {/* <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
                 <ListItemLink primary="Regulations" to="/regulations" /> */}
-                <ListItem button component="a" href="https://docs.polarisfinance.io">
-                  <ListItemText>Docs</ListItemText>
-                </ListItem>
-                <ListItem button component="a" href="https://www.vaporwave.farm/#/aurora">
-                  <ListItemText>AC</ListItemText>
-                </ListItem>
-                <ListItem
-                  button
-                  component="a"
-                  href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
-                >
-                  <ListItemText>KYC</ListItemText>
-                </ListItem>
-                <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <AccountButton text="Connect" />
-                </ListItem>
-              </List>
-            </Drawer>
+                  <ListItem button component="a" target="_blank" href="https://docs.polarisfinance.io">
+                    <ListItemText>Docs</ListItemText>
+                  </ListItem>
+                  <ListItem button {...bindHover(popupState)}>
+                    <ListItemText>AC</ListItemText>
+                  </ListItem>
+                  <HoverMenu
+                    {...bindMenu(popupState)}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    getContentAnchorEl={null}
+                    disableScrollLock={true}
+                  >
+                    <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
+                    <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
+                  </HoverMenu>
+                  <ListItemLink primary="Announcements" to="/announcements" />
+                  <ListItemLink primary="Strategy" to="/strategy" />
+                  <ListItem button component="a" target="_blank" href="https://vote.polarisfinance.io/#/">
+                    <ListItemText>Governance</ListItemText>
+                  </ListItem>
+                  <ListItem
+                    button
+                    component="a"
+                    target="_blank"
+                    href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
+                  >
+                    <ListItemText>KYC</ListItemText>
+                  </ListItem>
+
+                  {!matchesNotMobile && (
+                    <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <AccountButton text="Connect" />
+                    </ListItem>
+                  )}
+                </List>
+              </Drawer>
+            </Box>
+            {matchesNotMobile && <AccountButton text="Connect" />}
           </>
         )}
       </Toolbar>

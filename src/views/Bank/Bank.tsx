@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize: '22px',
+    color: '#fff',
   },
 }));
 
@@ -43,7 +44,9 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
-      {bank.depositTokenName.endsWith('WETH') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('USDC') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('USDT') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('USN') && <TaxFeeAlert />}
       {bank.depositTokenName.startsWith('POLAR-LUNAR') && (
         <Alert
           style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
@@ -51,6 +54,15 @@ const Bank: React.FC = () => {
           severity="warning"
         >
           <b>This pool has been retired. Please unstake and collect your rewards.</b>
+        </Alert>
+      )}
+      {bank.depositTokenName.startsWith('TRIPOLAR-x') && (
+        <Alert
+          style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}
+          variant="filled"
+          severity="warning"
+        >
+          <b>This pool has been retired. Please unstake and move to new TRIPOLAR/TRI pool.</b>
         </Alert>
       )}
       <Grid container>
@@ -135,6 +147,8 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const lunarAddr = polarisFinance.LUNAR.address;
   const tripolarAddr = polarisFinance.TRIPOLAR.address;
   const ethernalAddr = polarisFinance.ETHERNAL.address;
+  const orbitalAddr = polarisFinance.ORBITAL.address;
+  const uspAddr = polarisFinance.USP.address;
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName === 'POLAR-NEAR-LP') {
@@ -155,15 +169,29 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   } else if (bank.depositTokenName === 'ETHERNAL-ETH-LP') {
     pairName = 'ETHERNAL-ETH-LP';
     uniswapUrl = 'https://www.trisolaris.io/#/add/ETH/' + ethernalAddr;
+  } else if (bank.depositTokenName === 'ORBITAL-BTC-LP') {
+    pairName = 'ORBITAL-BTC-LP';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0xF4eB217Ba2454613b15dBdea6e5f22276410e89e/' + orbitalAddr;
+  } else if (bank.depositTokenName === 'TRIPOLAR-TRI-LP') {
+    pairName = 'TRIPOLAR-TRI-LP';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0xFa94348467f64D5A457F75F8bc40495D33c65aBB/' + tripolarAddr;
+  } else if (bank.depositTokenName === 'USP-USDC-LP') {
+    pairName = 'USP-USDC-LP';
+    uniswapUrl = 'https://www.trisolaris.io/#/add/0xB12BFcA5A55806AaF64E99521918A4bf0fC40802/' + uspAddr;
   } else {
     pairName = 'TRIPOLAR-xTRI pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x802119e4e253D5C19aA06A5d567C5a41596D6803/' + tripolarAddr;
   }
 
   return (
-    <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
-      {`Provide liquidity for ${pairName} now on Trisolaris`}
-    </StyledLink>
+    <>
+      {/*bank.depositTokenName.startsWith('ORBITAL') && (
+        <Typography style={{ color: 'white' }}> Note: The LPs are multiplied by 10000. </Typography>
+      )*/}
+      <StyledLink style={{ marginTop: '20px' }} href={uniswapUrl} target="_blank">
+        {`Provide liquidity for ${pairName} now on Trisolaris`}
+      </StyledLink>
+    </>
   );
 };
 

@@ -19,6 +19,47 @@ import Popups from './components/Popups';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 import { PhishingWarning } from './components/Alerts';
 
+import * as Realm from 'realm-web';
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client';
+
+const APP_ID = 'announcements-lsomz';
+
+// Connect to your MongoDB Realm app
+const app = new Realm.App(APP_ID);
+// Gets a valid Realm user access token to authenticate requests
+async function getValidAccessToken() {
+  // Guarantee that there's a logged in user with a valid access token
+  if (!app.currentUser) {
+    // If no user is logged in, log in an anonymous user. The logged in user will have a valid
+    // access token.
+    await app.logIn(Realm.Credentials.anonymous());
+  } else {
+    // An already logged in user's access token might be stale. To guarantee that the token is
+    // valid, we refresh the user's custom data which also refreshes their access token.
+    await app.currentUser.refreshCustomData();
+  }
+  return app.currentUser.accessToken;
+}
+// Configure the ApolloClient to connect to your app's GraphQL endpoint
+
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: `https://eu-central-1.aws.realm.mongodb.com/api/client/v2.0/app/${APP_ID}/graphql`,
+    // We define a custom fetch handler for the Apollo client that lets us authenticate GraphQL requests.
+    // The function intercepts every Apollo HTTP request and adds an Authorization header with a valid
+    // access token before sending the request.
+
+    fetch: async (uri, options) => {
+      const requestHeaders: HeadersInit = new Headers();
+      const accessToken = await getValidAccessToken();
+      requestHeaders.set('Authorization', `Bearer ${accessToken}`);
+      options.headers = requestHeaders;
+      return fetch(uri, options);
+    },
+  }),
+  cache: new InMemoryCache(),
+});
+
 const Home = lazy(() => import('./views/Home'));
 const Dawn = lazy(() => import('./views/Dawn'));
 const SunriseSplitter = lazy(() => import('./views/SunriseSplitter'));
@@ -26,11 +67,13 @@ const LegacySunriseSplitter = lazy(() => import('./views/LegacySunriseSplitter')
 const BondSplitter = lazy(() => import('./views/BondSplitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
-const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
-const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
+const Announcements = lazy(() => import('./views/Announcements'));
+
+//const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
+//const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
 
 const NoMatch = () => (
-  <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+  <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'white' }}>
     URL Not Found. <a href="/">Go back home.</a>
   </h3>
 );
@@ -73,13 +116,16 @@ const App: React.FC = () => {
               <LegacyDawn />
             </Route>
 
-            <Route path="/dawn_splitter">
+            {/* <Route path="/dawn_splitter">
               <DawnSplitter />
-            </Route>
+            </Route> */}
 
-            <Route path="/genesis_dawn">
-              <GenesisDawn />
+            <Route path="/announcements">
+              <Announcements />
             </Route>
+            {/* <Route path="/genesis_dawn">
+              <GenesisDawn />
+            </Route> */}
             <Route path="*">
               <NoMatch />
             </Route>
@@ -94,7 +140,7 @@ const Providers: React.FC = ({ children }) => {
   return (
     <TP1 theme={theme}>
       <TP theme={newTheme}>
-        <PhishingWarning/>
+        <PhishingWarning />
         <UseWalletProvider
           chainId={config.chainId}
           connectors={{
@@ -110,16 +156,18 @@ const Providers: React.FC = ({ children }) => {
             <Updaters />
             <RefreshContextProvider>
               <PolarisFinanceProvider>
-                <ModalsProvider>
-                  <BanksProvider>
-                    <SunrisesProvider>
-                      <>
-                        <Popups />
-                        {children}
-                      </>
-                    </SunrisesProvider>
-                  </BanksProvider>
-                </ModalsProvider>
+                <ApolloProvider client={client}>
+                  <ModalsProvider>
+                    <BanksProvider>
+                      <SunrisesProvider>
+                        <>
+                          <Popups />
+                          {children}
+                        </>
+                      </SunrisesProvider>
+                    </BanksProvider>
+                  </ModalsProvider>
+                </ApolloProvider>
               </PolarisFinanceProvider>
             </RefreshContextProvider>
           </Provider>

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Context from './context';
 import usePolarisFinance from '../../hooks/usePolarisFinance';
 import { Bank } from '../../polaris-finance';
-import config, { bankDefinitions } from '../../config';
+import { bankDefinitions } from '../../config';
 
 const Banks: React.FC = ({ children }) => {
   const [banks, setBanks] = useState<Bank[]>([]);
@@ -28,8 +28,8 @@ const Banks: React.FC = ({ children }) => {
       }
       banks.push({
         ...bankInfo,
-        address: config.deployments[bankInfo.contract].address,
-        depositToken: polarisFinance.externalTokens[bankInfo.depositTokenName],
+        address: polarisFinance.contracts[bankInfo.contract].address,
+        depositToken: polarisFinance.externalTokensMetamask[bankInfo.depositTokenName],
         earnToken: bankInfo.earnTokenName === 'POLAR' ? polarisFinance.POLAR : polarisFinance.SPOLAR,
       });
     }

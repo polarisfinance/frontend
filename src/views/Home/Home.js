@@ -1,9 +1,7 @@
 import React from 'react';
 import Page from '../../components/Page';
-import HomeImage from '../../assets/img/home.png';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
-import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
@@ -16,14 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import TokenCard from './TokenCard';
 import useSunrises from '../../hooks/useSunrises';
-
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${HomeImage}) no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-`;
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -76,20 +66,20 @@ const Home = () => {
 
   return (
     <Page>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       {/* <LaunchCountdown deadline={new Date(1645106400*1000)} description='hello'></LaunchCountdown> */}
       <Grid container spacing={3}>
         <Grid container>
           {/* Explanation text */}
           <Grid item xs={12} sm={6}>
             <Box color="primary" p={4}>
-              <h2 style={{ fontSize: '28px' }}>Welcome to Polaris Finance</h2>
-              <p style={{ fontSize: '20px' }}>
+              <h2 style={{ fontSize: '28px', color: '#fff' }}>Welcome to Polaris Finance</h2>
+              <p style={{ fontSize: '20px', color: '#fff' }}>
                 The very first algorithmic stablecoins ecosystem on Aurora / NEAR. We are bringing multiple pegged
                 assets 1:1 to native coins via seigniorage. Provide liquidity in{' '}
                 <StyledNormalLink href="/dawn">DAWN</StyledNormalLink> Farms to get SPOLAR - governance token that
                 controls inflation and expansion of all pegged assets. Stake your SPOLAR in{' '}
-                <StyledNormalLink href="/sunrise">SUNRISE</StyledNormalLink> to earn more POLAR, ETHERNAL and TRIPOLAR.
+                <StyledNormalLink href="/sunrise">SUNRISE</StyledNormalLink> to earn pegged assets.
               </p>
             </Box>
           </Grid>

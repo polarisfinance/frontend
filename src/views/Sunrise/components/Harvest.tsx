@@ -26,7 +26,7 @@ const Harvest = ({ sunrise }) => {
     [tombStats],
   );
 
-  const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
+  const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings, 18, 18))).toFixed(2);
 
   const { from, to } = useClaimRewardTimerSunrise(sunrise);
   let earnTokenName;
@@ -44,7 +44,12 @@ const Harvest = ({ sunrise }) => {
               <CardIcon>
                 <TokenSymbol symbol={sunrise.earnTokenName} />
               </CardIcon>
-              <Value value={getDisplayBalance(earnings)} />
+              {sunrise.earnTokenName === 'ORBITAL' ? (
+                <Value value={getDisplayBalance(earnings, 18, 6)} />
+              ) : (
+                <Value value={getDisplayBalance(earnings)} />
+              )}
+
               <Label text={`≈ $${earnedInDollars}`} />
               <Label text={`${earnTokenName} Earned`} />
             </StyledCardHeader>

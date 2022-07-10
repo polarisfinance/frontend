@@ -15,7 +15,6 @@ import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsRedeemable from '../../hooks/useBondsRedeemable';
 import { getDisplayBalance } from '../../utils/formatBalance';
-import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../polaris-finance/constants';
 
 import { useParams } from 'react-router-dom';
 import useSunrise from '../../hooks/useSunrise';
@@ -51,9 +50,12 @@ const Pit: React.FC = () => {
     },
     [polarisFinance, addTransaction, sunrise],
   );
-  const isBondRedeemable = useMemo(() => previousTwap.gt(BOND_REDEEM_PRICE_BN), [previousTwap]);
-  const isBondPurchasable = useMemo(() => Number(getDisplayBalance(previousTwap, 18, 4)) < 1.01, [previousTwap]);
-
+  const isBondRedeemable = useMemo(() => Number(getDisplayBalance(previousTwap, 18, 4)) > 1.01, [previousTwap]);
+  const isZen = useMemo(
+    () => Number(getDisplayBalance(previousTwap, 18, 4)) > 1 && Number(getDisplayBalance(previousTwap, 18, 4)) < 1.01,
+    [previousTwap],
+  );
+  const isBondPurchasable = useMemo(() => Number(getDisplayBalance(previousTwap, 18, 4)) < 1, [previousTwap]);
   return (
     <>
       {!!account ? (
@@ -64,17 +66,19 @@ const Pit: React.FC = () => {
             <StyledCardWrapper>
               <ExchangeCard
                 action="Purchase"
-                fromToken={polarisFinance[sunrise.earnTokenName]}
+                fromToken={polarisFinance[sunrise.earnTokenName + '_METAMASK']}
                 fromTokenName={sunrise.earnTokenName}
                 toToken={polarisFinance[sunrise.bond]}
                 toTokenName={sunrise.bond}
                 priceDesc={
-                  !isBondPurchasable
+                  isZen
+                    ? `${sunrise.earnTokenName} is in zen phase`
+                    : !isBondPurchasable
                     ? `${sunrise.earnTokenName} is over peg`
                     : `${sunrise.bond} is available for purchase`
                 }
                 onExchange={handleBuyBonds}
-                disabled={!bondStat || isBondRedeemable}
+                disabled={!bondStat || !isBondPurchasable}
                 treasury={sunrise.treasury}
               />
             </StyledCardWrapper>
@@ -103,7 +107,7 @@ const Pit: React.FC = () => {
             <StyledCardWrapper>
               <ExchangeCard
                 action="Redeem"
-                fromToken={polarisFinance[sunrise.bond]}
+                fromToken={polarisFinance[sunrise.bond + '_METAMASK']}
                 fromTokenName={sunrise.bond}
                 toToken={polarisFinance[sunrise.earnTokenName]}
                 toTokenName={sunrise.earnTokenName}
@@ -111,7 +115,7 @@ const Pit: React.FC = () => {
                 onExchange={handleRedeemBonds}
                 disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
                 disabledDescription={
-                  !isBondRedeemable ? `Enabled when ${sunrise.earnTokenName} > ${BOND_REDEEM_PRICE}NEAR` : null
+                  !isBondRedeemable ? `Enabled when ${sunrise.earnTokenName} > 1.01 ${sunrise.lpToken}` : null
                 }
                 treasury={sunrise.treasury}
               />

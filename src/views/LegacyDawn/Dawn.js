@@ -48,26 +48,87 @@ const Cemetery = () => {
                   >
                     <b>All below pools have ended. Please unstake and collect your rewards.</b>
                   </Alert>
-                  {/*<Typography
+                </div>
+                <div>
+                  <Typography
                     align="center"
                     color="textPrimary"
                     variant="h4"
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
-                    Earn SPOLAR by staking LP
+                    USP Genesis Pools
                   </Typography>
                   <Grid container spacing={3}>
                     {activeBanks
-                      .filter((bank) => bank.sectionInUI === 3)
+                      .filter((bank) => bank.sectionInUI === 8)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
                           <CemeteryCard bank={bank} />
                         </React.Fragment>
                       ))}
-                      </Grid>*/}
+                  </Grid>
                 </div>
-
+                <div>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    TRIPOLAR-xTRI Pool
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.depositTokenName === 'TRIPOLAR-xTRI-LP' && bank.poolId === 6)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 7).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    ORBITAL Genesis Pools
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 7)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
+                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 6).length === 0}>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
+                    ETHERNAL Genesis Pools
+                  </Typography>
+                  <Grid container spacing={3}>
+                    {activeBanks
+                      .filter((bank) => bank.sectionInUI === 6)
+                      .map((bank) => (
+                        <React.Fragment key={bank.name}>
+                          <CemeteryCard bank={bank} />
+                        </React.Fragment>
+                      ))}
+                  </Grid>
+                </div>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 3).length === 0}>
                   <Typography
                     align="center"

@@ -3,7 +3,7 @@ import { Sunrise } from '../polaris-finance';
 import usePolarisFinance from './usePolarisFinance';
 import useRefresh from './useRefresh';
 
-const useCashPriceInEstimatedTWAP = (sunrise:Sunrise) => {
+const useCashPriceInEstimatedTWAP = (sunrise: Sunrise) => {
   const [stat, setStat] = useState<string>();
   const polarisFinance = usePolarisFinance();
   const { slowRefresh } = useRefresh();

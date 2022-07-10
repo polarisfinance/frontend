@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontSize: '20px',
+    color: '#fff',
   },
 }));
 
@@ -99,6 +100,15 @@ const Sunrise: React.FC = () => {
           {earnTokenName} Sunrise
         </Typography>
       )}
+      <Grid container item justify="center">
+        <Alert
+          variant="filled"
+          severity="warning"
+          style={{ backgroundColor: '#b43387', fontSize: 16, paddingTop: 0, paddingBottom: 0 }}
+        >
+          <b>Sunrise prints only when the TWAP is above 1.01</b>
+        </Alert>
+      </Grid>
       <Grid container className={classes.text}>
         {sunrise.retired ? (
           <Grid container item xs={12} justify="center" className={classes.text}>
@@ -119,7 +129,7 @@ const Sunrise: React.FC = () => {
         )}
 
         <Grid item xs={12} md={4}>
-          <Stake sunrise={sunrise} contract={sunrise?.contract} retired={sunrise?.retired} />
+          <Stake sunrise={sunrise} contract={sunrise.contract} retired={sunrise.retired} />
         </Grid>
         <Grid container item xs={12} md={4} alignItems="center" direction="row">
           <Grid container item xs={12}>

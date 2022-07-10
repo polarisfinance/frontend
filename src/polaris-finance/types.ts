@@ -39,6 +39,7 @@ export interface SunriseInfo {
   getBondsPurchasable: string;
   getPrice: string;
   oracle: string;
+  notActive?: boolean;
 }
 
 export interface Sunrise extends SunriseInfo {

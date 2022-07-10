@@ -80,6 +80,17 @@ const Stake = ({ sunrise }) => {
                 >
                   Unstake
                 </Button>
+              ) : sunrise.notActive ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '20px' }}
+                  component={Link}
+                  to={'/polar_sunrise'}
+                  disabled={true}
+                >
+                  View and Stake
+                </Button>
               ) : (
                 <Button
                   variant="contained"

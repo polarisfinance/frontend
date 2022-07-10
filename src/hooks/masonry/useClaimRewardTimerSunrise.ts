@@ -3,7 +3,7 @@ import usePolarisFinance from '../usePolarisFinance';
 import { AllocationTime } from '../../polaris-finance/types';
 import { Sunrise } from '../../polaris-finance';
 
-const useClaimRewardTimerSunrise = (sunrise:Sunrise) => {
+const useClaimRewardTimerSunrise = (sunrise: Sunrise) => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
