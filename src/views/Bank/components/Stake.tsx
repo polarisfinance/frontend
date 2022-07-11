@@ -123,13 +123,16 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                   <RemoveIcon />
                 </IconButton>
                 <StyledActionSpacer />
-                <IconButton
-                  onClick={() => {
-                    onDissmissZap();
-                  }}
-                >
-                  <FlashOnRoundedIcon style={{ color: 'white' }} />
-                </IconButton>
+                {bank.depositTokenName.includes('-') && (
+                  <IconButton
+                    onClick={() => {
+                      onDissmissZap();
+                    }}
+                  >
+                    <FlashOnRoundedIcon style={{ color: 'white' }} />
+                  </IconButton>
+                )}
+
                 <StyledActionSpacer />
                 <IconButton
                   disabled={bank.closedForStaking}
