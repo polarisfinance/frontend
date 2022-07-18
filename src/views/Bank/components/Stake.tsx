@@ -66,10 +66,11 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
       decimals={bank.depositToken.decimal}
       onConfirm={(zappingToken, tokenName, amount) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+        console.log(amount);
         onZap(zappingToken, tokenName, amount);
         onDissmissZap();
       }}
-      tokenName={bank.depositTokenName}
+      lpName={bank.depositTokenName}
     />,
   );
 

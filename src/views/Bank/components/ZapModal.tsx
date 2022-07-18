@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 
 import { Button, MenuItem, withStyles, makeStyles, TextField } from '@material-ui/core';
 // import Button from '../../../components/Button'
@@ -20,7 +20,7 @@ import { Alert } from '@material-ui/lab';
 
 interface ZapProps extends ModalProps {
   onConfirm: (zapAsset: string, lpName: string, amount: string) => void;
-  tokenName?: string;
+  lpName?: string;
   decimals?: number;
 }
 
@@ -40,22 +40,44 @@ const useStyles = makeStyles({
   },
 });
 
-const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', decimals = 18 }) => {
+const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, lpName = '', decimals = 18 }) => {
+  const tokenName = lpName.match(/^(.*?)-/)[1];
+  const nativeName = lpName.match(/-(.*)-/)[1];
   const polarisFinance = usePolarisFinance();
   const { balance } = useWallet();
-  const ftmBalance = (Number(balance) / 1e24).toFixed(4).toString();
-  const tombBalance = useTokenBalance(polarisFinance.POLAR);
-  const tshareBalance = useTokenBalance(polarisFinance.SPOLAR);
+
   const [val, setVal] = useState('');
-  const [zappingToken, setZappingToken] = useState(FTM_TICKER);
-  const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
+
+  const [zappingToken, setZappingToken] = useState(tokenName);
+
+  const [zappingTokenBalance, setZappingTokenBalance] = useState('');
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (zappingToken === 'ETH') {
+        const ethBalance = (Number(balance) / 1e18).toFixed(4).toString();
+        setZappingTokenBalance(ethBalance);
+      } else {
+        setZappingTokenBalance(
+          getDisplayBalance(
+            await polarisFinance.externalTokens[zappingToken].balanceOf(polarisFinance.myAccount),
+            polarisFinance.externalTokens[zappingToken].decimal,
+          ),
+        );
+      }
+      console.log('executed');
+    };
+    fetchBalance().catch(console.error);
+  }, [zappingToken, balance, polarisFinance.externalTokens, polarisFinance.myAccount]);
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be FTM in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
+
   const tombFtmLpStats = useLpStats('POLAR-NEAR-LP');
   const tShareFtmLpStats = useLpStats('SPOLAR-NEAR-LP');
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
-  const ftmAmountPerLP = tokenName.startsWith(POLAR_TICKER) ? tombLPStats?.ftmAmount : tshareLPStats?.ftmAmount;
+  const ftmAmountPerLP = lpName.startsWith(POLAR_TICKER) ? tombLPStats?.ftmAmount : tshareLPStats?.ftmAmount;
+
   const classes = useStyles();
   /**
    * Checks if a value is a valid number or not
@@ -65,32 +87,30 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   function isNumeric(n: any) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
-  const handleChangeAsset = (event: any) => {
+  const handleChangeAsset = async (event: any) => {
     const value = event.target.value;
     setZappingToken(value);
-    setZappingTokenBalance(ftmBalance);
-    if (event.target.value === SPOLAR_TICKER) {
-      setZappingTokenBalance(getDisplayBalance(tshareBalance, decimals));
-    }
-    if (event.target.value === POLAR_TICKER) {
-      setZappingTokenBalance(getDisplayBalance(tombBalance, decimals));
-    }
   };
 
   const handleChange = async (e: any) => {
-    if (e.currentTarget.value === '' || e.currentTarget.value === 0) {
+    if (e.currentTarget.value === '' || e.currentTarget.value === '0') {
       setVal(e.currentTarget.value);
       setEstimate({ token0: '0', token1: '0' });
+    } else {
+      console.log(e.currentTarget.value);
+      if (!isNumeric(e.currentTarget.value)) console.log('non nummeric');
+      setVal(e.currentTarget.value);
+      const estimateZap = await polarisFinance.estimateZapIn(zappingToken, lpName, String(e.currentTarget.value));
+      setEstimate({
+        token0: estimateZap[0],
+        token1: estimateZap[1],
+      });
     }
-    if (!isNumeric(e.currentTarget.value)) return;
-    setVal(e.currentTarget.value);
-    const estimateZap = await polarisFinance.estimateZapIn(zappingToken, tokenName, String(e.currentTarget.value));
-    setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
   };
 
   const handleSelectMax = async () => {
     setVal(zappingTokenBalance);
-    const estimateZap = await polarisFinance.estimateZapIn(zappingToken, tokenName, String(zappingTokenBalance));
+    const estimateZap = await polarisFinance.estimateZapIn(zappingToken, lpName, String(zappingTokenBalance));
     setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
   };
 
@@ -99,7 +119,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       <Alert variant="filled" severity="warning" style={{ marginBottom: '1em' }}>
         Beta feature. Use at your own risk!
       </Alert>
-      <ModalTitle text={`Zap in ${tokenName}`} />
+      <ModalTitle text={`Zap in ${lpName}`} />
       <TextField
         select
         label="Select asset to zap with"
@@ -107,8 +127,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         onChange={handleChangeAsset}
         variant="outlined"
       >
-        <StyledMenuItem value={FTM_TICKER}>FTM</StyledMenuItem>
-        <StyledMenuItem value={SPOLAR_TICKER}>SPOLAR</StyledMenuItem>
+        <StyledMenuItem value={`${tokenName}`}>{tokenName}</StyledMenuItem>
+        <StyledMenuItem value={`${nativeName}`}>{nativeName}</StyledMenuItem>
       </TextField>
       <TokenInput
         onSelectMax={handleSelectMax}
@@ -121,12 +141,11 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         <Label text="Zap Estimations" />
         <StyledDescriptionText>
           {' '}
-          {tokenName}: {Number(estimate.token0) / Number(ftmAmountPerLP)}
+          {lpName}: {Number(estimate.token0) / Number(ftmAmountPerLP)}
         </StyledDescriptionText>
         <StyledDescriptionText>
           {' '}
-          ({Number(estimate.token0)} {FTM_TICKER} / {Number(estimate.token1)}{' '}
-          {tokenName.startsWith(POLAR_TICKER) ? POLAR_TICKER : SPOLAR_TICKER}){' '}
+          ({Number(estimate.token0)} {tokenName} / {Number(estimate.token1)} {nativeName}){' '}
         </StyledDescriptionText>
       </div>
       <div className={classes.button}>
@@ -135,7 +154,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
             color="primary"
             variant="contained"
             onClick={() =>
-              approveZapperStatus !== ApprovalState.APPROVED ? approveZapper() : onConfirm(zappingToken, tokenName, val)
+              approveZapperStatus !== ApprovalState.APPROVED ? approveZapper() : onConfirm(zappingToken, lpName, val)
             }
           >
             {approveZapperStatus !== ApprovalState.APPROVED ? 'Approve' : "Let's go"}

@@ -12,7 +12,7 @@ import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import config, { bankDefinitions, sunriseDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
-import { FTM_TICKER, SPOOKY_ROUTER_ADDR, POLAR_TICKER } from '../utils/constants';
+import { FTM_TICKER, ROUTER_ADDR, POLAR_TICKER } from '../utils/constants';
 import { Deployments } from './deployments/index';
 /**
  * An API module of Polaris Finance contracts.
@@ -1542,38 +1542,59 @@ export class PolarisFinance {
     return bondsAmount.length;
   }
 
-  async estimateZapIn(tokenName: string, lpName: string, amount: string): Promise<number[]> {
+  async estimateZapIn(tokenName: string, lpName: string, amount: string): Promise<string[]> {
     const { zapper } = this.contracts;
+    console.log(zapper);
     const lpToken = this.externalTokens[lpName];
-    let estimate;
-    if (tokenName === FTM_TICKER) {
-      estimate = await zapper.estimateZapIn(lpToken.address, SPOOKY_ROUTER_ADDR, parseUnits(amount, 18));
-    } else {
-      const token = tokenName === POLAR_TICKER ? this.POLAR : this.SPOLAR;
-      estimate = await zapper.estimateZapInToken(
-        token.address,
-        lpToken.address,
-        SPOOKY_ROUTER_ADDR,
-        parseUnits(amount, 18),
-      );
+    const pegToken = lpName.match(/^(.*?)-/)[1];
+    let native = lpName.match(/-(.*)-/)[1];
+    if (native === 'ETH') {
+      native = 'WETH';
     }
-    return [estimate[0] / 1e18, estimate[1] / 1e18];
+    let estimate: BigNumber;
+    if (tokenName === 'ETH') {
+      estimate = await zapper.estimateZapIn(lpToken.address, ROUTER_ADDR, parseUnits(amount, 18));
+      return [estimate[0], estimate[1]];
+    } else {
+      const token = this.externalTokens[tokenName];
+      console.log([token.address, lpToken.address, ROUTER_ADDR, parseUnits(amount, token.decimal)]);
+      try {
+        estimate = await zapper.estimateZapInToken(
+          token.address,
+          lpToken.address,
+          ROUTER_ADDR,
+          parseUnits(amount, token.decimal).toBigInt(),
+        );
+      } catch (err) {
+        console.error(err);
+      }
+      console.log(getDisplayBalance(estimate[1], token.decimal));
+      return [
+        getDisplayBalance(estimate[0], this.externalTokens[pegToken].decimal),
+        getDisplayBalance(estimate[1], this.externalTokens[native].decimal),
+      ];
+    }
   }
   async zapIn(tokenName: string, lpName: string, amount: string): Promise<TransactionResponse> {
-    const { zapper } = this.contracts;
+    const zapper = this.contracts['zappermetamask'];
     const lpToken = this.externalTokens[lpName];
-    if (tokenName === FTM_TICKER) {
+    if (tokenName === 'ETH') {
       let overrides = {
         value: parseUnits(amount, 18),
       };
-      return await zapper.zapIn(lpToken.address, SPOOKY_ROUTER_ADDR, this.myAccount, overrides);
+      return await zapper.zapIn(lpToken.address, ROUTER_ADDR, this.myAccount, overrides);
     } else {
-      const token = tokenName === POLAR_TICKER ? this.POLAR : this.SPOLAR;
+      console.log(tokenName);
+      const token = this.externalTokensMetamask[tokenName];
+      console.log(token.address);
+      console.log(lpToken.address);
+      console.log(ROUTER_ADDR);
+      console.log(this.myAccount);
       return await zapper.zapInToken(
         token.address,
-        parseUnits(amount, 18),
+        parseUnits(amount, token.decimal),
         lpToken.address,
-        SPOOKY_ROUTER_ADDR,
+        ROUTER_ADDR,
         this.myAccount,
       );
     }
