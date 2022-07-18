@@ -40,6 +40,10 @@ import usnLogo from '../../assets/img/usn-logo.svg';
 import usdtLogo from '../../assets/img/usdt-logo.svg';
 import uspUsdcLogo from '../../assets/img/usp-usdc.svg';
 
+import polarUsp from '../../assets/img/polar-usp.svg';
+import ethernalUsp from '../../assets/img/ethernal-usp.svg';
+import orbitalUsp from '../../assets/img/orbital-usp.svg'
+
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
@@ -81,6 +85,9 @@ const logosBySymbol: { [title: string]: string } = {
   USN: usnLogo,
   USDT: usdtLogo,
   'USP-USDC-LP': uspUsdcLogo,
+  'POLAR-USP-LP': polarUsp,
+  'ETHERNAL-USP-LP': ethernalUsp,
+  'ORBITAL-USP-LP': orbitalUsp,
 };
 
 type LogoProps = {
