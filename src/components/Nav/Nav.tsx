@@ -173,7 +173,9 @@ const Nav = () => {
                 getContentAnchorEl={null}
                 disableScrollLock={true}
               >
-                <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
+                <MenuItem onClick={() => window.open('https://autofarm.network/?chainId=1313161554')}>
+                  AutoFarm
+                </MenuItem>
                 <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
               </HoverMenu>
               <StyledButton {...bindHover(morepopupState)} variant="text">
