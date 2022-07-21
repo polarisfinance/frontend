@@ -598,6 +598,15 @@ export class PolarisFinance {
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getStat('PBOND');
         tokenPrice = getBondPrice.priceInDollars;
+      } else if (tokenName === 'EBOND') {
+        const getBondPrice = await this.getStat('EBOND');
+        tokenPrice = getBondPrice.priceInDollars;
+      } else if (tokenName === 'OBOND') {
+        const getBondPrice = await this.getStat('OBOND');
+        tokenPrice = getBondPrice.priceInDollars;
+      } else if (tokenName === 'USPBOND') {
+        const getBondPrice = await this.getStat('USPBOND');
+        tokenPrice = getBondPrice.priceInDollars;
       } else if (tokenName === 'ETHERNAL') {
         const price = await this.getStat('ETHERNAL');
         tokenPrice = price.priceInDollars;
@@ -741,6 +750,7 @@ export class PolarisFinance {
       SpolarNear,
       PolarNear,
       Polar,
+      Pbond,
       LunarAtluna,
       PolarStNear,
       Tripolar,
@@ -754,11 +764,15 @@ export class PolarisFinance {
       PolarUsp,
       EthernalUsp,
       OrbitalUsp,
+      Obond,
+      Uspbond,
+      Ebond,
     ] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
       poolContract.poolInfo(0),
       poolContract.poolInfo(2),
+      poolContract.poolInfo(3),
       poolContract.poolInfo(4),
       poolContract.poolInfo(5),
       poolContract.poolInfo(6),
@@ -772,6 +786,9 @@ export class PolarisFinance {
       poolContract.poolInfo(14),
       poolContract.poolInfo(15),
       poolContract.poolInfo(16),
+      poolContract.poolInfo(17),
+      poolContract.poolInfo(18),
+      poolContract.poolInfo(19),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
@@ -784,7 +801,7 @@ export class PolarisFinance {
     } else if (depositTokenName.startsWith('SPOLAR')) {
       return rewardPerSecond.mul(SpolarNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('PBOND')) {
-      return rewardPerSecond.mul(0).div(41000);
+      return rewardPerSecond.mul(Pbond.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR-STNEAR')) {
       return rewardPerSecond.mul(PolarStNear.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('POLAR')) {
@@ -805,6 +822,12 @@ export class PolarisFinance {
       return rewardPerSecond.mul(TripolarTri.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('USP-USDC')) {
       return rewardPerSecond.mul(UspUsdc.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('EBOND')) {
+      return rewardPerSecond.mul(Ebond.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('OBOND')) {
+      return rewardPerSecond.mul(Obond.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('USPBOND')) {
+      return rewardPerSecond.mul(Uspbond.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
