@@ -3,21 +3,23 @@ import usePolarisFinance from './usePolarisFinance';
 import { Bank } from '../polaris-finance';
 import { PoolStats } from '../polaris-finance/types';
 import config from '../config';
+import useRefresh from './useRefresh';
 
 const useStatsForPool = (bank: Bank) => {
   const polarisFinance = usePolarisFinance();
-
+  const { slowRefresh } = useRefresh();
   const [poolAPRs, setPoolAPRs] = useState<PoolStats>();
 
-  const fetchAPRsForPool = useCallback(async () => {
-    setPoolAPRs(await polarisFinance.getPoolAPRs(bank));
-  }, [polarisFinance, bank]);
-
   useEffect(() => {
-    fetchAPRsForPool().catch((err) => console.error(`Failed to fetch ${bank.earnTokenName} price: ${err.stack}`));
-    const refreshInterval = setInterval(fetchAPRsForPool, config.refreshInterval);
-    return () => clearInterval(refreshInterval);
-  }, [setPoolAPRs, polarisFinance, fetchAPRsForPool, bank]);
+    async function fetchAPRsForPool() {
+      try {
+        setPoolAPRs(await polarisFinance.getPoolAPRs(bank));
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchAPRsForPool();
+  }, [setPoolAPRs, polarisFinance, bank, slowRefresh]);
 
   return poolAPRs;
 };

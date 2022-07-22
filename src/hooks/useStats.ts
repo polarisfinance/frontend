@@ -5,7 +5,7 @@ import useRefresh from './useRefresh';
 
 const useStats = (token: string) => {
   const [state, setState] = useState<TokenStat>();
-  const { fastRefresh } = useRefresh();
+  const { slowRefresh } = useRefresh();
   const polarisFinance = usePolarisFinance();
   useEffect(() => {
     async function fetchStats() {
@@ -16,7 +16,7 @@ const useStats = (token: string) => {
       }
     }
     fetchStats();
-  }, [setState, polarisFinance, fastRefresh, token]);
+  }, [setState, polarisFinance, token, slowRefresh]);
 
   return state;
 };

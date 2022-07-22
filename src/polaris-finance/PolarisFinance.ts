@@ -545,7 +545,6 @@ export class PolarisFinance {
         return await pool.pendingOrbital(poolId, account);
       }
       if (earnTokenName === 'USP') {
-        console.log(await pool.pendingUsp(poolId, account));
         return await pool.pendingUsp(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
@@ -1017,7 +1016,6 @@ export class PolarisFinance {
       circulatingSupply = supply.sub(rewardPoolSupply);
       priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(2);
     }
-
     return {
       tokenInFtm: priceInToken,
       priceInDollars: priceInDollars,
@@ -1098,7 +1096,6 @@ export class PolarisFinance {
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal, 8));
-
     const stat = await this.getStat(bank.earnTokenName);
 
     const tokenPerSecond = await this.getTokenPerSecond(

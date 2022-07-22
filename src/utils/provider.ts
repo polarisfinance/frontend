@@ -3,12 +3,12 @@ import config from '../config';
 import { web3ProviderFrom } from '../polaris-finance/ether-utils';
 import Web3WsProvider from 'web3-providers-ws';
 
-let provider: ethers.providers.Web3Provider = null;
+let provider = null;
 
 export function getDefaultProvider(): ethers.providers.Web3Provider {
   if (!provider) {
     provider = !config.defaultWssProvider.includes('wss')
-      ? new ethers.providers.Web3Provider(web3ProviderFrom(config.defaultWssProvider), config.chainId)
+      ? new ethers.providers.JsonRpcBatchProvider(config.defaultWssProvider, config.chainId)
       : new ethers.providers.Web3Provider(
           new (Web3WsProvider as any)(config.defaultWssProvider, {
             timeout: 30000, // ms

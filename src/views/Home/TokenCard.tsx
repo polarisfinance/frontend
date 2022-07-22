@@ -50,7 +50,7 @@ function numberWithSpaces(x) {
   return parts.join('.');
 }
 
-const Stake = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
+const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
   const classes = useStyles();
   const polarisFinance = usePolarisFinance();
   const tokenStats = useStats(token);
@@ -197,4 +197,4 @@ const Stake = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
   );
 };
 
-export default Stake;
+export default TokenCard;

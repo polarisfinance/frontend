@@ -4,7 +4,7 @@ import TransactionUpdater from './transactions/updater';
 
 const Updaters = () => (
   <>
-    <ApplicationUpdater />
+    {/*<ApplicationUpdater />*/}
     <TransactionUpdater />
   </>
 );
