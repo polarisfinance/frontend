@@ -32,11 +32,12 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss, sunrises }) => {
             <AccountModalCard token={sunrise.earnTokenName} />
           </React.Fragment>
         ))}
-        {activeSunrises.map((sunrise) => (
+        <AccountModalCard token={`BBOND`} />
+        {/*activeSunrises.map((sunrise) => (
           <React.Fragment key={sunrise.bond}>
             <AccountModalCard token={sunrise.bond} />
           </React.Fragment>
-        ))}
+        ))*/}
       </Grid>
     </Modal>
   );

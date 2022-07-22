@@ -47,6 +47,7 @@ const Bank: React.FC = () => {
       {bank.depositTokenName.endsWith('USDC') && <TaxFeeAlert />}
       {bank.depositTokenName.endsWith('USDT') && <TaxFeeAlert />}
       {bank.depositTokenName.endsWith('USN') && <TaxFeeAlert />}
+      {bank.depositTokenName.endsWith('BNB') && <TaxFeeAlert />}
       {bank.depositTokenName.startsWith('POLAR-LUNAR') && (
         <Alert
           style={{ marginTop: '0px', marginBottom: '20px', backgroundColor: '#b43387', fontSize: '20px' }}

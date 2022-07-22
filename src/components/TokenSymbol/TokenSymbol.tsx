@@ -42,7 +42,12 @@ import uspUsdcLogo from '../../assets/img/usp-usdc.svg';
 
 import polarUsp from '../../assets/img/polar-usp.svg';
 import ethernalUsp from '../../assets/img/ethernal-usp.svg';
-import orbitalUsp from '../../assets/img/orbital-usp.svg'
+import orbitalUsp from '../../assets/img/orbital-usp.svg';
+
+import binarisLogo from '../../assets/img/binaris-token.svg';
+import bbondLogo from '../../assets/img/bbond-token.svg';
+import binarisBnb from '../../assets/img/binaris-bnb.svg';
+import bnbLogo from '../../assets/img/bnb-logo.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -88,6 +93,11 @@ const logosBySymbol: { [title: string]: string } = {
   'POLAR-USP-LP': polarUsp,
   'ETHERNAL-USP-LP': ethernalUsp,
   'ORBITAL-USP-LP': orbitalUsp,
+
+  BINARIS: binarisLogo,
+  BBOND: bbondLogo,
+  'BINARIS-BNB-LP': binarisBnb,
+  BNB: bnbLogo,
 };
 
 type LogoProps = {
