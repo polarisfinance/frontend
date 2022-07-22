@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import config from '../config';
-import { web3ProviderFrom } from '../polaris-finance/ether-utils';
+//import { web3ProviderFrom } from '../polaris-finance/ether-utils';
 import Web3WsProvider from 'web3-providers-ws';
 
 let provider = null;

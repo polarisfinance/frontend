@@ -1,27 +1,27 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
 import usePolarisFinance from './usePolarisFinance';
 import { ContractName } from '../polaris-finance';
-import config from '../config';
+import useRefresh from './useRefresh';
 
 const useEarnings = (poolName: ContractName, earnTokenName: String, poolId: Number) => {
   const [balance, setBalance] = useState(BigNumber.from(0));
   const polarisFinance = usePolarisFinance();
+  const { slowRefresh } = useRefresh();
   const isUnlocked = polarisFinance?.isUnlocked;
 
-  const fetchBalance = useCallback(async () => {
-    const balance = await polarisFinance.earnedFromBank(poolName, earnTokenName, poolId, polarisFinance.myAccount);
-    setBalance(balance);
-  }, [poolName, earnTokenName, poolId, polarisFinance]);
-
   useEffect(() => {
-    if (isUnlocked) {
-      fetchBalance().catch((err) => console.error(err.stack));
-
-      const refreshBalance = setInterval(fetchBalance, config.refreshInterval);
-      return () => clearInterval(refreshBalance);
+    async function fetchBalance() {
+      try {
+        setBalance(await polarisFinance.earnedFromBank(poolName, earnTokenName, poolId, polarisFinance.myAccount));
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }, [isUnlocked, poolName, polarisFinance, fetchBalance]);
+    if (isUnlocked) {
+      fetchBalance();
+    }
+  }, [poolName, polarisFinance, earnTokenName, poolId, slowRefresh, isUnlocked]);
 
   return balance;
 };

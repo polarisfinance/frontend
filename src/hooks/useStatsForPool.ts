@@ -1,8 +1,7 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import usePolarisFinance from './usePolarisFinance';
 import { Bank } from '../polaris-finance';
 import { PoolStats } from '../polaris-finance/types';
-import config from '../config';
 import useRefresh from './useRefresh';
 
 const useStatsForPool = (bank: Bank) => {
