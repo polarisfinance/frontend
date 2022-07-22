@@ -9,7 +9,7 @@ const configurations: { [env: string]: Configuration } = {
     networkName: 'Aurora Mainnet',
     ftmscanUrl: 'https://aurorascan.dev/',
     defaultProvider: 'https://mainnet.aurora.dev/',
-    defaultWssProvider: 'https://rpc.polarisfinance.io/',
+    defaultWssProvider: 'https://aurora-mainnet.infura.io/v3/36bf772af0a340e3be39429d97753e80',
     deployments: require('./polaris-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
