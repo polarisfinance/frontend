@@ -626,17 +626,6 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 3,
     closedForStaking: false,
   },
-  PbondSpolarRewardPool: {
-    name: 'Earn SPOLAR by PBOND',
-    poolId: 3,
-    sectionInUI: 2,
-    contract: 'PbondSpolarRewardPool',
-    depositTokenName: 'PBOND',
-    earnTokenName: 'SPOLAR',
-    finished: false,
-    sort: 10,
-    closedForStaking: false,
-  },
   OrbitalBtcLPSpolarRewardPool: {
     name: 'Earn SPOLAR by ORBITAL-WBTC LP',
     poolId: 9,
@@ -714,6 +703,17 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 9,
     closedForStaking: false,
   },
+  PbondSpolarRewardPool: {
+    name: 'Earn SPOLAR by PBOND',
+    poolId: 3,
+    sectionInUI: 2,
+    contract: 'PbondSpolarRewardPool',
+    depositTokenName: 'PBOND',
+    earnTokenName: 'SPOLAR',
+    finished: false,
+    sort: 10,
+    closedForStaking: false,
+  },
   EbondSpolarRewardPool: {
     name: 'Earn SPOLAR by EBOND',
     poolId: 19,
@@ -739,13 +739,13 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   UspbondSpolarRewardPool: {
     name: 'Earn SPOLAR by USPBOND',
     poolId: 18,
-    sectionInUI: 2,
+    sectionInUI: 9,
     contract: 'UspbondSpolarRewardPool',
     depositTokenName: 'USPBOND',
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 13,
-    closedForStaking: false,
+    closedForStaking: true,
   },
 };
 
