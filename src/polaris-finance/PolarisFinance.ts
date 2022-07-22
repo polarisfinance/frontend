@@ -812,28 +812,30 @@ export class PolarisFinance {
     }
     if (earnTokenName === 'BINARIS') {
       const rewardPerSecond = await poolContract.binarisPerSecond();
-      if (depositTokenName === 'USDC') {
-        return rewardPerSecond.mul(30000).div(100000);
-      } else if (depositTokenName === 'USDT') {
-        return rewardPerSecond.mul(10000).div(100000);
-      } else if (depositTokenName === 'USN') {
-        return rewardPerSecond.mul(10000).div(100000);
+      if (depositTokenName === 'BNB') {
+        return rewardPerSecond.mul(50000).div(100000);
       } else if (depositTokenName === 'SPOLAR') {
-        return rewardPerSecond.mul(25000).div(100000);
-      } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
-        return rewardPerSecond.mul(8000).div(100000);
+        return rewardPerSecond.mul(20000).div(100000);
+      } else if (depositTokenName === 'POLAR') {
+        return rewardPerSecond.mul(1000).div(100000);
+      } else if (depositTokenName === 'ETHERNAL') {
+        return rewardPerSecond.mul(1000).div(100000);
       } else if (depositTokenName === 'POLAR-NEAR-LP') {
-        return rewardPerSecond.mul(5500).div(100000);
+        return rewardPerSecond.mul(7000).div(100000);
+      } else if (depositTokenName === 'SPOLAR-NEAR-LP') {
+        return rewardPerSecond.mul(5000).div(100000);
       } else if (depositTokenName === 'POLAR-STNEAR-LP') {
-        return rewardPerSecond.mul(600).div(100000);
+        return rewardPerSecond.mul(1000).div(100000);
       } else if (depositTokenName === 'TRIPOLAR-TRI-LP') {
         return rewardPerSecond.mul(200).div(100000);
       } else if (depositTokenName.startsWith('ETHERNAL')) {
-        return rewardPerSecond.mul(7200).div(100000);
-      } else if (depositTokenName.startsWith('ORBITAL')) {
-        return rewardPerSecond.mul(3500).div(100000);
+        return rewardPerSecond.mul(5000).div(100000);
+      } else if (depositTokenName.startsWith('ORBITAL-')) {
+        return rewardPerSecond.mul(5000).div(100000);
+      } else if (depositTokenName.startsWith('USP-')) {
+        return rewardPerSecond.mul(2000).div(100000);
       } else {
-        return rewardPerSecond.mul(3500).div(100000);
+        return rewardPerSecond.mul(500).div(100000);
       }
     }
     const [
