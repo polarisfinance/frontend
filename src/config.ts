@@ -753,7 +753,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: true,
   },
   BnbBinarisGenesisRewardPool: {
-    name: 'Earn SPOLAR by BNB-BINARIS',
+    name: 'Earn BINARIS by BNB',
     poolId: 0,
     sectionInUI: 10,
     contract: 'BnbBinarisGenesisRewardPool',
