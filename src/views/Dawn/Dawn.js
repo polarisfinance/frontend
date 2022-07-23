@@ -13,11 +13,18 @@ import { createGlobalStyle } from 'styled-components';
 import useBanks from '../../hooks/useBanks';
 import HomeImage from '../../assets/img/home.png';
 
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Switch as MuiSwitch } from '@material-ui/core';
+
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
     background-position: center center !important;
+  }
+  .MuiFormControlLabel-label {
+    color: white;
   }
 `;
 
@@ -26,6 +33,15 @@ const Cemetery = () => {
   const { path } = useRouteMatch();
   const { account } = useWallet();
   const activeBanks = banks.filter((bank) => !bank.finished);
+
+  const [state, setState] = React.useState({
+    onlyStaked: false,
+  });
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
   return (
     <Switch>
       <Page>
@@ -47,13 +63,25 @@ const Cemetery = () => {
                   >
                     Earn SPOLAR by staking LP
                   </Typography>
-
+                  <FormGroup row>
+                    <FormControlLabel
+                      control={
+                        <MuiSwitch
+                          checked={state.onlyStaked}
+                          onChange={handleChange}
+                          name="onlyStaked"
+                          color="primary"
+                        />
+                      }
+                      label="Only show staked LP"
+                    />
+                  </FormGroup>
                   <Grid container spacing={3}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
+                          <CemeteryCard bank={bank} onlyStaked={state.onlyStaked} />
                         </React.Fragment>
                       ))}
                   </Grid>
