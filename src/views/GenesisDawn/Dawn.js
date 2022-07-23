@@ -21,6 +21,17 @@ const BackgroundImage = createGlobalStyle`
     background-size: cover !important;
     background-position: center center !important;
   }
+  
+  a:link, a:visited {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  a:link:active, a:visited:active {
+    color: white;
+  }
+
 `;
 
 const Cemetery = () => {
@@ -41,7 +52,15 @@ const Cemetery = () => {
               <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
                 <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
                   {/* <b>All below pools have ended. Please unstake and collect your rewards.</b> */}
-                  <b>23.06.2022 14:00 UTC - 24.06.2022 14:00 UTC</b>
+                  <b>23.07.2022 14:00 UTC - 24.07.2022 14:00 UTC</b>
+                  <p>
+                    You can bridge BNB via{' '}
+                    <a href="https://app.allbridge.io/bridge?from=BSC&to=AURO&asset=BNB">Allbridge</a>
+                  </p>
+                  <p>
+                    We have deployed and seeded with $ 50k BINARIS/USP LP as well. Routing is not live yet, if you want
+                    to buy BINARIS you can swap any asset to USP and then buy BINARIS from this pool.
+                  </p>
                 </Alert>
               </Grid>
               <Box mt={5}>
