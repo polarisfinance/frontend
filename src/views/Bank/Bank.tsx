@@ -113,6 +113,13 @@ const Bank: React.FC = () => {
                 </StyledLink>
               </Box>
             )}
+            {bank.depositTokenName.startsWith('BNB') && (
+              <Box style={{ marginTop: '10px' }}>
+                <StyledLink href={'https://app.allbridge.io/bridge?from=BSC&to=AURO&asset=BNB'} target="_blank">
+                  Bridge BNB ↗
+                </StyledLink>
+              </Box>
+            )}
             {bank.depositTokenName.startsWith('WETH') && (
               <Box style={{ marginTop: '10px' }}>
                 <StyledLink

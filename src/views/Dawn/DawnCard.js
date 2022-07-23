@@ -44,6 +44,13 @@ const CemeteryCard = ({ bank }) => {
               </StyledLink>
             </Box>
           )}
+          {bank.depositTokenName.startsWith('BNB') && (
+            <Box style={{ position: 'absolute', top: '20px', right: '20px' }}>
+              <StyledLink href={'https://app.allbridge.io/bridge?from=BSC&to=AURO&asset=BNB'} target="_blank">
+                BRIDGE BNB ↗
+              </StyledLink>
+            </Box>
+          )}
           <Grid container alignItems="center">
             <Grid container item xs={12} md={4} alignItems="center">
               <Box mr={5} ml={5} mt={2}>
