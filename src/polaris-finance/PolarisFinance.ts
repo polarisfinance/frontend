@@ -654,6 +654,10 @@ export class PolarisFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.ETHERNAL);
       } else if (tokenName === 'ORBITAL-BTC-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.ORBITAL);
+      } else if (tokenName === 'BINARIS-BNB-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.BINARIS);
+      } else if (tokenName === 'BINARIS-USP-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.BINARIS);
       } else if (tokenName === 'PBOND') {
         const getBondPrice = await this.getStat('PBOND');
         tokenPrice = getBondPrice.priceInDollars;
@@ -860,6 +864,8 @@ export class PolarisFinance {
       Obond,
       Uspbond,
       Ebond,
+      BinarisBnb,
+      BinarisUsp,
     ] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
@@ -882,6 +888,8 @@ export class PolarisFinance {
       poolContract.poolInfo(17),
       poolContract.poolInfo(18),
       poolContract.poolInfo(19),
+      poolContract.poolInfo(20),
+      poolContract.poolInfo(21),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
@@ -921,6 +929,10 @@ export class PolarisFinance {
       return rewardPerSecond.mul(Obond.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('USPBOND')) {
       return rewardPerSecond.mul(Uspbond.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('BINARIS-BNB')) {
+      return rewardPerSecond.mul(BinarisBnb.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('BINARIS-USP')) {
+      return rewardPerSecond.mul(BinarisUsp.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }

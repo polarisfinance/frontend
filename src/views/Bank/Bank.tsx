@@ -195,6 +195,14 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   } else if (bank.depositTokenName === 'ORBITAL-USP-LP') {
     pairName = 'ORBITAL-USP-LP';
     uniswapUrl = 'https://www.trisolaris.io/#/add/' + uspAddr + '/' + orbitalAddr;
+  } else if (bank.depositTokenName === 'BINARIS-BNB-LP') {
+    pairName = 'BINARIS-BNB-LP';
+    uniswapUrl =
+      'https://www.trisolaris.io/#/add/0xb14674C7264eC7d948B904Aab2c0E0F906F6e762/0xafE0d6ca6AAbB43CDA024895D203120831Ba0370';
+  } else if (bank.depositTokenName === 'BINARIS-USP-LP') {
+    pairName = 'BINARIS-USP-LP';
+    uniswapUrl =
+      'https://www.trisolaris.io/#/add/0xafE0d6ca6AAbB43CDA024895D203120831Ba0370/0xa69d9Ba086D41425f35988613c156Db9a88a1A96';
   } else {
     pairName = 'TRIPOLAR-xTRI pair';
     uniswapUrl = 'https://www.trisolaris.io/#/add/0x802119e4e253D5C19aA06A5d567C5a41596D6803/' + tripolarAddr;

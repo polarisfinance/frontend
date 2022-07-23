@@ -48,6 +48,7 @@ import binarisLogo from '../../assets/img/binaris-token.svg';
 import bbondLogo from '../../assets/img/bbond-token.svg';
 import binarisBnb from '../../assets/img/binaris-bnb.svg';
 import bnbLogo from '../../assets/img/bnb-logo.svg';
+import binarisUsp from '../../assets/img/binaris-usp.svg';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -98,6 +99,7 @@ const logosBySymbol: { [title: string]: string } = {
   BBOND: bbondLogo,
   'BINARIS-BNB-LP': binarisBnb,
   BNB: bnbLogo,
+  'BINARIS-USP-LP': binarisUsp,
 };
 
 type LogoProps = {
