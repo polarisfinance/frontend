@@ -1114,16 +1114,17 @@ export class PolarisFinance {
     if (token === 'BINARIS') {
       const { SpolarBinarisGenesisRewardPool } = this.contracts;
       let priceInUsp: string;
-      [supply, rewardPoolSupply, priceInToken, priceOfOneToken, priceInUsp] = await Promise.all([
+      let priceOfUsp: string;
+      [supply, rewardPoolSupply, priceInToken, priceOfUsp, priceInUsp] = await Promise.all([
         this.BINARIS.totalSupply(),
         this.BINARIS.balanceOf(SpolarBinarisGenesisRewardPool.address),
         this.getTokenPriceBinaris(this.BINARIS),
         this.getTokenPriceUsp(this.USP),
         this.getTokenPrice(this.BINARIS, this.USP),
       ]);
-      priceOfOneToken = (Number(priceOfOneToken) * Number(priceInUsp) * Number(priceInToken)).toFixed(2);
+      priceOfOneToken = (Number(priceOfUsp) * Number(priceInUsp) * Number(priceInToken)).toFixed(2);
       circulatingSupply = supply.sub(rewardPoolSupply);
-      priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(2);
+      priceInDollars = (Number(priceOfUsp) * Number(priceInUsp)).toFixed(2);
     }
     if (token === 'BBOND') {
       const { binarisTreasury } = this.contracts;
