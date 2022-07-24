@@ -51,8 +51,8 @@ const Cemetery = () => {
               </Typography>
               <Grid item xs={12} sm={12} style={{ margin: '12px' }}>
                 <Alert style={{ backgroundColor: '#b43387', fontSize: '20px' }} variant="filled" severity="warning">
-                  {/* <b>All below pools have ended. Please unstake and collect your rewards.</b> */}
-                  <b>23.07.2022 14:00 UTC - 24.07.2022 14:00 UTC</b>
+                  <b>All below pools have ended. Please unstake and collect your rewards.</b>
+                  {/* <b>23.07.2022 14:00 UTC - 24.07.2022 14:00 UTC</b> */}
                   <p>
                     You can bridge BNB via{' '}
                     <a href="https://app.allbridge.io/bridge?from=BSC&to=AURO&asset=BNB">Allbridge</a>
