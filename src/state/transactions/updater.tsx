@@ -35,12 +35,11 @@ export default function Updater(): null {
   const dispatch = useDispatch<AppDispatch>();
   const state = useSelector<AppState, AppState['transactions']>((state) => state.transactions);
 
-  const transactions = chainId ? state[chainId] ?? {} : {};
-
   // show popup on confirm
   const addPopup = useAddPopup();
 
   useEffect(() => {
+    const transactions = chainId ? state[chainId] ?? {} : {};
     if (!chainId || !ethereum || !lastBlockNumber) {
       return;
     }
@@ -88,7 +87,7 @@ export default function Updater(): null {
             console.error(`failed to check transaction hash: ${hash}`, error);
           });
       });
-  }, [chainId, ethereum, transactions, lastBlockNumber, dispatch, addPopup]);
+  }, [chainId, ethereum, lastBlockNumber, dispatch, addPopup, state]);
 
   return null;
 }
