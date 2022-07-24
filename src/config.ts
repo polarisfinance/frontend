@@ -784,7 +784,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   SpolarBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by SPOLAR',
@@ -795,7 +795,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by POLAR',
@@ -806,7 +806,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by ETHERNAL',
@@ -817,7 +817,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by ORBITAL',
@@ -828,7 +828,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by USP',
@@ -839,7 +839,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 6,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PbondBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by PBOND',
@@ -850,7 +850,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 7,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EbondBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by EBOND',
@@ -861,7 +861,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 8,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   ObondBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by OBOND',
@@ -872,7 +872,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 9,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarNearLPBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by POLAR-NEAR-LP',
@@ -883,7 +883,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 10,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   SpolarNearLPBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by SPOLAR-NEAR-LP',
@@ -894,7 +894,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 11,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarStnearLPBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by POLAR-STNEAR-LP',
@@ -905,7 +905,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 12,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalEthLPBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by ETHERNAL-ETH-LP',
@@ -916,7 +916,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 13,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalWbtcLPBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by ORBITAL-BTC-LP',
@@ -927,7 +927,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 14,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspUsdcLPBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by USP-USDC-LP',
@@ -938,7 +938,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 15,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   TripolarTriLPBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by TRIPOLAR-TRI-LP',
@@ -949,7 +949,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BINARIS',
     finished: false,
     sort: 16,
-    closedForStaking: false,
+    closedForStaking: true,
   },
 };
 
