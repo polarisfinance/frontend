@@ -57,7 +57,7 @@ const Cemetery = () => {
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
-                    Earn SPOLAR by staking BONDS
+                    Earn SPOLAR by staking LP
                   </Typography>
                   <Grid container spacing={3}>
                     {activeBanks
