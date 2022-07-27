@@ -751,7 +751,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 13,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   BinarisBnbLPSpolarRewardPool: {
     name: 'Earn SPOLAR by BINARIS-BNB-LP',

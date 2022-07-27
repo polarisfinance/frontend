@@ -874,6 +874,7 @@ export class PolarisFinance {
       BinarisUsp,
       Usp,
       Binaris,
+      Bbond,
     ] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
@@ -900,6 +901,7 @@ export class PolarisFinance {
       poolContract.poolInfo(21),
       poolContract.poolInfo(22),
       poolContract.poolInfo(23),
+      poolContract.poolInfo(24),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
@@ -947,6 +949,8 @@ export class PolarisFinance {
       return rewardPerSecond.mul(Usp.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('BINARIS')) {
       return rewardPerSecond.mul(Binaris.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('BBOND')) {
+      return rewardPerSecond.mul(Bbond.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
