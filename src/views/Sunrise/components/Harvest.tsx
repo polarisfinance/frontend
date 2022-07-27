@@ -14,6 +14,7 @@ import useClaimRewardFromSunrise from '../../../hooks/useClaimRewardFromSunrise'
 import useEarningsOnSunrise from '../../../hooks/useEarningsOnSunrise';
 import useStats from '../../../hooks/useStats';
 import { getDisplayBalance } from '../../../utils/formatBalance';
+import { Link } from 'react-router-dom';
 
 const Harvest = ({ sunrise }) => {
   const tombStats = useStats(sunrise.earnTokenName);
@@ -35,6 +36,8 @@ const Harvest = ({ sunrise }) => {
   } else {
     earnTokenName = sunrise.earnTokenName;
   }
+
+  const linkToSingleStake = `/dawn/${sunrise.name[0].toUpperCase()}${sunrise.name.slice(1)}SpolarRewardPool`;
   return (
     <Box>
       <Card>
@@ -59,9 +62,21 @@ const Harvest = ({ sunrise }) => {
                 color="primary"
                 variant="contained"
                 disabled={earnings.eq(0) || !canClaimReward}
+                style={{ marginRight: '10px' }}
               >
                 Claim Reward
               </Button>
+              {sunrise.earnTokenName !== 'TRIPOLAR' && (
+                <Button
+                  component={Link}
+                  to={linkToSingleStake}
+                  color="primary"
+                  variant="contained"
+                  style={{ marginLeft: '10px' }}
+                >
+                  Single Stake
+                </Button>
+              )}
             </StyledCardActions>
           </StyledCardContentInner>
         </CardContent>
