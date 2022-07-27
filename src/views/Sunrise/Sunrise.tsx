@@ -105,7 +105,7 @@ const Sunrise: React.FC = () => {
           <Alert
             variant="filled"
             severity="warning"
-            style={{ backgroundColor: '#b43387', fontSize: 16, paddingTop: 0, paddingBottom: 0 }}
+            style={{ backgroundColor: '#b43387', fontSize: '18px', paddingTop: 0, paddingBottom: 0 }}
           >
             {' '}
             {sunrise.name === 'ethernal' ? (
