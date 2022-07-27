@@ -76,8 +76,13 @@ const CemeteryCard = ({ bank, onlyStaked }) => {
                 </StyledLink>
               </Box>
             )}
-            <Box style={{ position: 'absolute', bottom: '30px', right: '20px' }}>Spolar Alloc: {alloc}</Box>
-            <Box style={{ position: 'absolute', bottom: '10px', right: '20px' }}>Pool Id: {bank.poolId}</Box>
+            {localStorage.getItem('devMode') === 'true' && (
+              <>
+                <Box style={{ position: 'absolute', bottom: '30px', right: '20px' }}>Spolar Alloc: {alloc}</Box>
+                <Box style={{ position: 'absolute', bottom: '10px', right: '20px' }}>Pool Id: {bank.poolId}</Box>
+              </>
+            )}
+
             <Grid container alignItems="center">
               <Grid container item xs={12} md={4} alignItems="center">
                 <Box mr={5} ml={5} mt={2}>
