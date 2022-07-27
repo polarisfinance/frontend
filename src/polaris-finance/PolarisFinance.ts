@@ -685,6 +685,12 @@ export class PolarisFinance {
       } else if (tokenName === 'USP') {
         const price = await this.getStat('USP');
         tokenPrice = price.priceInDollars;
+      } else if (tokenName === 'BINARIS') {
+        const price = await this.getStat('BINARIS');
+        tokenPrice = price.priceInDollars;
+      } else if (tokenName === 'BBOND') {
+        const price = await this.getStat('BBOND');
+        tokenPrice = price.priceInDollars;
       } else if (tokenName === 'USDC' || tokenName === 'USDT' || tokenName === 'USN') {
         tokenPrice = '1';
       } else {
@@ -866,6 +872,8 @@ export class PolarisFinance {
       Ebond,
       BinarisBnb,
       BinarisUsp,
+      Usp,
+      Binaris,
     ] = await Promise.all([
       poolContract.spolarPerSecond(),
       poolContract.poolInfo(1),
@@ -890,6 +898,8 @@ export class PolarisFinance {
       poolContract.poolInfo(19),
       poolContract.poolInfo(20),
       poolContract.poolInfo(21),
+      poolContract.poolInfo(22),
+      poolContract.poolInfo(23),
     ]);
     if (depositTokenName.startsWith('POLAR-NEAR')) {
       return rewardPerSecond.mul(PolarNear.allocPoint).div(41000);
@@ -933,6 +943,10 @@ export class PolarisFinance {
       return rewardPerSecond.mul(BinarisBnb.allocPoint).div(41000);
     } else if (depositTokenName.startsWith('BINARIS-USP')) {
       return rewardPerSecond.mul(BinarisUsp.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('USP')) {
+      return rewardPerSecond.mul(Usp.allocPoint).div(41000);
+    } else if (depositTokenName.startsWith('BINARIS')) {
+      return rewardPerSecond.mul(Binaris.allocPoint).div(41000);
     } else {
       return rewardPerSecond.mul(LunarAtluna.allocPoint).div(41000);
     }
