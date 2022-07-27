@@ -4,11 +4,19 @@ import { Box, Button, Card, CardContent, Typography, Grid } from '@material-ui/c
 
 import TokenSymbol from '../../components/TokenSymbol';
 import CardIcon from '../../components/CardIcon';
+import useStatsForPool from '../../hooks/useStatsForPool';
+
 const CemeteryCard = ({ bank }) => {
+  const statsOnPool = useStatsForPool(bank);
   return (
     <Grid item xs={12} md={12} lg={12}>
       <Card>
         <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
+          {localStorage.getItem('devMode') === 'true' && (
+            <>
+              <Box style={{ position: 'absolute', bottom: '10px', right: '20px' }}>TVL: ${statsOnPool?.TVL}</Box>
+            </>
+          )}
           <Grid container alignItems="center">
             <Grid container item sm={4} alignItems="center">
               <Box mr={5} ml={5} mt={2}>

@@ -12,8 +12,11 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import { Link } from 'react-router-dom';
 import Image from 'material-ui-image';
 import Fire from '../../../assets/img/fire.gif';
+import useTotalStakedOnSunrise from '../../../hooks/useTotalStakedOnSunrise';
+import { getDisplayBalance } from '../../../utils/formatBalance';
 
 const Stake = ({ sunrise }) => {
+  const totalStaked = useTotalStakedOnSunrise(sunrise);
   return (
     <Box>
       <Card>
@@ -56,6 +59,13 @@ const Stake = ({ sunrise }) => {
                 <Label text={`Please withdraw your SPOLAR`} />
               ) : (
                 <Label text={`Stake your $SPOLAR to earn $${sunrise.earnTokenName}`} />
+              )}
+              {localStorage.getItem('devMode') === 'true' && !sunrise.coming && (
+                <>
+                  <Box style={{ marginTop: '10px', bottom: '0px', top: '0px' }}>
+                    Spolar Staked: {getDisplayBalance(totalStaked)}
+                  </Box>
+                </>
               )}
             </StyledCardHeader>
             <StyledCardActions>
