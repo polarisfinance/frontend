@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
 import styled from 'styled-components';
@@ -15,6 +15,20 @@ import useStats from '../../hooks/useStats';
 
 import useStakedTokenPriceInDollars from '../../hooks/useStakedTokenPriceInDollars';
 import useStakedBalance from '../../hooks/useStakedBalance';
+import usePolarisFinance from '../../hooks/usePolarisFinance';
+
+const useAlloc = (bank) => {
+  const polarisFinance = usePolarisFinance();
+  const poolContract = polarisFinance.contracts[bank.contract];
+  const [alloc, setAlloc] = React.useState(null);
+  const fetchAlloc = useCallback(async () => {
+    const alloc = await poolContract.poolInfo(bank.poolId);
+    setAlloc(alloc.allocPoint.toString());
+  }, [poolContract, bank.poolId]);
+  fetchAlloc();
+
+  return alloc;
+};
 
 const CemeteryCard = ({ bank, onlyStaked }) => {
   const statsOnPool = useStatsForPool(bank);
@@ -36,6 +50,8 @@ const CemeteryCard = ({ bank, onlyStaked }) => {
     bankDepositName = bank.depositTokenName;
   }
 
+  const alloc = useAlloc(bank);
+
   const stakedBalance = useStakedBalance(bank.contract, bank.poolId);
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
   const stakedInDollars = (
@@ -53,13 +69,20 @@ const CemeteryCard = ({ bank, onlyStaked }) => {
                 </StyledLink>
               </Box>
             )}
-            {bank.depositTokenName.startsWith('BINARIS-BNB') && (
+            {bank.depositTokenName.startsWith('BNB') && (
               <Box style={{ position: 'absolute', top: '20px', right: '20px' }}>
                 <StyledLink href={'https://app.allbridge.io/bridge?from=BSC&to=AURO&asset=BNB'} target="_blank">
                   BRIDGE BNB ↗
                 </StyledLink>
               </Box>
             )}
+            {localStorage.getItem('devMode') === 'true' && (
+              <>
+                <Box style={{ position: 'absolute', bottom: '30px', right: '20px' }}>Spolar Alloc: {alloc}</Box>
+                <Box style={{ position: 'absolute', bottom: '10px', right: '20px' }}>Pool Id: {bank.poolId}</Box>
+              </>
+            )}
+
             <Grid container alignItems="center">
               <Grid container item xs={12} md={4} alignItems="center">
                 <Box mr={5} ml={5} mt={2}>
