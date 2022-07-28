@@ -18,7 +18,7 @@ const useTotalValueLocked = () => {
     fetchTVL();
   }, [setTotalValueLocked, polarisFinance, slowRefresh]);
 
-  return totalValueLocked;
+  return Number(totalValueLocked);
 };
 
 export default useTotalValueLocked;

@@ -10,18 +10,10 @@ import { Alert } from '@material-ui/lab';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import CemeteryCard from './DawnCard';
-import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
-import HomeImage from '../../assets/img/home.png';
 
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${HomeImage}) no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-`;
+
 
 const Cemetery = () => {
   const [banks] = useBanks();
@@ -32,7 +24,6 @@ const Cemetery = () => {
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage />
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
@@ -280,7 +271,6 @@ const Cemetery = () => {
           )}
         </Route>
         <Route path={`${path}/:bankId`}>
-          <BackgroundImage />
           <Bank />
         </Route>
       </Page>

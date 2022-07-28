@@ -11,7 +11,7 @@ const CemeteryCard = ({ bank }) => {
   return (
     <Grid item xs={12} md={12} lg={12}>
       <Card>
-        <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
+        <CardContent style={{ textAlign: 'center', position: 'relative', paddingBottom: '16px' }}>
           {localStorage.getItem('devMode') === 'true' && (
             <>
               <Box style={{ position: 'absolute', bottom: '10px', right: '20px' }}>TVL: ${statsOnPool?.TVL}</Box>

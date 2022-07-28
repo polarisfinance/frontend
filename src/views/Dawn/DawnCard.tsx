@@ -61,7 +61,7 @@ const CemeteryCard = ({ bank, onlyStaked }) => {
     return (
       <Grid item xs={12} md={12} lg={12}>
         <Card>
-          <CardContent align="center" style={{ position: 'relative', paddingBottom: '16px' }}>
+          <CardContent style={{ position: 'relative', paddingBottom: '16px', textAlign: 'center' }}>
             {bank.depositTokenName.startsWith('POLAR-STNEAR') && (
               <Box style={{ position: 'absolute', top: '20px', right: '20px' }}>
                 <StyledLink href={'https://metapool.app/dapp/mainnet/metapool-aurora/'} target="_blank">

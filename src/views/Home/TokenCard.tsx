@@ -50,10 +50,18 @@ function numberWithSpaces(x) {
   return parts.join('.');
 }
 
-const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
+interface Props {
+  token: string;
+  bond?: string;
+  tokenAddress?: string;
+  lpAddress?: string;
+  lpToken: string;
+}
+
+const TokenCard = (props: Props) => {
   const classes = useStyles();
   const polarisFinance = usePolarisFinance();
-  const tokenStats = useStats(token);
+  const tokenStats = useStats(props.token);
   const tokenPriceInNear = useMemo(() => (tokenStats ? Number(tokenStats.tokenInFtm).toFixed(4) : null), [tokenStats]);
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? String(Number(tokenStats.priceInDollars).toFixed(2)) : null),
@@ -74,17 +82,17 @@ const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
               <Grid container item xs={12} sm={4} className={classes.icon}>
                 <Box mr={5} ml={5} mt={2}>
                   <CardIcon>
-                    <TokenSymbol symbol={token} />
+                    <TokenSymbol symbol={props.token} />
                   </CardIcon>
                 </Box>
-                <h2>{token}</h2>
+                <h2>{props.token}</h2>
               </Grid>
               <Grid container item xs={12} sm={3} direction="column" alignItems="center">
                 <Grid item>Current Price</Grid>
                 <Grid item>
                   <Box>
                     <span style={{ fontSize: '30px' }}>
-                      {tokenPriceInNear ? tokenPriceInNear : '-.----'} {lpToken}
+                      {tokenPriceInNear ? tokenPriceInNear : '-.----'} {props.lpToken}
                     </span>
                   </Box>
                 </Grid>
@@ -105,12 +113,12 @@ const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
                 </Grid>
               </Grid>
               <Grid container item xs={12} sm={2} direction="column" alignItems="center">
-                {!token.endsWith('BOND') ? (
+                {!props.token.endsWith('BOND') ? (
                   <>
                     <Grid item xs={4} sm={12}>
                       <Button
                         onClick={() => {
-                          polarisFinance.watchAssetInMetamask(token);
+                          polarisFinance.watchAssetInMetamask(props.token);
                         }}
                         color="secondary"
                         variant="contained"
@@ -127,7 +135,7 @@ const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
                         color="secondary"
                         variant="contained"
                         target="_blank"
-                        href={`https://www.trisolaris.io/#/swap?outputCurrency=${tokenAddress}`}
+                        href={`https://www.trisolaris.io/#/swap?outputCurrency=${props.tokenAddress}`}
                         style={{ marginTop: '12px', minWidth: '70px', maxWidth: '70px' }}
                       >
                         BUY
@@ -138,7 +146,7 @@ const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
                         color="secondary"
                         variant="contained"
                         target="_blank"
-                        href={`https://dexscreener.com/aurora/${lpAddress}`}
+                        href={`https://dexscreener.com/aurora/${props.lpAddress}`}
                         className={classes.button}
                         style={{ minWidth: '70px', maxWidth: '70px', marginTop: '12px' }}
                       >
@@ -151,7 +159,7 @@ const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
                     <Grid item xs={4} sm={12}>
                       <Button
                         onClick={() => {
-                          polarisFinance.watchAssetInMetamask(token);
+                          polarisFinance.watchAssetInMetamask(props.token);
                         }}
                         color="secondary"
                         variant="contained"
@@ -167,7 +175,7 @@ const TokenCard = ({ token, bond, tokenAddress, lpAddress, lpToken }) => {
                       <Button
                         color="secondary"
                         variant="contained"
-                        href={`/bond/${bond}`}
+                        href={`/bond/${props.bond}`}
                         className={classes.button}
                         style={{ minWidth: '70px', maxWidth: '70px', marginTop: '12px' }}
                       >
