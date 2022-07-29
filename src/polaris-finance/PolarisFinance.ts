@@ -1035,7 +1035,7 @@ export class PolarisFinance {
         this.getTriPrice(),
       ]);
       circulatingSupply = supply.sub(rewardPoolSupply);
-      priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(2);
+      priceInDollars = (Number(priceInToken) * Number(priceOfOneToken)).toFixed(18);
     }
 
     if (token === 'TRIBOND') {
