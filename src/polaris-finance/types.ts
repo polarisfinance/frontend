@@ -20,6 +20,22 @@ export interface Bank extends BankInfo {
   earnToken: ERC20;
 }
 
+export interface AcBankInfo {
+  name: string;
+  sectionInUI: number;
+  contract: ContractName;
+  depositTokenName: ContractName;
+  sort: number;
+  finished: boolean;
+  closedForStaking: boolean;
+  bankName: ContractName;
+}
+
+export interface AcBank extends AcBankInfo {
+  address: string;
+  depositToken: ERC20;
+}
+
 export interface SunriseInfo {
   name: string;
   contract: ContractName;

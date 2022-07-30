@@ -1,7 +1,7 @@
 // import { ChainId } from '@pancakeswap-libs/sdk';
 import { ChainId } from '@trisolaris/sdk';
 import { Configuration } from './polaris-finance/config';
-import { BankInfo, SunriseInfo } from './polaris-finance';
+import { BankInfo, SunriseInfo, AcBankInfo } from './polaris-finance';
 
 const configurations: { [env: string]: Configuration } = {
   production: {
@@ -73,7 +73,18 @@ const configurations: { [env: string]: Configuration } = {
     refreshInterval: 10000,
   },
 };
-
+export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
+  PolarNearLPAutoCompounder: {
+    name: 'Autocompound your POLAR-NEAR-LP',
+    sectionInUI: 0,
+    contract: 'PolarNearLPAutoCompounder',
+    depositTokenName: 'POLAR-NEAR-LP',
+    sort: 0,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'PolarNearLpSpolarRewardPool',
+  },
+};
 export const bankDefinitions: { [contractName: string]: BankInfo } = {
   /*
   Explanation:
