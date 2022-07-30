@@ -163,7 +163,9 @@ const Nav = () => {
               <StyledButton href="/sunrise">Sunrise</StyledButton>
               <StyledButton href="/bond">Bond</StyledButton>
               <StyledButton onClick={() => window.open('https://docs.polarisfinance.io')}>Docs</StyledButton>
-              <StyledButton {...bindHover(popupState)} variant="text">
+              <StyledButton href="/autocompounder">AC</StyledButton>
+
+              {/* <StyledButton {...bindHover(popupState)} variant="text">
                 AC
               </StyledButton>
               <HoverMenu
@@ -177,7 +179,7 @@ const Nav = () => {
                   AutoFarm
                 </MenuItem>
                 <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
-              </HoverMenu>
+              </HoverMenu> */}
               <StyledButton {...bindHover(morepopupState)} variant="text">
                 More
               </StyledButton>
@@ -242,7 +244,9 @@ const Nav = () => {
                   <ListItem button component="a" target="_blank" href="https://docs.polarisfinance.io">
                     <ListItemText>Docs</ListItemText>
                   </ListItem>
-                  <ListItem button {...bindHover(popupState)}>
+                  <ListItemLink primary="AC" to="/autocompounder" />
+
+                  {/* <ListItem button {...bindHover(popupState)}>
                     <ListItemText>AC</ListItemText>
                   </ListItem>
                   <HoverMenu
@@ -254,7 +258,7 @@ const Nav = () => {
                   >
                     <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
                     <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
-                  </HoverMenu>
+                  </HoverMenu> */}
                   <ListItemLink primary="Announcements" to="/announcements" />
                   <ListItemLink primary="Strategy" to="/strategy" />
                   <ListItem button component="a" target="_blank" href="https://vote.polarisfinance.io/#/">

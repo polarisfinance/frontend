@@ -7,7 +7,7 @@ import { Box, Container, Typography, Grid, Button } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
-import CemeteryCard from './DawnCard';
+import CemeteryCard from './AcCard';
 import { createGlobalStyle } from 'styled-components';
 
 import useAcBanks from '../../hooks/useAcBanks';
@@ -74,7 +74,7 @@ const Autocompounder = () => {
                       .filter((bank) => bank.sectionInUI === 0)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} onlyStaked={state.onlyStaked} />
+                          <CemeteryCard acBank={bank} onlyStaked={state.onlyStaked} />
                         </React.Fragment>
                       ))}
                   </Grid>
