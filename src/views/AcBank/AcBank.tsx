@@ -132,7 +132,7 @@ const AcBank: React.FC = () => {
         </Grid> */}
         <Grid item xs={12}>
           <StyledBank>
-            {/* {acBank.depositTokenName.includes('LP') && <LPTokenHelpText acBank={acBank} />} */}
+            {acBank.depositTokenName.includes('LP') && <LPTokenHelpText acBank={acBank} />}
             {acBank.depositTokenName.startsWith('POLAR-STNEAR') && (
               <Box style={{ marginTop: '10px' }}>
                 <StyledLink href={'https://metapool.app/dapp/mainnet/metapool-aurora/'} target="_blank">

@@ -162,8 +162,8 @@ const Nav = () => {
               <StyledButton href="/dawn">Dawn</StyledButton>
               <StyledButton href="/sunrise">Sunrise</StyledButton>
               <StyledButton href="/bond">Bond</StyledButton>
+              <StyledButton href="/autocompounder">AC Vaults</StyledButton>
               <StyledButton onClick={() => window.open('https://docs.polarisfinance.io')}>Docs</StyledButton>
-              <StyledButton href="/autocompounder">AC</StyledButton>
 
               {/* <StyledButton {...bindHover(popupState)} variant="text">
                 AC
@@ -241,10 +241,10 @@ const Nav = () => {
                   {/* <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
                 <ListItemLink primary="Regulations" to="/regulations" /> */}
+                  <ListItemLink primary="AC Vaults" to="/autocompounder" />
                   <ListItem button component="a" target="_blank" href="https://docs.polarisfinance.io">
                     <ListItemText>Docs</ListItemText>
                   </ListItem>
-                  <ListItemLink primary="AC" to="/autocompounder" />
 
                   {/* <ListItem button {...bindHover(popupState)}>
                     <ListItemText>AC</ListItemText>

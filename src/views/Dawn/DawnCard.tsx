@@ -69,7 +69,7 @@ const CemeteryCard = ({ bank, onlyStaked }) => {
                 </StyledLink>
               </Box>
             )}
-            {bank.depositTokenName.startsWith('BNB') && (
+            {bank.depositTokenName.startsWith('BINARIS') && (
               <Box style={{ position: 'absolute', top: '20px', right: '20px' }}>
                 <StyledLink href={'https://app.allbridge.io/bridge?from=BSC&to=AURO&asset=BNB'} target="_blank">
                   BRIDGE BNB ↗
