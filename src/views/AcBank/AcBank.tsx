@@ -122,7 +122,7 @@ const AcBank: React.FC = () => {
               <Typography className={classes.text}>On Profits FEE:</Typography>
             </Grid>
             <Grid item xs={6} container justify="center">
-              <Typography className={classes.text}>3.6%</Typography>
+              <Typography className={classes.text}>3.5%</Typography>
             </Grid>
           </Grid>
         </Grid>
