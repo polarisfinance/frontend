@@ -3,16 +3,16 @@ import usePolarisFinance from './usePolarisFinance';
 import { AcBank } from '../polaris-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 import { parseUnits } from 'ethers/lib/utils';
+import { BigNumber } from 'ethers';
 
 const useWithdraw = (bank: AcBank) => {
   const polarisFinance = usePolarisFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleWithdraw = useCallback(
-    (amount: string) => {
-      const amountBn = parseUnits(amount, bank.depositToken.decimal);
+    (amount: BigNumber) => {
       handleTransactionReceipt(
-        polarisFinance.withdraw(bank.contract, amountBn),
+        polarisFinance.withdraw(bank.contract, amount),
         `Withdraw ${amount} ${bank.depositTokenName} from ${bank.contract}`,
       );
     },

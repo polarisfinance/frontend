@@ -12,7 +12,7 @@ import { BigNumber } from 'ethers';
 
 interface WithdrawModalProps extends ModalProps {
   max: BigNumber;
-  onConfirm: (amount: string) => void;
+  onConfirm: (amount: BigNumber) => void;
   tokenName?: string;
   decimals?: number;
   multiplyer: BigNumber;
@@ -42,6 +42,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
   const handleSelectMax = useCallback(() => {
     setVal(fullBalance);
   }, [fullBalance, setVal]);
+
   return (
     <Modal>
       <ModalTitle text={`Withdraw ${tokenName}`} />
@@ -52,11 +53,18 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
         max={fullBalance}
         symbol={tokenName}
       />
+
       <ModalActions>
         <Button
           color="primary"
           variant="contained"
-          onClick={() => onConfirm(String((Number(val) / Number(multiplyer.toString())) * 10 ** 18))}
+          onClick={() =>
+            onConfirm(
+              BigNumber.from(String(Number(val) * 10 ** 18))
+                .mul(BigNumber.from(10).pow(18))
+                .div(multiplyer),
+            )
+          }
         >
           Confirm
         </Button>
