@@ -108,10 +108,10 @@ const Sunrise: React.FC = () => {
             style={{ backgroundColor: '#b43387', fontSize: '18px', paddingTop: 0, paddingBottom: 0 }}
           >
             {' '}
-            {sunrise.name === 'ethernal' ? (
+            {sunrise.name === 'ethernal' || sunrise.name === 'orbital' ? (
               <b>
-                As we are in recovery mode, it is important to not sell your rewards. Please stake your ETHERNAL in the
-                DAWN single stake.
+                As we are in recovery mode, it is important to not sell your rewards. Please stake your {earnTokenName}{' '}
+                in the DAWN single stake.
               </b>
             ) : (
               <b>Sunrise prints only when the TWAP is above 1.01</b>
