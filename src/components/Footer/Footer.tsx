@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: '0',
     paddingTop: '15px',
-    paddingBottom: '15px',
+    paddingBottom: '30px',
     width: '100%',
     color: 'white',
 

@@ -15,12 +15,8 @@ import HomeImage from '../../assets/img/home.png';
 
 import { Alert } from '@material-ui/lab';
 
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${HomeImage}) no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
+const Style = createGlobalStyle`
+
   
   a:link, a:visited {
     color: white;
@@ -33,7 +29,6 @@ const BackgroundImage = createGlobalStyle`
   }
 
 `;
-
 const Cemetery = () => {
   const [banks] = useBanks();
   const { path } = useRouteMatch();
@@ -43,7 +38,7 @@ const Cemetery = () => {
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage />
+          <Style />
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
@@ -77,7 +72,7 @@ const Cemetery = () => {
                 </div>
 
                 <Grid container direction="row" alignItems="flex-end">
-                  <Grid item align="center" xs={12}>
+                  <Grid item style={{ textAlign: 'center' }} xs={12}>
                     <Button
                       color="primary"
                       href="/legacy_dawn"
@@ -101,7 +96,6 @@ const Cemetery = () => {
           )}
         </Route>
         <Route path={`${path}/:bankId`}>
-          <BackgroundImage />
           <Bank />
         </Route>
       </Page>

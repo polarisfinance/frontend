@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   icon: {
-    [theme.breakpoints.down('850')]: {
+    [theme.breakpoints.down(850)]: {
       justifyContent: 'center',
     },
     alignItems: 'center',
@@ -66,8 +66,6 @@ const Home = () => {
 
   return (
     <Page>
-      {/* <BackgroundImage /> */}
-      {/* <LaunchCountdown deadline={new Date(1645106400*1000)} description='hello'></LaunchCountdown> */}
       <Grid container spacing={3}>
         <Grid container>
           {/* Explanation text */}
@@ -83,10 +81,12 @@ const Home = () => {
               </p>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} align="center">
+          <Grid item xs={12} sm={6} style={{ textAlign: 'center' }}>
             <Box className={classes.box} style={{ paddingTop: '12px' }}>
               <span style={{ fontSize: '25px', fontFamily: '"Rajdhani",regular' }}>Total Value Locked</span>
-              <CountUp style={{ fontSize: '60px', fontFamily: '"Rajdhani",bold' }} end={TVL} separator=" " prefix="$" />
+              <div style={{ fontSize: '60px', fontFamily: '"Rajdhani",bold' }}>
+                <CountUp end={TVL} separator=" " prefix="$" />
+              </div>
             </Box>
           </Grid>
         </Grid>

@@ -8,13 +8,6 @@ import RegulationsImage from '../../assets/img/regulations_bg.png';
 import { createGlobalStyle } from 'styled-components';
 import usePolarisFinance from '../../hooks/usePolarisFinance';
 
-const BackgroundImage = createGlobalStyle`
-  body, html {
-    background: url(${RegulationsImage}) no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-`;
 const StyledTableCell = withStyles((theme) => ({
   head: {
     fontSize: 18,
@@ -76,7 +69,6 @@ const Regulations = () => {
 
   return (
     <Page>
-      <BackgroundImage />
       <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
         Graveyard regulations
       </Typography>

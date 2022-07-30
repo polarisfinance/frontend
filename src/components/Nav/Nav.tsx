@@ -162,8 +162,10 @@ const Nav = () => {
               <StyledButton href="/dawn">Dawn</StyledButton>
               <StyledButton href="/sunrise">Sunrise</StyledButton>
               <StyledButton href="/bond">Bond</StyledButton>
+              <StyledButton href="/autocompounder">AC Vaults</StyledButton>
               <StyledButton onClick={() => window.open('https://docs.polarisfinance.io')}>Docs</StyledButton>
-              <StyledButton {...bindHover(popupState)} variant="text">
+
+              {/* <StyledButton {...bindHover(popupState)} variant="text">
                 AC
               </StyledButton>
               <HoverMenu
@@ -177,7 +179,7 @@ const Nav = () => {
                   AutoFarm
                 </MenuItem>
                 <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
-              </HoverMenu>
+              </HoverMenu> */}
               <StyledButton {...bindHover(morepopupState)} variant="text">
                 More
               </StyledButton>
@@ -239,10 +241,12 @@ const Nav = () => {
                   {/* <ListItemLink primary="SBS" to="/sbs" />
                 <ListItemLink primary="Liquidity" to="/liquidity" />
                 <ListItemLink primary="Regulations" to="/regulations" /> */}
+                  <ListItemLink primary="AC Vaults" to="/autocompounder" />
                   <ListItem button component="a" target="_blank" href="https://docs.polarisfinance.io">
                     <ListItemText>Docs</ListItemText>
                   </ListItem>
-                  <ListItem button {...bindHover(popupState)}>
+
+                  {/* <ListItem button {...bindHover(popupState)}>
                     <ListItemText>AC</ListItemText>
                   </ListItem>
                   <HoverMenu
@@ -254,7 +258,7 @@ const Nav = () => {
                   >
                     <MenuItem onClick={() => window.open('https://autofarm.network/aurora/')}>AutoFarm</MenuItem>
                     <MenuItem onClick={() => window.open('https://www.vaporwave.farm/#/aurora')}>VaporWave</MenuItem>
-                  </HoverMenu>
+                  </HoverMenu> */}
                   <ListItemLink primary="Announcements" to="/announcements" />
                   <ListItemLink primary="Strategy" to="/strategy" />
                   <ListItem button component="a" target="_blank" href="https://vote.polarisfinance.io/#/">

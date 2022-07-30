@@ -1,7 +1,7 @@
 // import { ChainId } from '@pancakeswap-libs/sdk';
 import { ChainId } from '@trisolaris/sdk';
 import { Configuration } from './polaris-finance/config';
-import { BankInfo, SunriseInfo } from './polaris-finance';
+import { BankInfo, SunriseInfo, AcBankInfo } from './polaris-finance';
 
 const configurations: { [env: string]: Configuration } = {
   production: {
@@ -73,7 +73,88 @@ const configurations: { [env: string]: Configuration } = {
     refreshInterval: 10000,
   },
 };
-
+export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
+  PolarNearLPAutoCompounder: {
+    name: 'Autocompound your POLAR-NEAR-LP',
+    sectionInUI: 0,
+    contract: 'PolarNearLPAutoCompounder',
+    depositTokenName: 'POLAR-NEAR-LP',
+    sort: 0,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'PolarNearLpSpolarRewardPool',
+  },
+  SpolarNearLPAutoCompounder: {
+    name: 'Autocompound your SPOLAR-NEAR-LP',
+    sectionInUI: 0,
+    contract: 'SpolarNearLPAutoCompounder',
+    depositTokenName: 'SPOLAR-NEAR-LP',
+    sort: 0,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'SpolarNearLpSpolarRewardPool',
+  },
+  PolarStnearLPAutoCompounder: {
+    name: 'Autocompound your POLAR-STNEAR-LP',
+    sectionInUI: 0,
+    contract: 'PolarStnearLPAutoCompounder',
+    depositTokenName: 'POLAR-STNEAR-LP',
+    sort: 1,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'PolarStNearLpSpolarRewardPool',
+  },
+  EthernalWethLPAutoCompounder: {
+    name: 'Autocompound your ETHERNAL-ETH-LP',
+    sectionInUI: 0,
+    contract: 'EthernalWethLPAutoCompounder',
+    depositTokenName: 'ETHERNAL-ETH-LP',
+    sort: 2,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'EthernalEthLpSpolarRewardPool',
+  },
+  OrbitalWbtcLPAutoCompounder: {
+    name: 'Autocompound your ORBITAL-BTC-LP',
+    sectionInUI: 0,
+    contract: 'OrbitalWbtcLPAutoCompounder',
+    depositTokenName: 'ORBITAL-BTC-LP',
+    sort: 3,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'OrbitalBtcLPSpolarRewardPool',
+  },
+  BinarisBnbLPAutoCompounder: {
+    name: 'Autocompound your BINARIS-BNB-LP',
+    sectionInUI: 0,
+    contract: 'BinarisBnbLPAutoCompounder',
+    depositTokenName: 'BINARIS-BNB-LP',
+    sort: 4,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'BinarisBnbLPSpolarRewardPool',
+  },
+  UspUsdcLPAutoCompounder: {
+    name: 'Autocompound your USP-USDC-LP',
+    sectionInUI: 0,
+    contract: 'UspUsdcLPAutoCompounder',
+    depositTokenName: 'USP-USDC-LP',
+    sort: 5,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'UspUsdcLPSpolarRewardPool',
+  },
+  TripolarTriLPAutoCompounder: {
+    name: 'Autocompound your TRIPOLAR-TRI-LP',
+    sectionInUI: 0,
+    contract: 'TripolarTriLPAutoCompounder',
+    depositTokenName: 'TRIPOLAR-TRI-LP',
+    sort: 6,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'TripolarTriLPSpolarRewardPool',
+  },
+};
 export const bankDefinitions: { [contractName: string]: BankInfo } = {
   /*
   Explanation:
@@ -544,7 +625,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 20,
     closedForStaking: true,
   },
-  TripolarTriSpolarRewardPool: {
+  TripolarTriLPSpolarRewardPool: {
     name: 'Earn SPOLAR by TRIPOLAR/TRI LP',
     poolId: 10,
     sectionInUI: 2,
@@ -625,7 +706,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     name: 'Earn SPOLAR by ETHERNAL-ETH LP',
     poolId: 8,
     sectionInUI: 2,
-    contract: 'EthernalEthLPSpolarRewardPool',
+    contract: 'EthernalEthLpSpolarRewardPool',
     depositTokenName: 'ETHERNAL-ETH-LP',
     earnTokenName: 'SPOLAR',
     finished: false,

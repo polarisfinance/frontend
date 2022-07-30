@@ -7,6 +7,7 @@ import { UseWalletProvider } from 'use-wallet';
 import usePromptNetwork from './hooks/useNetworkPrompt';
 import BanksProvider from './contexts/Banks';
 import SunrisesProvider from './contexts/Sunrises';
+import AcBanksProvider from './contexts/AcBanks';
 import PolarisFinanceProvider from './contexts/PolarisFinanceProvider';
 import ModalsProvider from './contexts/Modals';
 import store from './state';
@@ -68,6 +69,7 @@ const BondSplitter = lazy(() => import('./views/BondSplitter'));
 const Strategy = lazy(() => import('./views/Strategy'));
 const LegacyDawn = lazy(() => import('./views/LegacyDawn'));
 const Announcements = lazy(() => import('./views/Announcements'));
+const Autocompounder = lazy(() => import('./views/Autocompounder'));
 
 //const GenesisDawn = lazy(() => import('./views/GenesisDawn'));
 //const DawnSplitter = lazy(() => import('./views/DawnSplitter'));
@@ -123,6 +125,9 @@ const App: React.FC = () => {
             <Route path="/announcements">
               <Announcements />
             </Route>
+            <Route path="/autocompounder">
+              <Autocompounder />
+            </Route>
             {/* <Route path="/genesis_dawn">
               <GenesisDawn />
             </Route> */}
@@ -160,10 +165,12 @@ const Providers: React.FC = ({ children }) => {
                   <ModalsProvider>
                     <BanksProvider>
                       <SunrisesProvider>
-                        <>
-                          <Popups />
-                          {children}
-                        </>
+                        <AcBanksProvider>
+                          <>
+                            <Popups />
+                            {children}
+                          </>
+                        </AcBanksProvider>
                       </SunrisesProvider>
                     </BanksProvider>
                   </ModalsProvider>

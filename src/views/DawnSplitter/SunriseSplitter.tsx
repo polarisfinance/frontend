@@ -9,17 +9,6 @@ import { Typography, Grid } from '@material-ui/core';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 
-import { createGlobalStyle } from 'styled-components';
-import HomeImage from '../../assets/img/home.png';
-
-const BackgroundImage = createGlobalStyle`
-  body, html {
-    background: url(${HomeImage}) no-repeat !important;
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-`;
-
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
@@ -35,7 +24,6 @@ const Masonry = () => {
 
   return (
     <Page>
-      <BackgroundImage />
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>

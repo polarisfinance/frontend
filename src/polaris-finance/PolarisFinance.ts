@@ -1,7 +1,17 @@
 // import { Fetcher, Route, Token } from '@uniswap/sdk';
 import { Fetcher, Route, Token } from '@trisolaris/sdk';
 import { Configuration } from './config';
-import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, TShareSwapperStat, Sunrise } from './types';
+import {
+  ContractName,
+  TokenStat,
+  AllocationTime,
+  LPStat,
+  Bank,
+  AcBank,
+  PoolStats,
+  TShareSwapperStat,
+  Sunrise,
+} from './types';
 import { BigNumber, Contract, ethers, EventFilter } from 'ethers';
 import { decimalToBalance } from './ether-utils';
 import { TransactionResponse } from '@ethersproject/providers';
@@ -1273,6 +1283,26 @@ export class PolarisFinance {
     };
   }
 
+  async getVaultStats(bank: Bank, acBank: AcBank): Promise<PoolStats> {
+    if (this.myAccount === undefined) return;
+    const depositToken = bank.depositToken;
+    const poolContract = this.contracts[bank.contract];
+    const acContract = this.contracts[acBank.contract];
+    const strategy = await acContract.strategy();
+    const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
+    const stakeInPool = await poolContract.userInfo(bank.poolId, strategy);
+    const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool.amount, depositToken.decimal, 18));
+
+    const poolStats = await this.getPoolAPRs(bank);
+    const dailyAPR = poolStats.dailyAPR;
+    const yearlyAPY = 100 * ((1 + Number(poolStats.yearlyAPR) / 100 / 8760) ** 8760 - 1);
+    return {
+      dailyAPR: dailyAPR,
+      yearlyAPR: yearlyAPY.toFixed(2).toString(),
+      TVL: numberWithSpaces(Number(TVL.toFixed(2))),
+    };
+  }
+
   //===================================================================
   //===================== GET ASSET STATS =============================
   //=========================== END ===================================
@@ -1414,6 +1444,40 @@ export class PolarisFinance {
     }
   }
 
+  async multiplyerAc(poolName: ContractName): Promise<BigNumber> {
+    const pool = this.contracts[poolName];
+    try {
+      const multiplyer = await pool.getPricePerFullShare();
+      return multiplyer;
+    } catch (err) {
+      console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err}`);
+      return BigNumber.from(0);
+    }
+  }
+
+  async depositedBalanceOnAC(poolName: ContractName, account = this.myAccount): Promise<BigNumber> {
+    const pool = this.contracts[poolName];
+    try {
+      const multiplyer = await pool.getPricePerFullShare();
+      const tokenBalance = await pool.balanceOf(account);
+      return tokenBalance.mul(multiplyer).div(BigNumber.from(10).pow(18));
+    } catch (err) {
+      console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err}`);
+      return BigNumber.from(0);
+    }
+  }
+
+  async depositedSharesOnAC(poolName: ContractName, account = this.myAccount): Promise<BigNumber> {
+    const pool = this.contracts[poolName];
+    try {
+      const tokenBalance = await pool.balanceOf(account);
+      return tokenBalance;
+    } catch (err) {
+      console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err}`);
+      return BigNumber.from(0);
+    }
+  }
+
   /**
    * Deposits token to given pool.
    * @param poolName A name of pool contract.
@@ -1425,6 +1489,11 @@ export class PolarisFinance {
     return await pool.deposit(poolId, amount);
   }
 
+  async deposit(poolName: ContractName, amound: BigNumber): Promise<TransactionResponse> {
+    const acPool = this.contracts[poolName + 'metamask'];
+    return await acPool.deposit(amound);
+  }
+
   /**
    * Withdraws token from given pool.
    * @param poolName A name of pool contract.
@@ -1434,6 +1503,11 @@ export class PolarisFinance {
   async unstake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
     const pool = this.contracts[poolName + 'metamask'];
     return await pool.withdraw(poolId, amount);
+  }
+
+  async withdraw(poolName: ContractName, amount: BigNumber): Promise<TransactionResponse> {
+    const pool = this.contracts[poolName + 'metamask'];
+    return await pool.withdraw(amount);
   }
 
   /**
