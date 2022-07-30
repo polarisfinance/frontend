@@ -1444,12 +1444,34 @@ export class PolarisFinance {
     }
   }
 
+  async multiplyerAc(poolName: ContractName): Promise<BigNumber> {
+    const pool = this.contracts[poolName];
+    try {
+      const multiplyer = await pool.getPricePerFullShare();
+      return multiplyer;
+    } catch (err) {
+      console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err}`);
+      return BigNumber.from(0);
+    }
+  }
+
   async depositedBalanceOnAC(poolName: ContractName, account = this.myAccount): Promise<BigNumber> {
     const pool = this.contracts[poolName];
     try {
       const multiplyer = await pool.getPricePerFullShare();
       const tokenBalance = await pool.balanceOf(account);
       return tokenBalance.mul(multiplyer).div(BigNumber.from(10).pow(18));
+    } catch (err) {
+      console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err}`);
+      return BigNumber.from(0);
+    }
+  }
+
+  async depositedSharesOnAC(poolName: ContractName, account = this.myAccount): Promise<BigNumber> {
+    const pool = this.contracts[poolName];
+    try {
+      const tokenBalance = await pool.balanceOf(account);
+      return tokenBalance;
     } catch (err) {
       console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err}`);
       return BigNumber.from(0);

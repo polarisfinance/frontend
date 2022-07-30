@@ -13,6 +13,9 @@ import useModal from '../../../hooks/useModal';
 import useDeposit from '../../../hooks/useDeposit';
 import useZap from '../../../hooks/useZap';
 import useDepositedBalance from '../../../hooks/useDepositedBalance';
+import useDepositedShares from '../../../hooks/useDepositedShares';
+import useMutiplyerAc from '../../../hooks/useMutiplyerAc';
+
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import useWithdrawAc from '../../../hooks/useWithdrawAc';
@@ -33,6 +36,8 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
   const [approveStatus, approve] = useApprove(bank.depositToken, bank.address);
 
   //const { color: themeColor } = useContext(ThemeContext);
+  const multiplyer = useMutiplyerAc(bank.contract);
+  const stakedShareBalance = useDepositedShares(bank.contract);
   const tokenBalance = useTokenBalance(bank.depositToken);
   const stakedBalance = useDepositedBalance(bank.contract);
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
@@ -75,6 +80,7 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
   const [onPresentWithdraw, onDismissWithdraw] = useModal(
     <WithdrawModal
       max={stakedBalance}
+      multiplyer={multiplyer}
       decimals={bank.depositToken.decimal}
       onConfirm={(amount) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;

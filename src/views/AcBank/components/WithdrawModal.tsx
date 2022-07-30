@@ -15,9 +15,17 @@ interface WithdrawModalProps extends ModalProps {
   onConfirm: (amount: string) => void;
   tokenName?: string;
   decimals?: number;
+  multiplyer: BigNumber;
 }
 
-const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max, tokenName = '', decimals = 18 }) => {
+const WithdrawModal: React.FC<WithdrawModalProps> = ({
+  onConfirm,
+  onDismiss,
+  max,
+  multiplyer,
+  tokenName = '',
+  decimals = 18,
+}) => {
   const [val, setVal] = useState('');
 
   const fullBalance = useMemo(() => {
@@ -34,7 +42,6 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
   const handleSelectMax = useCallback(() => {
     setVal(fullBalance);
   }, [fullBalance, setVal]);
-
   return (
     <Modal>
       <ModalTitle text={`Withdraw ${tokenName}`} />
@@ -46,7 +53,11 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
         symbol={tokenName}
       />
       <ModalActions>
-        <Button color="primary" variant="contained" onClick={() => onConfirm(val)}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => onConfirm(String((Number(val) / Number(multiplyer.toString())) * 10 ** 18))}
+        >
           Confirm
         </Button>
         {/* <Button color="secondary" onClick={onDismiss}>Cancel</Button> */}
