@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useParams } from 'react-router-dom';
@@ -22,6 +22,8 @@ import useTotalStakedOnSunrise from '../../hooks/useTotalStakedOnSunrise';
 import useClaimRewardCheck from '../../hooks/masonry/useClaimRewardCheck';
 import useWithdrawCheck from '../../hooks/masonry/useWithdrawCheck';
 import useTokenPreviousEpochTWAP from '../../hooks/useTokenPreviousEpochTWAP';
+import usePolarisFinance from '../../hooks/usePolarisFinance';
+import { BigNumber } from 'ethers';
 
 import Image from 'material-ui-image';
 import Fire from '../../assets/img/fire.gif';
@@ -46,6 +48,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const useTwapToPrint = (sunrise) => {
+  const polarisFinance = usePolarisFinance();
+  const treasuryContract = polarisFinance.contracts[sunrise.treasury];
+  const isUnlocked = polarisFinance?.isUnlocked;
+
+  const [alloc, setTwapToPrint] = React.useState(BigNumber.from(0));
+  useEffect(() => {
+    async function fetchTwapToPrint() {
+      try {
+        if (sunrise.name === 'ethernal') {
+          setTwapToPrint(await treasuryContract.ethernalPriceCeiling());
+        } else if (sunrise.name === 'orbital') {
+          setTwapToPrint(await treasuryContract.orbitalPriceCeiling());
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    if (isUnlocked) {
+      fetchTwapToPrint();
+    }
+  }, [isUnlocked, treasuryContract, sunrise.name]);
+  return alloc;
+};
+
 const Sunrise: React.FC = () => {
   const classes = useStyles();
   const { sunriseId } = useParams<{ sunriseId: string }>();
@@ -62,6 +89,7 @@ const Sunrise: React.FC = () => {
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat).toFixed(4) : null), [cashStat]);
   const { to } = useTreasuryAllocationTimes(sunrise);
   const polarPreviousEpochTwap = useTokenPreviousEpochTWAP(sunrise);
+  const twapToPrint = useTwapToPrint(sunrise);
   let earnTokenName: string;
   if (sunrise.earnTokenName.startsWith('OLD')) {
     earnTokenName = sunrise.earnTokenName.slice(3);
@@ -180,6 +208,16 @@ const Sunrise: React.FC = () => {
               <Typography className={classes.text}>{getDisplayBalance(polarPreviousEpochTwap)}</Typography>
             </Grid>
           </Grid>
+          {sunrise.name === 'ethernal' || sunrise.name === 'orbital' ? (
+            <Grid container item xs={12}>
+              <Grid item xs={7} container justify="flex-end">
+                <Typography className={classes.text}>TWAP to print:</Typography>
+              </Grid>
+              <Grid item xs={5} container justify="center">
+                <Typography className={classes.text}>{getDisplayBalance(twapToPrint)}</Typography>
+              </Grid>
+            </Grid>
+          ) : null}
           <Grid container item xs={12}>
             <Grid item xs={7} container justify="flex-end">
               <Typography className={classes.text}>APR:</Typography>
