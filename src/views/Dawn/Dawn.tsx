@@ -56,19 +56,28 @@ const Cemetery = () => {
                   >
                     Earn SPOLAR by staking LP
                   </Typography>
-                  <FormGroup row>
-                    <FormControlLabel
-                      control={
-                        <MuiSwitch
-                          checked={state.onlyStaked}
-                          onChange={handleChange}
-                          name="onlyStaked"
-                          color="primary"
-                        />
-                      }
-                      label="Only show staked LP"
-                    />
-                  </FormGroup>
+                  <Grid container direction="row">
+                    {' '}
+                    <Grid item xs={6}>
+                      <FormControlLabel
+                        control={
+                          <MuiSwitch
+                            checked={state.onlyStaked}
+                            onChange={handleChange}
+                            name="onlyStaked"
+                            color="primary"
+                          />
+                        }
+                        label="Only show staked LP"
+                      />
+                    </Grid>
+                    <Grid item style={{ textAlign: 'right', marginBottom: '15px' }} xs={6}>
+                      <Button color="primary" href="/autocompounder" variant="contained">
+                        Autocompounder
+                      </Button>
+                    </Grid>
+                  </Grid>
+
                   <Grid container spacing={3}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)

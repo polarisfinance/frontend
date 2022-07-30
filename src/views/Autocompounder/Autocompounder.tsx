@@ -67,6 +67,7 @@ const Autocompounder = () => {
                         />
                       }
                       label="Only show staked LP"
+                      style={{ marginBottom: '15px' }}
                     />
                   </FormGroup>
                   <Grid container spacing={3}>
