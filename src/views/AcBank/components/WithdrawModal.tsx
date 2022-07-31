@@ -42,7 +42,6 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
   const handleSelectMax = useCallback(() => {
     setVal(fullBalance);
   }, [fullBalance, setVal]);
-
   return (
     <Modal>
       <ModalTitle text={`Withdraw ${tokenName}`} />
@@ -60,7 +59,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
           variant="contained"
           onClick={() =>
             onConfirm(
-              BigNumber.from(String(Number(val) * 10 ** 18))
+              BigNumber.from('0x' + (Number(val) * 10 ** 18).toString(16).toUpperCase())
                 .mul(BigNumber.from(10).pow(18))
                 .div(multiplyer),
             )
