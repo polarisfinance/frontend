@@ -6,7 +6,7 @@ import { BankInfo, SunriseInfo, AcBankInfo } from './polaris-finance';
 const configurations: { [env: string]: Configuration } = {
   production: {
     chainId: ChainId.AURORA,
-    networkName: 'Aurora Mainnet',
+    networkName: 'Aurora Mainnet Polaris',
     ftmscanUrl: 'https://aurorascan.dev/',
     defaultProvider: 'https://rpc.polarisfinance.io/',
     defaultWssProvider: 'https://rpc.polarisfinance.io/',
