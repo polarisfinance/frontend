@@ -13,7 +13,7 @@ const useWithdraw = (bank: AcBank) => {
     (amount: BigNumber) => {
       handleTransactionReceipt(
         polarisFinance.withdraw(bank.contract, amount),
-        `Withdraw ${amount} ${bank.depositTokenName} from ${bank.contract}`,
+        `Withdraw ${amount.div(BigNumber.from(10).pow(18))} ${bank.depositTokenName} from ${bank.contract}`,
       );
     },
     [bank, polarisFinance, handleTransactionReceipt],
