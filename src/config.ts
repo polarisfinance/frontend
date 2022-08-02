@@ -154,6 +154,16 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     closedForStaking: false,
     bankName: 'TripolarTriLPSpolarRewardPool',
   },
+  EthernalSingleAutoCompounder: {
+    name: 'Autocompound your ETHERNAL',
+    sectionInUI: 0,
+    contract: 'EthernalSingleAutoCompounder',
+    depositTokenName: 'ETHERNAL',
+    sort: 7,
+    finished: false,
+    closedForStaking: false,
+    bankName: 'EthernalSpolarRewardPool',
+  },
 };
 export const bankDefinitions: { [contractName: string]: BankInfo } = {
   /*

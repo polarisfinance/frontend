@@ -4,8 +4,8 @@ import ApplicationUpdater from './application/updater';
 
 const Updaters = () => (
   <>
-    <ApplicationUpdater />
-    <TransactionUpdater />
+    {/* <ApplicationUpdater /> */}
+    {/* <TransactionUpdater /> */}
   </>
 );
 
