@@ -60,8 +60,8 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
           onClick={() =>
             onConfirm(
               BigNumber.from('0x' + (Number(val) * 10 ** 18).toString(16).toUpperCase())
-                .mul(multiplyer)
-                .div(BigNumber.from(10).pow(18)),
+                .div(BigNumber.from(10).pow(18))
+                .mul(multiplyer),
             )
           }
         >
