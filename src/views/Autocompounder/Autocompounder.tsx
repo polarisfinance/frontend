@@ -54,7 +54,7 @@ const Autocompounder = () => {
                     gutterBottom
                     style={{ marginTop: '20px' }}
                   >
-                    Autocompound your LPs
+                    Autocompound your assets
                   </Typography>
                   <FormGroup row>
                     <FormControlLabel
