@@ -35,6 +35,7 @@ import Harvest from './components/Harvest';
 import Stake from './components/Stake';
 import ProgressCountdown from './components/ProgressCountdown';
 import { Alert } from '@material-ui/lab';
+import { sunriseDefinitions } from '../../config';
 const useStyles = makeStyles((theme) => ({
   gridItem: {
     height: '100%',
@@ -61,6 +62,10 @@ const useTwapToPrint = (sunrise) => {
           setTwapToPrint(await treasuryContract.ethernalPriceCeiling());
         } else if (sunrise.name === 'orbital') {
           setTwapToPrint(await treasuryContract.orbitalPriceCeiling());
+        } else if (sunrise.name === 'usp') {
+          setTwapToPrint(await treasuryContract.uspPriceCeiling());
+        } else if (sunrise.name === 'binaris') {
+          setTwapToPrint(await treasuryContract.binarisPriceCeiling());
         }
       } catch (e) {
         console.log(e);
