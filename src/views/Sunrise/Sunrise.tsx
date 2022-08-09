@@ -136,7 +136,10 @@ const Sunrise: React.FC = () => {
             style={{ backgroundColor: '#b43387', fontSize: '18px', paddingTop: 0, paddingBottom: 0 }}
           >
             {' '}
-            {sunrise.name === 'ethernal' || sunrise.name === 'orbital' ? (
+            {sunrise.name === 'ethernal' ||
+            sunrise.name === 'orbital' ||
+            sunrise.name === 'usp' ||
+            sunrise.name === 'binaris' ? (
               <b>
                 As we are in recovery mode, it is important to not sell your rewards. Please stake your {earnTokenName}{' '}
                 in the DAWN single stake.
@@ -208,7 +211,10 @@ const Sunrise: React.FC = () => {
               <Typography className={classes.text}>{getDisplayBalance(polarPreviousEpochTwap)}</Typography>
             </Grid>
           </Grid>
-          {sunrise.name === 'ethernal' || sunrise.name === 'orbital' ? (
+          {sunrise.name === 'ethernal' ||
+          sunrise.name === 'orbital' ||
+          sunrise.name === 'usp' ||
+          sunrise.name === 'binaris' ? (
             <Grid container item xs={12}>
               <Grid item xs={7} container justify="flex-end">
                 <Typography className={classes.text}>TWAP to print:</Typography>
