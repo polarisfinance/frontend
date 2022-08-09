@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import usePolarisFinance from './usePolarisFinance';
 import { AcBank } from '../polaris-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
-import { parseUnits } from 'ethers/lib/utils';
 import { BigNumber } from 'ethers';
 
 const useWithdraw = (bank: AcBank) => {
