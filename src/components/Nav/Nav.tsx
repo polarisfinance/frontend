@@ -120,14 +120,23 @@ const useStyles = makeStyles((theme) => ({
   box: {
     flexGrow: 1,
   },
+  updates: {
+    fontSize: '25px',
+    color: '#70d44b',
+    // padding: '0.1em',
+  },
 }));
 
-const Nav = () => {
+const Nav = ({ openNews, setOpenNews }) => {
   const matches = useMediaQuery('(min-width:1010px)');
   const matchesNotMobile = useMediaQuery('(min-width:380px)');
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const handleOpenNews = () => {
+    if (!openNews) setOpenNews(true);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -183,6 +192,9 @@ const Nav = () => {
               <StyledButton {...bindHover(morepopupState)} variant="text">
                 More
               </StyledButton>
+              <Button onClick={handleOpenNews} variant="text" className={classes.updates}>
+                Updates
+              </Button>
               <HoverMenu
                 {...bindMenu(morepopupState)}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
@@ -271,6 +283,11 @@ const Nav = () => {
                     href="https://www.apeoclock.com/launch/polaris-finance-genesis-pools-launch/"
                   >
                     <ListItemText>KYC</ListItemText>
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText onClick={handleOpenNews} className={classes.updates}>
+                      Updates
+                    </ListItemText>
                   </ListItem>
 
                   {!matchesNotMobile && (
