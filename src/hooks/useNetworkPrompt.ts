@@ -11,23 +11,38 @@ const usePromptNetwork = () => {
    * @param provider ethereum provider in this case is the window.ethereum available due to metamask being installed
    * @returns
    */
-  const connectToNetwork = async (provider: any) => {
-    await provider.request({
-      method: 'wallet_addEthereumChain',
-      params: [
-        {
-          chainId: `0x${config.chainId.toString(16)}`,
-          chainName: config.networkName,
-          nativeCurrency: {
-            name: 'ETH',
-            symbol: 'ETH',
-            decimals: 18,
-          },
-          rpcUrls: [config.defaultProvider],
-          blockExplorerUrls: [config.ftmscanUrl],
-        },
-      ],
-    });
+  const connectToNetwork = async (ethereum: any) => {
+    try {
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: `0x${config.chainId.toString(16)}` }],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError['code'] === 4902) {
+        try {
+          await ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: `0x${config.chainId.toString(16)}`,
+                chainName: config.networkName,
+                nativeCurrency: {
+                  name: 'ETH',
+                  symbol: 'ETH',
+                  decimals: 18,
+                },
+                rpcUrls: [config.defaultProvider],
+                blockExplorerUrls: [config.ftmscanUrl],
+              },
+            ],
+          });
+        } catch (addError) {
+          // handle "add" error
+        }
+      }
+      // handle other "switch" errors
+    }
   };
   useEffect(() => {
     if (!networkPrompt) {
