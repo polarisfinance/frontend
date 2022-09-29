@@ -8,8 +8,8 @@ const configurations: { [env: string]: Configuration } = {
     chainId: ChainId.AURORA,
     networkName: 'Aurora Mainnet Polaris',
     ftmscanUrl: 'https://aurorascan.dev/',
-    defaultProvider: 'https://rpc.polarisfinance.io/',
-    defaultWssProvider: 'https://rpc.polarisfinance.io/',
+    defaultProvider: 'https://mainnet.aurora.dev/',
+    defaultWssProvider: 'https://mainnet.aurora.dev/',
     deployments: require('./polaris-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       NEAR: ['0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d', 24],
