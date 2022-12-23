@@ -81,7 +81,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'POLAR-NEAR-LP',
     sort: 0,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'PolarNearLpSpolarRewardPool',
   },
   SpolarNearLPAutoCompounder: {
@@ -91,7 +91,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'SPOLAR-NEAR-LP',
     sort: 0,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'SpolarNearLpSpolarRewardPool',
   },
   PolarStnearLPAutoCompounder: {
@@ -101,7 +101,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'POLAR-STNEAR-LP',
     sort: 1,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'PolarStNearLpSpolarRewardPool',
   },
   EthernalWethLPAutoCompounder: {
@@ -111,7 +111,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'ETHERNAL-ETH-LP',
     sort: 2,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'EthernalEthLpSpolarRewardPool',
   },
   OrbitalWbtcLPAutoCompounder: {
@@ -121,7 +121,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'ORBITAL-BTC-LP',
     sort: 3,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'OrbitalBtcLPSpolarRewardPool',
   },
   BinarisBnbLPAutoCompounder: {
@@ -131,7 +131,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'BINARIS-BNB-LP',
     sort: 4,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'BinarisBnbLPSpolarRewardPool',
   },
   UspUsdcLPAutoCompounder: {
@@ -141,7 +141,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'USP-USDC-LP',
     sort: 5,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'UspUsdcLPSpolarRewardPool',
   },
   TripolarTriLPAutoCompounder: {
@@ -151,7 +151,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'TRIPOLAR-TRI-LP',
     sort: 6,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'TripolarTriLPSpolarRewardPool',
   },
   PolarSingleAutoCompounder: {
@@ -161,7 +161,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'POLAR',
     sort: 7,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'PolarSpolarRewardPool',
   },
   EthernalSingleAutoCompounder: {
@@ -171,7 +171,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'ETHERNAL',
     sort: 8,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'EthernalSpolarRewardPool',
   },
   OrbitalSingleAutoCompounder: {
@@ -181,7 +181,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'ORBITAL',
     sort: 9,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'OrbitalSpolarRewardPool',
   },
   UspSingleAutoCompounder: {
@@ -191,7 +191,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'USP',
     sort: 10,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'UspSpolarRewardPool',
   },
   BinarisSingleAutoCompounder: {
@@ -201,7 +201,7 @@ export const acBankDefinitions: { [contractName: string]: AcBankInfo } = {
     depositTokenName: 'BINARIS',
     sort: 11,
     finished: false,
-    closedForStaking: false,
+    closedForStaking: true,
     bankName: 'BinarisSpolarRewardPool',
   },
 };
@@ -684,7 +684,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 6,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   LunarLunaSpolarRewardPool: {
     name: 'Earn SPOLAR by LUNAR/LUNA LP',
@@ -695,7 +695,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarNearLpSpolarRewardPool: {
     name: 'Earn SPOLAR by POLAR-NEAR LP',
@@ -706,7 +706,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarStNearLpSpolarRewardPool: {
     name: 'Earn SPOLAR by POLAR-STNEAR LP',
@@ -717,7 +717,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 2,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarLunarLpSpolarRewardPool: {
     name: 'Earn SPOLAR by POLAR-LUNAR LP',
@@ -739,7 +739,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 0,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarSpolarRewardPool: {
     name: 'Earn SPOLAR by POLAR',
@@ -750,7 +750,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 15,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalEthLpSpolarRewardPool: {
     name: 'Earn SPOLAR by ETHERNAL-ETH LP',
@@ -761,7 +761,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalBtcLPSpolarRewardPool: {
     name: 'Earn SPOLAR by ORBITAL-WBTC LP',
@@ -772,7 +772,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalSpolarRewardPool: {
     name: 'Earn SPOLAR by ORBITAL',
@@ -783,7 +783,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 17,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalSpolarRewardPool: {
     name: 'Earn SPOLAR by ETHERNAL',
@@ -794,7 +794,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 16,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspUsdcLPSpolarRewardPool: {
     name: 'Earn SPOLAR by USP-USDC LP',
@@ -805,7 +805,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PolarUspLPSpolarRewardPool: {
     name: 'Earn SPOLAR by POLAR-USP LP',
@@ -816,7 +816,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 7,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EthernalUspLPSpolarRewardPool: {
     name: 'Earn SPOLAR by ETHERNAL-USP LP',
@@ -827,7 +827,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 8,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   OrbitalUspLPSpolarRewardPool: {
     name: 'Earn SPOLAR by ORBITAL-USP LP',
@@ -838,7 +838,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 9,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   PbondSpolarRewardPool: {
     name: 'Earn SPOLAR by PBOND',
@@ -849,7 +849,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 10,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   EbondSpolarRewardPool: {
     name: 'Earn SPOLAR by EBOND',
@@ -860,7 +860,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 11,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   ObondSpolarRewardPool: {
     name: 'Earn SPOLAR by OBOND',
@@ -871,7 +871,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 12,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspbondSpolarRewardPool: {
     name: 'Earn SPOLAR by USPBOND',
@@ -882,7 +882,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 13,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BinarisBnbLPSpolarRewardPool: {
     name: 'Earn SPOLAR by BINARIS-BNB-LP',
@@ -893,7 +893,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BinarisUspLPSpolarRewardPool: {
     name: 'Earn SPOLAR by BINARIS-USP-LP',
@@ -904,7 +904,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 10,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   UspSpolarRewardPool: {
     name: 'Earn SPOLAR by USP',
@@ -915,7 +915,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 19,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BinarisSpolarRewardPool: {
     name: 'Earn SPOLAR by BINARIS',
@@ -926,7 +926,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 20,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BbondSpolarRewardPool: {
     name: 'Earn SPOLAR by BBOND',
@@ -937,7 +937,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'SPOLAR',
     finished: false,
     sort: 14,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BnbBinarisGenesisRewardPool: {
     name: 'Earn BINARIS by BNB',

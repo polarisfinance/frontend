@@ -73,11 +73,8 @@ const Home = () => {
             <Box color="primary" p={4}>
               <h2 style={{ fontSize: '28px', color: '#fff' }}>Welcome to Polaris Finance</h2>
               <p style={{ fontSize: '20px', color: '#fff' }}>
-                The very first algorithmic stablecoins ecosystem on Aurora / NEAR. We are bringing multiple pegged
-                assets 1:1 to native coins via seigniorage. Provide liquidity in{' '}
-                <StyledNormalLink href="/dawn">DAWN</StyledNormalLink> Farms to get SPOLAR - governance token that
-                controls inflation and expansion of all pegged assets. Stake your SPOLAR in{' '}
-                <StyledNormalLink href="/sunrise">SUNRISE</StyledNormalLink> to earn pegged assets.
+                Please move all your assets into our new{' '}
+                <StyledNormalLink href="https://app.polarisfinance.io">Polaris DEX</StyledNormalLink>
               </p>
             </Box>
           </Grid>
